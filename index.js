@@ -26,10 +26,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // docker run -p 27017:27017 -d mongo
+/*
 app.get('/', (req, res) => {
     res.send({hi: "there"});
 })
-
+*/
 
 
 require('./routes/authRoutes')(app);
