@@ -7,5 +7,7 @@ module.exports = {
     mongoURI: "mongodb://localhost:27017/exprs",
     cookieKey: "linux-dev",
     stripePublishableKey: "pk_test_ItA2ayIlsJB4byNF1bj4hITx",
-    stripeSecretKey: "sk_test_Il98QoV7o79ygZBZwQvqoHCV"
+    stripeSecretKey: "sk_test_Il98QoV7o79ygZBZwQvqoHCV",
+    sendGridKey: "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",
+    redirectDomain: 'http://localhost:5000'
 };

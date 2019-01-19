@@ -4,6 +4,7 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 const bodyParser = require('body-parser')
 require('./models/User');
+require('./models/Survey')
 require('./services/passport');
 
 const mongoose = require('mongoose');
@@ -35,6 +36,7 @@ app.get('/', (req, res) => {
 
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
+require('./routes/surveyRoutes')(app)
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'))
