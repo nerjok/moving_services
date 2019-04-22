@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 require('./models/User');
 require('./models/Survey')
 require('./services/passport');
+const flash        = require('connect-flash');
 
 const mongoose = require('mongoose');
 mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
@@ -14,14 +15,17 @@ mongoose.connection.on('connected', function(){console.log('conected')});
 mongoose.connection.on('error', function (err) {console.warn('err', err);});
 
 const app = express();
-
+app.use(flash())
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded());//proxy body
+
 app.use(
     cookieSession({
         maxAge: 30 * 24 * 60 * 60 * 1000,
         keys: [keys.cookieKey]
     })
 )
+app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -31,6 +35,7 @@ app.use(passport.session());
 app.get('/', (req, res) => {
     res.send({hi: "there"});
 })
+npm run dev
 */
 
 

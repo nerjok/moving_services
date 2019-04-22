@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 
 import 'materialize-css/dist/css/materialize.min.css'
 import { Provider } from 'react-redux'
-import {createStore, applyMiddleware} from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 
 import App from './components/App'
 import reducers from './store/reducers'
@@ -17,8 +17,8 @@ window.axios = axios;
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk))
 ReactDOM.render(
-    <Provider store={store}><App /></Provider>, 
-    document.querySelector('#root'))
+  <Provider store={store}><App /></Provider>,
+  document.querySelector('#root'))
 
 
 /*
@@ -29,5 +29,5 @@ ReactDOM.render(
     },
     "/api/*": { "http://localhost:5000"}}*/
 
-    console.log('[[STRIPE KEY IS]]', process.env.REACT_APP_STRIPE_KEY)
-    console.log('environment is: ', process.env.NODE_ENV)
+console.log('[[STRIPE KEY IS]]', process.env.REACT_APP_STRIPE_KEY)
+console.log('environment is: ', process.env.NODE_ENV)

@@ -2,15 +2,21 @@ import React, { Component} from 'react'
 import {connect} from 'react-redux'
 import { Link } from 'react-router-dom'
 import Payments from './Payments'
+//import { link } from 'fs';
 class Header extends Component {
 
-    renderContent() {
-        switch(this.props.auth) {
+    renderContent() {console.log('[[]HeaderAuthProps]', this.props)
+    const { auth } = this.props
+    const email = auth.email || false
+        switch(email) {
             case null:
                 return;
             case false:
                 return (
+                    <React.Fragment>
                     <li><a href="auth/google">Login with Google</a></li>
+                    <li><a href="login">Login with username</a></li>
+                    </React.Fragment>
                 );
             default:
                 return ([
@@ -22,12 +28,14 @@ class Header extends Component {
                 );
         }
     }
-    render() {console.log(this.props)
+
+    render() {
         return (
             <nav>
                 <div className="nav-wrapper">
                     <Link 
-                        to={this.props.auth ? "/surveys" : "/"} 
+                        //to={this.props.auth ? "/surveys" : "/"} 
+                        to="/"
                         className="brand-logo">
                         Emaily
                     </Link>
