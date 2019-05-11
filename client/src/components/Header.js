@@ -5,9 +5,10 @@ import Payments from './Payments'
 //import { link } from 'fs';
 class Header extends Component {
 
-    renderContent() {console.log('[[]HeaderAuthProps]', this.props)
+    renderContent() {
     const { auth } = this.props
     const email = auth.email || false
+    console.log('[Header]', auth)
         switch(email) {
             case null:
                 return;
@@ -22,6 +23,7 @@ class Header extends Component {
                 return ([
                     <li key="dsdss"><Payments/></li>,
                     <li key="dfgdfg"> Credits: {this.props.auth.credits}</li>,
+                    <li key="profile"> <a href="/profile">My profile</a></li>,
                     <li key="DFgfg"><a href="/api/logout">Log out</a></li>
                     
                 ]

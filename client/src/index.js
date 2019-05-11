@@ -8,6 +8,7 @@ import { createStore, applyMiddleware } from 'redux'
 
 import App from './components/App'
 import reducers from './store/reducers'
+import 'bootstrap/dist/css/bootstrap.css';
 
 import reduxThunk from 'redux-thunk'
 
