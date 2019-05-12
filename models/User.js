@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
+var mongoosePaginate = require('mongoose-paginate-v2');
 
 const { Schema } = mongoose;
 
@@ -19,4 +20,5 @@ userSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
 };
 
+userSchema.plugin(mongoosePaginate);
 mongoose.model('users', userSchema);

@@ -19,28 +19,29 @@ const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
     });
 
     return (
-        <div>
+        <div className="card">
+					<div className="card-body">
             <h5>Please confirm entries</h5>
 
             {reviewFields}
             <button
-            className="yellow darken-3 btn-flat white-text"
+            className="btn btn-sm btn-outline-dark"
             onClick={onCancel}>
             Back
             </button>
 
             <button 
             onClick={() => submitSurvey(formValues, history)}
-            className="green btn-flat right white-text"
+            className="btn btn-sm btn-outline-success"
             >
-                Send Survey
-                <i className="material-icons right">email</i>
+              Send Survey
             </button>
+					</div>
         </div>
     );
 }
 
-function mapStateToProps(state){console.log('state', state)
+function mapStateToProps(state){
     return {
         formValues: state.form.surveyForm.values
     }

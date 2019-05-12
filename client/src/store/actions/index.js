@@ -7,9 +7,7 @@ export const fetchUser = () => async dispatch => {
 };
 
 export const loginPassword = (username, password) => async dispatch => {
-    console.log('loginAction', username, password)
     const res = await axios.post('/auth/login', {username, password});
-    console.log('[[loginResponse]]', res)
     dispatch({type:LOGIN_PASSWORD, payload: res.data})
 }
 

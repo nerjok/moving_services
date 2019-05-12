@@ -19,7 +19,7 @@ module.exports = (app) => {
   });
 
   app.post('/auth/login', function(req, res, next) {
-    passport.authenticate('local', function(err, user, info) {console.log('login', req.body)
+    passport.authenticate('local', function(err, user, info) {
       if (err) 
        return res.send({error: info.message})
       if (!user) 

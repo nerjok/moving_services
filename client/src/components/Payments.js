@@ -5,7 +5,6 @@ import * as actions from '../store/actions'
  class Payment extends Component {
     render(){
         return (
-            <div>
                 <StripeCheckout
                   name="Emaily"
                   description="for email credits"
@@ -13,9 +12,8 @@ import * as actions from '../store/actions'
                   token={(token) => this.props.handleToken(token)}
                   stripeKey={process.env.REACT_APP_STRIPE_KEY}
                 >
-                <button className="btn">Add Credits</button>
+                <button className="btn btn-sm btn-outline-dark" style={{display: 'inline'}}>Add Credits</button>
                 </StripeCheckout>
-            </div>
         )
     }
 }

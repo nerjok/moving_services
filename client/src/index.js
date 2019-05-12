@@ -2,14 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 
-import 'materialize-css/dist/css/materialize.min.css'
+//import 'materialize-css/dist/css/materialize.min.css'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 
 import App from './components/App'
 import reducers from './store/reducers'
 import 'bootstrap/dist/css/bootstrap.css';
-
+import './styles/header.css'
 import reduxThunk from 'redux-thunk'
 
 

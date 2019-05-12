@@ -3,13 +3,15 @@ import React from 'react'
 
 
 export default ({input, label, meta: {error, touched}}) => {
-    //console.log('meta', meta)
     return (
-        <div>
-            <label>{label}</label>
-            <input {...input} style={{marginBottom: '5px'}}/>
-            <div className="red-text" style={{marginBottom:'20px'}}>
+        <div className="form-group">
+            <label className="control-label col-sm-2">{label}</label>
+            <div className="col-sm-10">
+                <input {...input} className="form-control" style={{marginBottom: '5px'}}/>
+            
+            <div className="text-danger" style={{marginBottom:'20px'}}>
             {touched && error}
+            </div>
             </div>
         </div>
     )
