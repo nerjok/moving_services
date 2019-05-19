@@ -21,14 +21,18 @@ module.exports = (app) => {
     res.send(user)
   });
 
-  app.get('/api/users', async (req, res) => {
-    const page = 1;
-    //if (req.query.page && req.query.page > 1) 
-     //page = req.query.page;
-    const responseUsers = await User.paginate({}, {...pagOptions, page});
+  app.get('/api/users', async (req, res, next) => {
+    const page = req.query.page || 1
+    try {
+      users = await User.paginate({}, {...pagOptions, page})
+      res.send({})
+    } catch (err) {
+      next(err);
+    }
 
+    
+    
     //res.send(users)
-    res.send(responseUsers)
   });
 
 }
