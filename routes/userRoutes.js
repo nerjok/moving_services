@@ -25,9 +25,10 @@ module.exports = (app) => {
     const page = 1;
     //if (req.query.page && req.query.page > 1) 
      //page = req.query.page;
-    const users = await User.paginate({}, {...pagOptions, page});
+    //const users = await User.paginate({}, {...pagOptions, page});
 
-    res.send(users)
+    //res.send(users)
+    res.send({})
   });
 
 }
