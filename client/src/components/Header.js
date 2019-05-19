@@ -10,7 +10,7 @@ class Header extends Component {
 
     renderContent() {
     const { auth } = this.props
-    const email = auth.email || false
+    const email = (auth.email ||auth.name) || false
 
 		switch(email) {
             case null:
@@ -67,8 +67,7 @@ class Header extends Component {
 
     render() {
         return (
-            <div 
-            className="navbar navbar-expand-sm bg-light">
+            <div className="navbar navbar-expand-sm bg-light stickie-nav">
             <h5 className="my-0 mr-md-auto font-weight-normal">
              <Link 
                 to="/"

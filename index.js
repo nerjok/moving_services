@@ -17,7 +17,7 @@ mongoose.connection.on('error', function (err) {console.warn('err', err);});
 const app = express();
 app.use(flash())
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded());//proxy body
+app.use(bodyParser.urlencoded({ extended: true }));//proxy body
 
 app.use(
     cookieSession({
@@ -54,3 +54,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 const PORT = process.env.PORT || 5000
 app.listen(PORT);
+
+
+// git push heroku master

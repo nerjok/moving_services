@@ -24,6 +24,7 @@ class App extends Component {
         return (
                 <BrowserRouter>
                     <div>
+                      <div style={{height: '3px', background: '#4d4d4d'}}></div>
                       <Header/>
                       <Map/>
                       <div className="container">

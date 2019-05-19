@@ -8,7 +8,7 @@ const options = {
 const styles =  {
   container: {
     height: '50vh',
-    width: '100vw', background: 'gray'
+    width: '100%', background: 'gray'
   },
   mapDiv: {
     padding: 0,
@@ -36,7 +36,8 @@ class Map extends React.Component {
           container: "viewDiv",
           map,
           zoom: 15,
-          center: [23.903597, 54.898521]
+          center: [23.903597, 54.898521],
+          //logo:false
         });
         view.then(() => {
           this.setState({
@@ -61,8 +62,8 @@ class Map extends React.Component {
           <div style={styles.container}>
             <div id='viewDiv' style={ styles.mapDiv } >
               {this.renderMap()}
-              <div style={{ /*zIndex: '100',*/ position: 'absolute' , bottom: 10, left: 0, right: 0}}>
-              <Search/>
+              <div className="container" style={{ position: 'absolute' , bottom: 10, left: 0, right: 0}}>
+                <Search/>
               </div>
             </div>
           </div>

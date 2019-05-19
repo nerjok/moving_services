@@ -21,10 +21,25 @@ module.exports = (app) => {
     res.send(user)
   });
 
-  app.get('/api/users', async (req, res) => {
-    let page = req.query.page || 1
-    users = await User.paginate({}, {...pagOptions, page})
-
+  app.get('/api/users', async (req, res, next) => {
+    const page = req.query.page || 1
+    const users = await User.paginate({}, {...pagOptions, page})
+    /*
+    try {
+      //
+      await User.paginate({}, {...pagOptions, page}).then(function(result) {
+        res.send(result)
+        return result;   
+    }, function(err) {
+      return err;   
+  })
+      res.send({none: 'none'})
+    } catch (err) {
+      next(err);
+    }
+*/
+    
+    
     res.send(users)
   });
 

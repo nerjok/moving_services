@@ -1,3 +1,11 @@
 .dropdown {
   display: inline;
 }
+
+.stickie-nav {
+  position: sticky;
+  /* doesnt work :( */
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 999;
+}
