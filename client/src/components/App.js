@@ -11,8 +11,9 @@ import LoginPassword from './auth/password/LoginPassword'
 import Profile from './auth/profile/Profile'
 import Profiles from './auth/profiles/Profiles'
 import User from './auth/user/User'
-const Footer = (props) => <h2>Footer</h2> 
-
+import Map from './map/Map'
+import { Footer } from './footer' 
+import { RecentAdds } from './recentAdds'
 class App extends Component {
 
     componentDidMount() {
@@ -24,6 +25,7 @@ class App extends Component {
                 <BrowserRouter>
                     <div>
                       <Header/>
+                      <Map/>
                       <div className="container">
                         <Route path="/" exact component={Landing}/>
                         <Route path="/surveys" exact component={Dashboard} />
@@ -33,6 +35,7 @@ class App extends Component {
                         <Route path="/profiles/:id" exact component={User}/>
                         <Route path="/login" component={LoginPassword} />
 											</div>
+                      <RecentAdds/>
                       <Footer/>
                     </div>
                 </BrowserRouter>
