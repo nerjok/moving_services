@@ -24,8 +24,13 @@ module.exports = (app) => {
   app.get('/api/users', async (req, res, next) => {
     const page = req.query.page || 1
     try {
-      users = await User.paginate({}, {...pagOptions, page})
-      res.send({})
+      //users = await User.paginate({}, {...pagOptions, page})
+      users = await User.paginate({}, {...pagOptions, page}).then(function(result) {
+        return result;   
+    }, function(err) {
+      return err;   
+  })
+      res.send(users)
     } catch (err) {
       next(err);
     }
