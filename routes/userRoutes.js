@@ -25,12 +25,13 @@ module.exports = (app) => {
     const page = req.query.page || 1
     try {
       //users = await User.paginate({}, {...pagOptions, page})
-      users = await User.paginate({}, {...pagOptions, page}).then(function(result) {
+      await User.paginate({}, {...pagOptions, page}).then(function(result) {
+        res.send(result)
         return result;   
     }, function(err) {
       return err;   
   })
-      res.send(users)
+      res.send({none: 'none'})
     } catch (err) {
       next(err);
     }
