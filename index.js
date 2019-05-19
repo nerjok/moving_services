@@ -3,6 +3,7 @@ const keys = require('./config/keys');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const bodyParser = require('body-parser')
+//const bodyParser = express.bodyParser();
 require('./models/User');
 require('./models/Survey')
 require('./services/passport');
@@ -17,6 +18,7 @@ mongoose.connection.on('error', function (err) {console.warn('err', err);});
 const app = express();
 app.use(flash())
 app.use(bodyParser.json())
+//app.use(express.bodyParser())
 app.use(bodyParser.urlencoded());//proxy body
 
 app.use(
