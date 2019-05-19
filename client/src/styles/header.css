@@ -1,11 +1,11 @@
 .dropdown {
   display: inline;
 }
-div.esriControlsBR {  
-  display: none;  
-} 
-.map .logo-med {
 
-  visibility: hidden;
-
+.stickie-nav {
+  position: sticky;
+  /* doesnt work :( */
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 999;
 }
