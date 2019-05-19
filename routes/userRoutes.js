@@ -23,8 +23,10 @@ module.exports = (app) => {
 
   app.get('/api/users', async (req, res, next) => {
     const page = req.query.page || 1
+    const users = await User.paginate({}, {...pagOptions, page})
+    /*
     try {
-      //users = await User.paginate({}, {...pagOptions, page})
+      //
       await User.paginate({}, {...pagOptions, page}).then(function(result) {
         res.send(result)
         return result;   
@@ -35,10 +37,10 @@ module.exports = (app) => {
     } catch (err) {
       next(err);
     }
-
+*/
     
     
-    //res.send(users)
+    res.send(users)
   });
 
 }
