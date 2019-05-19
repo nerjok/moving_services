@@ -1,3 +1,11 @@
 .dropdown {
   display: inline;
 }
+div.esriControlsBR {  
+  display: none;  
+} 
+.map .logo-med {
+
+  visibility: hidden;
+
+}

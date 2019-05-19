@@ -67,8 +67,8 @@ class Header extends Component {
 
     render() {
         return (
-            <div 
-            className="navbar navbar-expand-sm bg-light">
+            <div //style={{  position: '-webkit-sticky', position: 'sticky',top: '-1px'}}
+            className="navbar navbar-expand-sm bg-light fixed-top">
             <h5 className="my-0 mr-md-auto font-weight-normal">
              <Link 
                 to="/"
