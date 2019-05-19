@@ -18,8 +18,7 @@ mongoose.connection.on('error', function (err) {console.warn('err', err);});
 const app = express();
 app.use(flash())
 app.use(bodyParser.json())
-//app.use(express.bodyParser())
-app.use(bodyParser.urlencoded());//proxy body
+app.use(bodyParser.urlencoded({ extended: true }));//proxy body
 
 app.use(
     cookieSession({
