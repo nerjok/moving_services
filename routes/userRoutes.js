@@ -22,10 +22,10 @@ module.exports = (app) => {
   });
 
   app.get('/api/users', async (req, res) => {
-    let page = 1;
+    var page = 1;
     if (req.query.page && req.query.page > 1) 
      page = req.query.page;
-    let users = await User.paginate({}, {...pagOptions, page})
+    var users = await User.paginate({}, {...pagOptions, page});
 
     res.send(users)
   });

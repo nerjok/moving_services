@@ -28,7 +28,7 @@ export class Search extends React.Component {
   }
   render() {
   return (
-    <div style={{backgroundColor: '#000000', opacity: 0.8, /*backgroundColor: '#4611a7',*/ margin: 'auto', width: '60%', height: 'inherit', padding: '0.5rem', boxShadow: '0.3rem 0.4rem 0.1rem rgba(0, 0, 0, 0.2)'}}>
+    <div className="container" style={{backgroundColor: '#000000', opacity: 0.8, /*backgroundColor: '#4611a7',*/ margin: 'auto', /*width: '60%',*/ height: 'inherit', padding: '0.5rem', boxShadow: '0.3rem 0.4rem 0.1rem rgba(0, 0, 0, 0.2)'}}>
       <div class="row">
         <div class="col-md-3 col-sm-2">
           <div class="form-group">

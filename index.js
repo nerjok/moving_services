@@ -3,7 +3,6 @@ const keys = require('./config/keys');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const bodyParser = require('body-parser')
-//const bodyParser = express.bodyParser();
 require('./models/User');
 require('./models/Survey')
 require('./services/passport');
