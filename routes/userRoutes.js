@@ -1,6 +1,7 @@
 const requireLogin = require('../middlewares/requireLogin');
 const mongoose = require('mongoose');
 const User = mongoose.model('users');
+
 const pagOptions = {
   page: 1,
   limit: 1,
@@ -21,26 +22,34 @@ module.exports = (app) => {
     res.send(user)
   });
 
-  app.get('/api/users', async (req, res, next) => {
+  app.get('/api/users', requireLogin , async (req, res, next) => {
     const page = req.query.page || 1
     const users = await User.paginate({}, {...pagOptions, page})
-    /*
-    try {
-      //
-      await User.paginate({}, {...pagOptions, page}).then(function(result) {
-        res.send(result)
-        return result;   
-    }, function(err) {
-      return err;   
-  })
-      res.send({none: 'none'})
-    } catch (err) {
-      next(err);
-    }
-*/
-    
-    
+
     res.send(users)
   });
 
+  app.post('/api/update_user', requireLogin, function (req ,res, next) {
+    const { user } = req
+    const {name, newPassword, repeatPassword, currentPassword} = req.body
+
+    if (newPassword && newPassword == repeatPassword) {
+      if (!user.checkPassword(currentPassword)) {
+        res.send({ error: 'Incorrect password.' });
+        return;
+      } else {
+        const passwdHash = user.generateHash(newPassword);
+        user.password = passwdHash;
+      }  
+    }
+
+    user.name = name
+    user.save(function(err) {
+      //res.send(err);
+      console.log(err)
+      return
+    });
+
+    res.send(user)
+  })
 }

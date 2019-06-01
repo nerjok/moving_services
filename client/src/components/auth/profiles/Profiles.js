@@ -63,7 +63,6 @@ class Profiles extends React.Component {
   pagination = () => {
     const { pages: {page, hasPrevPage, hasNextPage} } = this.state
     let pagination = []
-    console.log('[[pagination]]', page)
     if (hasPrevPage) {
       pagination.push(<Pagination.Prev onClick={() => this.fetchUsers(+page - 1)}/>)
     }

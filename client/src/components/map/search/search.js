@@ -29,17 +29,17 @@ export class Search extends React.Component {
   render() {
   return (
     <div style={{boxSizing:'border-box', backgroundColor: '#000000', opacity: 0.8, /*backgroundColor: '#4611a7',*/ margin: 'auto', /*width: '60%',*/ height: 'inherit', padding: '0.5rem', boxShadow: '0.3rem 0.4rem 0.1rem rgba(0, 0, 0, 0.2)'}}>
-      <div class="row">
-        <div class="col-md-3 col-sm-2">
-          <div class="form-group">
-            <input type="text" class="form-control form-control-sm" name="keyword" placeholder="Enter keyword" 
+      <div className="row">
+        <div className="col-md-3 col-sm-2">
+          <div className="form-group">
+            <input type="text" className="form-control form-control-sm" name="keyword" placeholder="Enter keyword" 
             style={styles.input}
             />
           </div>
         </div>
-        <div class="col-md-3 col-sm-2">
-          <div class="form-group">
-          <select class="form-control form-control-sm" name="city" tabindex="-98" style={styles.input}>
+        <div className="col-md-3 col-sm-2">
+          <div className="form-group">
+          <select className="form-control form-control-sm" name="city" tabIndex="-98" style={styles.input}>
                 <option value="">Location</option>
                 <option value="1">Kaunas</option>
                 <option value="2">Vilnius</option>
@@ -49,9 +49,9 @@ export class Search extends React.Component {
               </select>
           </div>
         </div>
-        <div class="col-md-3 col-sm-2">
-          <div class="form-group">
-          <select class="form-control form-control-sm" name="city" tabindex="-98" style={styles.input}>
+        <div className="col-md-3 col-sm-2">
+          <div className="form-group">
+          <select className="form-control form-control-sm" name="city" tabIndex="-98" style={styles.input}>
                 <option value="">Category</option>
                 <option value="1">Kaunas</option>
                 <option value="2">Vilnius</option>
@@ -61,36 +61,36 @@ export class Search extends React.Component {
               </select>
           </div>
         </div>
-        <div class="col-md-1 col-sm-4">
-              <div class="form-group">
+        <div className="col-md-1 col-sm-4">
+              <div className="form-group">
                 <button type="submit" 
                   data-ajax-response="map" 
                   data-ajax-data-file="assets/external/data_2.php" 
                   data-ajax-auto-zoom="1" 
                   style={styles.input}
-                  class=" form-control-sm btn btn-sm btn-primary pull-right darker">
+                  className=" form-control-sm btn btn-sm btn-primary pull-right darker">
                     Search
                   </button>
               </div>
             </div>
 
-            <div class="col-md-6 col-sm-6">
-            <div class="row" style={styles.whiteCollor}>
+            <div className="col-md-6 col-sm-6">
+            <div className="row" style={styles.whiteCollor}>
               <div className="col-md-4">
                 <input type="checkbox" id="horns" name="horns"/>
-                <label for="horns">With prices</label>
+                <label htmlFor="horns">With prices</label>
               </div>
               <div className="col-md-4">
                 <input type="checkbox" id="horns" name="horns"/>
-                <label for="horns">Bill</label>
+                <label htmlFor="horns">Bill</label>
               </div>
               <div className="col-md-4">
                 <input type="checkbox" id="horns" name="horns"/>
-                <label for="horns">Flexible Hours</label>
+                <label htmlFor="horns">Flexible Hours</label>
               </div>
             </div>
           </div>
-          <div classNames="col-6">
+          <div className="col-6">
             <div style={styles.wrapperStyle}>
               <Range min={0} max={30} defaultValue={[3, 10]} marks={{ 0: '0 EU', 30: '30 EU' }} tipFormatter={value => `${value} eu`} onChange={val => console.log(val)} />
             </div>
