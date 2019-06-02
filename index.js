@@ -5,6 +5,7 @@ const passport = require('passport');
 const bodyParser = require('body-parser')
 require('./models/User');
 require('./models/Survey')
+require('./models/Advertisement')
 require('./services/passport');
 const flash        = require('connect-flash');
 

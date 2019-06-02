@@ -1,6 +1,8 @@
 const requireLogin = require('../middlewares/requireLogin');
 const mongoose = require('mongoose');
 const User = mongoose.model('users');
+const Advertisement = mongoose.model('advertisements');
+
 
 const pagOptions = {
   page: 1,
@@ -50,6 +52,36 @@ module.exports = (app) => {
       return
     });
 
+//= Temp for adds
+    const add = new Advertisement({
+      title: 'Casino Royale',
+      description: 'My sugested work description',
+      _user: user._id,
+      author: user._id    // assign the _id from the person
+    });
+  
+    add.save(function (err) {
+      if (err) return handleError(err);
+      // thats it!
+    });
+//= ended
     res.send(user)
   })
+
+  app.get('/api/advertisements', requireLogin , async (req, res, next) => {
+    const page = req.query.page || 1
+    //const users = await User.paginate({}, {...pagOptions, page})
+    const user = req.user
+    const advertisements = await User.findById(req.user._id)
+ /*   
+    .populate('_advertisements').
+    exec(function (err, user) {
+      if (err) return handleError(err);
+      console.log('The author is %s', user);
+      // prints "The author is Ian Fleming"
+    });
+/** */
+    console.log('[[advertisements]]', advertisements)
+    res.send(advertisements)
+  });
 }

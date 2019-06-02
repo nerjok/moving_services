@@ -9,7 +9,8 @@ const userSchema = new Schema({
     name: String,
     email: String,
     password: String,
-    credits: {type: Number, default: 0}
+    credits: {type: Number, default: 0},
+    _advertisements: {type: Schema.Types.ObjectId, ref: 'Advertisement'},
 });
 
 userSchema.methods.generateHash = function(password) {

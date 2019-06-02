@@ -7,6 +7,8 @@ import Header from './Header'
 import Landing from './Landing'
 import Dashboard from './Dashboard'
 import SurveyNew from './surveys/SurveyNew'
+import Advertisements from './advertisements/Advertisements'
+
 import LoginPassword from './auth/password/LoginPassword'
 import Profile from './auth/profile/Profile'
 import Profiles from './auth/profiles/Profiles'
@@ -33,6 +35,7 @@ class App extends Component {
                         <Route path="/surveys/new" component={SurveyNew} />
                         <Route path="/profile" exact component={Profile}/>
                         <Route path="/profiles" exact component={Profiles}/>
+                        <Route path="/advertisements" exact component={Advertisements}/>
                         <Route path="/profiles/:id" exact component={User}/>
                         <Route path="/login" component={LoginPassword} />
 											</div>

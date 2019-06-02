@@ -57,6 +57,14 @@ class Header extends Component {
 														Surveys
 													</Link>
 												</Dropdown.Item>
+                        <Dropdown.Item href="/advertisements">
+												<Link 
+														key="advertisements"
+														to={this.props.auth ? "/advertisements" : "/"} 
+														className="p-2 text-dark">
+														Advertisements
+													</Link>
+												</Dropdown.Item>
 												<Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
 											</DropdownButton>,
                     <a key="logout" href="/api/logout" className="p-2 text-dark">Log out</a>
