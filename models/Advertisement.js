@@ -11,4 +11,4 @@ const advertisementSchema = new Schema({
 });
 
 advertisementSchema.plugin(mongoosePaginate);
-mongoose.model('advertisements', advertisementSchema);
+mongoose.model('Advertisement', advertisementSchema);

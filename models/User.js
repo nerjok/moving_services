@@ -10,8 +10,16 @@ const userSchema = new Schema({
     email: String,
     password: String,
     credits: {type: Number, default: 0},
-    _advertisements: {type: Schema.Types.ObjectId, ref: 'Advertisement'},
-});
+    //_advertisements: [{type: Schema.Types.ObjectId, ref: 'advertisements'}],
+}, { toJSON: { virtuals: true } });
+
+userSchema.virtual('advertisements', {
+    ref: 'Advertisement',
+    localField: '_id',
+    foreignField: '_user',
+    //justOne: false,
+    //options: { sort: { name: -1 }, limit: 5 }
+  });
 
 userSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
@@ -29,4 +37,5 @@ userSchema.methods.checkPassword = function(password) {
 };
 
 userSchema.plugin(mongoosePaginate);
+
 mongoose.model('users', userSchema);
