@@ -2,7 +2,6 @@ import React from 'react'
 import {connect} from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
-import axios from 'axios'
 
 import _ from 'lodash'
 import { updateData } from '../../../store/actions/index'

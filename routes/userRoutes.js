@@ -32,7 +32,7 @@ module.exports = (app) => {
   });
 
   /**
-   * Update user' data
+   * Update user data
    */
   app.post('/api/update_user', requireLogin, function (req ,res, next) {
     const { user } = req
@@ -73,28 +73,4 @@ module.exports = (app) => {
     res.send(user)
   })
 
-
-  /**
-   * Update user' data
-   */
-  app.get('/api/advertisements', requireLogin , async (req, res, next) => {
-    const page = req.query.page || 1
-    //const users = await User.paginate({}, {...pagOptions, page})
-    const user = req.user
-    const advertisements = await User.findById(req.user._id)
-    
-    console.log('[[before populate]]')
-    const usr = await User.findById(req.user._id)
-.populate({path: 'advertisements'})
-  /*  
-    //.populate('_advertisements')
-    .exec(function (err, user) {      
-      console.log('The author is %s', user, err);
-
-      if (err) return handleError(err);
-    });
-/** */
-    console.log('[[advertisements]]', advertisements)
-    res.send(usr)
-  });
 }

@@ -17,9 +17,14 @@ userSchema.virtual('advertisements', {
     ref: 'Advertisement',
     localField: '_id',
     foreignField: '_user',
-    //justOne: false,
-    //options: { sort: { name: -1 }, limit: 5 }
   });
+
+  userSchema.virtual('advertisementsCount', {
+    ref: 'Advertisement',
+    localField: '_id',
+    foreignField: '_user',
+    count: true
+  });  
 
 userSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);

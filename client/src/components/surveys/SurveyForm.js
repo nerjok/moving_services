@@ -38,7 +38,7 @@ class SurveyForm extends Component {
     }
 }
 
-function validate(values) {
+function validate(values) {console.log('[validate survey]')
     const errors= {};
 
     errors.recipients = validEmails(values.recipients || '');
