@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 var mongoosePaginate = require('mongoose-paginate-v2');
+const mongoose_delete = require('mongoose-delete');
+
 
 const advertisementSchema = new Schema({
     title: String,
@@ -11,4 +13,6 @@ const advertisementSchema = new Schema({
 });
 
 advertisementSchema.plugin(mongoosePaginate);
+advertisementSchema.plugin(mongoose_delete, { deletedAt : true, overrideMethods: true});
+
 mongoose.model('Advertisement', advertisementSchema);

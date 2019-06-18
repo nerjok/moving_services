@@ -13,9 +13,9 @@ class AdvertisementForm extends React.Component {
     //console.log('[[handlingSubmit]]', this.props.formValues)
     if (formValues.values) {
       const advertisement = formValues.values
-      
-      console.log('[[submit]]', advertisement)
-      if (this.props.advertisement && this.props.advertisement.id) {
+      //console.log('[[submit]]', this.props.advertisement._id)
+
+      if (this.props.advertisement && this.props.advertisement._id) {
         advertisement.id = this.props.advertisement._id
         this.props.updateAdvertisement(advertisement);
       } else

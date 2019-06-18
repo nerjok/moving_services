@@ -68,5 +68,44 @@ module.exports = app => {
     res.send(resp)
   })
 
+  app.delete('/api/advertisements/:id/', requireLogin, async (req, res, next) => {
+    const { id } = req.params
+    const { page } = req.query
 
+      Advertisement.deleteById(id, function (err, petDocument) {
+        // mongodb: { deleted: true, name: 'Fluffy', _id: '53da93b1...' }
+        console.log('[[deleteedDoc]]', petDocument)
+    });
+    
+    const advertisements = await getAdvertisements(req.user, page);
+    res.send(advertisements)
+  })
+
+}
+
+async function getAdvertisements (user, page = 0) {
+
+  const limit = 5
+  const skip = page * limit
+  const usr = await User.findById(user._id)
+                        .populate({
+                                    path: 'advertisements',
+                                    options: {
+                                      skip,
+                                      limit,
+                                      sort: {'_id': -1}
+                                    },
+                                  })
+                          .populate('advertisementsCount')
+
+                          if (!usr || !usr.advertisements) 
+                            return [];
+
+  const ads = { 
+                page,
+                advertisements: usr.advertisements,
+                total: Math.ceil(usr.advertisementsCount / limit)
+              }
+
+  return ads
 }

@@ -44,12 +44,19 @@ export const fetchAdvertisement = _id => async dispatch => {console.log('[action
   dispatch({ type: FETCH_ADVERTISEMENT, payload: res.data });
 }
 
-export const updateAdvertisement = data => async dispatch => {
+export const updateAdvertisement = data => async dispatch => {console.log('[[updateOne]]')
   const res = await axios.post('/api/advertisements/'+data.id+'/update', data );
+  console.log('[updateResponse]', res)
   dispatch({ type: FETCH_ADVERTISEMENT, payload: res.data });
 }
 
 export const newAdvertisement = data => async dispatch => {
   const res = await axios.post('/api/advertisements/new', data );
   //dispatch({ type: FETCH_ADVERTISEMENT, payload: res.data });
+}
+
+export const deleteAdvertisement = data => async dispatch => {
+  const res = await axios.delete(`/api/advertisements/${data.id}?page=${data.page}`, data );
+  console.log('[[deletion response]]' , res.data, '[SentData]', data)
+  dispatch({ type: FETCH_ADVERTISEMENTS, payload: res.data });
 }

@@ -1,6 +1,8 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable react/jsx-no-comment-textnodes */
 import React from 'react'
 //import _ from 'lodash'
-import { fetchAdvertisements } from '../../store/actions'
+import { fetchAdvertisements, deleteAdvertisement } from '../../store/actions'
 import { connect } from 'react-redux'
 import ReactPaginate from 'react-paginate';
 import {
@@ -55,7 +57,9 @@ export class Advertisements extends React.Component {
                 </td>
                 <td>{description}</td>
                 <td></td>
-                <td>action</td>
+                <td>action
+                  {/*// eslint-disable-next-line jsx-a11y/anchor-is-valid*/}
+                  <a onClick={() => {console.log('deletion');this.props.deleteAdvertisement({page: this.state.page, id: _id})}}>Delete </a></td>
               </tr>
             )}
             </tbody>
@@ -146,4 +150,4 @@ export class Advertisements extends React.Component {
 
 const mapStateToProps = ({advertisements: {advertisements, total, page}}) => ({advertisements, total, page });
 
-export default connect(mapStateToProps, {fetchAdvertisements})(Advertisements)
+export default connect(mapStateToProps, {fetchAdvertisements, deleteAdvertisement})(Advertisements)
