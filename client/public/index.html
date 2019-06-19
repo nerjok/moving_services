@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -12,8 +12,26 @@
     <meta name="theme-color" content="#000000" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>Temporary works</title>
+    
     <link rel="stylesheet" href="https://js.arcgis.com/4.11/esri/css/main.css">
     <!--<script src="https://js.arcgis.com/4.11/"></script>-->
+    <script>
+      window.addEventListener('scroll', function(e) {
+        let sY = window.scrollY;
+        console.log('scrollYPosition', sY)
+        if (sY > 260)
+          document.getElementsByClassName('stickie-nav')[0].style.backgroundImage = 
+          'linear-gradient(to right, #669900 10%,#05331a 50%, #000 100%)';
+          //'linear-gradient(to right, rgba(0,0,0,0) 10%,#05331a 60%, #000 100%)';
+          //'#05331a';
+        else
+        document.getElementsByClassName('stickie-nav')[0].style.background = 
+        //'linear-gradient(to right, rgba(0,0,0,0) 10%,#05331a 60%, #000 100%)';
+        'transparent';
+        
+      })
+    </script>
+    <link rel="stylesheet" href="styles/style.css">
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

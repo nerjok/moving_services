@@ -3,10 +3,13 @@ import {connect} from 'react-redux'
 import { Link } from 'react-router-dom'
 import Payments from './Payments'
 //import { link } from 'fs';
+import { Search } from './map/search/search'
+
 
 import {Dropdown, DropdownButton} from 'react-bootstrap';
 
 class Header extends Component {
+    state = { isOpen: false }
 
     renderContent() {
     const { auth } = this.props
@@ -24,20 +27,24 @@ class Header extends Component {
                 );
             default:
                 return ([
-                    <Payments key="payments"/>,
-										<React.Fragment key="credits">Credits: {this.props.auth.credits}</React.Fragment>,
 										<Link 
 										  key="surveys"
 										  to={this.props.auth ? "/surveys" : "/"} 
-										  className="p-2 text-dark">
+										  className="stickie-nav__menu-link">
 										  Surveys
 										</Link>,
-											<DropdownButton key="user-profiles" id="dropdown-basic-button" bsPrefix="btn btn-sm btn-info inline" title="Profiles">
+                      <DropdownButton 
+                      key="user-profiles" id="dropdown-basic-button" 
+                      bsPrefix="stickie-nav__menu-link" 
+                      onMouseEnter = { () => this.setState({isOpen: true}) }
+                      //onMouseLeave = { () => this.setState({isOpen: false}) }
+                      //show={ this.state.isOpen }
+                      title="Profiles">
 												<Dropdown.Item>
 													<Link 
 														key="surveys"
 														to={this.props.auth ? "/profile" : "/"} 
-														className="p-2 text-dark">
+														className="text-dark">
 														Profile
 													</Link>
 												</Dropdown.Item>
@@ -45,7 +52,7 @@ class Header extends Component {
 													<Link 
 														key="surveys"
 														to={this.props.auth ? "/profiles" : "/"} 
-														className="p-2 text-dark">
+														className="text-dark">
 														Profiles
 													</Link>
 												</Dropdown.Item>
@@ -53,7 +60,7 @@ class Header extends Component {
 												<Link 
 														key="surveys"
 														to={this.props.auth ? "/surveys" : "/"} 
-														className="p-2 text-dark">
+														className="text-dark">
 														Surveys
 													</Link>
 												</Dropdown.Item>
@@ -61,13 +68,15 @@ class Header extends Component {
 												<Link 
 														key="advertisements"
 														to={this.props.auth ? "/advertisements" : "/"} 
-														className="p-2 text-dark">
+														className="text-dark">
 														Advertisements
 													</Link>
 												</Dropdown.Item>
 												<Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-											</DropdownButton>,
-                    <a key="logout" href="/api/logout" className="p-2 text-dark">Log out</a>
+                      </DropdownButton>,
+                      <Payments key="payments"/>,
+                      <React.Fragment key="credits">Credits: {this.props.auth.credits}</React.Fragment>,
+                    <a key="logout" href="/api/logout" className="stickie-nav__menu-link">Log out</a>
                 ]
                 );
         }
@@ -75,18 +84,28 @@ class Header extends Component {
 
     render() {
         return (
-            <div className="navbar navbar-expand-sm bg-light stickie-nav">
-            <h5 className="my-0 mr-md-auto font-weight-normal">
+          <>
+            <div className="navbar stickie-nav">
+              <div className="container" >
+            <h5 className="stickie-nav__logo">
              <Link 
                 to="/"
-                className="brand-logo">
-                Tempus
+                className="stickie-nav__logo">
+                TempusWork
               </Link>
             </h5>
-            <nav className="my-2 my-md-0 mr-md-3">
-              {this.renderContent()}
-            </nav>
+              <div>
+                {this.renderContent()}
+              </div>
+            </div>
           </div>
+          <div className="header-img">
+            &nbsp;
+            <div className="container" style={{ position: 'absolute' , bottom: 10, left: 0, right: 0}}>
+                <Search/>
+              </div>
+          </div>
+          </>
         )
     }
 }

@@ -1,0 +1,114 @@
+.footer__text {
+  color: #999; }
+
+.more-info {
+  color: #fff;
+  padding: 4px 10px;
+  border: 1px solid #fff;
+  border-radius: 2px;
+  transition: all .5s;
+  display: inline-block; }
+  .more-info:hover {
+    transform: translateY(-3px);
+    text-decoration: none;
+    color: white;
+    border-color: rgba(255, 255, 255, 0.507); }
+  .more-info:active, .more-info:focus {
+    transform: translateY(-1px); }
+
+.white-link {
+  color: #999;
+  display: inline-block;
+  transform: all .3s; }
+  .white-link:hover {
+    text-decoration: none;
+    color: #fff;
+    transform: scale(1.05); }
+
+.dropdown {
+  display: inline; }
+  .dropdown:hover .dropdown-menu {
+    display: block; }
+
+.stickie-nav {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4rem;
+  z-index: 999;
+  border-bottom: 2px solid #05331a;
+  color: #fff; }
+  .stickie-nav__logo {
+    color: white;
+    font-size: 1.8rem;
+    font-weight: 400;
+    background-image: linear-gradient(to right, #0e0f0f 30%, #a5f507, #fff 100%);
+    -webkit-background-clip: text;
+    color: transparent; }
+    .stickie-nav__logo:hover {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.63); }
+  .stickie-nav__menu-link {
+    all: unset;
+    border: none;
+    background: none;
+    color: inherit;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    line-height: 1.1rem;
+    font-size: 1rem;
+    color: #fff;
+    border: 1px solid #000;
+    border-radius: 1px;
+    padding: 6px 10px;
+    margin: 3px; }
+    .stickie-nav__menu-link:hover {
+      text-decoration: none;
+      background: #344915;
+      color: rgba(255, 255, 255, 0.507); }
+
+.header-img {
+  position: relative;
+  top: -4rem;
+  width: 100%;
+  height: calc(40vh + 3rem);
+  background-image: linear-gradient(to right bottom, rgba(7, 71, 7, 0.8), rgba(5, 51, 26, 0.8)), url("../../../images/startup.jpg");
+  background-size: cover;
+  background-attachment: fixed; }
+
+.footer {
+  background: #202020;
+  color: #fff;
+  padding: 1rem; }
+  .footer__break {
+    border: 1px solid #333; }
+  .footer__list {
+    margin-top: 1rem;
+    list-style: none;
+    padding: 0;
+    /*
+    & li {
+      position: relative;
+      color: $text-gray;
+      left: 20px;
+    }
+
+    & li:before {
+      content: '';
+      position: absolute;
+      border-right:2px solid black;
+      border-bottom:2px solid black;
+      border-color: $text-gray;
+      width:10px;
+      height:10px;
+      top: calc(50% - 4px);
+      left: -20px;
+      transform: translateY(-50%) rotate(-45deg);
+    }
+    */ }
+    .footer__list li:not(:last-child) {
+      margin-bottom: 1px; }

@@ -12,7 +12,7 @@ import * as actions from '../store/actions'
                   token={(token) => this.props.handleToken(token)}
                   stripeKey={process.env.REACT_APP_STRIPE_KEY}
                 >
-                <button className="btn btn-sm btn-outline-dark" style={{display: 'inline'}}>Add Credits</button>
+                <button className="stickie-nav__menu-link" style={{display: 'inline'}}>Add Credits</button>
                 </StripeCheckout>
         )
     }

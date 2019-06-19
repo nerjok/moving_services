@@ -27,8 +27,6 @@ class App extends Component {
     render () {
         return (
                 <BrowserRouter>
-                    <div>
-                      <div style={{height: '3px', background: '#4d4d4d'}}></div>
                       <Header/>
                       <Map/>
                       <div className="container">
@@ -45,7 +43,6 @@ class App extends Component {
 											</div>
                       <RecentAdds/>
                       <Footer/>
-                    </div>
                 </BrowserRouter>
         )
     }

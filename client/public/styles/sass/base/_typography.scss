@@ -1,0 +1,39 @@
+.footer__text {
+  color: #999;
+}
+
+
+.more-info {
+  color: #fff;
+  padding: 4px 10px;
+  border: 1px solid #fff;
+  border-radius: 2px;
+  transition: all .5s;
+  display: inline-block;
+
+
+  &:hover {
+    transform: translateY(-3px);
+    text-decoration: none;
+    //background: #344915;
+    color: rgb(255, 255, 255);
+    border-color: rgba(255, 255, 255, 0.507);
+  }
+  
+  &:active,
+  &:focus {
+    transform: translateY(-1px);
+  }
+}
+
+.white-link {
+  color: $text-gray;
+  display: inline-block;
+  transform: all .3s;
+
+  &:hover {
+    text-decoration: none;
+    color: $text-white;
+    transform: scale(1.05);// translateX(5px);
+  }
+}

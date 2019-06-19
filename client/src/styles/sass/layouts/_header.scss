@@ -1,0 +1,30 @@
+.dropdown {
+  display: inline;
+}
+
+.stickie-nav {
+  position: sticky;
+  //background-color: green;
+  /* doesnt work :( */
+  position: -webkit-sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  height:3rem;
+  z-index: 999;
+  transition: background-color .4s ease-in;
+}
+
+.header-img {
+  position:relative;
+  top: -3rem;
+
+  width: 100%;
+  height: calc(40vh + 3rem);
+  background: green;
+  background-image: linear-gradient(to right bottom, 
+                          rgba(green, 0.8), 
+                          rgba(blue, 0.8));
+ 
+
+}
