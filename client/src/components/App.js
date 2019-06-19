@@ -16,6 +16,7 @@ import Profile from './auth/profile/Profile'
 import Profiles from './auth/profiles/Profiles'
 import User from './auth/user/User'
 import Map from './map/Map'
+import BlogSlider from './BlogSlider'
 import { Footer } from './footer' 
 import { RecentAdds } from './recentAdds'
 class App extends Component {
@@ -42,6 +43,7 @@ class App extends Component {
                         <Route path="/login" component={LoginPassword} />
 											</div>
                       <RecentAdds/>
+                      <BlogSlider/>
                       <Footer/>
                 </BrowserRouter>
         )

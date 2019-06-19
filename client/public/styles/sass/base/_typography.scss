@@ -37,3 +37,34 @@
     transform: scale(1.05);// translateX(5px);
   }
 }
+
+.more-info-2 {
+
+  &:link,
+  &:visited {
+    color: $color-red;
+    font-weight: 600;
+    display: table;
+    margin: auto auto;
+    padding: 3px;
+  }
+
+  &__arrow {
+    display:inline-block;
+    transform: translateY(-2px);
+  }
+
+  &:hover {
+    color: $color-red-dark;
+    text-decoration: none;
+    border-bottom: 1px solid $color-red-dark;
+    //transform: translateY(-2px);
+    //box-shadow: 0 0 .5rem rgba($color-black, .2);
+    //box-shadow: 0 .5rem 1rem rgba($color-black,.2);
+  }
+  
+  /*
+  &:active {
+    transform: translateY(-1px);
+  }*/
+}

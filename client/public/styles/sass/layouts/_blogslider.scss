@@ -1,0 +1,86 @@
+.blog-slider {
+  background-image: url('../../../images/geometry.png');
+  background-attachment: fixed;
+  min-height: 40vh;
+  padding: 2rem;
+  
+
+  &__card {
+    transition: all .4s;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    
+
+    &__info {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 0px;
+      width:80%;
+      background-color: $color-white;
+      color: $color-red;
+      z-index: 2;
+
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+      padding: 4px;
+      text-align: center
+    }
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 .8rem 1.2rem rgba($color-black, .2);
+      //transition: all 2s ease-out;
+    }
+
+    &:active,
+    &:focus {
+        transform: translateY(-1px);
+        box-shadow: 0 .5rem 1rem rgba($color-black,.2);
+    }
+
+    &__image {
+      width:100%;
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+      transition: all .5s;
+    }
+
+    &__caption {
+      position: absolute;
+      top: 0%;
+      left: 50%;
+      transform: translate(-50%, -100%);
+      width:80%;
+      background-color: $color-white;
+      color: $color-red;
+
+      font-size: 1rem;
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+      padding: 2px;
+      text-align: center;
+
+      text-transform: uppercase;
+      text-align: center;
+      opacity: 0;
+      transition: all .1s ease-out;
+      backface-visibility: hidden;
+    }
+
+
+    &:hover &__image {
+      filter: blur(1.5px) brightness(90%);
+      transform: scale(1.01);
+    }
+
+    &:hover &__caption {
+      opacity: 1;
+      transform: translate(-50%, -0%);
+      z-index: 10;
+      //transition: all .4s;
+    }
+  }
+
+
+}

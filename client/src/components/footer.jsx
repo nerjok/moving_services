@@ -7,7 +7,7 @@ export const Footer = (props) => {
       <div className="container text-white" styles={{background: '#4d4d4d', textAlign: 'center', color: 'white', padding: '5px'}}>
              
           <div className="row">
-            <div className="col-6">
+            <div className="col-md-6">
               <h5>About</h5>
               <p className="footer__text">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima, assumenda ipsum quibusdam necessitatibus 
@@ -16,7 +16,7 @@ export const Footer = (props) => {
               </p>
               <a href="#about" className="more-info">More &rarr;</a>
             </div>
-            <div className="col-2">
+            <div className="col-md-2">
               <h5>For seakers</h5>
               <ul className="footer__list">
                 <li><a href="#" className="white-link">Types</a></li>
@@ -25,7 +25,7 @@ export const Footer = (props) => {
                 <li><a href="#" className="white-link">My tasks</a></li>
               </ul>
             </div>
-            <div className="col-2">
+            <div className="col-md-2">
               <h5>For employees</h5>
               <ul className="footer__list">
                 <li><a href="#" className="white-link">Seekers</a></li>
@@ -34,7 +34,7 @@ export const Footer = (props) => {
                 <li><a href="#" className="white-link">My tasks</a></li>
               </ul>
             </div>
-            <div className="col-2">
+            <div className="col-md-2">
               <h5>Other</h5>
               <ul className="footer__list">
                 <li><a href="#" className="white-link">Main</a></li>

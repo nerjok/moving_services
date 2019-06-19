@@ -25,6 +25,25 @@
     color: #fff;
     transform: scale(1.05); }
 
+.more-info-2 {
+  /*
+  &:active {
+    transform: translateY(-1px);
+  }*/ }
+  .more-info-2:link, .more-info-2:visited {
+    color: red;
+    font-weight: 600;
+    display: table;
+    margin: auto auto;
+    padding: 3px; }
+  .more-info-2__arrow {
+    display: inline-block;
+    transform: translateY(-2px); }
+  .more-info-2:hover {
+    color: #c22020;
+    text-decoration: none;
+    border-bottom: 1px solid #c22020; }
+
 .dropdown {
   display: inline; }
   .dropdown:hover .dropdown-menu {
@@ -112,3 +131,62 @@
     */ }
     .footer__list li:not(:last-child) {
       margin-bottom: 1px; }
+
+.blog-slider {
+  background-image: url("../../../images/geometry.png");
+  background-attachment: fixed;
+  min-height: 40vh;
+  padding: 2rem; }
+  .blog-slider__card {
+    transition: all .4s;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden; }
+    .blog-slider__card__info {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 0px;
+      width: 80%;
+      background-color: #fff;
+      color: red;
+      z-index: 2;
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+      padding: 4px;
+      text-align: center; }
+    .blog-slider__card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0.8rem 1.2rem rgba(0, 0, 0, 0.2); }
+    .blog-slider__card:active, .blog-slider__card:focus {
+      transform: translateY(-1px);
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); }
+    .blog-slider__card__image {
+      width: 100%;
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+      transition: all .5s; }
+    .blog-slider__card__caption {
+      position: absolute;
+      top: 0%;
+      left: 50%;
+      transform: translate(-50%, -100%);
+      width: 80%;
+      background-color: #fff;
+      color: red;
+      font-size: 1rem;
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+      padding: 2px;
+      text-align: center;
+      text-transform: uppercase;
+      text-align: center;
+      opacity: 0;
+      transition: all .1s ease-out;
+      backface-visibility: hidden; }
+    .blog-slider__card:hover .blog-slider__card__image {
+      filter: blur(1.5px) brightness(90%);
+      transform: scale(1.01); }
+    .blog-slider__card:hover .blog-slider__card__caption {
+      opacity: 1;
+      transform: translate(-50%, 0%);
+      z-index: 10; }
