@@ -1,8 +1,14 @@
 @import 'abstracts/variables';
 
 @import 'base/typography';
+@import 'base/animations';
 @import 'base/base';
 
 @import 'layouts/header';
 @import 'layouts/footer';
 @import 'layouts/blogslider';
+
+@import 'components/categories-card';
+@import 'components/get-started';
+
+@import 'pages/home';

@@ -1,0 +1,51 @@
+
+.get-started {
+  //background: $color-primary-dark;
+  background-image: linear-gradient(to bottom right, rgba($color-primary, .8), rgba($color-primary-dark, .8)), url('../../../images/apple_pc.jpg');
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+
+  &  container {
+    display: relative;
+  }
+
+  //height: 20vh;
+  &__heading {
+
+    &-visible {
+      font-size: 2rem;
+      //color: $color-white;
+      //box-shadow: 0 1rem 1rem rgba($color-black, .2);
+      transition: all .5s;
+      animation-name: textColors;
+      animation-duration: 15s;
+      animation-iteration-count: infinite;
+    }
+
+    &-hidden {
+      font-size: 2rem;
+      transform: translateY(5rem);
+      display: inline-block;
+      transition: all 1s;
+      //width:0px;
+      opacity: 0;
+    }
+  }
+
+  &:hover {
+    background-image: linear-gradient(to bottom right, rgba($color-primary-light, .8), rgba($color-primary-dark-2, .8)), url('../../../images/apple_pc.jpg');
+
+    .get-started__heading-hidden {
+      color: red;
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .get-started__heading-visibles {
+      color: red;
+      transform: translateY(-5rem);
+      
+    }
+  }
+}

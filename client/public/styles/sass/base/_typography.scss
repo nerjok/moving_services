@@ -11,6 +11,11 @@
   transition: all .5s;
   display: inline-block;
 
+  &--dark {
+    color: $color-black;
+    border: 1px solid $color-black;
+  }
+
 
   &:hover {
     transform: translateY(-3px);
@@ -47,6 +52,7 @@
     display: table;
     margin: auto auto;
     padding: 3px;
+    box-sizing: border-box;
   }
 
   &__arrow {
@@ -67,4 +73,8 @@
   &:active {
     transform: translateY(-1px);
   }*/
+}
+
+.text-red {
+  color: $color-red;
 }

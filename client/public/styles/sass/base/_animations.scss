@@ -1,0 +1,25 @@
+@-webkit-keyframes textColors {
+  0% {
+    color: red;
+  }
+  50% {
+    color: yellow;
+  }
+  100% {
+    color: red;
+  }
+}
+
+@keyframes textColors {
+  0% {
+    color: red;
+  }
+  50% {
+    color: yellow;
+    transform: scale(1.2);
+    
+  }
+  100% {
+    color: red;
+  }
+}

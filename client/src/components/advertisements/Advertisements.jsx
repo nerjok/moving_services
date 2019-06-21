@@ -36,7 +36,7 @@ export class Advertisements extends React.Component {
         <div style={{margin: '5rem'}}>
         <Link to={"/advertisements/new"}>New Advertisement</Link>
           Advertisements
-          <table className="table">
+          <table className="table table-hover">
             <thead>
               <tr>
                 <th>#</th>

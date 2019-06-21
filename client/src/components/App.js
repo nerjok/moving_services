@@ -19,6 +19,9 @@ import Map from './map/Map'
 import BlogSlider from './BlogSlider'
 import { Footer } from './footer' 
 import { RecentAdds } from './recentAdds'
+import Categories from './categories/Categories'
+import { GetStarted } from './GetStarted'
+
 class App extends Component {
 
     componentDidMount() {
@@ -29,7 +32,8 @@ class App extends Component {
         return (
                 <BrowserRouter>
                       <Header/>
-                      <Map/>
+                      {/*<Map/>*/}
+                      <Categories/>
                       <div className="container">
                         <Route path="/" exact component={Landing}/>
                         <Route path="/surveys" exact component={Dashboard} />
@@ -41,8 +45,10 @@ class App extends Component {
                         <Route path="/advertisements/:id" exact component={Advertisement}/>
                         <Route path="/profiles/:id" exact component={User}/>
                         <Route path="/login" component={LoginPassword} />
-											</div>
-                      <RecentAdds/>
+					  </div>
+
+                      <GetStarted/>
+                      {/*<RecentAdds/>*/}
                       <BlogSlider/>
                       <Footer/>
                 </BrowserRouter>

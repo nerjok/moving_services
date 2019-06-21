@@ -8,6 +8,9 @@
   border-radius: 2px;
   transition: all .5s;
   display: inline-block; }
+  .more-info--dark {
+    color: #000;
+    border: 1px solid #000; }
   .more-info:hover {
     transform: translateY(-3px);
     text-decoration: none;
@@ -35,7 +38,8 @@
     font-weight: 600;
     display: table;
     margin: auto auto;
-    padding: 3px; }
+    padding: 3px;
+    box-sizing: border-box; }
   .more-info-2__arrow {
     display: inline-block;
     transform: translateY(-2px); }
@@ -43,6 +47,26 @@
     color: #c22020;
     text-decoration: none;
     border-bottom: 1px solid #c22020; }
+
+.text-red {
+  color: red; }
+
+@-webkit-keyframes textColors {
+  0% {
+    color: red; }
+  50% {
+    color: yellow; }
+  100% {
+    color: red; } }
+
+@keyframes textColors {
+  0% {
+    color: red; }
+  50% {
+    color: yellow;
+    transform: scale(1.2); }
+  100% {
+    color: red; } }
 
 .dropdown {
   display: inline; }
@@ -82,7 +106,7 @@
     font-size: 1rem;
     color: #fff;
     border: 1px solid #000;
-    border-radius: 1px;
+    border-radius: 5px;
     padding: 6px 10px;
     margin: 3px; }
     .stickie-nav__menu-link:hover {
@@ -95,7 +119,7 @@
   top: -4rem;
   width: 100%;
   height: calc(40vh + 3rem);
-  background-image: linear-gradient(to right bottom, rgba(7, 71, 7, 0.8), rgba(5, 51, 26, 0.8)), url("../../../images/startup.jpg");
+  background-image: linear-gradient(to right bottom, rgba(7, 71, 7, 0.5), rgba(5, 51, 26, 0.8)), url("../../../images/startup.jpg");
   background-size: cover;
   background-attachment: fixed; }
 
@@ -190,3 +214,90 @@
       opacity: 1;
       transform: translate(-50%, 0%);
       z-index: 10; }
+
+.categories__card {
+  perspective: 150rem;
+  -moz-perspective: 150rem;
+  position: relative;
+  height: 10rem;
+  /* Animation with two sides */
+  /*
+  
+  &:hover &__side--front {
+    transform: rotateY(-180deg);
+  }
+
+  &:hover &__side--back {
+    transform: rotateY(0) scale(1.02);
+          &:active {
+        transform: translateY(3px) scale(1.02); 
+      }
+  }
+  /**/ }
+  .categories__card__icon {
+    background-image: linear-gradient(to right, #7ed56f, #28b485);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: 3rem;
+    display: inline-block;
+    margin: auto auto; }
+  .categories__card__title {
+    font-size: .9rem;
+    text-transform: uppercase; }
+  .categories__card__text {
+    font-size: .8rem; }
+  .categories__card__side {
+    height: 10rem;
+    transition: all .5s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border-radius: 5px;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    box-sizing: border-box; }
+    .categories__card__side--front {
+      background: #f2f2f2; }
+    .categories__card__side--back {
+      background: #f7f7f7;
+      border: 1px solid #bfbfbf;
+      transform: rotateY(180deg) scale(1.02) translateY(-10px);
+      box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.2); }
+  .categories__card:hover .categories__card__side--front {
+    box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.2);
+    border: 1px solid #bfbfbf;
+    transform: scale(1.01);
+    z-index: 999; }
+
+.get-started {
+  background-image: linear-gradient(to bottom right, rgba(85, 197, 122, 0.8), rgba(40, 180, 133, 0.8)), url("../../../images/apple_pc.jpg");
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed; }
+  .get-started container {
+    display: relative; }
+  .get-started__heading-visible {
+    font-size: 2rem;
+    transition: all .5s;
+    animation-name: textColors;
+    animation-duration: 15s;
+    animation-iteration-count: infinite; }
+  .get-started__heading-hidden {
+    font-size: 2rem;
+    transform: translateY(5rem);
+    display: inline-block;
+    transition: all 1s;
+    opacity: 0; }
+  .get-started:hover {
+    background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.8), rgba(25, 124, 91, 0.8)), url("../../../images/apple_pc.jpg"); }
+    .get-started:hover .get-started__heading-hidden {
+      color: red;
+      transform: translateY(0);
+      opacity: 1; }
+    .get-started:hover .get-started__heading-visibles {
+      color: red;
+      transform: translateY(-5rem); }
+
+.categories-section {
+  min-height: 40vh; }

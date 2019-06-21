@@ -56,7 +56,8 @@ line-height: 1.1rem;
     font-size: 1rem;
     color: #fff;
     border: 1px solid #000;
-    border-radius: 1px;
+    //border: 1px solid rgb(121, 98, 98);
+    border-radius: 5px;
     padding: 6px 10px;
     margin: 3px;
 
@@ -76,14 +77,12 @@ line-height: 1.1rem;
 
   width: 100%;
   height: calc(40vh + 3rem);
-  //background: green;
+  
   background-image: linear-gradient(to right bottom, 
-                          rgba(#0747075b, 0.8), 
+                          rgba(#0747075b, 0.5), 
                           rgba(#05331a, 0.8)), url('../../../images/startup.jpg');
   background-size: cover;   
-  background-attachment: fixed;
-  //z-index: -99999;              
-  //clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%,0 85%); 
+  background-attachment: fixed; 
   //-webkit-filter: grayscale(80%);
   //filter: brightness(60%);
 

@@ -1,0 +1,75 @@
+.categories__card {
+  perspective: 150rem;
+  -moz-perspective: 150rem;
+  position: relative;
+  height: 10rem;
+
+  &__icon {
+    background-image: linear-gradient(to right, $color-primary-light, $color-primary-dark);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: 3rem;
+    display: inline-block;
+    margin: auto auto;
+  }
+
+  &__title {
+    font-size: .9rem;
+    text-transform: uppercase;
+    //margin: .5rem;
+  }
+
+  &__text {
+    font-size: .8rem;
+  }
+
+  &__side {
+    height: 10rem;
+    transition: all .5s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    //border: 1px solid $color-black;
+    border-radius: 5px;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;  
+    box-sizing: border-box;
+
+    &--front {
+      background: #f2f2f2;
+    }
+
+    &--back {
+      background: #f7f7f7;
+      border: 1px solid #bfbfbf;
+      //color: $color-white;
+      transform: rotateY(180deg) scale(1.02) translateY(-10px);
+      box-shadow: 0 1rem 1.5rem rgba($color-black, .2);
+
+
+    }
+    
+  }
+  
+  &:hover &__side--front {
+    box-shadow: 0 1rem 1.5rem rgba($color-black, .2);
+    border: 1px solid #bfbfbf;
+    transform: scale(1.01);
+    z-index: 999;
+  }
+  /* Animation with two sides *//*
+  
+  &:hover &__side--front {
+    transform: rotateY(-180deg);
+  }
+
+  &:hover &__side--back {
+    transform: rotateY(0) scale(1.02);
+          &:active {
+        transform: translateY(3px) scale(1.02); 
+      }
+  }
+  /**/
+}
+

@@ -18,12 +18,14 @@
     <script>
       window.addEventListener('scroll', function(e) {
         let sY = window.scrollY;
-        console.log('scrollYPosition', sY)
+        //console.log('scrollYPosition', sY)
         if (sY > 260)
-          document.getElementsByClassName('stickie-nav')[0].style.backgroundImage = 
-          'linear-gradient(to right, #669900 10%,#05331a 50%, #000 100%)';
-          //'linear-gradient(to right, rgba(0,0,0,0) 10%,#05331a 60%, #000 100%)';
+          document.getElementsByClassName('stickie-nav')[0].style
+          //.backgroundImage = 'linear-gradient(to right, #669900 10%,#05331a 50%, #000 100%)';
+          //.backgroundImage ='linear-gradient(to right, #55c57a, #197c5b)';
           //'#05331a';
+          .background = '#3B935E';
+          //.backgroundImage = "linear-gradient(to right, rgba(red, .5), #197c5b), url('./images/geometry.png')";
         else
         document.getElementsByClassName('stickie-nav')[0].style.background = 
         //'linear-gradient(to right, rgba(0,0,0,0) 10%,#05331a 60%, #000 100%)';
@@ -31,6 +33,7 @@
         
       })
     </script>
+    <link rel="stylesheet" href="styles/styles.css">
     <link rel="stylesheet" href="styles/style.css">
   </head>
   <body>
