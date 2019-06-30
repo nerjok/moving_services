@@ -1,0 +1,44 @@
+.advertisements {
+
+  &-row {
+    border-top: .2px solid $border-gray;
+    border-right: .2px solid $border-gray;
+    padding: .5rem;
+
+    &:last-child {
+      border-bottom: .2px solid $border-gray;
+    }
+    &--red {
+      border-left: 6px solid $color-red;
+    }
+
+    &:hover {
+      background-color: #fafafa;
+    }
+
+    &__badge {
+      display: block !important;
+      margin: auto;
+    }
+
+    &__info-txt {
+      display: block !important;
+      margin: auto;
+    }
+
+    &__description {
+
+      h5 a {
+        color: black;
+      }
+    }
+
+    @media screen  and (max-width: 767px) {
+      &__description {
+        text-align: center;
+        //background: gray;
+      }
+    }
+  }
+
+}

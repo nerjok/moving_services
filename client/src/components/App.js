@@ -28,14 +28,14 @@ class App extends Component {
         this.props.fetchUser()
     }
 
-    render () {
+    render () {console.log('[[Loged props]]', this.props)
         return (
                 <BrowserRouter>
                       <Header/>
                       {/*<Map/>*/}
                       <Categories/>
                       <div className="container">
-                        <Route path="/" exact component={Landing}/>
+                        {/*<Route path="/" exact component={Landing}/>*/}
                         <Route path="/surveys" exact component={Dashboard} />
                         <Route path="/surveys/new" component={SurveyNew} />
                         <Route path="/profile" exact component={Profile}/>
@@ -44,10 +44,14 @@ class App extends Component {
                         <Route path="/advertisements/new" exact component={AdvertisementForm}/>
                         <Route path="/advertisements/:id" exact component={Advertisement}/>
                         <Route path="/profiles/:id" exact component={User}/>
-                        <Route path="/login" component={LoginPassword} />
+                        <Route path="/login" exact component={LoginPassword} />
 					  </div>
 
-                      <GetStarted/>
+                      { !this.props.auth || !this.props.auth._id ?
+                        <GetStarted/>
+                        : null
+                      }
+                      
                       {/*<RecentAdds/>*/}
                       <BlogSlider/>
                       <Footer/>
@@ -56,5 +60,10 @@ class App extends Component {
     }
 }
 
+function mapStateToProps({auth}) {
+  return {
+      auth
+  }
+}
+export default connect(mapStateToProps, actions)(App)
 
-export default connect(null, actions)(App)

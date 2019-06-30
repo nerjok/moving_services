@@ -9,7 +9,6 @@ import {
   Link
 } from 'react-router-dom'
 
-
 export class Advertisements extends React.Component {
 
   constructor(props) {
@@ -29,49 +28,43 @@ export class Advertisements extends React.Component {
     this.props.fetchAdvertisements(this.state.page)
   }
 
-  render() {console.log('[[advertisements]]', this.state.page)
+  render() {
     return (
+      <>
+        <div className="text-center">
+          <h5>Advertisements</h5>
+          <small>Explore available advertisements</small>
+        </div>
+        <Link to={"/advertisements/new"} className="btn btn-sm btn-outline-success m-3 float-right">New Advertisement</Link>
+        <div className="clearfix"></div>
 
-      <div>
-        <div style={{margin: '5rem'}}>
-        <Link to={"/advertisements/new"}>New Advertisement</Link>
-          Advertisements
-          <table className="table table-hover">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
+            <div className="advertisements">
               {Array.from(this.props.advertisements, ({_id, title, description}) => 
+              <div className="row advertisements-row advertisements-row--red">
+                <div className="col-md-6 advertisements-row__description">
+                  <h5><Link to={`/advertisements/${_id}`}>{title}</Link></h5>
+                  {description}
+                  </div>
+                <div className="col-md-2 flex" styles={{background: 'lightgray'}}>
+                    <span className="badge badge-success advertisements-row__badge">Active</span>
+                </div>
+                <div className="col-md-1 flex">
+                    <span className="advertisements-row__info-txt">Vilnius</span> 
+                </div>
+                <div className="col-md-3 flex">
+                  <div className="advertisements-row__info-txt">
+                    <Link to={`/advertisements/${_id}`} className="btn btn-sm btn-outline-info">View</Link>
+                    <a href="#ff" className="btn btn-sm btn-outline-success">Remember</a>
+                    <a className="btn btn-sm btn-outline-danger" onClick={() => {console.log('deletion');this.props.deleteAdvertisement({page: this.state.page, id: _id})}}>Delete </a>
+                  </div>
+                </div>
+              </div>
+              )}
+        </div>      
 
-              
-              <tr>
-                <td>#</td>
-                <td>
-                <Link to={`/advertisements/${_id}`}>{title}</Link>
-                </td>
-                <td>{description}</td>
-                <td></td>
-                <td>action
-                  {/*// eslint-disable-next-line jsx-a11y/anchor-is-valid*/}
-                  <a onClick={() => {console.log('deletion');this.props.deleteAdvertisement({page: this.state.page, id: _id})}}>Delete </a></td>
-              </tr>
-            )}
-            </tbody>
-          </table>
-          <div style={{position: 'relative', padding: '1rem'}}>
-            <div style={{//background:'green',
-                          //padding: '1rem',
+          <div style={{position: 'relative', padding: '1rem', margin: '1.5rem'}}>
+            <div style={{
                           boxSizing: 'border-box',
-                          //margin: 'auto auto',
-                          //width: '40%',
-                          //display: 'block',
-
                           position: 'absolute',
                           left: '50%',
                           top: '50%',
@@ -98,30 +91,7 @@ export class Advertisements extends React.Component {
                     />
             </div>
           </div>
-{/*}
-<Pagination
-          activePage={this.state.page}
-          itemsCountPerPage={5}
-          totalItemsCount={this.props.total}
-          pageRangeDisplayed={5}
-          onChange={this.handlePageChange}
-          pageClassName="page-item"
-          pageLinkClassName="page-link"
-          
-          innerClass={'pagination'}
-          activeClass="active"
-          itemClass="page-item"
-          linkClass="page-link"
-
-          subContainerClassName={'pages pagination'}
-          previousClassName="page-link"
-          nextClassName="page-link"
-          activeLinkClass='active'
-          
-        />
-    */}
-          </div>
-      </div>
+      </>
     );
   }
 
@@ -149,5 +119,4 @@ export class Advertisements extends React.Component {
 
 
 const mapStateToProps = ({advertisements: {advertisements, total, page}}) => ({advertisements, total, page });
-
 export default connect(mapStateToProps, {fetchAdvertisements, deleteAdvertisement})(Advertisements)

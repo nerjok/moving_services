@@ -5,7 +5,7 @@ export default class Landing extends Component {
     render(){
         return (
             <div style={{textAlign:'center'}}>
-            <h2>Please login to see content!!!</h2>
+            <h2>Navigate to view page content</h2>
             </div>
         )
     }
