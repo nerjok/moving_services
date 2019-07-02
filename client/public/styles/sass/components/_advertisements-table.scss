@@ -4,6 +4,7 @@
     border-top: .2px solid $border-gray;
     border-right: .2px solid $border-gray;
     padding: .5rem;
+    background-color: $color-table-light-gray;
 
     &:last-child {
       border-bottom: .2px solid $border-gray;
@@ -13,7 +14,7 @@
     }
 
     &:hover {
-      background-color: #fafafa;
+      background-color: $color-table-middle-gray;
     }
 
     &__badge {

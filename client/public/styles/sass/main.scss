@@ -1,4 +1,6 @@
 @import 'abstracts/variables';
+@import 'abstracts/mixins';
+@import 'abstracts/functions';
 
 @import 'base/typography';
 @import 'base/animations';
@@ -11,5 +13,6 @@
 @import 'components/categories-card';
 @import 'components/get-started';
 @import 'components/advertisements-table';
+@import 'components/advertisement-statuses';
 
 @import 'pages/home';

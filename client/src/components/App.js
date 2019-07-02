@@ -33,7 +33,7 @@ class App extends Component {
                 <BrowserRouter>
                       <Header/>
                       {/*<Map/>*/}
-                      <Categories/>
+                      {/*<Categories/>*/}
                       <div className="container">
                         {/*<Route path="/" exact component={Landing}/>*/}
                         <Route path="/surveys" exact component={Dashboard} />
@@ -48,7 +48,10 @@ class App extends Component {
 					  </div>
 
                       { !this.props.auth || !this.props.auth._id ?
-                        <GetStarted/>
+                        <>
+                          <Advertisements/>
+                          <GetStarted/>
+                        </>  
                         : null
                       }
                       

@@ -1,0 +1,128 @@
+.advertisement-statuses {
+  list-style-type: none;
+  background: $color-table-light-gray;
+  padding: 0;
+}
+
+.advertisement-status {
+  position: relative;
+  width: 100%;
+  padding: .5rem 0px .5rem 0rem;
+  box-sizing: border-box;
+  border: .2px solid $border-gray;
+
+  &:hover {
+    background: $color-table-middle-gray;
+  }
+
+  & label:hover {
+    cursor: pointer;
+  }
+
+  &:not(:last-child) {
+    border-bottom: none;
+  }
+
+  &__filter {
+   width:0;
+   height:0;
+   opacity: 0;
+  }
+
+  &__label {
+    position: relative; 
+    width: 100%;
+    margin: 0;
+  }
+
+  &__filter-span {
+    @include verticaly-center;
+
+    right: .6rem;
+    //z-index: 99999;
+    height: 1.2rem;
+    width: 1.2rem;
+    background-color: #eee;
+    border-radius: 2px;
+
+    &:hover {
+      background-color: #ccc;
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      display: none;
+
+      left: 30%;
+      top: 45%;
+      width: 5px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 3px 3px 0;
+      -webkit-transform: rotate(45deg) translate(-50%, -50%);
+      -ms-transform: rotate(45deg) translate(-50%, -50%);
+      transform: rotate(45deg) translate(-50%, -50%);
+    }
+  }
+
+  &__badge {
+    
+    padding:2px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    transition: backround-image .5s ease .075s;
+    width: 9rem;
+    display: inline-block;
+
+    &--red {
+      background-image: job-type($color-red);
+    }
+
+    &--blue {
+      background-image: job-type($color-blue);
+    }
+
+    &--green {
+      background-image: job-type($color-green);
+    }
+
+    &--yellow {
+      background-image: job-type($color-red);
+    }
+    &--gray {
+      background-image: job-type($color-gray);
+    }
+  }
+
+  &__filter:checked ~ &__filter-span {
+    background-color: $color-green;
+
+    &::after {
+      display: block;
+    }
+  }
+
+  &__filter:checked ~ &__badge {
+    color: $color-white;
+
+    &--red {
+      background-image: job-type-selected($color-red);
+    }
+
+    &--blue {
+      background-image: job-type-selected($color-blue);
+    }
+
+    &--green {
+      background-image: job-type-selected($color-green);
+    }
+
+    &--yellow {
+      background-image: job-type-selected($color-red);
+    }
+    &--gray {
+      background-image: job-type-selected($color-gray);
+    }
+  }
+}

@@ -129,6 +129,17 @@
   background-size: cover;
   background-attachment: fixed; }
 
+.header__search {
+  padding: 1rem;
+  margin: 0; }
+
+.section-header__search {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.4); }
+
 .footer {
   background: #202020;
   color: #fff;
@@ -308,13 +319,14 @@
 .advertisements-row {
   border-top: 0.2px solid #e0e0e0;
   border-right: 0.2px solid #e0e0e0;
-  padding: .5rem; }
+  padding: .5rem;
+  background-color: #fafafa; }
   .advertisements-row:last-child {
     border-bottom: 0.2px solid #e0e0e0; }
   .advertisements-row--red {
     border-left: 6px solid red; }
   .advertisements-row:hover {
-    background-color: #fafafa; }
+    background-color: #f6f6f6; }
   .advertisements-row__badge {
     display: block !important;
     margin: auto; }
@@ -326,6 +338,89 @@
   @media screen and (max-width: 767px) {
     .advertisements-row__description {
       text-align: center; } }
+
+.advertisement-statuses {
+  list-style-type: none;
+  background: #fafafa;
+  padding: 0; }
+
+.advertisement-status {
+  position: relative;
+  width: 100%;
+  padding: .5rem 0px .5rem 0rem;
+  box-sizing: border-box;
+  border: 0.2px solid #e0e0e0; }
+  .advertisement-status:hover {
+    background: #f6f6f6; }
+  .advertisement-status label:hover {
+    cursor: pointer; }
+  .advertisement-status:not(:last-child) {
+    border-bottom: none; }
+  .advertisement-status__filter {
+    width: 0;
+    height: 0;
+    opacity: 0; }
+  .advertisement-status__label {
+    position: relative;
+    width: 100%;
+    margin: 0; }
+  .advertisement-status__filter-span {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: .6rem;
+    height: 1.2rem;
+    width: 1.2rem;
+    background-color: #eee;
+    border-radius: 2px; }
+    .advertisement-status__filter-span:hover {
+      background-color: #ccc; }
+    .advertisement-status__filter-span:after {
+      content: "";
+      position: absolute;
+      display: none;
+      left: 30%;
+      top: 45%;
+      width: 5px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 3px 3px 0;
+      -webkit-transform: rotate(45deg) translate(-50%, -50%);
+      -ms-transform: rotate(45deg) translate(-50%, -50%);
+      transform: rotate(45deg) translate(-50%, -50%); }
+  .advertisement-status__badge {
+    padding: 2px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    transition: backround-image .5s ease .075s;
+    width: 9rem;
+    display: inline-block; }
+    .advertisement-status__badge--red {
+      background-image: linear-gradient(to right, red 10%, transparent 10%); }
+    .advertisement-status__badge--blue {
+      background-image: linear-gradient(to right, #265a56 10%, transparent 10%); }
+    .advertisement-status__badge--green {
+      background-image: linear-gradient(to right, #26ae61 10%, transparent 10%); }
+    .advertisement-status__badge--yellow {
+      background-image: linear-gradient(to right, red 10%, transparent 10%); }
+    .advertisement-status__badge--gray {
+      background-image: linear-gradient(to right, #999 10%, transparent 10%); }
+  .advertisement-status__filter:checked ~ .advertisement-status__filter-span {
+    background-color: #26ae61; }
+    .advertisement-status__filter:checked ~ .advertisement-status__filter-span::after {
+      display: block; }
+  .advertisement-status__filter:checked ~ .advertisement-status__badge {
+    color: #fff; }
+    .advertisement-status__filter:checked ~ .advertisement-status__badge--red {
+      background-image: linear-gradient(60deg, red 110%, transparent 110%); }
+    .advertisement-status__filter:checked ~ .advertisement-status__badge--blue {
+      background-image: linear-gradient(60deg, #265a56 110%, transparent 110%); }
+    .advertisement-status__filter:checked ~ .advertisement-status__badge--green {
+      background-image: linear-gradient(60deg, #26ae61 110%, transparent 110%); }
+    .advertisement-status__filter:checked ~ .advertisement-status__badge--yellow {
+      background-image: linear-gradient(60deg, red 110%, transparent 110%); }
+    .advertisement-status__filter:checked ~ .advertisement-status__badge--gray {
+      background-image: linear-gradient(60deg, #999 110%, transparent 110%); }
 
 .categories-section {
   min-height: 40vh; }

@@ -88,3 +88,23 @@ line-height: 1.1rem;
 
 }
 
+
+.header {
+  &__search {
+    //background: rgba($color-green, .85);
+   // min-height: 4rem;
+    padding: 1rem;
+    margin: 0;
+    //border-top-left-radius: 5px; 
+    //border-top-right-radius: 5px;
+  }
+}
+
+.section-header__search {
+  position: absolute;
+   bottom: 0; 
+   left: 0; 
+   right: 0;
+   background: rgba(#000, .4);
+}
+

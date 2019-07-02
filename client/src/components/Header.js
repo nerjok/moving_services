@@ -5,8 +5,8 @@ import Payments from './Payments'
 //import { link } from 'fs';
 import { Search } from './map/search/search'
 
+import {Dropdown, DropdownButton, Navbar, Nav, NavDropdown} from 'react-bootstrap';
 
-import {Dropdown, DropdownButton} from 'react-bootstrap';
 
 class Header extends Component {
     state = { isOpen: false }
@@ -85,7 +85,7 @@ class Header extends Component {
     render() {
         return (
           <>
-            <div className="navbar stickie-nav">
+           <nav className="navbar stickie-nav">
               <div className="container" >
             <h5 className="stickie-nav__logo">
              <Link 
@@ -98,12 +98,76 @@ class Header extends Component {
                 {this.renderContent()}
               </div>
             </div>
-          </div>
+          </nav>
+          
+ 
+
+
           <div className="header-img">
             &nbsp;
-            <div className="container" style={{ position: 'absolute' , bottom: 10, left: 0, right: 0}}>
-                <Search/>
+            <section
+            className="section-header__search"
+            //style={{position: 'absolute', bottom: 0, left: 0, right: 0}}
+            >
+
+            
+            <div className="container header__search"
+              //style={{background: 'lightgray', minHeight: '4rem', borderTopLeftRadius: '5px', borderTopRightRadius: '5px'}}
+              //style={{ position: 'absolute' , bottom: 10, left: 0, right: 0}}
+              >
+
+
+<div className="row">
+  
+        <div className="col-md-3">
+          <div className="form-group m-0">
+            <input type="text" className="form-control" name="keyword" placeholder="Enter keyword" 
+            />
+          </div>
+        </div>
+        
+        <div className="col-md-3">
+          <div className="form-group m-0">
+          <select className="form-control" name="city" tabIndex="-98" 
+          >
+                <option value="">Location</option>
+                <option value="1">Kaunas</option>
+                <option value="2">Vilnius</option>
+                <option value="3">Klaipeda</option>
+                <option value="4">Panevezys</option>
+                <option value="4">Siauliai</option>
+              </select>
+          </div>
+        </div>
+        <div className="col-md-3">
+          <div className="form-group m-0">
+          <select className="form-control" name="city" tabIndex="-98" 
+          >
+                <option value="">Category</option>
+                <option value="1">Kaunas</option>
+                <option value="2">Vilnius</option>
+                <option value="3">Klaipeda</option>
+                <option value="4">Panevezys</option>
+                <option value="4">Siauliai</option>
+              </select>
+          </div>
+        </div>
+        <div className="col-md-3">
+              <div className="form-group m-0">
+                <button type="submit" 
+                  className=" col-md-12 form-control btn btn-sm btn-danger">
+                    Search
+                  </button>
               </div>
+            </div>
+        
+      </div>
+
+
+                {/*<Search/>*/}
+              </div>
+            </section>
+
           </div>
           </>
         )
