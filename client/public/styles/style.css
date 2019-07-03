@@ -86,7 +86,7 @@
   left: 0;
   right: 0;
   height: 4rem;
-  z-index: 999;
+  z-index: 9;
   border-bottom: 2px solid #05331a;
   color: #fff; }
   .stickie-nav__logo {
@@ -421,6 +421,49 @@
       background-image: linear-gradient(60deg, red 110%, transparent 110%); }
     .advertisement-status__filter:checked ~ .advertisement-status__badge--gray {
       background-image: linear-gradient(60deg, #999 110%, transparent 110%); }
+
+.popup-modal {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 20;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .3s; }
+  .popup-modal__content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75%;
+    height: 50%;
+    background-color: #fff;
+    transform: translate(-50%, -50%) scale(0.25);
+    transition: all .5s .2s; }
+    .popup-modal__content__title {
+      margin: 1rem;
+      margin-top: 2.5rem; }
+  .popup-modal:target {
+    opacity: 1;
+    visibility: visible; }
+  .popup-modal:target .popup-modal__content {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1); }
+  .popup-modal__close:link, .popup-modal__close:visited {
+    color: #999;
+    position: absolute;
+    top: 2.5rem;
+    right: 2.5rem;
+    font-size: 3rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: all .2s;
+    line-height: 1; }
+  .popup-modal__close:hover {
+    color: #55c57a; }
 
 .categories-section {
   min-height: 40vh; }

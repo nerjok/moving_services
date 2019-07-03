@@ -49,7 +49,7 @@ class App extends Component {
 
                       { !this.props.auth || !this.props.auth._id ?
                         <>
-                          <Advertisements/>
+                          <div className="container"><Advertisements/></div>
                           <GetStarted/>
                         </>  
                         : null

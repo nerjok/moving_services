@@ -13,6 +13,8 @@ import {
   Link
 } from 'react-router-dom'
 
+import { AdvertisementPopup } from './AdvertisementPopup'
+
 export class Advertisements extends React.Component {
 
   constructor(props) {
@@ -41,6 +43,7 @@ export class Advertisements extends React.Component {
         </div>
         <Link to={"/advertisements/new"} className="btn btn-sm btn-outline-success m-3 float-right">New Advertisement</Link>
         <div className="clearfix"></div>
+        <AdvertisementPopup/>
 
         <div className="row">
         <div className="col-md-9"> 
@@ -49,7 +52,10 @@ export class Advertisements extends React.Component {
               {Array.from(this.props.advertisements, ({_id, title, description}) => 
               <div className="row advertisements-row advertisements-row--red">
                 <div className="col-md-5 advertisements-row__description">
-                  <h5><Link to={`/advertisements/${_id}`}>{title}</Link></h5>
+                  <h5>
+                      <a href="#show-details">{title}</a>
+                      {/*<Link to={`/advertisements/${_id}`}></Link>*/}
+                  </h5>
                   {description}
                   </div>
                 <div className="col-md-2 flex" styles={{background: 'lightgray'}}>

@@ -17,13 +17,35 @@ module.exports = app => {
   /**
   * Get advertisement
   */
-  app.get('/api/advertisements', requireLogin , async (req, res, next) => {
+  app.get('/api/advertisements', /*requireLogin ,*/ async (req, res, next) => {
     //const page = req.query.page ? +req.query.page +1 : 1
     var page = req.query.page || 0
    // page++;
     const user = req.user
     const limit = 5
     const skip = page * limit
+
+    if (!req.user || !req.user._id) {
+      /**
+       * TODO
+       * 
+       * DEFINE alternate route to user self infos
+       */
+      const page2 = page++;
+      const skip2 = page2 * limit;
+      const advertisements = await Advertisement.paginate({},{
+        ...pagOptions,
+        page,
+        skip,
+        limit,
+        sort: {'_id': -1}
+      })
+      res.send({...advertisements, total: Math.ceil(advertisements.totalDocs / limit)})
+      return
+    }
+
+
+
     const usr = await User.findById(req.user._id)
                           .populate({
                                       path: 'advertisements',
@@ -41,6 +63,7 @@ module.exports = app => {
                             }
     const ads = {advertisements: usr.advertisements, //total: usr.advertisementsCount, page}
                                                     total: Math.ceil(usr.advertisementsCount / limit), page}
+
     console.log("[[paging]", req.query)
     res.send(ads)
   });

@@ -8,6 +8,6 @@
   //right: 0;
   */
   height:4rem;
-  z-index: 999;
+  z-index: 10;
   transition: background-color .4s ease-in;
 }
