@@ -69,6 +69,9 @@ class App extends Component {
                       {/*<RecentAdds/>*/}
                       {/*<BlogSlider/>*/}
                       <Footer/>
+                      <div className="to-top">
+                        <a href="#">&#8616;</a>
+                        </div>
                 </BrowserRouter>
         )
     }
