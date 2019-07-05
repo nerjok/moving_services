@@ -16,11 +16,7 @@
   right: 0;
   height:4rem;
   z-index: 9;
-  //transition: background-color .4s ease-in;
   border-bottom: 2px solid #05331a;
-  //background-image: linear-gradient(to right, rgba(0,0,0,0) 10%,#05331a 60%, #000 100%); 
-  //linear-gradient(to right, red 10%,#05331a 50%, #000 100%);
-  //border-image-slice: 1;
 
   color:#fff;
 
@@ -28,7 +24,8 @@
     color: white;
     font-size: 1.8rem;
     font-weight: 400;
-    background-image: linear-gradient(to right,#0e0f0f 30%,#a5f507, #fff 100%);
+    //background-image: linear-gradient(to right,#0e0f0f 30%,#a5f507, #fff 100%);
+    background-image: linear-gradient(to right,#a5f507 10%, #fff 100%);
     -webkit-background-clip: text;
     color: transparent;
 
@@ -71,13 +68,22 @@
   top: -4rem;
 
   width: 100%;
-  height: calc(40vh + 3rem);
-  
+  height: calc(30vh + 3rem);
+  /*
   background-image: linear-gradient(to right bottom, 
                           rgba(#0747075b, 0.5), 
-                          rgba(#05331a, 0.8)), url('../../../images/startup.jpg');
-  background-size: cover;   
+                          rgba(#05331a, 0.8)), url('../../../images/man-map.jpg');*/
+                          //rgba(#05331a, 0.8)), url('../../../images/startup.jpg');
   background-attachment: fixed; 
+  background-size: cover;   
+  background-position: left 0% top 0%;
+  background-size: 100% auto;
+
+  animation-name: header-background;
+  animation-duration: 100s;
+  transition: all 5s;
+  animation-iteration-count: infinite;
+
 }
 
 
@@ -95,4 +101,3 @@
    right: 0;
    background: rgba(#000, .4);
 }
-

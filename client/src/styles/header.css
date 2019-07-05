@@ -1,12 +1,7 @@
 
 .stickie-nav {
   position: sticky;
-  /* doesnt work :( */
   position: -webkit-sticky;
-  /*top: 0;
-  //left: 0;
-  //right: 0;
-  */
   height:4rem;
   z-index: 10;
   transition: background-color .4s ease-in;

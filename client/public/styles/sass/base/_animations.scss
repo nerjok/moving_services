@@ -23,3 +23,32 @@
     color: red;
   }
 }
+
+@keyframes header-background {
+  0% {
+    background-image: linear-gradient(to right bottom, 
+    rgba(#0747075b, 0.5), 
+    rgba(#05331a, 0.8)), url('../../../images/man-map.jpg');
+    transition: all 5s;
+  }
+
+  40% {
+    background-image: linear-gradient(to right bottom, 
+    rgba(#0747075b, 0.5), 
+    rgba(#05331a, 0.8)), url('../../../images/change.jpg');
+    transition: all 5s;
+  }
+
+  70% {
+    background-image: linear-gradient(to right bottom, 
+    rgba(#0747075b, 0.5), 
+    rgba(#05331a, 0.8)), url('../../../images/apple_pc.jpg');
+    transition: all 5s;
+  }
+  
+  100% {
+    background-image: linear-gradient(to right bottom, 
+    rgba(#0747075b, 0.5), 
+    rgba(#05331a, 0.8)), url('../../../images/man-map.jpg');
+  }
+}

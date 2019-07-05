@@ -71,6 +71,19 @@
   100% {
     color: red; } }
 
+@keyframes header-background {
+  0% {
+    background-image: linear-gradient(to right bottom, rgba(7, 71, 7, 0.5), rgba(5, 51, 26, 0.8)), url("../../../images/man-map.jpg");
+    transition: all 5s; }
+  40% {
+    background-image: linear-gradient(to right bottom, rgba(7, 71, 7, 0.5), rgba(5, 51, 26, 0.8)), url("../../../images/change.jpg");
+    transition: all 5s; }
+  70% {
+    background-image: linear-gradient(to right bottom, rgba(7, 71, 7, 0.5), rgba(5, 51, 26, 0.8)), url("../../../images/apple_pc.jpg");
+    transition: all 5s; }
+  100% {
+    background-image: linear-gradient(to right bottom, rgba(7, 71, 7, 0.5), rgba(5, 51, 26, 0.8)), url("../../../images/man-map.jpg"); } }
+
 .flex {
   display: flex; }
 
@@ -104,7 +117,7 @@
     color: white;
     font-size: 1.8rem;
     font-weight: 400;
-    background-image: linear-gradient(to right, #0e0f0f 30%, #a5f507, #fff 100%);
+    background-image: linear-gradient(to right, #a5f507 10%, #fff 100%);
     -webkit-background-clip: text;
     color: transparent; }
     .stickie-nav__logo:hover {
@@ -135,10 +148,19 @@
   position: relative;
   top: -4rem;
   width: 100%;
-  height: calc(40vh + 3rem);
-  background-image: linear-gradient(to right bottom, rgba(7, 71, 7, 0.5), rgba(5, 51, 26, 0.8)), url("../../../images/startup.jpg");
+  height: calc(30vh + 3rem);
+  /*
+  background-image: linear-gradient(to right bottom, 
+                          rgba(#0747075b, 0.5), 
+                          rgba(#05331a, 0.8)), url('../../../images/man-map.jpg');*/
+  background-attachment: fixed;
   background-size: cover;
-  background-attachment: fixed; }
+  background-position: left 0% top 0%;
+  background-size: 100% auto;
+  animation-name: header-background;
+  animation-duration: 100s;
+  transition: all 5s;
+  animation-iteration-count: infinite; }
 
 .header__search {
   padding: 1rem;
