@@ -74,6 +74,17 @@
 .flex {
   display: flex; }
 
+#entrance-point .nav-tabs {
+  justify-content: center; }
+
+#entrance-point .nav-tabs a {
+  width: 50%; }
+
+.tab-content {
+  border: 1px solid #dee2e6;
+  border-top: none;
+  padding: 3rem 4rem; }
+
 .dropdown {
   display: inline; }
   .dropdown:hover .dropdown-menu {
@@ -464,6 +475,12 @@
     line-height: 1; }
   .popup-modal__close:hover {
     color: #55c57a; }
+
+.web-login {
+  position: relative; }
+  .web-login__social {
+    position: absolute;
+    bottom: 10px; }
 
 .categories-section {
   min-height: 40vh; }

@@ -21,18 +21,19 @@ class Header extends Component {
             case false:
                 return (
                     <React.Fragment>
-                      <a key="googleLogin" href="auth/google" className="p-2 text-dark">Login with Google</a>
-                      <a key="login" href="login" className="p-2 text-dark">Login with username</a>
+                      {/*<a key="googleLogin" href="auth/google" className="stickie-nav__menu-link">Login with Google</a>
+                      <a key="login" href="login" className="stickie-nav__menu-link">Login with username</a>*/}
+                      <a key="logins" href="login" className="stickie-nav__menu-link">Login</a>
                     </React.Fragment>
                 );
             default:
                 return ([
-										<Link 
+										/*<Link 
 										  key="surveys"
 										  to={this.props.auth ? "/surveys" : "/"} 
 										  className="stickie-nav__menu-link">
 										  Surveys
-										</Link>,
+										</Link>,*/
                       <DropdownButton 
                       key="user-profiles" id="dropdown-basic-button" 
                       bsPrefix="stickie-nav__menu-link" 
@@ -74,8 +75,8 @@ class Header extends Component {
 												</Dropdown.Item>
 												<Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
                       </DropdownButton>,
-                      <Payments key="payments"/>,
-                      <React.Fragment key="credits">Credits: {this.props.auth.credits}</React.Fragment>,
+                      //<Payments key="payments"/>,
+                      //<React.Fragment key="credits">Credits: {this.props.auth.credits}</React.Fragment>,
                     <a key="logout" href="/api/logout" className="stickie-nav__menu-link">Log out</a>
                 ]
                 );

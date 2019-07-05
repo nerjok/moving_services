@@ -11,6 +11,11 @@ export const loginPassword = (username, password) => async dispatch => {
   dispatch({ type: LOGIN_PASSWORD, payload: res.data })
 }
 
+export const signupPassword = (username, password) => async dispatch => {
+  const res = await axios.post('/auth/signup', { username, password });
+  dispatch({ type: LOGIN_PASSWORD, payload: res.data })
+}
+
 export const handleToken = (token) => async dispatch => {
   const res = await axios.post('/api/stripe', token)
   dispatch({ type: FETCH_USER, payload: res.data })
