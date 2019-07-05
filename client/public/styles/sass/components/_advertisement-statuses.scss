@@ -71,9 +71,11 @@
     padding:2px;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
-    transition: backround-image .5s ease .075s;
+    transition: all .5s ease .075s;
     width: 9rem;
     display: inline-block;
+    background-size: 100%;
+    overflow: hidden;
 
     &--red {
       background-image: job-type($color-red);
@@ -105,9 +107,11 @@
 
   &__filter:checked ~ &__badge {
     color: $color-white;
-
+    background-size: 1000%;
+    /*
     &--red {
-      background-image: job-type-selected($color-red);
+      //background-image: job-type-selected($color-red);
+      
     }
 
     &--blue {
@@ -124,5 +128,6 @@
     &--gray {
       background-image: job-type-selected($color-gray);
     }
+    */
   }
 }

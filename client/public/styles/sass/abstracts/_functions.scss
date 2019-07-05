@@ -1,6 +1,8 @@
 
 @function job-type($color) {
-  @return linear-gradient(to right, $color 10%, transparent 10%);
+  //@return linear-gradient(to right, $color 10%, transparent 10%);
+  @return  linear-gradient(to right, $color 10%, transparent 10%);
+
 }
 
 @function job-type-selected($color) {

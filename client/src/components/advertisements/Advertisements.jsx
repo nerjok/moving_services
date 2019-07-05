@@ -37,17 +37,21 @@ export class Advertisements extends React.Component {
   render() {
     return (
       <>
+      {/*}
         <div className="text-center">
           <h5>Advertisements</h5>
           <small>Explore available advertisements</small>
         </div>
-        <Link to={"/advertisements/new"} className="btn btn-sm btn-outline-success m-3 float-right">New Advertisement</Link>
+        */}
+          <Link to={"/advertisements/new"} className="btn btn-sm btn-outline-success m-3 mr-0 float-right">New Advertisement</Link>
+
         <div className="clearfix"></div>
         <AdvertisementPopup/>
 
         <div className="row">
         <div className="col-md-9"> 
-        <h5>&nbsp;</h5>
+        
+        {/*<h5>&nbsp;</h5>*/}
             <div className="advertisements">
               {Array.from(this.props.advertisements, ({_id, title, description}) => 
               <div className="row advertisements-row advertisements-row--red">
@@ -115,11 +119,11 @@ export class Advertisements extends React.Component {
           </div>
           </div>
           <div className="col-md-3">
+            {/*}
             <div className="text-center">
               <h5>Job Type</h5>
             </div>
-              
-  
+              */}
 
             <ul className="advertisement-statuses">
               <li className="advertisement-status">

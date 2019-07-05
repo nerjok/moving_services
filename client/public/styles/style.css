@@ -148,7 +148,7 @@
   position: relative;
   top: -4rem;
   width: 100%;
-  height: calc(30vh + 3rem);
+  height: calc(25vh + 3rem);
   /*
   background-image: linear-gradient(to right bottom, 
                           rgba(#0747075b, 0.5), 
@@ -425,9 +425,11 @@
     padding: 2px;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
-    transition: backround-image .5s ease .075s;
+    transition: all .5s ease .075s;
     width: 9rem;
-    display: inline-block; }
+    display: inline-block;
+    background-size: 100%;
+    overflow: hidden; }
     .advertisement-status__badge--red {
       background-image: linear-gradient(to right, red 10%, transparent 10%); }
     .advertisement-status__badge--blue {
@@ -443,17 +445,29 @@
     .advertisement-status__filter:checked ~ .advertisement-status__filter-span::after {
       display: block; }
   .advertisement-status__filter:checked ~ .advertisement-status__badge {
-    color: #fff; }
-    .advertisement-status__filter:checked ~ .advertisement-status__badge--red {
-      background-image: linear-gradient(60deg, red 110%, transparent 110%); }
-    .advertisement-status__filter:checked ~ .advertisement-status__badge--blue {
-      background-image: linear-gradient(60deg, #265a56 110%, transparent 110%); }
-    .advertisement-status__filter:checked ~ .advertisement-status__badge--green {
-      background-image: linear-gradient(60deg, #26ae61 110%, transparent 110%); }
-    .advertisement-status__filter:checked ~ .advertisement-status__badge--yellow {
-      background-image: linear-gradient(60deg, red 110%, transparent 110%); }
-    .advertisement-status__filter:checked ~ .advertisement-status__badge--gray {
-      background-image: linear-gradient(60deg, #999 110%, transparent 110%); }
+    color: #fff;
+    background-size: 1000%;
+    /*
+    &--red {
+      //background-image: job-type-selected($color-red);
+      
+    }
+
+    &--blue {
+      background-image: job-type-selected($color-blue);
+    }
+
+    &--green {
+      background-image: job-type-selected($color-green);
+    }
+
+    &--yellow {
+      background-image: job-type-selected($color-red);
+    }
+    &--gray {
+      background-image: job-type-selected($color-gray);
+    }
+    */ }
 
 .popup-modal {
   height: 100vh;
@@ -503,6 +517,25 @@
   .web-login__social {
     position: absolute;
     bottom: 10px; }
+
+.input-grey {
+  background-color: #eee;
+  border-radius: 0;
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  /* border-radius: 0.25rem; */
+  -webkit-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
+  .input-grey:hover {
+    background-color: #ccc; }
 
 .categories-section {
   min-height: 40vh; }

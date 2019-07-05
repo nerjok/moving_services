@@ -22,8 +22,14 @@ class Header extends Component {
                 return (
                     <React.Fragment>
                       {/*<a key="googleLogin" href="auth/google" className="stickie-nav__menu-link">Login with Google</a>
-                      <a key="login" href="login" className="stickie-nav__menu-link">Login with username</a>*/}
-                      <a key="logins" href="login" className="stickie-nav__menu-link">Login</a>
+                      <a key="login" href="login" className="stickie-nav__menu-link">Login with username</a>
+                      <a key="logins" href="login" className="stickie-nav__menu-link">Login</a>*/}
+                      <Link 
+                        key="login"
+                        to={"/login"} 
+                        className="stickie-nav__menu-link">
+                          Login
+										  </Link>
                     </React.Fragment>
                 );
             default:
@@ -33,7 +39,10 @@ class Header extends Component {
 										  to={this.props.auth ? "/surveys" : "/"} 
 										  className="stickie-nav__menu-link">
 										  Surveys
-										</Link>,*/
+                    </Link>,*/
+                    <Link to={"/profiles"} className="stickie-nav__menu-link">Users</Link>,
+                    <Link to={"/profile"} className="stickie-nav__menu-link">Profile</Link>,
+                    /*
                       <DropdownButton 
                       key="user-profiles" id="dropdown-basic-button" 
                       bsPrefix="stickie-nav__menu-link" 
@@ -75,6 +84,7 @@ class Header extends Component {
 												</Dropdown.Item>
 												<Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
                       </DropdownButton>,
+                      */
                       //<Payments key="payments"/>,
                       //<React.Fragment key="credits">Credits: {this.props.auth.credits}</React.Fragment>,
                     <a key="logout" href="/api/logout" className="stickie-nav__menu-link">Log out</a>
@@ -96,6 +106,7 @@ class Header extends Component {
               </Link>
             </h5>
               <div>
+              <Link to={"/advertisements"} className="stickie-nav__menu-link">Advertisements</Link>
                 {this.renderContent()}
               </div>
             </div>
@@ -122,14 +133,14 @@ class Header extends Component {
   
         <div className="col-md-3">
           <div className="form-group m-0">
-            <input type="text" className="form-control" name="keyword" placeholder="Enter keyword" 
+            <input type="text" className="form-controll input-grey" name="keyword" placeholder="Enter keyword" 
             />
           </div>
         </div>
         
         <div className="col-md-3">
           <div className="form-group m-0">
-          <select className="form-control" name="city" tabIndex="-98" 
+          <select className="form-controll input-grey" name="city" tabIndex="-98" 
           >
                 <option value="">Location</option>
                 <option value="1">Kaunas</option>
@@ -142,7 +153,7 @@ class Header extends Component {
         </div>
         <div className="col-md-3">
           <div className="form-group m-0">
-          <select className="form-control" name="city" tabIndex="-98" 
+          <select className="form-controll input-grey" name="city" tabIndex="-98" 
           >
                 <option value="">Category</option>
                 <option value="1">Kaunas</option>

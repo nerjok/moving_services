@@ -22,6 +22,17 @@ import { RecentAdds } from './recentAdds'
 import Categories from './categories/Categories'
 import { GetStarted } from './GetStarted'
 
+
+const MainPage = props => {
+
+  return (
+    <>
+      <div className="container"><Advertisements/></div>
+      <GetStarted/>
+      <BlogSlider/>
+    </>
+  )
+}
 class App extends Component {
 
     componentDidMount() {
@@ -34,8 +45,8 @@ class App extends Component {
                       <Header/>
                       {/*<Map/>*/}
                       {/*<Categories/>*/}
+                        <Route path="/" exact component={MainPage}/>
                       <div className="container">
-                        {/*<Route path="/" exact component={Landing}/>*/}
                         <Route path="/surveys" exact component={Dashboard} />
                         <Route path="/surveys/new" component={SurveyNew} />
                         <Route path="/profile" exact component={Profile}/>
@@ -47,16 +58,16 @@ class App extends Component {
                         <Route path="/login" exact component={LoginPassword} />
 					  </div>
 
-                      { !this.props.auth || !this.props.auth._id ?
+                      {/* !this.props.auth || !this.props.auth._id ?
                         <>
                           <div className="container"><Advertisements/></div>
                           <GetStarted/>
                         </>  
                         : null
-                      }
+                      */}
                       
                       {/*<RecentAdds/>*/}
-                      <BlogSlider/>
+                      {/*<BlogSlider/>*/}
                       <Footer/>
                 </BrowserRouter>
         )
