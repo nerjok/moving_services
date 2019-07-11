@@ -1,0 +1,13 @@
+.menu-navigation {
+ //background: green !important; 
+ background-image: linear-gradient(to bottom right, rgba($color-primary, .8), rgba($color-primary-dark, .8));
+ //, url('../../../images/apple_pc.jpg');
+
+ min-height: 5rem;
+ -webkit-clip-path: polygon( 0 0, 100% 0, 100% 4rem, 50% 5rem, 0 4rem);
+ clip-path: polygon( 0 0, 100% 0, 100% 4rem, 50% 5rem, 0 4rem);
+
+ &:hover {
+  background-image: linear-gradient(to bottom right, rgba($color-primary, .9), rgba($color-primary-dark, .9));
+ }
+}

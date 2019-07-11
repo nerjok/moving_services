@@ -4,6 +4,7 @@ import axios from 'axios'
 export class User extends React.Component {
 
   /*
+  To show other user profile
   constructor(props) {
     super(props)
   }*/

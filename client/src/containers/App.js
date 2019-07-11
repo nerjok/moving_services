@@ -14,13 +14,15 @@ import AdvertisementForm from './advertisements/AdvertisementForm'
 import LoginPassword from './auth/password/LoginPassword'
 import Profile from './auth/profile/Profile'
 import Profiles from './auth/profiles/Profiles'
-import User from './auth/user/User'
+import User0 from './auth/user/User'
 import Map from './map/Map'
 import BlogSlider from './BlogSlider'
 import { Footer } from './footer' 
 import { RecentAdds } from './recentAdds'
 import Categories from './categories/Categories'
 import { GetStarted } from './GetStarted'
+
+import { User } from './user/User'
 
 
 const MainPage = props => {
@@ -54,7 +56,8 @@ class App extends Component {
                         <Route path="/advertisements" exact component={Advertisements}/>
                         <Route path="/advertisements/new" exact component={AdvertisementForm}/>
                         <Route path="/advertisements/:id" exact component={Advertisement}/>
-                        <Route path="/profiles/:id" exact component={User}/>
+                        <Route path="/profiles/:id" exact component={User0}/>
+                        <Route path="/user" component={User}/>
                         <Route path="/login" exact component={LoginPassword} />
 					  </div>
 

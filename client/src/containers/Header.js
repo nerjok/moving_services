@@ -41,7 +41,8 @@ class Header extends Component {
 										  Surveys
                     </Link>,*/
                     <Link to={"/profiles"} className="stickie-nav__menu-link">Users</Link>,
-                    <Link to={"/profile"} className="stickie-nav__menu-link">Profile</Link>,
+                    //<Link to={"/profile"} className="stickie-nav__menu-link">Profile</Link>,
+                    <Link to={"/user"} className="stickie-nav__menu-link">Info</Link>,
                     /*
                       <DropdownButton 
                       key="user-profiles" id="dropdown-basic-button" 
@@ -87,7 +88,7 @@ class Header extends Component {
                       */
                       //<Payments key="payments"/>,
                       //<React.Fragment key="credits">Credits: {this.props.auth.credits}</React.Fragment>,
-                    <a key="logout" href="/api/logout" className="stickie-nav__menu-link">Log out</a>
+                    //<a key="logout" href="/api/logout" className="stickie-nav__menu-link">Log out</a>
                 ]
                 );
         }

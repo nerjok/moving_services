@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 
-import App from './components/App'
+import App from './containers/App'
 import reducers from './store/reducers'
 import 'bootstrap/dist/css/bootstrap.css';
 import './styles/header.css';

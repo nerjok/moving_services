@@ -560,5 +560,13 @@ html {
   .input-grey:hover {
     background-color: #ccc; }
 
+.menu-navigation {
+  background-image: linear-gradient(to bottom right, rgba(85, 197, 122, 0.8), rgba(40, 180, 133, 0.8));
+  min-height: 5rem;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 4rem, 50% 5rem, 0 4rem);
+  clip-path: polygon(0 0, 100% 0, 100% 4rem, 50% 5rem, 0 4rem); }
+  .menu-navigation:hover {
+    background-image: linear-gradient(to bottom right, rgba(85, 197, 122, 0.9), rgba(40, 180, 133, 0.9)); }
+
 .categories-section {
   min-height: 40vh; }
