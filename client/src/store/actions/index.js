@@ -44,14 +44,13 @@ export const fetchAdvertisements = ( page = 0) => async dispatch => {
   dispatch({ type: FETCH_ADVERTISEMENTS, payload: res.data });
 }
 
-export const fetchAdvertisement = _id => async dispatch => {console.log('[actionFetchAdvertisement]', _id)
+export const fetchAdvertisement = _id => async dispatch => {
   const res = await axios.get('/api/advertisements/'+_id, { _id });
   dispatch({ type: FETCH_ADVERTISEMENT, payload: res.data });
 }
 
-export const updateAdvertisement = data => async dispatch => {console.log('[[updateOne]]')
+export const updateAdvertisement = data => async dispatch => {
   const res = await axios.post('/api/advertisements/'+data.id+'/update', data );
-  console.log('[updateResponse]', res)
   dispatch({ type: FETCH_ADVERTISEMENT, payload: res.data });
 }
 

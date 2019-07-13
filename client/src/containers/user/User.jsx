@@ -4,8 +4,10 @@ import { Route, Link} from 'react-router-dom'
 import UserInfo from './UserInfo/UserInfo'
 import MyAdvertisements from './myAdvertisements/MyAdvertisements'
 import { Advertisements } from './advertisements/advertisements'
-import { MyAdvertisement } from './myAdvertisements/MyAdvertisement/MyAdvertisement'
-import {cardComponent } from '../../components/card/card'
+import MyAdvertisement from './myAdvertisements/MyAdvertisement/MyAdvertisement'
+import {cardComponent } from '../../hoc/card/card'
+
+
  export const User = props => {
 
   return (
@@ -15,7 +17,7 @@ import {cardComponent } from '../../components/card/card'
             <Route path="/user" exact component={cardComponent(UserInfo)} />
             <Route path="/user/advertisements" exact component={MyAdvertisements} />
             <Route path="/user/advertisements/:id" exact component={cardComponent(MyAdvertisement)} />
-            <Route path="/user/works" exact component={Advertisements} />
+            <Route path="/user/works" exact component={cardComponent(Advertisements)} />
 
       </div>
       <div className="col-md-3 card p-0">
