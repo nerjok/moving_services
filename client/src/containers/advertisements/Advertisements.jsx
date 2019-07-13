@@ -6,14 +6,10 @@ import { fetchAdvertisements, deleteAdvertisement } from '../../store/actions'
 import { connect } from 'react-redux'
 import ReactPaginate from 'react-paginate';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart, faStar,  faSearch, faTrash} from '@fortawesome/free-solid-svg-icons'
-
-import {
-  Link
-} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { AdvertisementPopup } from './AdvertisementPopup'
+import { Advertisements as AdvertisementsList } from '../../components/advertisements/Advertisements'
 
 export class Advertisements extends React.Component {
 
@@ -22,28 +18,26 @@ export class Advertisements extends React.Component {
   
     const url = new URL(window.location.href);
     let page = url.searchParams.get("page")
-    page = isNaN(page) ? 0 : page
-
+    page = isNaN(page) ? 0 : parseInt(page)
     this.state = {
       page
     }
   }
   
   componentDidMount() {
-
     this.props.fetchAdvertisements(this.state.page)
+  }
+
+  currentUrlPath = () => {
+    if (this.props.history.location.pathname === '/')
+      return '/advertisements'
+    return this.props.history.location.pathname
   }
 
   render() {
     return (
       <>
-      {/*}
-        <div className="text-center">
-          <h5>Advertisements</h5>
-          <small>Explore available advertisements</small>
-        </div>
-        */}
-          <Link to={"/advertisements/new"} className="btn btn-sm btn-outline-success m-3 mr-0 float-right">New Advertisement</Link>
+        <Link to={"/advertisements/new"} className="btn btn-sm btn-outline-success m-3 mr-0 float-right">New Advertisement</Link>
 
         <div className="clearfix"></div>
         <AdvertisementPopup/>
@@ -51,42 +45,9 @@ export class Advertisements extends React.Component {
         <div className="row">
         <div className="col-md-9"> 
         
-        {/*<h5>&nbsp;</h5>*/}
-            <div className="advertisements">
-              {Array.from(this.props.advertisements, ({_id, title, description}) => 
-              <div className="row advertisements-row advertisements-row--red">
-                <div className="col-md-5 advertisements-row__description">
-                  <h5>
-                      <a href="#show-details">{title}</a>
-                      {/*<Link to={`/advertisements/${_id}`}></Link>*/}
-                  </h5>
-                  {description}
-                  </div>
-                <div className="col-md-2 flex" styles={{background: 'lightgray'}}>
-                    <span className="badge badge-success advertisements-row__badge">Active</span>
-                </div>
-                <div className="col-md-2 flex">
-                    <span className="advertisements-row__info-txt">Vilnius</span> 
-                </div>
-                <div className="col-md-3 flex">
-                  <div className="advertisements-row__info-txt">
-                    <Link to={`/advertisements/${_id}`} className="btn btn-sm btn-outline-info">
-                      <FontAwesomeIcon icon={faSearch} size="lg" style={{color: 'lightblue'}} />
-                    </Link>
-                    <a href="#ff" className="btn btn-sm btn-outline-danger m-1">
-                      <FontAwesomeIcon icon={faHeart} size="lg" style={{color: 'red'}} />
-                    </a>
-                    <a className="btn btn-sm btn-outline-danger" 
-                      onClick={() => {
-                        console.log('deletion');
-                        this.props.deleteAdvertisement({page: this.state.page, id: _id})}}>
-                           <FontAwesomeIcon icon={faTrash} size="lg" style={{color: 'gray'}} /> 
-                    </a>
-                  </div>
-                </div>
-              </div>
-              )}
-        </div>      
+        <div className="advertisements">
+          <AdvertisementsList advertisements={this.props.advertisements} location={this.currentUrlPath}/>
+        </div>
 
           <div style={{position: 'relative', padding: '1rem', margin: '1.5rem'}}>
             <div style={{
@@ -127,8 +88,8 @@ export class Advertisements extends React.Component {
 
             <ul className="advertisement-statuses">
               <li className="advertisement-status">
-								<label className="advertisement-status__label" for="filter-2">
-                  <input type="checkbox" id="filter-2" class="checkbox-filter advertisement-status__filter"/>
+								<label className="advertisement-status__label" htmlFor="filter-2">
+                  <input type="checkbox" id="filter-2" className="checkbox-filter advertisement-status__filter"/>
 									<span className="advertisement-status__badge advertisement-status__badge--red">
 										&nbsp; &nbsp; Part Time &nbsp;
 									</span>                
@@ -137,8 +98,8 @@ export class Advertisements extends React.Component {
               </li>
 
               <li className="advertisement-status">
-								<label className="advertisement-status__label" for="filter-full">
-                  <input type="checkbox" id="filter-full" class="checkbox-filter advertisement-status__filter"/>
+								<label className="advertisement-status__label" htmlFor="filter-full">
+                  <input type="checkbox" id="filter-full" className="checkbox-filter advertisement-status__filter"/>
 									<span className="advertisement-status__badge advertisement-status__badge--green">
 										&nbsp; &nbsp; Full time &nbsp;
 									</span>                
@@ -147,8 +108,8 @@ export class Advertisements extends React.Component {
               </li>
 
               <li className="advertisement-status">
-								<label className="advertisement-status__label" for="filter-freelance">
-                  <input type="checkbox" id="filter-freelance" class="checkbox-filter advertisement-status__filter"/>
+								<label className="advertisement-status__label" htmlFor="filter-freelance">
+                  <input type="checkbox" id="filter-freelance" className="checkbox-filter advertisement-status__filter"/>
 									<span className="advertisement-status__badge advertisement-status__badge--blue">
 										&nbsp; &nbsp; Freelance &nbsp;
 									</span>                
@@ -157,8 +118,8 @@ export class Advertisements extends React.Component {
               </li>
 
               <li className="advertisement-status">
-								<label className="advertisement-status__label" for="filter-flex">
-                  <input type="checkbox" id="filter-flex" class="checkbox-filter advertisement-status__filter"/>
+								<label className="advertisement-status__label" htmlFor="filter-flex">
+                  <input type="checkbox" id="filter-flex" className="checkbox-filter advertisement-status__filter"/>
 									<span className="advertisement-status__badge advertisement-status__badge--gray">
 										&nbsp; &nbsp; Flexible hours &nbsp;
 									</span>                
@@ -173,8 +134,8 @@ export class Advertisements extends React.Component {
             </div>
               <ul className="advertisement-statuses">
                 <li className="advertisement-status">
-                  <label className="advertisement-status__label" for="filter-available">
-                    <input type="checkbox" id="filter-available" class="checkbox-filter advertisement-status__filter"/>
+                  <label className="advertisement-status__label" htmlFor="filter-available">
+                    <input type="checkbox" id="filter-available" className="checkbox-filter advertisement-status__filter"/>
                     <span className="advertisement-status__badge advertisement-status__badge--green">
                       &nbsp; &nbsp; Available &nbsp;
                     </span>                
@@ -182,8 +143,8 @@ export class Advertisements extends React.Component {
                   </label>
                 </li>
                 <li className="advertisement-status">
-                  <label className="advertisement-status__label" for="filter-pending">
-                    <input type="checkbox" id="filter-pending" class="checkbox-filter advertisement-status__filter"/>
+                  <label className="advertisement-status__label" htmlFor="filter-pending">
+                    <input type="checkbox" id="filter-pending" className="checkbox-filter advertisement-status__filter"/>
                     <span className="advertisement-status__badge advertisement-status__badge--green">
                       &nbsp; &nbsp; Pending &nbsp;
                     </span>                
@@ -191,8 +152,8 @@ export class Advertisements extends React.Component {
                   </label>
                 </li>
                 <li className="advertisement-status">
-                  <label className="advertisement-status__label" for="filter-asap">
-                    <input type="checkbox" id="filter-asap" class="checkbox-filter advertisement-status__filter"/>
+                  <label className="advertisement-status__label" htmlFor="filter-asap">
+                    <input type="checkbox" id="filter-asap" className="checkbox-filter advertisement-status__filter"/>
                     <span className="advertisement-status__badge advertisement-status__badge--green">
                       &nbsp; &nbsp; Asap &nbsp;
                     </span>                
@@ -200,8 +161,8 @@ export class Advertisements extends React.Component {
                   </label>
                 </li>
                 <li className="advertisement-status">
-                  <label className="advertisement-status__label" for="filter-nearfuture">
-                    <input type="checkbox" id="filter-nearfuture" class="checkbox-filter advertisement-status__filter"/>
+                  <label className="advertisement-status__label" htmlFor="filter-nearfuture">
+                    <input type="checkbox" id="filter-nearfuture" className="checkbox-filter advertisement-status__filter"/>
                     <span className="advertisement-status__badge advertisement-status__badge--green">
                       &nbsp; &nbsp; Near future &nbsp;
                     </span>                
@@ -222,9 +183,9 @@ export class Advertisements extends React.Component {
   }
 
   updatePage = ({selected}) => {
-    const url = new URL(window.location.href);
-    let old = url.searchParams.get("page")
-    console.log('paramFromUri', old); 
+//    const url = new URL(window.location.href);
+//    let old = url.searchParams.get("page")
+//    console.log('paramFromUri', old); 
     
 
     this.setState({page: selected})

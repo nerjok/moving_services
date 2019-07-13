@@ -56,7 +56,8 @@ export const updateAdvertisement = data => async dispatch => {console.log('[[upd
 }
 
 export const newAdvertisement = data => async dispatch => {
-  const res = await axios.post('/api/advertisements/new', data );
+  //const res = 
+  await axios.post('/api/advertisements/new', data );
   //dispatch({ type: FETCH_ADVERTISEMENT, payload: res.data });
 }
 

@@ -1,11 +1,10 @@
 import React, { Component} from 'react'
 import {connect} from 'react-redux'
 import { Link } from 'react-router-dom'
-import Payments from './Payments'
+//import Payments from './Payments'
 //import { link } from 'fs';
-import { Search } from './map/search/search'
+//import { Search } from './map/search/search'
 
-import {Dropdown, DropdownButton, Navbar, Nav, NavDropdown} from 'react-bootstrap';
 
 
 class Header extends Component {
@@ -21,9 +20,6 @@ class Header extends Component {
             case false:
                 return (
                     <React.Fragment>
-                      {/*<a key="googleLogin" href="auth/google" className="stickie-nav__menu-link">Login with Google</a>
-                      <a key="login" href="login" className="stickie-nav__menu-link">Login with username</a>
-                      <a key="logins" href="login" className="stickie-nav__menu-link">Login</a>*/}
                       <Link 
                         key="login"
                         to={"/login"} 
@@ -40,9 +36,9 @@ class Header extends Component {
 										  className="stickie-nav__menu-link">
 										  Surveys
                     </Link>,*/
-                    <Link to={"/profiles"} className="stickie-nav__menu-link">Users</Link>,
+                    <Link key="users" to={"/profiles"} className="stickie-nav__menu-link">Users</Link>,
                     //<Link to={"/profile"} className="stickie-nav__menu-link">Profile</Link>,
-                    <Link to={"/user"} className="stickie-nav__menu-link">Info</Link>,
+                    <Link key="myProfile" to={"/user"} className="stickie-nav__menu-link">Info</Link>,
                     /*
                       <DropdownButton 
                       key="user-profiles" id="dropdown-basic-button" 
@@ -120,13 +116,9 @@ class Header extends Component {
             &nbsp;
             <section
             className="section-header__search"
-            //style={{position: 'absolute', bottom: 0, left: 0, right: 0}}
             >
 
-            
             <div className="container header__search"
-              //style={{background: 'lightgray', minHeight: '4rem', borderTopLeftRadius: '5px', borderTopRightRadius: '5px'}}
-              //style={{ position: 'absolute' , bottom: 10, left: 0, right: 0}}
               >
 
 

@@ -14,15 +14,15 @@ class BlogSlider extends React.Component {
             </div>
             <div className="col-md-4">
 
-              <div class="card blog-slider__card" >
+              <div className="card blog-slider__card" >
                 <figure style={{position:'relative'}}>  
                 <figcaption className="blog-slider__card__caption">2019-18-15 | 0 comments</figcaption>
                   {/* eslint-disable-next-line jsx-a11y/img-redundant-alt*/}
-                  <img class="card-img-top blog-slider__card__image" src={require("../assets/images/student-849825_640.jpg")} alt="Card image cap"/>
+                  <img className="card-img-top blog-slider__card__image" src={require("../assets/images/student-849825_640.jpg")} alt="Card image cap"/>
                 </figure>
-                <div class="card-body">
-                  <h5 class="card-title">Search Types</h5>
-                  <p class="card-text">
+                <div className="card-body">
+                  <h5 className="card-title">Search Types</h5>
+                  <p className="card-text">
                     Some quick example text to build on the card title and make up the bulk of the card's content.
                     </p>
                     <hr/>
@@ -31,15 +31,15 @@ class BlogSlider extends React.Component {
               </div>
             </div>
             <div className="col-md-4">
-              <div class="card blog-slider__card" >
+              <div className="card blog-slider__card" >
                 <figure style={{position:'relative'}}>  
                 <figcaption className="blog-slider__card__caption">2019-18-15 | 0 comments</figcaption>
                   {/* eslint-disable-next-line jsx-a11y/img-redundant-alt*/}
-                  <img class="card-img-top blog-slider__card__image" src={require("../assets/images/ecology-2985781_640.jpg")} alt="Card image cap"/>
+                  <img className="card-img-top blog-slider__card__image" src={require("../assets/images/ecology-2985781_640.jpg")} alt="Card image cap"/>
                 </figure>
-                <div class="card-body">
-                  <h5 class="card-title">Sustainable time managment</h5>
-                  <p class="card-text">
+                <div className="card-body">
+                  <h5 className="card-title">Sustainable time managment</h5>
+                  <p className="card-text">
                     Some quick example text to build on the card title and make up the bulk of the card's content.
                     </p>
                     <hr/>
@@ -48,15 +48,15 @@ class BlogSlider extends React.Component {
               </div>
             </div>
             <div className="col-md-4">
-            <div class="card blog-slider__card" >
+            <div className="card blog-slider__card" >
                 <figure style={{position:'relative'}}>  
                 <figcaption className="blog-slider__card__caption">2019-18-15 | 0 comments</figcaption>
                   {/* eslint-disable-next-line jsx-a11y/img-redundant-alt*/}
-                  <img class="card-img-top blog-slider__card__image" src={require("../assets/images/building-1080592_640.jpg")} alt="Card image cap"/>
+                  <img className="card-img-top blog-slider__card__image" src={require("../assets/images/building-1080592_640.jpg")} alt="Card image cap"/>
                 </figure>
-                <div class="card-body">
-                  <h5 class="card-title">Direct to point</h5>
-                  <p class="card-text">
+                <div className="card-body">
+                  <h5 className="card-title">Direct to point</h5>
+                  <p className="card-text">
                     Some quick example text to build on the card title and make up the bulk of the card's content.
                     </p>
                     <hr/>

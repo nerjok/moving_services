@@ -1,20 +1,21 @@
 import React from 'react'
-import { BrowserRouter, Route, Link} from 'react-router-dom'
+import { Route, Link} from 'react-router-dom'
 
 import UserInfo from './UserInfo/UserInfo'
+import MyAdvertisements from './myAdvertisements/MyAdvertisements'
 import { Advertisements } from './advertisements/advertisements'
-
+import { MyAdvertisement } from './myAdvertisements/MyAdvertisement/MyAdvertisement'
+import {cardComponent } from '../../components/card/card'
  export const User = props => {
 
   return (
     <div className="row mt-3 mb-3">
       <div className="col-md-9">
-        <div className="card">
-          <div class="card-body">
-            <Route path="/user" exact component={UserInfo} />
-            <Route path="/user/advertisements" exact component={Advertisements} />
-          </div>
-        </div>
+
+            <Route path="/user" exact component={cardComponent(UserInfo)} />
+            <Route path="/user/advertisements" exact component={MyAdvertisements} />
+            <Route path="/user/advertisements/:id" exact component={cardComponent(MyAdvertisement)} />
+            <Route path="/user/works" exact component={Advertisements} />
 
       </div>
       <div className="col-md-3 card p-0">
@@ -27,7 +28,7 @@ import { Advertisements } from './advertisements/advertisements'
           <br/>
           <Link to={'/user/advertisements'} style={{zIndex: 1}}>My suggestions</Link>
           <br/>
-          <Link to={'/user/advertisements'}>My works</Link>
+          <Link to={'/user/works'}>My works</Link>
           <br/>
           {/*<Link to={'user/advertisements'}>Sign out</Link>*/}
           <a key="logout" href="/api/logout" className="btn btn-danger m-3">Log out</a>

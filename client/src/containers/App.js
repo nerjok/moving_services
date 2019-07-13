@@ -1,10 +1,12 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+
 import React, {Component} from 'react'
 import { BrowserRouter, Route} from 'react-router-dom'
 import {connect} from 'react-redux'
 import * as actions from '../store/actions'
 
 import Header from './Header'
-import Landing from './Landing'
+//import Landing from './Landing'
 import Dashboard from './Dashboard'
 import SurveyNew from './surveys/SurveyNew'
 import Advertisements from './advertisements/Advertisements'
@@ -15,39 +17,43 @@ import LoginPassword from './auth/password/LoginPassword'
 import Profile from './auth/profile/Profile'
 import Profiles from './auth/profiles/Profiles'
 import User0 from './auth/user/User'
-import Map from './map/Map'
+//import Map from './map/Map'
 import BlogSlider from './BlogSlider'
 import { Footer } from './footer' 
-import { RecentAdds } from './recentAdds'
-import Categories from './categories/Categories'
+//import { RecentAdds } from './recentAdds'
+//import Categories from './categories/Categories'
 import { GetStarted } from './GetStarted'
 
 import { User } from './user/User'
+import { withRouter } from 'react-router';
 
+function mainRouted(props2) {
+  const MainPage2 = props => {
 
-const MainPage = props => {
-
-  return (
-    <>
-      <div className="container"><Advertisements/></div>
-      <GetStarted/>
-      <BlogSlider/>
-    </>
-  )
+    return (
+      <div>
+        <div className="container"><Advertisements {...props}/></div>
+        <GetStarted/>
+        <BlogSlider/>
+      </div>
+    )
+  }
+  return withRouter(MainPage2)
 }
+
 class App extends Component {
 
     componentDidMount() {
         this.props.fetchUser()
     }
 
-    render () {console.log('[[Loged props]]', this.props)
+    render () {
         return (
                 <BrowserRouter>
                       <Header/>
                       {/*<Map/>*/}
                       {/*<Categories/>*/}
-                        <Route path="/" exact component={MainPage}/>
+                        <Route path="/" exact component={mainRouted()}/>
                       <div className="container">
                         <Route path="/surveys" exact component={Dashboard} />
                         <Route path="/surveys/new" component={SurveyNew} />
@@ -73,6 +79,7 @@ class App extends Component {
                       {/*<BlogSlider/>*/}
                       <Footer/>
                       <div className="to-top">
+                        
                         <a href="#">&#8616;</a>
                         </div>
                 </BrowserRouter>

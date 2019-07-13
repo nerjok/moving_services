@@ -81,13 +81,13 @@ class UserInfo extends React.Component {
 
   toggleEddit = () => this.setState({edit: !this.state.edit})
 
-  render() {//console.log(this.props)
+  render() {
     
     return (
         <>
             <h5 className="card-title">May Profile
             &nbsp;
-              <FontAwesomeIcon icon={faEdit} size="lg" onClick={this.toggleEddit}/>
+              <div style={{float:"right"}}><FontAwesomeIcon icon={faEdit} size="lg" onClick={this.toggleEddit}/></div>
             </h5>
             {this.state.edit ? this.editProfile() : this.showProfile()}
         </>
@@ -100,4 +100,5 @@ function mapStateToProps({auth}) {
       auth
   }
 }
+
 export default connect(mapStateToProps, {updateData})(UserInfo)

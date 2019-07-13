@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+ // eslint-disable-next-line jsx-a11y/anchor-is-valid
 import React from 'react'
 
 export const Footer = (props) => {
@@ -19,6 +21,7 @@ export const Footer = (props) => {
             <div className="col-md-2">
               <h5>For seakers</h5>
               <ul className="footer__list">
+               
                 <li><a href="#" className="white-link">Types</a></li>
                 <li><a href="#" className="white-link">Proposals</a></li>
                 <li><a href="#" className="white-link">Search</a></li>

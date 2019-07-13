@@ -1,13 +1,13 @@
 import React from 'react'
-import _ from 'lodash'
-import { reduxForm, Field } from 'redux-form';
+//import _ from 'lodash'
+//import { Field } from 'redux-form';
 
 import { fetchAdvertisement, updateAdvertisement } from '../../store/actions'
 import { connect } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
-import FIELDS from './formFields'
-import { AdvertisementField } from './advertisementField'
+//import FIELDS from './formFields'
+//import { AdvertisementField } from './advertisementField'
 
 import AdvertisementForm from './AdvertisementUpdateForm'
 
@@ -42,37 +42,7 @@ export class Advertisement extends React.Component {
   }
 
   update = () => {
-    const {title, description, _id } = this.props.advertisement
     return <AdvertisementForm advertisement={this.props.advertisement} submitForm={this.submitForm}/>;
-    return (
-        <form 
-          //action={`/api/advertisements/${_id}/update`} 
-          onSubmit={this.props.handleSubmit(this.submitForm.bind(this)) }
-          //onSubmit={()=> alert()}
-          //method="post"
-          >
-          {_.map(FIELDS, ({label, name}) => {
-            return (
-              <>
-                <Field
-                    key={name}
-                    type="text"
-                    name={name}
-                    component={AdvertisementField}
-                    label={label}
-                    input={{defaultValue: this.props.advertisement[name]}}
-                />
-              {/*<AdvertisementField
-                label={label}
-                name={name}
-                input={{defaultValue: this.props.advertisement[name]}}
-              />*/}
-              </>
-            )
-          })}
-          <button type="submit" className="btn btn-outline-dark">Submit</button>
-        </form>
-    )
   }
 
   render() {
@@ -94,20 +64,12 @@ export class Advertisement extends React.Component {
     )
   }
 }
+/*
 function validate(values) {
   console.log('[validate]', values)
   return {}
 }
+*/
 
 const mapStateToProps = ({advertisements: {advertisements, total, page, advertisement}}) => ({advertisement, advertisements, total, page });
 export default connect(mapStateToProps, {fetchAdvertisement, updateAdvertisement})(Advertisement)
-//const Adv = connect(mapStateToProps, {fetchAdvertisement, updateAdvertisement})(Advertisement)
-
-/*
-export default reduxForm({
-  validate,
-  //asyncValidate: validate,
-  form: 'advertisementUpdate',
-  destroyOnUnmount: false
-})(connect(mapStateToProps, {fetchAdvertisement, updateAdvertisement})(Advertisement));
-/** */
