@@ -1,6 +1,6 @@
 const requireLogin = require('../middlewares/requireLogin');
 const mongoose = require('mongoose');
-const User = mongoose.model('users');
+const User = mongoose.model('User');
 const Advertisement = mongoose.model('Advertisement');
 
 

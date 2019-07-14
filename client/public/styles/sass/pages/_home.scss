@@ -2,3 +2,12 @@
   min-height: 40vh;
   //background: green;
 }
+
+@media screen  and (max-width: 767px) {
+  .advertisements-row--mobile {
+    display: flex !important;
+    flex-direction: column-reverse;
+    //flex-flow: row-reverse !important;//row-reverse wrap;
+    //flex-direction: row-reverse !important;
+  }
+}

@@ -1,15 +1,8 @@
 import React from 'react'
-//import _ from 'lodash'
-//import { Field } from 'redux-form';
-
-import { fetchAdvertisement, updateAdvertisement } from '../../store/actions'
+import { fetchAdvertisement } from '../../store/actions'
 import { connect } from 'react-redux'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit } from '@fortawesome/free-solid-svg-icons'
-//import FIELDS from './formFields'
-//import { AdvertisementField } from './advertisementField'
 
-import AdvertisementForm from './AdvertisementUpdateForm'
+
 
 export class Advertisement extends React.Component {
 
@@ -18,49 +11,57 @@ export class Advertisement extends React.Component {
   }
 
   componentDidMount() {
-    console.table('ID', this.props.match.params.id)
     this.props.fetchAdvertisement(this.props.match.params.id)
-  }
-
-  toggleEddit = () => this.setState({edit: !this.state.edit})
-
-  show() {
-    const {title, description, } = this.props.advertisement
-
-    return (
-      <>
-        <div styles={{display:'block', background: 'gray'}}><b>Title:</b> {title}</div>        
-        <br/>
-        <div><b>Description</b> {description}</div>
-      </>
-    )
-  }
-
-  submitForm = (e) => {
-    //e.preventDefault()
-    console.log('submit')
-  }
-
-  update = () => {
-    return <AdvertisementForm advertisement={this.props.advertisement} submitForm={this.submitForm}/>;
   }
 
   render() {
     const { advertisement } = this.props
+    //var title, description;
     if (!advertisement)
       return null;
-    console.log('[[advertisement]]', this.props.advertisement)
-    return (
 
-      <div className="card" style={{marginTop: '2rem', marginBottom: '2rem'}}>
-      <div className="card-body">
-        <h5 className="card-title">Advertisement
-        &nbsp;
-          <FontAwesomeIcon icon={faEdit} size="lg" onClick={this.toggleEddit}/>
-        </h5>
-        {this.state.edit ? this.update() : this.show()}
+      const {title, description, _user: user } = advertisement;
+    
+    console.log('[[advertisement]]', advertisement, user);
+    //return null;
+    return (
+      <div className="row mt-2 mb-2" >
+        <div className="col-md-9">
+          <div className="card" >
+            <div className="card-body">
+              <h5 className="card-title">Advertisement</h5>
+              <div styles={{display:'block', background: 'gray'}}><b>Title:</b> {title}</div>        
+              <br/>
+              <div><b>Description</b> {description}</div>
+            </div>
+          </div>
+        </div>
+          <div className="col-md-3">
+            <div className="card p-0 ">
+              <div className="menu-navigation text-center p-3">
+                <h5>{user && user.name}</h5>
+              </div>
+            
+              &nbsp;
+              <div className="p-2">
+                
+              {user && <><b>Email: </b>{user.email}</>} 
+
+              <div className="float-right m-3">
+                <button className="btn btn-sm btn-outline-success d-block m-1">Apply for a job</button>
+                <button className="btn btn-sm btn-outline-info d-block m-1">Ask a question</button>
+                <button className="btn btn-sm btn-outline-danger d-block m-1">Report add</button>
+              </div>
+
+
+              </div>
+
+
+            </div>
+
+          </div>
       </div>
-    </div>
+
     )
   }
 }
@@ -72,4 +73,4 @@ function validate(values) {
 */
 
 const mapStateToProps = ({advertisements: {advertisements, total, page, advertisement}}) => ({advertisement, advertisements, total, page });
-export default connect(mapStateToProps, {fetchAdvertisement, updateAdvertisement})(Advertisement)
+export default connect(mapStateToProps, {fetchAdvertisement})(Advertisement)

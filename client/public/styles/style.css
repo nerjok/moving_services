@@ -185,6 +185,13 @@ html {
   transition: all 5s;
   animation-iteration-count: infinite; }
 
+@media screen and (max-width: 767px) {
+  .header-img {
+    height: calc(50vh + 3rem);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center; } }
+
 .header__search {
   padding: 1rem;
   margin: 0; }
@@ -570,3 +577,8 @@ html {
 
 .categories-section {
   min-height: 40vh; }
+
+@media screen and (max-width: 767px) {
+  .advertisements-row--mobile {
+    display: flex !important;
+    flex-direction: column-reverse; } }

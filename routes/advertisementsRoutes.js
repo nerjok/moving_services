@@ -1,6 +1,6 @@
 const requireLogin = require('../middlewares/requireLogin');
 const mongoose = require('mongoose');
-const User = mongoose.model('users');
+const User = mongoose.model('User');
 const Advertisement = mongoose.model('Advertisement');
 
 
@@ -68,9 +68,9 @@ module.exports = app => {
     res.send(ads)
   });
 
-  app.get('/api/advertisements/:id', requireLogin, async (req, res, next) => {
-
-    const advertisement = await Advertisement.findOne({_id: req.params.id, _user: req.user._id})
+  app.get('/api/advertisements/:id', /*requireLogin,*/ async (req, res, next) => {
+    const advertisement = await Advertisement.findOne({_id: req.params.id})
+                                                            .populate('_user')
     res.send(advertisement)
   })
 

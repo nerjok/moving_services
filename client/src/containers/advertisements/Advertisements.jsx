@@ -42,7 +42,7 @@ export class Advertisements extends React.Component {
         <div className="clearfix"></div>
         <AdvertisementPopup/>
 
-        <div className="row">
+        <div className="row advertisements-row--mobile">
         <div className="col-md-9"> 
         
         <div className="advertisements">

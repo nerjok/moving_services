@@ -43,4 +43,4 @@ userSchema.methods.checkPassword = function(password) {
 
 userSchema.plugin(mongoosePaginate);
 
-mongoose.model('users', userSchema);
+mongoose.model('User', userSchema);
