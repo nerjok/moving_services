@@ -3,6 +3,7 @@ const keys = require('./config/keys');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const bodyParser = require('body-parser')
+
 require('./models/Advertisement')
 require('./models/User');
 require('./models/Survey')
@@ -46,10 +47,14 @@ require('./routes/surveyRoutes')(app)
 require('./routes/userRoutes')(app)
 require('./routes/advertisementsRoutes')(app)
 
+app.use('/public', express.static(__dirname + '/public'));
+//app.use('/uploads', express.static(path.join(__dirname, 'public')))
+//app.use('/uploads', express.static('public'))
+
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'))
-
     const path = require('path');
+
     app.get('*', (req, res) => {
         res.sendfile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     })

@@ -81,3 +81,26 @@
 .text-red {
   color: $color-red;
 }
+
+.breadcrumb-link {
+  color: $color-black;
+  font-size: 1.2rem;
+  margin-top: 5px;
+  transition: all .5s ease;
+  display: inline-block;
+
+  &:hover {
+    transform: scale(.95) translateY(-3px);
+    color: darkgreen;
+    text-decoration: none;
+    border-bottom: 1px solid darkgreen;
+  }
+  
+  &:focus,
+  &:active {
+    transform: scale(.95) translateY(-1px);
+    color: darkgreen;
+    text-decoration: none;
+    border-bottom: 1px solid darkgreen;
+  }
+}

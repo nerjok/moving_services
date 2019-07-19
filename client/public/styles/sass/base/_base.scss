@@ -46,3 +46,11 @@ html {
   padding: 3rem 4rem;
 }
 
+.verticaly-center {
+  display: block;
+  width: 100%;
+  padding: 3px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
