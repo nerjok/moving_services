@@ -64,7 +64,8 @@
     transform: scale(0.95) translateY(-3px);
     color: darkgreen;
     text-decoration: none;
-    border-bottom: 1px solid darkgreen; }
+    border-bottom: 1px solid darkgreen;
+    padding-bottom: 5px; }
   .breadcrumb-link:focus, .breadcrumb-link:active {
     transform: scale(0.95) translateY(-1px);
     color: darkgreen;

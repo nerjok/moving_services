@@ -57,14 +57,17 @@ class Map extends React.Component {
   }
 
   render() {
+return (
+  <div id='viewDiv' style={{width: '100%', height: '300px'} } >
+  {this.renderMap()}
 
+</div>
+)
     return(
-          <div style={styles.container}>
+          <div id="mapcontainer" style={styles.container}>
             <div id='viewDiv' style={ styles.mapDiv } >
               {this.renderMap()}
-              <div className="container" style={{ position: 'absolute' , bottom: 10, left: 0, right: 0}}>
-                <Search/>
-              </div>
+
             </div>
           </div>
     )

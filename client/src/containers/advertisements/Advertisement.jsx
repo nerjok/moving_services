@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar, faStarHalfAlt, faEnvelope, faInfo, faUserAltSlash, faAddressCard, faShareSquare, faBan} from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
-
+import Map from '../map/Map';
 export class Advertisement extends React.Component {
 
   state = {
@@ -35,9 +35,9 @@ export class Advertisement extends React.Component {
               <div className="verticaly-center ">
                 <div className="float-left">
                   <Link to={"/"} className="breadcrumb-link">Home</Link>
-                  {' '}>{' '}
+                  {' '}&#187;{' '}
                   <Link to={"/advertisements"} className="breadcrumb-link">Advertisements</Link>
-                  {' '}>{' '} <Link to={"#"} className="breadcrumb-link">Advertisement</Link>
+                  {' '}&#187;{' '} <Link to={"#"} className="breadcrumb-link">Advertisement</Link>
                 </div>
                 <div className="float-right mr-3 ">
                   <button className="btn btn-sm btn-outline-success">
@@ -62,8 +62,11 @@ export class Advertisement extends React.Component {
               <div><b>Time information</b></div>
               <div><b>Skils and experience required</b></div>
 
-
-              <div className="map" style={{width:'100%', ['min-height']: '300px', background: 'lightgreen'}}><b>Location info </b></div>
+              <h5><b>Location info </b></h5>
+              <div className="map" style={{width:'100%', ['min-height']: '300px', background: 'darkgray'}}>
+                
+                <Map/>
+                </div>
             </div>
           </div>
         </div>
