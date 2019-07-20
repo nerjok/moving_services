@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
 
 
-export const Advertisement = ({title, description, _id, location, advCallback}) => {
+export const Advertisement = ({title, description, _id, location, advCallback, deleteAdvertisement, page}) => {
 
   return (
     <div className="row advertisements-row advertisements-row--red">
@@ -32,7 +32,7 @@ export const Advertisement = ({title, description, _id, location, advCallback}) 
           <a className="btn btn-sm btn-outline-danger" 
             onClick={() => {
               console.log('deletion');
-              this.props.deleteAdvertisement({page: this.state.page, id: _id})}}>
+              deleteAdvertisement({page, id: _id})}}>
                 <FontAwesomeIcon icon={faTrash} size="lg" style={{color: 'gray'}} /> 
           </a>
         </div>

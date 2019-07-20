@@ -7,6 +7,10 @@ const mongoose_delete = require('mongoose-delete');
 const advertisementSchema = new Schema({
     title: String,
     description: String,
+    skills: String,
+    tools: String,
+    time: String,
+    payment: String,
     latitude: String,
     longitude: String,
     _user: {type: Schema.Types.ObjectId, ref: 'User'},

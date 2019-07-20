@@ -1,5 +1,6 @@
-import axios from 'axios'
 import { FETCH_USER, FETCH_SURVEYS, LOGIN_PASSWORD, FETCH_ADVERTISEMENTS, FETCH_ADVERTISEMENT } from './types'
+import axios from 'axios';
+
 
 export const fetchUser = () => async dispatch => {
   const res = await axios.get('/api/current_user')
@@ -49,15 +50,22 @@ export const fetchAdvertisement = _id => async dispatch => {
   dispatch({ type: FETCH_ADVERTISEMENT, payload: res.data });
 }
 
-export const updateAdvertisement = data => async dispatch => {
+export const updateAdvertisement = (data, history) => async dispatch => {
   const res = await axios.post('/api/advertisements/'+data.id+'/update', data );
-  dispatch({ type: FETCH_ADVERTISEMENT, payload: res.data });
+
+  if (res.data._id) {
+    history.push(`/user/advertisements/${res.data._id}`)
+    dispatch({ type: FETCH_ADVERTISEMENT, payload: res.data });
+  }
 }
 
-export const newAdvertisement = data => async dispatch => {
-  //const res = 
-  await axios.post('/api/advertisements/new', data );
-  //dispatch({ type: FETCH_ADVERTISEMENT, payload: res.data });
+export const newAdvertisement = (data, history) => async dispatch => {
+  const res = await axios.post('/api/advertisements/new', data );
+
+  if (res.data && !res.data.errors) {
+    dispatch({ type: FETCH_ADVERTISEMENT, payload: res.data });
+    history.push(`/user/advertisements/${res.data._id}`);
+  } 
 }
 
 export const deleteAdvertisement = data => async dispatch => {

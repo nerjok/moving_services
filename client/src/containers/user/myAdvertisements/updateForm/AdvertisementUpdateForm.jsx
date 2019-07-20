@@ -4,8 +4,9 @@ import { reduxForm, Field } from 'redux-form';
 import FIELDS from './formFields'
 import { AdvertisementField } from './advertisementField'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom';
 
-import { updateAdvertisement, newAdvertisement } from '../../../../store/actions/'
+import { updateAdvertisement, newAdvertisement } from '../../../../store/actions'
 
 class AdvertisementForm extends React.Component {
 
@@ -16,9 +17,10 @@ class AdvertisementForm extends React.Component {
 
       if (this.props.advertisement && this.props.advertisement._id) {
         advertisement.id = this.props.advertisement._id
-        this.props.updateAdvertisement(advertisement);
-      } else
-        this.props.newAdvertisement(advertisement);
+        this.props.updateAdvertisement(advertisement, this.props.history);
+      } else {
+        this.props.newAdvertisement(advertisement, this.props.history);
+      }
     }
   }
 
@@ -73,9 +75,9 @@ function mapStateToProps(state) {
 
 }
 
-export default reduxForm({
+export default withRouter(reduxForm({
   validate,
   form: 'advertisementUpdate',
   destroyOnUnmount: false,
   initialValues: {},
-})(connect(mapStateToProps, {updateAdvertisement, newAdvertisement})(AdvertisementForm));
+})(connect(mapStateToProps, {updateAdvertisement, newAdvertisement})(AdvertisementForm)));

@@ -11,7 +11,6 @@ import Dashboard from './Dashboard'
 import SurveyNew from './surveys/SurveyNew'
 import Advertisements from './advertisements/Advertisements'
 import Advertisement from './advertisements/Advertisement'
-import AdvertisementForm from './advertisements/AdvertisementForm'
 
 import LoginPassword from './auth/password/LoginPassword'
 import Profile from './auth/profile/Profile'
@@ -60,7 +59,6 @@ class App extends Component {
                         <Route path="/profile" exact component={Profile}/>
                         <Route path="/profiles" exact component={Profiles}/>
                         <Route path="/advertisements" exact component={Advertisements}/>
-                        <Route path="/advertisements/new" exact component={AdvertisementForm}/>
                         <Route path="/advertisements/:id" exact component={Advertisement}/>
                         <Route path="/profiles/:id" exact component={User0}/>
                         <Route path="/user" component={User}/>

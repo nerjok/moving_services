@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import { Advertisement } from './advertisement/Advertisement';
 import { AdvertisementPopup } from './AdvertisementPopup';
 
-export const Advertisements = ({advertisements, location, advCallback, activeAdvertisement}) => {
+export const Advertisements = ({advertisements, location, advCallback, activeAdvertisement, deleteAdvertisement, page}) => {
 
   return (
     <div className="advertisements">
       <AdvertisementPopup {...activeAdvertisement} />
       {Array.from(advertisements, ({_id, title, description}) => 
-        <Advertisement key={_id} _id={_id} title={title} description={description} location={location} advCallback={advCallback}/>
+        <Advertisement key={_id} _id={_id} title={title} page={page} deleteAdvertisement={deleteAdvertisement} description={description} location={location} advCallback={advCallback}/>
       )}
     </div> 
   )

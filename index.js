@@ -40,12 +40,16 @@ app.get('/', (req, res) => {
 npm run dev
 */
 
+const advertisementsRoutes = require('./routes/advertisementRoutes');
+app.use('/', advertisementsRoutes)
 
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
 require('./routes/surveyRoutes')(app)
 require('./routes/userRoutes')(app)
-require('./routes/advertisementsRoutes')(app)
+//require('./routes/advertisementsRoutes')(app)
+
+
 
 app.use('/public', express.static(__dirname + '/public'));
 //app.use('/uploads', express.static(path.join(__dirname, 'public')))

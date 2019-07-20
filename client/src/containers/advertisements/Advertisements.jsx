@@ -40,10 +40,11 @@ export class Advertisements extends React.Component {
     this.setState({activeAdvertisement})
   }
 
+
   render() {
     return (
       <>
-        <Link to={"/advertisements/new"} className="btn btn-sm btn-outline-success m-3 mr-0 float-right">New Advertisement</Link>
+        <Link to={"/user/advertisements/new"} className="btn btn-sm btn-outline-success m-3 mr-0 float-right">New Advertisement</Link>
 
         <div className="clearfix"></div>
 
@@ -56,6 +57,8 @@ export class Advertisements extends React.Component {
             location={this.currentUrlPath}
             advCallback={this.displayAdvertisementPopup}
             activeAdvertisement={this.state.activeAdvertisement}
+            deleteAdvertisement={this.props.deleteAdvertisement}
+            page={this.state.page}
             />
         </div>
 

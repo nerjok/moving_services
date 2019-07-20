@@ -1,7 +1,8 @@
 export default [
   {label: 'Title', name: 'title'},
   {label: 'Description', name: 'description'},
-  {label: 'Survey Subject', name: 'subject'},
-  {label: 'Survey text', name: 'body'},
-  {label: 'Survey Emails', name: 'recipients'}
+  {label: 'Skills required', name: 'skills'},
+  {label: 'Tools required', name: 'tools'},
+  {label: 'Time and date', name: 'time'},
+  {label: 'Payment info', name: 'payment'}
 ];
