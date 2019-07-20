@@ -7,12 +7,12 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
 
 
-export const Advertisement = ({title, description, _id, location}) => {
+export const Advertisement = ({title, description, _id, location, advCallback}) => {
 
   return (
     <div className="row advertisements-row advertisements-row--red">
       <div className="col-md-5 advertisements-row__description">
-        <h5><a href="#show-details">{title}</a></h5>
+        <h5><a href="#show-details" id={_id} onClick={advCallback}>{title}</a></h5>
         {description}
       </div>
       <div className="col-md-2 flex" styles={{background: 'lightgray'}}>

@@ -21,7 +21,7 @@
 
     &__title {
       margin: 1rem;
-      margin-top: 2.5rem;
+      margin-top: 1rem;
 
     }
   }
@@ -42,8 +42,8 @@
     &:visited {
         color: $color-gray;
         position: absolute;
-        top: 2.5rem;
-        right: 2.5rem;
+        top: 1rem;
+        right: 1rem;
         font-size: 3rem;
         text-decoration: none;
         display: inline-block;

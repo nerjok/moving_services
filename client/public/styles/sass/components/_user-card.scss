@@ -20,6 +20,10 @@
     display: inline-block;
     border-radius: 50%;
     transition: all .5s ease-in-out;
+    animation-name: profile_photo;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+
     
     &:hover {
       box-shadow: 0 .5rem 1rem rgba($color-black,.2);

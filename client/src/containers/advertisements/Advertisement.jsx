@@ -19,14 +19,11 @@ export class Advertisement extends React.Component {
 
   render() {
     const { advertisement } = this.props
-    //var title, description;
     if (!advertisement)
       return null;
 
-      const {title, description, _user: user } = advertisement;
+    const {title, description, _user: user } = advertisement;
     
-    console.log('[[advertisement]]', advertisement, user);
-    //return null;
     return (
       <div className="row mt-2 mb-2" >
         <div className="col-md-9 mb-1">
@@ -53,17 +50,23 @@ export class Advertisement extends React.Component {
               </div>
             </div>
             <div className="card-body">
-              <h5 className="card-title">Advertisement</h5>
-              <div styles={{display:'block', background: 'gray'}}><b>Title:</b> {title}</div>        
+              <h5 className="card-title">{title}</h5>
               <br/>
-              <div><b>Description</b> {description}</div>
-
-              <div><b>Payment information</b></div>
-              <div><b>Time information</b></div>
+              <div> {description}</div>
+              <br/>
               <div><b>Skils and experience required</b></div>
-
+              <br/>
+              <div><b>Time information</b></div>
+              <br/>
+              <div><b>Payment information</b></div>
+              
+              <br/>
+              
+              <br/>
+              <b>PHOTOS</b>
+              <br/>
               <h5><b>Location info </b></h5>
-              <div className="map" style={{width:'100%', ['min-height']: '300px', background: 'darkgray'}}>
+              <div className="map" style={{width:'100%', minHeight: '300px', background: 'darkgray'}}>
                 
                 <Map/>
                 </div>

@@ -59,18 +59,23 @@
   font-size: 1.2rem;
   margin-top: 5px;
   transition: all .5s ease;
-  display: inline-block; }
+  display: inline-block;
+  text-decoration: none; }
+  .breadcrumb-link::after {
+    display: block;
+    content: '';
+    border-bottom: solid 1.5px #197c5b;
+    padding-bottom: 5px;
+    transform: scaleX(0);
+    transition: transform .2s ease-in-out; }
   .breadcrumb-link:hover {
+    text-decoration: none;
     transform: scale(0.95) translateY(-3px);
-    color: darkgreen;
-    text-decoration: none;
-    border-bottom: 1px solid darkgreen;
-    padding-bottom: 5px; }
+    color: #28583c; }
+    .breadcrumb-link:hover::after {
+      transform: scaleX(1); }
   .breadcrumb-link:focus, .breadcrumb-link:active {
-    transform: scale(0.95) translateY(-1px);
-    color: darkgreen;
-    text-decoration: none;
-    border-bottom: 1px solid darkgreen; }
+    transform: scale(0.95) translateY(-1px); }
 
 @-webkit-keyframes textColors {
   0% {
@@ -101,6 +106,22 @@
     transition: all 5s; }
   100% {
     background-image: linear-gradient(to right bottom, rgba(7, 71, 7, 0.5), rgba(5, 51, 26, 0.8)), url("../../../images/man-map.jpg"); } }
+
+@-webkit-keyframes profile_photo {
+  0% {
+    transform: translateY(2px); }
+  50% {
+    transform: translateY(-2px); }
+  100% {
+    transform: translateY(2px); } }
+
+@keyframes profile_photo {
+  0% {
+    transform: translateY(2px); }
+  50% {
+    transform: translateY(-2px); }
+  100% {
+    transform: translateY(2px); } }
 
 html {
   scroll-behavior: smooth; }
@@ -548,7 +569,7 @@ html {
     transition: all .5s .2s; }
     .popup-modal__content__title {
       margin: 1rem;
-      margin-top: 2.5rem; }
+      margin-top: 1rem; }
   .popup-modal:target {
     opacity: 1;
     visibility: visible; }
@@ -558,8 +579,8 @@ html {
   .popup-modal__close:link, .popup-modal__close:visited {
     color: #999;
     position: absolute;
-    top: 2.5rem;
-    right: 2.5rem;
+    top: 1rem;
+    right: 1rem;
     font-size: 3rem;
     text-decoration: none;
     display: inline-block;
@@ -622,7 +643,10 @@ html {
   background: lightgreen;
   display: inline-block;
   border-radius: 50%;
-  transition: all .5s ease-in-out; }
+  transition: all .5s ease-in-out;
+  animation-name: profile_photo;
+  animation-duration: 2s;
+  animation-iteration-count: infinite; }
   .user-card__img-container:hover {
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
     transform: translateY(-3px); }

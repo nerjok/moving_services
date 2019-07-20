@@ -8,7 +8,6 @@ import ReactPaginate from 'react-paginate';
 
 import { Link } from 'react-router-dom'
 
-import { AdvertisementPopup } from './AdvertisementPopup'
 import { Advertisements as AdvertisementsList } from '../../components/advertisements/Advertisements'
 
 export class Advertisements extends React.Component {
@@ -20,8 +19,10 @@ export class Advertisements extends React.Component {
     let page = url.searchParams.get("page")
     page = isNaN(page) ? 0 : parseInt(page)
     this.state = {
-      page
+      page,
+      activeAdvertisement: {}
     }
+    this.displayAdvertisementPopup = this.displayAdvertisementPopup.bind(this);
   }
   
   componentDidMount() {
@@ -34,19 +35,28 @@ export class Advertisements extends React.Component {
     return this.props.history.location.pathname
   }
 
+  displayAdvertisementPopup({target}) {
+    const activeAdvertisement = this.props.advertisements.find(itm => itm._id === target.getAttribute('id')); 
+    this.setState({activeAdvertisement})
+  }
+
   render() {
     return (
       <>
         <Link to={"/advertisements/new"} className="btn btn-sm btn-outline-success m-3 mr-0 float-right">New Advertisement</Link>
 
         <div className="clearfix"></div>
-        <AdvertisementPopup/>
 
         <div className="row advertisements-row--mobile">
         <div className="col-md-9"> 
         
         <div className="advertisements">
-          <AdvertisementsList advertisements={this.props.advertisements} location={this.currentUrlPath}/>
+          <AdvertisementsList 
+            advertisements={this.props.advertisements} 
+            location={this.currentUrlPath}
+            advCallback={this.displayAdvertisementPopup}
+            activeAdvertisement={this.state.activeAdvertisement}
+            />
         </div>
 
           <div style={{position: 'relative', padding: '1rem', margin: '1.5rem'}}>

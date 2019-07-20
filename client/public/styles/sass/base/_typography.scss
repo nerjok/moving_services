@@ -82,28 +82,33 @@
   color: $color-red;
 }
 
+
 .breadcrumb-link {
   color: $color-black;
   font-size: 1.2rem;
   margin-top: 5px;
   transition: all .5s ease;
   display: inline-block;
+  text-decoration: none;
+  
+  &::after {
+    display:block;
+    content: '';
+    border-bottom: solid 1.5px $color-primary-dark-2;
+    padding-bottom: 5px;
+    transform: scaleX(0);  
+    transition: transform .2s ease-in-out;
+  }
 
   &:hover {
-    transform: scale(.95) translateY(-3px);
-    color: darkgreen;
     text-decoration: none;
-    border-bottom: 1px solid darkgreen;
-    //border-top: 1px solid darkgreen;
-    padding-bottom:5px;
-    //padding-top: 5px;
+    transform: scale(.95) translateY(-3px);
+    color: $color-dark-green;
+    &::after { transform: scaleX(1); }
   }
   
   &:focus,
   &:active {
     transform: scale(.95) translateY(-1px);
-    color: darkgreen;
-    text-decoration: none;
-    border-bottom: 1px solid darkgreen;
   }
 }

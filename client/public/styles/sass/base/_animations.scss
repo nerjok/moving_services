@@ -52,3 +52,27 @@
     rgba(#05331a, 0.8)), url('../../../images/man-map.jpg');
   }
 }
+
+@-webkit-keyframes profile_photo {
+  0% { 
+    transform: translateY(2px);
+  }
+  50% { 
+    transform: translateY(-2px);
+  }
+  100% { 
+    transform: translateY(2px);
+  }
+}
+
+@keyframes profile_photo {
+  0% { 
+    transform: translateY(2px);
+  }
+  50% { 
+    transform: translateY(-2px);
+  }
+  100% { 
+    transform: translateY(2px);
+  }
+}
