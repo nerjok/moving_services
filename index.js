@@ -32,6 +32,12 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
+/*
+var multer = require('multer');
+var upload = multer();
+app.use(upload.array()); 
+*/
+
 // docker run -p 27017:27017 -d mongo
 /*
 app.get('/', (req, res) => {

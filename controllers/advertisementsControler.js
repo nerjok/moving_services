@@ -163,6 +163,14 @@ const showAdvertisement = async (req, res, next) => {
   res.send(advertisement);
 };
 
+const uploadPhoto = async (req, res, next) => {console.log('[controler photoupload, req.files]', req.files)
+  if (req.files && !req.fileValidationError) {
+    res.send({msg: "succes, photo uploaded"});
+    return
+  }
+  res.send({msg: 'error uploading photos', error: 'upload error'})
+}
+
 const deleteAdvertisement = async (req, res, next) => {
   const { id } = req.params;
   const { page } = req.query;
@@ -178,5 +186,6 @@ module.exports = {
   updateAdvertisement,
   showAdvertisement,
   showAdvertisements,
-  deleteAdvertisement
+  deleteAdvertisement,
+  uploadPhoto
 };

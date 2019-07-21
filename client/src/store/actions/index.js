@@ -59,6 +59,26 @@ export const updateAdvertisement = (data, history) => async dispatch => {
   }
 }
 
+export const uploadPhoto = (id, photos) => async dispatch => {
+    const res = await axios.post('/api/advertisements/'+id+'/uploadphoto', photos,
+    //{ headers: {'Content-Type': 'multipart/form-data' }}
+    );
+    console.log('[PhotosResponse]', res.data)
+/*
+    fetch(`${API_URL}/image-upload`, {
+      method: 'POST',
+      body: {photos}
+    })
+    .then(res => res.json())
+    .then(images => {
+      this.setState({ 
+        uploading: false,
+        images
+      })
+    })
+    /** */
+}
+
 export const newAdvertisement = (data, history) => async dispatch => {
   const res = await axios.post('/api/advertisements/new', data );
 

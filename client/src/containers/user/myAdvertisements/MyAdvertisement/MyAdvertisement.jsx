@@ -1,11 +1,11 @@
 import React from 'react'
-import { fetchAdvertisement, updateAdvertisement } from '../../../../store/actions'
+import { fetchAdvertisement, updateAdvertisement, uploadPhoto } from '../../../../store/actions'
 import { connect } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
 
 import AdvertisementForm from '../updateForm/AdvertisementUpdateForm'
-
+import FileUpload from './FileUpload'
 export class MyAdvertisement extends React.Component {
 
   state = {
@@ -19,13 +19,14 @@ export class MyAdvertisement extends React.Component {
   toggleEddit = () => this.setState({edit: !this.state.edit})
 
   show() {
-    const {title, description } = this.props.advertisement
+    const {title, description, _id } = this.props.advertisement
 
     return (
       <>
         <div styles={{display:'block', background: 'gray'}}><b>Title:</b> {title}</div>        
         <br/>
         <div><b>Description</b> {description}</div>
+        <FileUpload uploadPhoto={this.props.uploadPhoto} id={_id}/>
       </>
     )
   }
@@ -52,4 +53,4 @@ export class MyAdvertisement extends React.Component {
 }
 
 const mapStateToProps = ({advertisements: { advertisement }}) => ({advertisement });
-export default connect(mapStateToProps, {fetchAdvertisement, updateAdvertisement})(MyAdvertisement)
+export default connect(mapStateToProps, {fetchAdvertisement, updateAdvertisement, uploadPhoto})(MyAdvertisement)
