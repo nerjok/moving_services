@@ -2,39 +2,7 @@ const express = require('express');
 const router = express.Router();
 const requireLogin = require('../middlewares/requireLogin');
 
-
-const fs = require('fs');
-var multer  = require('multer')
-
-var storage = multer.diskStorage({ 
-    destination: function (req, file, cb) {
-      let { id } = req.params
-      let existence = fs.existsSync(`uploads/${id}/`)
-
-      if (!existence) {
-        fs.mkdir(`uploads/${id}/`, function dirCreation(err) {
-          console.log('[dircreation]', err)
-        });
-      }
-      console.log('[[existence]]', existence);
-      cb(null, `uploads/${id}/`)
-    },
-    filename: function (req, file, cb) {
-      cb(null, Date.now() + '-' + file.originalname )
-    }
-});
-var upload = multer({storage, dest: 'uploads',   fileFilter: function (req, file, cb) {
-  if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
-      //return cb('Only image files are allowed!', false);
-      req.fileValidationError = 'goes wrong on the mimetype';
-      return cb(null, false, new Error('goes wrong on the mimetype'));
-  }
-  cb(null, true);
-}})
-//var upload = multer({ dest: 'uploads/' })
-
-
-
+const multer = require('../middlewares/storageMiddleware')
 const advertisements = require('../controllers/advertisementsControler')
 
 
@@ -52,7 +20,9 @@ router.get('/api/advertisements/:id', advertisements.showAdvertisement);
 
 router.post('/api/advertisements/:id/update', requireLogin, advertisements.updateAdvertisement);
 
-router.post('/api/advertisements/:id/uploadphoto', requireLogin, upload.array('photos[]', 4), advertisements.uploadPhoto);
+router.post('/api/advertisements/:id/uploadphoto', requireLogin, multer.storageMiddleware("ADVERTISEMENT_PHOTO"), advertisements.uploadPhoto);
+
+router.delete('/api/advertisements/:id/deletephoto/:photo', requireLogin, advertisements.deletePhoto);
 
 router.delete('/api/advertisements/:id', requireLogin, advertisements.deleteAdvertisement);
 

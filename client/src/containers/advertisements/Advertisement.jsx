@@ -7,6 +7,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar, faStarHalfAlt, faEnvelope, faInfo, faUserAltSlash, faAddressCard, faShareSquare, faBan} from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
 import Map from '../map/Map';
+
+import "react-image-gallery/styles/css/image-gallery.css";
+
+
+import ImageGallery from 'react-image-gallery';
+
+const toGallery = (id, images) => {
+  return images.map(image => ({
+    original: `/public/images/${id}/${image}`, 
+    //thumbnail: `/public/images/${id}/${image}`
+  }))
+}
+
 export class Advertisement extends React.Component {
 
   state = {
@@ -22,10 +35,14 @@ export class Advertisement extends React.Component {
     if (!advertisement)
       return null;
 
-    const {title, description, _user: user } = advertisement;
+    const {title, description, _user: user, payment, photos, skills, time, tools, _id } = advertisement;
     
     return (
       <div className="row mt-2 mb-2" >
+        <div className="col-md-12 mb-3">
+        {(photos && photos.length > 0) && <ImageGallery showPlayButton={false} showBullets={true} showThumbnails={false} items={toGallery(_id, photos)} />}
+
+        </div>
         <div className="col-md-9 mb-1">
           <div className="card" >
             <div className="card__header">
@@ -51,20 +68,25 @@ export class Advertisement extends React.Component {
             </div>
             <div className="card-body">
               <h5 className="card-title">{title}</h5>
+
               <br/>
               <div> {description}</div>
               <br/>
-              <div><b>Skils and experience required</b></div>
+              <div><b>Skils and experience required</b>{skills}</div>
               <br/>
-              <div><b>Time information</b></div>
+              {time && <div><b> Time information</b>{time}</div>}
               <br/>
-              <div><b>Payment information</b></div>
+              <div><b>Payment information</b>{payment}</div>
+              <div><b>Tools required</b>{tools}</div>
+              <br/>
               
               <br/>
-              
-              <br/>
-              <b>PHOTOS</b>
-              <br/>
+              {/*}
+              <b>PHOTOS</b><br/>
+              {photos && photos.map(photo => {
+                return <><img src={`/public/images/${_id}/${photo}`} width={"300px"} alt="image not displayd"/><br/></>
+              })}
+              <br/>*/}
               <h5><b>Location info </b></h5>
               <div className="map" style={{width:'100%', minHeight: '300px', background: 'darkgray'}}>
                 

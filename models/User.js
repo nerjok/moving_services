@@ -11,7 +11,7 @@ const userSchema = new Schema({
     password: String,
     credits: {type: Number, default: 0},
     //_advertisements: [{type: Schema.Types.ObjectId, ref: 'advertisements'}],
-}, { toJSON: { virtuals: true } });
+}, { toJSON: { virtuals: true }, timestamps: true });
 
 userSchema.virtual('advertisements', {
     ref: 'Advertisement',

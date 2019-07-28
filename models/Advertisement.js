@@ -14,7 +14,7 @@ const advertisementSchema = new Schema({
     latitude: String,
     longitude: String,
     _user: {type: Schema.Types.ObjectId, ref: 'User'},
-});
+}, { timestamps: true });
 
 advertisementSchema.plugin(mongoosePaginate);
 advertisementSchema.plugin(mongoose_delete, { deletedAt : true, overrideMethods: true});

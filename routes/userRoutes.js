@@ -55,21 +55,6 @@ module.exports = (app) => {
       return
     });
 
-//= Temp for adds
-    const add = new Advertisement({
-      title: `Casino Royale ${name}`,
-      description: `My sugested work description ${name}`,
-      _user: user._id,
-      author: user._id    // assign the _id from the person
-    });
-  
-    add.save(function (err) {
-      if (err) return handleError(err);
-      // thats it!
-    });
-
-    user._advertisements.push(add)
-//= ended
     res.send(user)
   })
 

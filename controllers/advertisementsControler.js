@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const User = mongoose.model("User");
 const Advertisement = mongoose.model("Advertisement");
 const { body, check, validationResult } = require("express-validator");
-
+const { advertisementPhotos, deletePhotos } = require('../helpers/advertisements');
 
 const pagOptions = {
   page: 1,
@@ -160,15 +160,34 @@ const showAdvertisement = async (req, res, next) => {
     _id: req.params.id
   }).populate("_user");
 
-  res.send(advertisement);
+  let photos = advertisementPhotos(req.params.id);
+  res.send({...advertisement._doc, photos});
 };
 
-const uploadPhoto = async (req, res, next) => {console.log('[controler photoupload, req.files]', req.files)
+const uploadPhoto = async (req, res, next) => {
   if (req.files && !req.fileValidationError) {
-    res.send({msg: "succes, photo uploaded"});
+    const advertisement = await Advertisement.findOne({
+      _id: req.params.id
+    }).populate("_user");
+  
+    let photos = advertisementPhotos(req.params.id);
+    res.send({...advertisement._doc, photos});
+    //res.send({msg: "succes, photo uploaded"});
     return
   }
   res.send({msg: 'error uploading photos', error: 'upload error'})
+}
+
+const deletePhoto = async (req, res, next) => {
+
+  deletePhotos(req.params.id, req.params.photo)
+
+  const advertisement = await Advertisement.findOne({
+    _id: req.params.id
+  }).populate("_user");
+
+  let photos = advertisementPhotos(req.params.id);
+  res.send({...advertisement._doc, photos});
 }
 
 const deleteAdvertisement = async (req, res, next) => {
@@ -180,6 +199,8 @@ const deleteAdvertisement = async (req, res, next) => {
   res.send(advertisements);
 };
 
+
+
 module.exports = {
   validate,
   createAdvertisement,
@@ -187,5 +208,6 @@ module.exports = {
   showAdvertisement,
   showAdvertisements,
   deleteAdvertisement,
+  deletePhoto,
   uploadPhoto
 };

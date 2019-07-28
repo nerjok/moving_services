@@ -47,6 +47,8 @@ export const fetchAdvertisements = ( page = 0) => async dispatch => {
 
 export const fetchAdvertisement = _id => async dispatch => {
   const res = await axios.get('/api/advertisements/'+_id, { _id });
+  //let advertisement = {...res.data.advertisement, photos: res.data.photos}
+  console.log('showAdvertisement', res.data);
   dispatch({ type: FETCH_ADVERTISEMENT, payload: res.data });
 }
 
@@ -60,23 +62,13 @@ export const updateAdvertisement = (data, history) => async dispatch => {
 }
 
 export const uploadPhoto = (id, photos) => async dispatch => {
-    const res = await axios.post('/api/advertisements/'+id+'/uploadphoto', photos,
-    //{ headers: {'Content-Type': 'multipart/form-data' }}
-    );
-    console.log('[PhotosResponse]', res.data)
-/*
-    fetch(`${API_URL}/image-upload`, {
-      method: 'POST',
-      body: {photos}
-    })
-    .then(res => res.json())
-    .then(images => {
-      this.setState({ 
-        uploading: false,
-        images
-      })
-    })
-    /** */
+    const res = await axios.post('/api/advertisements/'+id+'/uploadphoto', photos);
+    dispatch({ type: FETCH_ADVERTISEMENT, payload: res.data });
+}
+
+export const deletePhoto = (id, photo) => async dispatch => {
+  const res = await axios.delete('/api/advertisements/'+id+'/deletephoto/'+photo, photo);
+  dispatch({ type: FETCH_ADVERTISEMENT, payload: res.data });
 }
 
 export const newAdvertisement = (data, history) => async dispatch => {

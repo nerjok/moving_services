@@ -68,13 +68,9 @@ class FileUpload extends Component {
 
   render() {
     return (
-      <div>FileUpload
+      <div>
           <div className='buttons fadein'>
-            <div className='button'>
-              <label htmlFor='single'>Single file upload
-              </label>
-              <input type='file' id='single' onChange={this.onChange} /> 
-            </div>
+
             
             <div className='button'>
               <label htmlFor='multi'>Multiple fiel upload
@@ -83,7 +79,7 @@ class FileUpload extends Component {
             </div>
             </div>
 
-            <button onClick={this.submitForm}>Submit Photos</button>
+            <button className={"btn btn-sm btn-outline-success"} onClick={this.submitForm}>Submit Photos</button>
       </div>
     )
   }

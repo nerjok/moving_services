@@ -54,3 +54,25 @@ html {
   top: 50%;
   transform: translateY(-50%);
 }
+
+
+/** Image slider */
+.image-gallery-slide img {
+  width: auto;
+  height: 400px;
+  //max-height: 80vh;
+  object-fit: cover;
+  overflow: hidden;
+  object-position: center center;
+}
+
+
+.fullscreen .image-gallery-slide img {
+  height: 100vh;
+  max-height: 100vh;
+}
+
+.image-gallery-left-nav,
+.image-gallery-right-nav {
+  outline: none !important;
+}

@@ -18,7 +18,7 @@ import AdvertisementForm from './myAdvertisements/updateForm/AdvertisementUpdate
             <Route path="/user" exact component={cardComponent(UserInfo)} />
             <Route path="/user/advertisements" exact component={MyAdvertisements} />
             <Route path="/user/advertisements/new" exact component={cardComponent(AdvertisementForm)} />
-            <Route path="/user/advertisements/:id" exact component={cardComponent(MyAdvertisement)} />
+            <Route path="/user/advertisements/:id" exact component={MyAdvertisement} />
             <Route path="/user/works" exact component={cardComponent(Advertisements)} />
           </Switch>
       </div>

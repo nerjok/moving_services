@@ -1,3 +1,6 @@
 node_modules
 
+uploads
+public/images
+
 #keys.js
