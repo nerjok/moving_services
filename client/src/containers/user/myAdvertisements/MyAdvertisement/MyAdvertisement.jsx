@@ -1,11 +1,10 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React from 'react'
 import { fetchAdvertisement, updateAdvertisement, uploadPhoto, deletePhoto } from '../../../../store/actions'
 import { connect } from 'react-redux'
 
 import AdvertisementForm from '../updateForm/AdvertisementUpdateForm'
 import FileUpload from './FileUpload'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash} from '@fortawesome/free-solid-svg-icons'
 import { Tabs, Tab } from 'react-bootstrap';
 export class MyAdvertisement extends React.Component {
 
@@ -50,7 +49,6 @@ export class MyAdvertisement extends React.Component {
     return (
       <>
         {photos && photos.map(photo => {
-          // eslint-disable-next-line jsx-a11y/img-redundant-alt
           return (<div key={photo} style={{position:'relative', width: "90%", margin: "5px"}}>
             <img src={`/public/images/${_id}/${photo}`}  width={"100%"} alt="image not displayd"/>
             <button

@@ -5,4 +5,11 @@
   height:4rem;
   z-index: 10;
   transition: background-color .4s ease-in;
+  background: #28583c;
+  /**/
+  background: #fff;
+  /**/
+  /*
+  background-image: linear-gradient(to bottom right, rgba(85, 197, 122, .8), rgba(40, 180, 133, .8));
+  /**/
 }

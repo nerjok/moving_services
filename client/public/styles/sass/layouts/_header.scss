@@ -16,16 +16,15 @@
   right: 0;
   height:4rem;
   z-index: 9;
-  border-bottom: 2px solid #05331a;
-
+  border-bottom: 1px solid #05331a;
+  //background: #28583c;
   color:#fff;
 
   &__logo {
     color: white;
     font-size: 1.8rem;
     font-weight: 400;
-    //background-image: linear-gradient(to right,#0e0f0f 30%,#a5f507, #fff 100%);
-    background-image: linear-gradient(to right,#a5f507 10%, #fff 100%);
+    background-image: linear-gradient(to right,$color-primary-dark-2 10%, $color-primary 100%);
     -webkit-background-clip: text;
     color: transparent;
 
@@ -38,8 +37,8 @@
   &__menu-link {
     
     all: unset;
-    border: none;	background: none;
-    color: inherit;
+    border: none;	
+    background: none;
     padding: 0;
     font: inherit;
     cursor: pointer;
@@ -48,7 +47,7 @@
 
 
     font-size: 1rem;
-    color: #fff;
+    color: #000;
     border: 1px solid #000;
     border-radius: 5px;
     padding: 6px 10px;

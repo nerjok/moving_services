@@ -77,6 +77,39 @@
   .breadcrumb-link:focus, .breadcrumb-link:active {
     transform: scale(0.95) translateY(-1px); }
 
+.heading-primary {
+  color: #000;
+  text-transform: uppercase;
+  backface-visibility: hidden;
+  margin: 6rem 0; }
+  .heading-primary--main {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 400;
+    letter-spacing: .25rem;
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    /* @include respond(phone) {
+          letter-spacing: 1rem;
+          font-family: 5rem;
+      }
+      /*
+      animation-delay: 3s;
+      animation-iteration-count: 3;
+      */ }
+  .heading-primary--sub {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 400;
+    letter-spacing: .25rem;
+    animation: moveInRight 1s ease-out;
+    /*
+      @include respond(phone) {
+          letter-spacing: .5rem;
+      }
+      /**/ }
+
 @-webkit-keyframes textColors {
   0% {
     color: red; }
@@ -122,6 +155,26 @@
     transform: translateY(-2px); }
   100% {
     transform: translateY(2px); } }
+
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-10rem); }
+  80% {
+    transform: translateX(1rem); }
+  100% {
+    opacity: 1;
+    transform: translate(0); } }
+
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(10rem); }
+  80% {
+    transform: translateX(-1rem); }
+  100% {
+    opacity: 1;
+    transform: translate(0); } }
 
 html {
   scroll-behavior: smooth; }
@@ -197,13 +250,13 @@ html {
   right: 0;
   height: 4rem;
   z-index: 9;
-  border-bottom: 2px solid #05331a;
+  border-bottom: 1px solid #05331a;
   color: #fff; }
   .stickie-nav__logo {
     color: white;
     font-size: 1.8rem;
     font-weight: 400;
-    background-image: linear-gradient(to right, #a5f507 10%, #fff 100%);
+    background-image: linear-gradient(to right, #197c5b 10%, #55c57a 100%);
     -webkit-background-clip: text;
     color: transparent; }
     .stickie-nav__logo:hover {
@@ -213,14 +266,13 @@ html {
     all: unset;
     border: none;
     background: none;
-    color: inherit;
     padding: 0;
     font: inherit;
     cursor: pointer;
     outline: inherit;
     line-height: 1.1rem;
     font-size: 1rem;
-    color: #fff;
+    color: #000;
     border: 1px solid #000;
     border-radius: 5px;
     padding: 6px 10px;
@@ -688,6 +740,43 @@ html {
   .user-card__button:hover {
     color: greenyellow;
     background: gray; }
+
+.header-btn {
+  height: 20rem;
+  border-radius: 3px;
+  transition: all .5s ease;
+  padding: 1rem;
+  background-size: cover;
+  background-repeat: no-repeat; }
+  .header-btn--workers {
+    background-image: url("/public/assets/images/zoom-search.jpg"); }
+  .header-btn--employers {
+    background-image: url("/public/assets/images/pc-table.jpg"); }
+  .header-btn__heading {
+    color: #28583c;
+    font-size: 1.8rem;
+    font-weight: 250;
+    width: 60%; }
+  .header-btn__heading span {
+    background: #fff;
+    padding: .2rem .5rem;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    background-image: -webkit-gradient(linear, left top, right bottom, from(rgba(40, 180, 133, 0.7)), to(rgba(25, 124, 91, 0.7))); }
+  .header-btn__description {
+    width: 50%;
+    margin: 1.5rem 0; }
+    .header-btn__description span {
+      background: #fff;
+      padding: .2rem .5rem;
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone; }
+  .header-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.2);
+    background-repeat: no-repeat; }
+  .header-btn:focus, .header-btn:active {
+    transform: translateY(-1px); }
 
 .categories-section {
   min-height: 40vh; }

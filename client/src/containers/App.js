@@ -25,6 +25,7 @@ import { GetStarted } from './GetStarted'
 
 import { User } from './user/User'
 import { withRouter } from 'react-router';
+import { Header as HeaderBtn} from '../components/header/header';
 
 function mainRouted(props2) {
   const MainPage2 = props => {
@@ -52,6 +53,7 @@ class App extends Component {
                       <Header/>
                       {/*<Map/>*/}
                       {/*<Categories/>*/}
+                        <Route path="/" exact component={HeaderBtn}/>
                         <Route path="/" exact component={mainRouted()}/>
                       <div className="container">
                         <Route path="/surveys" exact component={Dashboard} />

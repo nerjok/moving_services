@@ -10,3 +10,10 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+@mixin spanBackground {
+  background: #fff;
+  padding: .2rem .5rem;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}

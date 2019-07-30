@@ -94,7 +94,6 @@ class Header extends Component {
         return (
           <>
            <nav className="navbar stickie-nav">
-              <div className="container" >
             <h5 className="stickie-nav__logo">
              <Link 
                 to="/"
@@ -106,12 +105,11 @@ class Header extends Component {
               <Link to={"/advertisements"} className="stickie-nav__menu-link">Advertisements</Link>
                 {this.renderContent()}
               </div>
-            </div>
           </nav>
           
  
 
-
+{/*}
           <div className="header-img">
             &nbsp;
             <section
@@ -169,11 +167,11 @@ class Header extends Component {
       </div>
 
 
-                {/*<Search/>*/}
               </div>
             </section>
 
           </div>
+*/}          
           </>
         )
     }

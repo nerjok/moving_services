@@ -1,0 +1,48 @@
+.header-btn {
+  height: 20rem;
+  border-radius: 3px;
+  transition: all .5s ease;
+  padding: 1rem;
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  
+  &--workers {
+    background-image: url("/public/assets/images/zoom-search.jpg");
+  }
+
+  &--employers {
+    background-image: url("/public/assets/images/pc-table.jpg");
+  }
+
+  &__heading {
+    color: $color-dark-green;
+    font-size: 1.8rem;
+    font-weight: 250;
+    width: 60%; 
+  }
+
+  &__heading span {
+    @include spanBackground;
+    background-image: -webkit-gradient(linear, left top, right bottom, from(rgba($color-primary-dark, 0.7)), to(rgba($color-primary-dark-2, 0.7)));
+  }
+
+  &__description {
+    width: 50%;
+    margin: 1.5rem 0;
+    & span {
+      @include spanBackground;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 1rem 1.5rem rgba($color-black, .2);
+    background-repeat: no-repeat;
+  }
+
+  &:focus,
+  &:active {
+    transform: translateY(-1px);
+  }
+}
