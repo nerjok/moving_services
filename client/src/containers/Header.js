@@ -18,16 +18,16 @@ class Header extends Component {
             case null:
                 return;
             case false:
-                return (
-                    <React.Fragment>
+                return [
                       <Link 
                         key="login"
                         to={"/login"} 
-                        className="stickie-nav__menu-link">
+                        className="stickie-nav__menu-link"
+                        onClick={hideMenu}
+                        >
                           Login
 										  </Link>
-                    </React.Fragment>
-                );
+                ];
             default:
                 return ([
 										/*<Link 
