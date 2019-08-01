@@ -100,6 +100,15 @@ background-position: center;
     padding: 1rem;
     margin: 0;
   }
+  
+  &__links {
+    display:none;
+  }
+  @media screen and (min-width: 767px){
+    &__links {
+      display:block;
+    }
+  }
 }
 
 .section-header__search {
@@ -109,3 +118,5 @@ background-position: center;
    right: 0;
    background: rgba(#000, .4);
 }
+
+

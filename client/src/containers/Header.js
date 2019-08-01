@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 //import { link } from 'fs';
 //import { Search } from './map/search/search'
 
-
+const hideMenu = () => {console.log('hideMenu');document.getElementById('navigation-toggle').checked = false;}
 
 class Header extends Component {
     state = { isOpen: false }
@@ -36,55 +36,10 @@ class Header extends Component {
 										  className="stickie-nav__menu-link">
 										  Surveys
                     </Link>,*/
-                    <Link key="users" to={"/profiles"} className="stickie-nav__menu-link">Users</Link>,
+                    <Link key="users" to={"/profiles"} className="stickie-nav__menu-link" onClick={hideMenu}>Users</Link>,
                     //<Link to={"/profile"} className="stickie-nav__menu-link">Profile</Link>,
-                    <Link key="myProfile" to={"/user"} className="stickie-nav__menu-link">Info</Link>,
-                    /*
-                      <DropdownButton 
-                      key="user-profiles" id="dropdown-basic-button" 
-                      bsPrefix="stickie-nav__menu-link" 
-                      onMouseEnter = { () => this.setState({isOpen: true}) }
-                      //onMouseLeave = { () => this.setState({isOpen: false}) }
-                      //show={ this.state.isOpen }
-                      title="Profiles">
-												<Dropdown.Item>
-													<Link 
-														key="surveys"
-														to={this.props.auth ? "/profile" : "/"} 
-														className="text-dark">
-														Profile
-													</Link>
-												</Dropdown.Item>
-                        <Dropdown.Item>
-													<Link 
-														key="surveys"
-														to={this.props.auth ? "/profiles" : "/"} 
-														className="text-dark">
-														Profiles
-													</Link>
-												</Dropdown.Item>
-												<Dropdown.Item href="/surveys">
-												<Link 
-														key="surveys"
-														to={this.props.auth ? "/surveys" : "/"} 
-														className="text-dark">
-														Surveys
-													</Link>
-												</Dropdown.Item>
-                        <Dropdown.Item href="/advertisements">
-												<Link 
-														key="advertisements"
-														to={this.props.auth ? "/advertisements" : "/"} 
-														className="text-dark">
-														Advertisements
-													</Link>
-												</Dropdown.Item>
-												<Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                      </DropdownButton>,
-                      */
-                      //<Payments key="payments"/>,
-                      //<React.Fragment key="credits">Credits: {this.props.auth.credits}</React.Fragment>,
-                    //<a key="logout" href="/api/logout" className="stickie-nav__menu-link">Log out</a>
+                    <Link key="myProfile" to={"/user"} className="stickie-nav__menu-link" onClick={hideMenu}>Info</Link>,
+
                 ]
                 );
         }
@@ -101,9 +56,23 @@ class Header extends Component {
                 TempusWork
               </Link>
             </h5>
-              <div>
+              <div className="header__links">
               <Link to={"/advertisements"} className="stickie-nav__menu-link">Advertisements</Link>
                 {this.renderContent()}
+              </div>
+              <div className="navigation">
+                <input type="checkbox" id="navigation-toggle" className="navigation__checkbox"/>
+                <label htmlFor="navigation-toggle" className="navigation__button">
+                  <span className="navigation__icon"></span>
+                </label>
+
+                <div className="navigation__background">&nbsp;</div>
+                <nav className="navigation__nav">
+                  <ul className="navigation__list">
+                  <Link to={"/advertisements"} className="stickie-nav__menu-link" onClick={hideMenu}>Advertisements</Link>
+                  {Array.from(this.renderContent(), itm => {return(<div className="navigation__list__link">{itm}</div>)})}
+                  </ul>
+                </nav>
               </div>
           </nav>
           
