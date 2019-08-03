@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const requireLogin = require('../middlewares/requireLogin');
 
-const multer = require('../middlewares/storageMiddleware')
-const advertisements = require('../controllers/advertisementsControler')
+const multer = require('../middlewares/storageMiddleware');
+const advertisements = require('../controllers/advertisementsControler');
 
 
 router.use(function authorized(req, res, next) {

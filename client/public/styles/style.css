@@ -808,13 +808,13 @@ html {
     right: .5rem;
     display: none; }
   .navigation__background {
-    height: 3.1rem;
-    width: 3.1rem;
+    height: 3rem;
+    width: 3rem;
     border-radius: 50%;
     position: fixed;
     top: .5rem;
     right: .5rem;
-    background: #05331a;
+    background-image: radial-gradient(#28b485, #28583c);
     transition: all .8s ease-in-out;
     display: none; }
   @media screen and (max-width: 767px) {
@@ -833,7 +833,7 @@ html {
       content: "";
       position: absolute;
       left: 0;
-      transition: all .4s; }
+      transition: all .2s; }
     .navigation__icon::before {
       top: -.5rem; }
     .navigation__icon::after {
@@ -876,5 +876,3 @@ html {
   .navigation__checkbox:checked ~ .navigation__button .navigation__icon::after {
     top: 0;
     transform: rotate(45deg); }
-  .navigation__checkbox:checked ~ .navigation__button {
-    color: darkcyan; }
