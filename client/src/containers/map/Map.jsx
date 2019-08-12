@@ -1,6 +1,5 @@
 import React from 'react'
 import { loadModules } from 'esri-loader';
-import { Search } from './search/search'
 const options = {
   url: 'https://js.arcgis.com/4.5/'
 };
@@ -37,39 +36,13 @@ class Map extends React.Component {
           map,
           zoom: 15,
           center: [23.903597, 54.898521],
-          //logo:false
-        });
-        view.then(() => {
-          this.setState({
-            map,
-            view,
-            status: 'loaded'
-          });
-        });
+        });        
       })
-
-  }
-
-  renderMap() {
-    if(this.state.status === 'loading') {
-      return <div>loading</div>;
-    }
   }
 
   render() {
-return (
-  <div id='viewDiv' style={{width: '100%', height: '300px'} } >
-  {this.renderMap()}
-
-</div>
-)
-    return(
-          <div id="mapcontainer" style={styles.container}>
-            <div id='viewDiv' style={ styles.mapDiv } >
-              {this.renderMap()}
-
-            </div>
-          </div>
+    return (
+      <div id='viewDiv' style={{width: '100%', height: '300px'} } />
     )
   }
 }

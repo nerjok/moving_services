@@ -4,7 +4,7 @@ const Advertisement = mongoose.model("Advertisement");
 
 const pagOptions = {
   page: 1,
-  limit: 1,
+  limit: 5,
   customLabels: {
     docs: "users"
   }

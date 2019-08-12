@@ -19,19 +19,6 @@ describe('Test advertisements controler', () => {
       .end((err, res) => {})
   });
 
-/*
-  afterAll(async () => {
-    try {
-      //await Promise.all(mongoose.modelNames().map(model => mongoose.model(model).ensureIndexes()));
-      await server2.close();
-      await mongoose.connection.close() 
-    } catch (error) {
-      console.error(error)
-      throw error;
-    }
-  })
-*/
-
   it("should get last advertisements", (done) => {
     chai.request(app)
         .get('/api/advertisements')
@@ -84,7 +71,7 @@ describe('Test advertisements controler', () => {
   it('should get create advertisement validation error', done => {
     agent
       .post('/api/advertisements/new')
-      .end((err, res) => {console.log('[createAdvertisement]', res.body)
+      .end((err, res) => {
         should.not.exist(err);
         res.status.should.equal(200);
         res.type.should.equal('application/json');

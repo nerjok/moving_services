@@ -101,32 +101,54 @@ const createAdvertisement = async (req, res, next) => {
     return res.json({ errors: errors.array() });
   }
 
-  const { title, description, skills, tools, payment, time } = req.body;
+  const { title, description, skills, tools, payment, time, dateTime, location } = req.body;
 
   let resp = await Advertisement.create({
     title,
     description,
     _user: req.user,
     skills,
-    tools
+    tools,
+    time,
+    dateTime,
+    location: {
+      type: "Point",
+      coordinates: location
+    }
   });
 
   if (!resp._id) {
     res.send({ errors: [{ msg: "Advertisement not saved" }] });
     return;
   }
+console.log('ResponseSaved', resp);
+
+res.send({errors: "error", resp});
+return;
+
   res.send(resp);
 };
 
 const updateAdvertisement = async (req, res, next) => {
-  const { title, description, skills, tools, payment, time } = req.body;
+  const { title, description, skills, tools, payment, time, dateTime, location } = req.body;
 
   const resp = await Advertisement.findOneAndUpdate(
     { _id: req.params.id, _user: req.user._id },
-    { title, description, skills, tools, payment, time },
+    {
+      title,
+      description,
+      skills,
+      tools,
+      payment,
+      time,
+      dateTime,
+      location: {
+        type: "Point",
+        coordinates: location
+      }
+    },
     { new: true }
   );
-  //console.log('[[updateAdvertisement]]', req.params.id, '[user]', req.user._id, '[[advertisement]]', resp)
   res.send(resp);
 };
 
@@ -159,6 +181,7 @@ const showAdvertisement = async (req, res, next) => {
   const advertisement = await Advertisement.findOne({
     _id: req.params.id
   }).populate("_user");
+  console.log('SendingAdvertisementData', advertisement);
 
   let photos = advertisementPhotos(req.params.id);
   res.send({...advertisement._doc, photos});
@@ -199,7 +222,80 @@ const deleteAdvertisement = async (req, res, next) => {
   res.send(advertisements);
 };
 
+const filterAdvertisements = async (req, res, next) => {
 
+  const {lat, lng} = req.query
+  const page = req.query.page || 0
+  const limit = 5;
+
+
+/** With pagination */
+const page2 = +page + 1;
+const skip = page * limit;
+console.log('skip', skip, 'page', page2)
+const advertisementsF = await Advertisement.paginate({
+  location: {
+    $geoWithin: { $center: [ [lat, lng], 1000 ] } 
+  }
+},{
+  ...pagOptions,
+  page: page2,
+  skip: 4,
+  limit,
+  sort: {'_id': -1}
+})
+res.send({...advertisementsF, total: Math.ceil(advertisementsF.totalDocs / limit)})
+return
+/** //End pagination */
+
+
+
+
+  console.log('filterPArams', req.query)
+  const advertisements = new Promise(function(resolve, reject) {
+    Advertisement.find({
+      location: {
+        $near: {
+          $maxDistance: 10000000,
+          $geometry: {
+            type: "Point",
+            //coordinates: [55.416670000000074, 22.733330000000027]
+            coordinates: [lat, lng]
+          }
+        }
+      }
+    }).limit(limit).skip(limit*page).exec((err, advertisements) => {
+      Advertisement.countDocuments({    
+        location: {
+          $geoWithin: { $center: [ [lat, lng], 1000 ] } 
+          /*
+          $near: {
+            $maxDistance: 10000000,
+            $geometry: {
+              type: "Point",
+              coordinates: [lat, lng]
+            }
+          }*/
+      }
+      }).exec(function(err, total) {
+        if (advertisements && total) {
+          resolve({
+            advertisements,
+            total,
+            page: +page,
+            pages: total / +page
+          })
+        }
+      })
+    })
+  })
+
+  advertisements.then(function(adv) {
+    console.log('AdvertisementsResolation', adv.length, lat, lng, page);
+    res.send(adv)
+  })
+
+}
 
 module.exports = {
   validate,
@@ -209,5 +305,6 @@ module.exports = {
   showAdvertisements,
   deleteAdvertisement,
   deletePhoto,
-  uploadPhoto
+  uploadPhoto,
+  filterAdvertisements
 };

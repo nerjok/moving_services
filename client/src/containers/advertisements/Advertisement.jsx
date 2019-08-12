@@ -2,13 +2,13 @@
 import React from 'react'
 import { fetchAdvertisement } from '../../store/actions'
 import { connect } from 'react-redux'
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar, faStarHalfAlt, faEnvelope, faInfo, faUserAltSlash, faAddressCard, faShareSquare, faBan} from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
 import Map from '../map/Map';
-
+import  UserCard from '../../components/userCard';
 import "react-image-gallery/styles/css/image-gallery.css";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAddressCard, faShareSquare, faBan } from '@fortawesome/free-solid-svg-icons'
 
 
 import ImageGallery from 'react-image-gallery';
@@ -81,12 +81,7 @@ export class Advertisement extends React.Component {
               <br/>
               
               <br/>
-              {/*}
-              <b>PHOTOS</b><br/>
-              {photos && photos.map(photo => {
-                return <><img src={`/public/images/${_id}/${photo}`} width={"300px"} alt="image not displayd"/><br/></>
-              })}
-              <br/>*/}
+
               <h5><b>Location info </b></h5>
               <div className="map" style={{width:'100%', minHeight: '300px', background: 'darkgray'}}>
                 
@@ -98,69 +93,14 @@ export class Advertisement extends React.Component {
 
 
           <div className="col-md-3 mb-1">
-            <div className="card p-0 user-card">
-              <div className="user-card__header text-center p-3">
-                <h5>{user && user.name}</h5>
-              </div>
-            
-              &nbsp;
-              <div className="text-center">
-                <div className="user-card__img-container">
-                  <img 
-                    src={"/public/images/man_icon.svg"} 
-                    alt="Image cannot be displayed"
-                    className={"user-card__image"}
-                  />
-                </div>
-            <br/>
-            <div>
-              <FontAwesomeIcon icon={faStar} size="lg" style={{color: '#26ae61'}} />
-              <FontAwesomeIcon icon={faStar} size="lg" style={{color: '#26ae61'}} />
-              <FontAwesomeIcon icon={faStar} size="lg" style={{color: '#26ae61'}} />
-              <FontAwesomeIcon icon={faStar} size="lg" style={{color: '#26ae61'}} />
-              <FontAwesomeIcon icon={faStarHalfAlt} size="lg" style={{color: '#26ae61'}} />
-            </div>
-
-
-                <br/>
-              {/*user && <><b>Email: </b>{user.email}</>*/} 
-
-              <div className="m-3">                
-                <button className="btn btn-sm btn-info user-card__button">
-                  <FontAwesomeIcon icon={faInfo} size="lg" styles={{color: '#fff'}} />
-                </button>
-                <button className="btn btn-sm btn-success  user-card__button">
-                  <FontAwesomeIcon icon={faEnvelope} size="lg" styles={{color: '#fff'}} />
-                </button>
-                <button className="btn btn-sm btn-warning  user-card__button">
-                  <FontAwesomeIcon icon={faUserAltSlash} size="lg" style={{color: '#fff'}} />
-                </button>
-
-              {/*
-                <button className="btn btn-sm btn-outline-success d-block m-1">Apply for a job</button>
-                <button className="btn btn-sm btn-outline-info d-block m-1">Ask a question</button>
-                <button className="btn btn-sm btn-outline-danger d-block m-1">Report add</button>
-                */}
-              </div>
-
-
-              </div>
-
-
-            </div>
-
+            <UserCard user={user}/>
           </div>
       </div>
 
     )
   }
 }
-/*
-function validate(values) {
-  console.log('[validate]', values)
-  return {}
-}
-*/
+
 
 const mapStateToProps = ({advertisements: {advertisements, total, page, advertisement}}) => ({advertisement, advertisements, total, page });
 export default connect(mapStateToProps, {fetchAdvertisement})(Advertisement)

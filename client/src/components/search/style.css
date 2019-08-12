@@ -1,0 +1,47 @@
+.esri-search__input {
+
+  box-shadow: inset 0px 0px 0px 30px rgba(0, 0, 0, 0.23);
+  color: #fff;
+  background-color: #333333;
+  border-radius: 0 !important;
+  border: none;
+  opacity: 1;
+  offset: none;
+}
+.esri-search,
+.esri-widget,
+.esri-menu,
+.esri-search__sources-menu,
+.esri-icon-search,
+.esri-search__submit-button,
+.esri-widget--button 
+{
+  color: #fff;
+  background-color: #333333;
+  z-index: 2000;
+}
+
+.esri-widget--button:hover,
+.esri-menu__list-item:hover,
+.esri-menu li:hover,
+.esri-menu__list-item:active,
+.esri-menu li:active
+{
+  color: #fff;
+  background-color: #333333;
+  z-index: 2000;
+}
+
+.esri-menu, 
+.esri-search__suggestions-menu {
+  z-index: 2000;
+}
+/*
+.esri-search__submit-button,
+.esri-widget--button,
+.esri-icon-search:hover
+{
+  color: #fff;
+  background-color: #333333;
+}
+*/

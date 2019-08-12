@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from 'react'
-import { fetchAdvertisement, updateAdvertisement, uploadPhoto, deletePhoto } from '../../../../store/actions'
+import { fetchAdvertisement, updateAdvertisement, uploadPhoto, deletePhoto, removeAdvertisement } from '../../../../store/actions'
 import { connect } from 'react-redux'
 
 import AdvertisementForm from '../updateForm/AdvertisementUpdateForm'
@@ -19,7 +19,7 @@ export class MyAdvertisement extends React.Component {
   }
 
   show() {
-    const {title, description, payment, skills, time, tools } = this.props.advertisement
+    const { title, description, payment, skills, time, tools } = this.props.advertisement
 
     return (
       <>
@@ -94,4 +94,4 @@ export class MyAdvertisement extends React.Component {
 }
 
 const mapStateToProps = ({advertisements: { advertisement }}) => ({advertisement });
-export default connect(mapStateToProps, {fetchAdvertisement, updateAdvertisement, uploadPhoto, deletePhoto})(MyAdvertisement)
+export default connect(mapStateToProps, {fetchAdvertisement, updateAdvertisement, uploadPhoto, deletePhoto, removeAdvertisement})(MyAdvertisement)

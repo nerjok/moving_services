@@ -1,0 +1,19 @@
+/*
+ * Calendar input styling
+ */
+.react-datepicker__input-container {
+  width: 100% ;
+}
+
+.react-datepicker-wrapper {
+  display: block;
+}
+
+.esri-search__input {
+  padding: 2px 10px;
+  border: 1px solid #555;
+  border-radius: 3px;
+  line-height: 30px;
+}
+
+.esri-icon-zoom-in-magnifying-glass { display:none; }

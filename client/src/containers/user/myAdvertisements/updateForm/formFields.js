@@ -4,5 +4,7 @@ export default [
   {label: 'Skills required', name: 'skills'},
   {label: 'Tools required', name: 'tools'},
   {label: 'Time and date', name: 'time'},
-  {label: 'Payment info', name: 'payment'}
+  {label: 'Payment info', name: 'payment'},
+  {label: 'Date and Time:', name: 'dateTime'},
+  {label: 'Search address:', name: 'location'}
 ];

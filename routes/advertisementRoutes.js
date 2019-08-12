@@ -16,6 +16,8 @@ router.post('/api/advertisements/new', requireLogin, advertisements.validate('cr
 
 router.get('/api/advertisements', advertisements.showAdvertisements);
 
+router.get('/api/advertisements/filter', advertisements.filterAdvertisements);
+
 router.get('/api/advertisements/:id', advertisements.showAdvertisement);
 
 router.post('/api/advertisements/:id/update', requireLogin, advertisements.updateAdvertisement);

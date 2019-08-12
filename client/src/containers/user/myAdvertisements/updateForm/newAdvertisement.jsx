@@ -13,38 +13,17 @@ import Card from '../../../../hoc/cardBorders';
 import { DateTimePicker } from './dateTimePicker';
 
 
-class AdvertisementForm extends React.Component {
+class NewAdvertisement extends React.Component {
 
   submitForm = (values) => {
     const { formValues } = this.props
     if (formValues.values) {
       const advertisement = formValues.values//, ...this.state}
-   
-      if (this.props.advertisement && this.props.advertisement._id) {
-        advertisement.id = this.props.advertisement._id
-        this.props.updateAdvertisement(advertisement, this.props.history);
-      } else {
-        this.props.newAdvertisement(advertisement, this.props.history);
-      }
+      this.props.newAdvertisement(advertisement, this.props.history);
     }
   }
 
 
-  componentDidMount() {
-    const { advertisement } = this.props
-    if (advertisement) {
-      // eslint-disable-next-line no-lone-blocks
-      {_.each(FIELDS, ({name}) => {
-        if (name === 'location') {
-          this.props.initialValues[name] = advertisement[name]['coordinates'];
-        } else if (name === 'dateTime') { 
-          this.props.initialValues[name] = new Date(advertisement[name]);
-        } else
-          this.props.initialValues[name] = advertisement[name];
-      })};
-     }
-    }
-  
   render() {
     return (
       <Card showCard={this.props.advertisement && this.props.advertisement._id}>
@@ -101,6 +80,5 @@ function mapStateToProps(state) {
 export default withRouter(reduxForm({
   validate,
   form: 'advertisementUpdate',
-  initialValues: {},
-  enableReinitialize: true
-})(connect(mapStateToProps, {updateAdvertisement, newAdvertisement, removeAdvertisement })(AdvertisementForm)));
+  initialValues: {}
+})(connect(mapStateToProps, {updateAdvertisement, newAdvertisement, removeAdvertisement})(NewAdvertisement)));

@@ -11,7 +11,12 @@ require("./services/passport");
 const flash = require("connect-flash");
 
 const mongoose = require("mongoose");
-mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
+mongoose.connect(keys.mongoURI, { 
+																	useNewUrlParser: true,  
+																	useCreateIndex: true,
+																	useFindAndModify: false
+                                                                });
+mongoose.set('debug', true)
 
 mongoose.connection.on("connected", function () {
     console.log("conected");

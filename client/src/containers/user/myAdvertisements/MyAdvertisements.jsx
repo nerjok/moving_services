@@ -30,7 +30,11 @@ export class MyAdvertisements extends React.Component {
     return (
       <div className="container">
 
-        <Advertisements advertisements={this.props.advertisements} location={this.currentUrlPath}/>
+        <Advertisements 
+          advertisements={this.props.advertisements} 
+          location={this.currentUrlPath}
+          activeAdvertisement={{}}
+          />
 
         <div style={{position: 'relative', padding: '1rem', margin: '1.5rem'}}>
             <div style={{

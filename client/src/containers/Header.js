@@ -70,7 +70,7 @@ class Header extends Component {
                 <nav className="navigation__nav">
                   <ul className="navigation__list">
                   <Link to={"/advertisements"} className="stickie-nav__menu-link" onClick={hideMenu}>Advertisements</Link>
-                  {Array.from(this.renderContent(), itm => {return(<div className="navigation__list__link">{itm}</div>)})}
+                  {Array.from(this.renderContent(), itm => <div key={itm.key} className="navigation__list__link">{itm}</div>)}
                   </ul>
                 </nav>
               </div>

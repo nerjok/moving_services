@@ -31,7 +31,6 @@ export const Advertisement = ({title, description, _id, location, advCallback, d
           </a>
           <a className="btn btn-sm btn-outline-danger" 
             onClick={() => {
-              console.log('deletion');
               deleteAdvertisement({page, id: _id})}}>
                 <FontAwesomeIcon icon={faTrash} size="lg" style={{color: 'gray'}} /> 
           </a>

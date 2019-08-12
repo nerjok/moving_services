@@ -1,11 +1,10 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import axios from 'axios'
-import Pagination from 'react-bootstrap/Pagination'
-import {
-  Link
-} from 'react-router-dom'
-class Profiles extends React.Component {
+import React from "react";
+import { connect } from "react-redux";
+import axios from "axios";
+import Pagination from "react-bootstrap/Pagination";
+import TableList from "../../components/table";
+
+class Users extends React.Component {
 
   constructor(props) {
     super(props)
@@ -30,26 +29,8 @@ class Profiles extends React.Component {
   render() {
     return (
       <div>
-        Profiles
-        <table className="table table-sm">
-        <thead>
-          <th>#</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>type</th>
-          <th>Actions</th>
-        </thead>
-        <tbody>
-        {this.state.users.map(user => {
-          return [
-            <td>{user._id}</td>,
-            <td>{user.name}</td>,
-            <td>{user.email}</td>,
-            <td><Link to={"/profiles/"+user._id}>Show</Link></td>
-          ];
-        })}
-        </tbody>
-</table>
+        <TableList items={this.state.users} />
+
         <div className="text-xs-center">
           <br/>
           <ul className="pagination justify-content-center" styles={{margin: 'auto', display: 'inline', textAlign: 'center', background: 'green'}}>
@@ -64,7 +45,7 @@ class Profiles extends React.Component {
     const { pages: {page, hasPrevPage, hasNextPage} } = this.state
     let pagination = []
     if (hasPrevPage) {
-      pagination.push(<Pagination.Prev onClick={() => this.fetchUsers(+page - 1)}/>)
+      pagination.push(<Pagination.Prev key="prev-page" onClick={() => this.fetchUsers(+page - 1)}/>)
     }
     for (let number = 1; number <= page; number++) {
       pagination.push(
@@ -75,7 +56,7 @@ class Profiles extends React.Component {
     }
 
     if (hasNextPage) {
-      pagination.push(<Pagination.Next onClick={() => this.fetchUsers(+page + 1)}/>)
+      pagination.push(<Pagination.Next key="next-page" onClick={() => this.fetchUsers(+page + 1)}/>)
     }
 
     return pagination
@@ -88,4 +69,5 @@ function mapStateToProps({auth}) {
       auth
   }
 }
-export default connect(mapStateToProps, null)(Profiles)
+
+export default connect(mapStateToProps, null)(Users)

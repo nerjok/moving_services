@@ -7,6 +7,7 @@ import { Advertisements } from './advertisements/advertisements'
 import MyAdvertisement from './myAdvertisements/MyAdvertisement/MyAdvertisement'
 import {cardComponent } from '../../hoc/card/card'
 import AdvertisementForm from './myAdvertisements/updateForm/AdvertisementUpdateForm' 
+import  NewAdvertisement  from './myAdvertisements/updateForm/newAdvertisement'
 
  export const User = props => {
 
@@ -17,7 +18,7 @@ import AdvertisementForm from './myAdvertisements/updateForm/AdvertisementUpdate
           <Switch>
             <Route path="/user" exact component={cardComponent(UserInfo)} />
             <Route path="/user/advertisements" exact component={MyAdvertisements} />
-            <Route path="/user/advertisements/new" exact component={cardComponent(AdvertisementForm)} />
+            <Route path="/user/advertisements/new" exact component={NewAdvertisement} />
             <Route path="/user/advertisements/:id" exact component={MyAdvertisement} />
             <Route path="/user/works" exact component={cardComponent(Advertisements)} />
           </Switch>

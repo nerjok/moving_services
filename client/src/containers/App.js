@@ -13,9 +13,10 @@ import Advertisements from './advertisements/Advertisements'
 import Advertisement from './advertisements/Advertisement'
 
 import LoginPassword from './auth/password/LoginPassword'
-import Profile from './auth/profile/Profile'
-import Profiles from './auth/profiles/Profiles'
-import User0 from './auth/user/User'
+
+import Users from './users/Users';
+import Profile from './users/user/user';
+
 //import Map from './map/Map'
 import BlogSlider from './BlogSlider'
 import { Footer } from './footer' 
@@ -32,7 +33,7 @@ function mainRouted(props2) {
 
     return (
       <div>
-        <div className="container"><Advertisements {...props}/></div>
+        <div className="container"><Advertisements from="index" {...props}/></div>
         <GetStarted/>
         <BlogSlider/>
       </div>
@@ -59,11 +60,11 @@ class App extends Component {
                       <div className="container">
                         <Route path="/surveys" exact component={Dashboard} />
                         <Route path="/surveys/new" component={SurveyNew} />
-                        <Route path="/profile" exact component={Profile}/>
-                        <Route path="/profiles" exact component={Profiles}/>
+                        {/*<Route path="/profile" exact component={Profile}/>*/}
+                        <Route path="/profiles" exact component={Users}/>
                         <Route path="/advertisements" exact component={Advertisements}/>
                         <Route path="/advertisements/:id" exact component={Advertisement}/>
-                        <Route path="/profiles/:id" exact component={User0}/>
+                        <Route path="/profiles/:id" exact component={Profile}/>
                         <Route path="/user" component={User}/>
                         <Route path="/login" exact component={LoginPassword} />
 					  </div>

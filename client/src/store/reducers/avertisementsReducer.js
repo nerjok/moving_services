@@ -1,4 +1,4 @@
-import { FETCH_ADVERTISEMENTS, FETCH_ADVERTISEMENT } from '../actions/types'
+import { FETCH_ADVERTISEMENTS, FETCH_ADVERTISEMENT, REMOVE_ADVERTISEMENT } from '../actions/types'
 
 
 export default function(state = {advertisements: [], total: 0, page: 0, advertisement: {}}, action) {
@@ -7,7 +7,10 @@ export default function(state = {advertisements: [], total: 0, page: 0, advertis
         case FETCH_ADVERTISEMENTS:
             return {...action.payload}
         case FETCH_ADVERTISEMENT:
-           return {...state, advertisement: action.payload}    
+           return {...state, advertisement: action.payload}  
+        case REMOVE_ADVERTISEMENT:
+            console.log('[RemoveReducer]', state)
+            return {...state, advertisement: {}};     
         default:
             return state;    
     }
