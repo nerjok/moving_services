@@ -5,7 +5,7 @@ const mongoose_delete = require('mongoose-delete');
 
 
 const advertisementSchema = new Schema({
-    title: {type: String, required: true, minlength: 50},
+    title: {type: String, required: true, minlength: 10},
     description: {type: String, required: true, minlength: 50},
     skills: String,
     tools: String,

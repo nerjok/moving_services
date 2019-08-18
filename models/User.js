@@ -6,8 +6,11 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema({
     googleId: String,
-    name: String,
-    email: String,
+    name: {type: String, required: true, minlength: 5},
+    email: {type: String, required: true, minlength: 5},
+    description: {type: String, required: true, minlength: 10},
+    available: {type: String, required: true, minlength: 10},
+    city: {type: String, required: true, minlength: 10},
     password: String,
     credits: {type: Number, default: 0},
     //_advertisements: [{type: Schema.Types.ObjectId, ref: 'advertisements'}],

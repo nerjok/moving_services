@@ -2,12 +2,35 @@
 
   &__header {
     position: relative;
-    //display: table;
-    min-height: 4rem;
-    background-image: linear-gradient(to bottom right, rgba($color-primary-dark, .7), rgba($color-primary, .7));
-
+    display: table;
+    padding: 15px;
+    min-height: 2rem;
+    //background-image: linear-gradient(to bottom right, rgba($color-primary-dark, .7), rgba($color-primary, .7));
+    background: $color-grey;
+    /*
     &:hover {
       background-image: linear-gradient(to bottom right, rgba($color-primary-dark, .8), rgba($color-primary, .8));
+      background: $color-middle-grey;
+    }
+    */
+  }
+
+  &__body {
+    background: $color-table-light-gray !important;
+
+    &:hover {
+      background-color: $color-table-middle-gray !important;
     }
   }
+}
+
+.user-page {
+  background: $color-grey;
+  & a.active {
+    background: $color-table-light-gray !important;
+  }
+}
+
+.tab-content {
+  background: $color-table-light-gray;
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchAdvertisements, deleteAdvertisement } from '../../../store/actions'
+import { myAdvertisements, deleteAdvertisement } from '../../../store/actions'
 import { Advertisements } from '../../../components/advertisements/Advertisements'
 import ReactPaginate from 'react-paginate'
 
@@ -19,7 +19,7 @@ export class MyAdvertisements extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchAdvertisements(this.state.page)
+    this.props.myAdvertisements(this.state.page)
   }
 
   currentUrlPath = () => {
@@ -70,25 +70,20 @@ export class MyAdvertisements extends React.Component {
   }
 
   handlePageChange = (pageNumber) => {
-    console.log(`active page is ${pageNumber}`);
     this.setState({activePage: pageNumber});
   }
 
   updatePage = ({selected}) => {
-    //const url = new URL(window.location.href);
-    //let old = url.searchParams.get("page")
-    
 
     this.setState({page: selected})
-
     let currentUrlParams = new URLSearchParams(window.location.search);
     currentUrlParams.set('page', selected);
     if (this.props.history)
       this.props.history.push(window.location.pathname + "?" + currentUrlParams.toString());
 
-    this.props.fetchAdvertisements(selected)
+    this.props.myAdvertisements(selected)
   }
 }
 
 const mapStateToProps = ({advertisements: {advertisements, total, page}}) => ({advertisements, total, page });
-export default connect(mapStateToProps, {fetchAdvertisements, deleteAdvertisement})(MyAdvertisements)
+export default connect(mapStateToProps, {myAdvertisements, deleteAdvertisement})(MyAdvertisements)

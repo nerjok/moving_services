@@ -1,48 +1,66 @@
-import React from 'react'
-import { Switch, Route, Link} from 'react-router-dom'
+import React, { useState} from 'react';
+import { Switch, Route, Link} from 'react-router-dom';
 
-import UserInfo from './UserInfo/UserInfo'
-import MyAdvertisements from './myAdvertisements/MyAdvertisements'
-import { Advertisements } from './advertisements/advertisements'
-import MyAdvertisement from './myAdvertisements/MyAdvertisement/MyAdvertisement'
-import {cardComponent } from '../../hoc/card/card'
-import AdvertisementForm from './myAdvertisements/updateForm/AdvertisementUpdateForm' 
-import  NewAdvertisement  from './myAdvertisements/updateForm/newAdvertisement'
+import UserInfo from './UserInfo/UserInfo';
+import MyAdvertisements from './myAdvertisements/MyAdvertisements';
+import { Advertisements } from './advertisements/advertisements';
+import MyAdvertisement from './myAdvertisements/MyAdvertisement/MyAdvertisement';
+import {cardComponent } from '../../hoc/card/card';
+import  NewAdvertisement  from './myAdvertisements/updateForm/newAdvertisement';
+import Breadcrumb from '../../components/breadcrumb';
+import UserCard from '../../components/userCard';
 
  export const User = props => {
-
+ const [breadcrumb, setBreadcrumb] = useState([{link: '/user', title: "User page"}])
   return (
-    <div className="row mt-3 mb-3">
-      <div className="col-md-9">
+    <>
+    <Breadcrumb links={breadcrumb}/>
+      <div className="row mt-3 mb-3">
+        <div className="col-md-9 mb-1">
 
-          <Switch>
-            <Route path="/user" exact component={cardComponent(UserInfo)} />
-            <Route path="/user/advertisements" exact component={MyAdvertisements} />
-            <Route path="/user/advertisements/new" exact component={NewAdvertisement} />
-            <Route path="/user/advertisements/:id" exact component={MyAdvertisement} />
-            <Route path="/user/works" exact component={cardComponent(Advertisements)} />
-          </Switch>
-      </div>
-      <div className="col-md-3 card p-0">
-        <div className="user-card__header text-center">
-          <h5 className="mt-3">Profile info</h5>
+            <Switch>
+              <Route path="/user" exact component={UserInfo} />
+              <Route path="/user/advertisements" exact component={MyAdvertisements} />
+              <Route path="/user/advertisements/new" exact component={NewAdvertisement} />
+              <Route path="/user/advertisements/:id" exact component={MyAdvertisement} />
+              <Route path="/user/works" exact component={cardComponent(Advertisements)} />
+            </Switch>
         </div>
-         
-        <div className="p-3" styles={{display: 'inline-block', background: 'gray'}}>
-          <Link to={'/user'}>UserInfo</Link>
-          <br/>
-          <Link to={'/user/advertisements'} style={{zIndex: 1}}>My suggestions</Link>
-          <br/>
-          <Link to={'/user/advertisements/new'} style={{zIndex: 1}}>new Advertisement</Link>
-          <br/>
-          <Link to={'/user/works'}>My works</Link>
-          <br/>
-          {/*<Link to={'user/advertisements'}>Sign out</Link>*/}
-          <a key="logout" href="/api/logout" className="btn btn-danger m-3">Log out</a>
+        <div className="col-md-3 ">
+          <UserCard user={{name: 'Profile info'}} hideLinks={true}>
+            <div className="p-2 mt-2">
+            <Link to={'/user'}>UserInfo</Link>
+            <br/>
+            <Link to={'/user/advertisements'} style={{zIndex: 1}}>My suggestions</Link>
+            <br/>
+            <Link to={'/user/advertisements/new'} style={{zIndex: 1}}>new Advertisement</Link>
+            <br/>
+            <Link to={'/user/works'}>My works</Link>
+            <br/>
+            <a key="logout" href="/api/logout" className="btn btn-danger m-3">Log out</a>
+            </div>
+          </UserCard>  
+          {/*}
+        <div className="card p-0 user-card">
+          <div className="user-card__header text-center">
+            <h5 className="mt-3">Profile info</h5>
+          </div>
+          
+          <div className="p-3 " styles={{display: 'inline-block', background: 'gray'}}>
+            <Link to={'/user'}>UserInfo</Link>
+            <br/>
+            <Link to={'/user/advertisements'} style={{zIndex: 1}}>My suggestions</Link>
+            <br/>
+            <Link to={'/user/advertisements/new'} style={{zIndex: 1}}>new Advertisement</Link>
+            <br/>
+            <Link to={'/user/works'}>My works</Link>
+            <br/>
+            <a key="logout" href="/api/logout" className="btn btn-danger m-3">Log out</a>
+  </div>
+  </div>*/}
         </div>
-
       </div>
-    </div>
+    </>
   )
 }
 

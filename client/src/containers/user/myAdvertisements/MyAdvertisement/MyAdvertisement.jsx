@@ -39,7 +39,6 @@ export class MyAdvertisement extends React.Component {
 
   deletePhoto({target}) {
     let photoId = target.getAttribute("photo_id");
-    console.log("deletePhoto", photoId);
     this.props.deletePhoto(this.props.advertisement._id, photoId);
   }
 
@@ -77,7 +76,7 @@ export class MyAdvertisement extends React.Component {
 
     return (
       <>
-        <Tabs defaultActiveKey="home" transition={false} id="noanim-tab-example" unmountOnExit={true}>
+        <Tabs defaultActiveKey="home" transition={false} id="noanim-tab-example" className="user-page" unmountOnExit={true}>
         <Tab eventKey="home" title="Advertisement">
           {this.show()}
         </Tab>

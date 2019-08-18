@@ -1,6 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, Field, SubmissionError } from 'redux-form';
 import FIELDS from './formFields'
 import { AdvertisementField } from './advertisementField'
 import { connect } from 'react-redux'
@@ -18,17 +18,31 @@ class AdvertisementForm extends React.Component {
   submitForm = (values) => {
     const { formValues } = this.props
     if (formValues.values) {
-      const advertisement = formValues.values//, ...this.state}
+      const advertisement = formValues.values
    
       if (this.props.advertisement && this.props.advertisement._id) {
         advertisement.id = this.props.advertisement._id
-        this.props.updateAdvertisement(advertisement, this.props.history);
+        return this.props.updateAdvertisement(advertisement, this.props.history).then(data => {
+          if (data && data.errors) {
+            let wrongData = this.invalidServerData(data.errors);
+            throw new SubmissionError(wrongData);
+          } else {
+            document.getElementById("noanim-tab-example-tab-home").click()
+          }
+        });
       } else {
-        this.props.newAdvertisement(advertisement, this.props.history);
+        //this.props.newAdvertisement(advertisement, this.props.history);
       }
     }
   }
 
+  invalidServerData = (errors) => {
+    let wrongData = {}
+    errors.forEach(err => {
+      wrongData[err['param']] = err.msg
+    })
+    return wrongData;
+  }
 
   componentDidMount() {
     const { advertisement } = this.props
@@ -48,52 +62,49 @@ class AdvertisementForm extends React.Component {
   render() {
     return (
       <Card showCard={this.props.advertisement && this.props.advertisement._id}>
-      <form 
-        onSubmit={this.props.handleSubmit(this.submitForm) }
-
+        <form 
+          onSubmit={this.props.handleSubmit(this.submitForm) }
         >
-        {_.map(FIELDS, ({label, name}) => {
-          let fieldComp;
-          if (name === 'dateTime')
-            fieldComp = DateTimePicker;
-          else if (name === 'location')
-           fieldComp = MapInput;
-          else 
-            fieldComp = AdvertisementField;   
-          return (
-              <Field
-                  key={name}
-                  type="text"
-                  name={name}
-                  component={fieldComp}
-                  label={label}
-              />
-          )
-        })}
+          {_.map(FIELDS, ({label, name}) => {
+            let fieldComp;
+            if (name === 'dateTime')
+              fieldComp = DateTimePicker;
+            else if (name === 'location')
+            fieldComp = MapInput;
+            else 
+              fieldComp = AdvertisementField;   
+            return (
+                <Field
+                    key={name}
+                    type="text"
+                    name={name}
+                    component={fieldComp}
+                    label={label}
+                />
+            )
+          })}
 
-        <br/>
-        <br/>
-        <button type="submit" className="btn btn-outline-dark">Submit</button>
-      </form>
+          <br/>
+          <br/>
+          <button type="submit" className="btn btn-outline-dark">Submit</button>
+        </form>
       </Card>
   )
       }
 }
 
 const validate = (values) => {
-  const errors= {};
-  
-  _.each(FIELDS, ({name})=>{
-    if (!values[name] || (values[name].length < 20 && name !== 'location'))
+  const errors = {};
+  _.each(FIELDS, ({ name }) => {
+    if (!values[name] || ((values[name].length < 50 && ['description', 'title'].includes(name)) && name !== 'location'))
       errors[name] = "You must provide data!";
   })
-
   return errors
 }
 
 function mapStateToProps(state) {
   return {
-      formValues: state.form.advertisementUpdate
+    formValues: state.form.advertisementUpdate
   };
 }
 
@@ -103,4 +114,4 @@ export default withRouter(reduxForm({
   form: 'advertisementUpdate',
   initialValues: {},
   enableReinitialize: true
-})(connect(mapStateToProps, {updateAdvertisement, newAdvertisement, removeAdvertisement })(AdvertisementForm)));
+})(connect(mapStateToProps, { updateAdvertisement, newAdvertisement, removeAdvertisement })(AdvertisementForm)));

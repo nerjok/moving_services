@@ -6,7 +6,7 @@ export const CardBorders = props => {
     return props.children;
   return (
     <div className="card">
-    <div className="card-body">
+    <div className="card-body card__body">
       {props.children}
     </div>
   </div>

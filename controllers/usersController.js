@@ -29,8 +29,31 @@ const showUser = async (req, res, next) => {
 
 const updateUser = async (req, res, next) => {
   const { user } = req;
-  const { name, newPassword, repeatPassword, currentPassword } = req.body;
+  const { name, description, available, city } = req.body;
+  const updateData = {name, description, available, city}
 
+
+  User.findByIdAndUpdate(user._id, 
+    updateData, {
+    new: true, 
+    fields: {name: 1, email:1, description: 1, available: 1, city: 1}
+    }
+  )
+  .then(result=> {
+    if (result)
+      res.send(result)
+    else
+      res.send({errors: 'error'})  
+  })
+  .catch(err => {
+    res.send(err);
+  });
+};
+
+
+const changePassword = (req, res, next) => {
+  const { user } = req;
+  const { newPassword, repeatPassword, currentPassword } = req.body;
   if (newPassword && newPassword == repeatPassword) {
     if (!user.checkPassword(currentPassword)) {
       res.send({ error: "Incorrect password." });
@@ -38,17 +61,20 @@ const updateUser = async (req, res, next) => {
     } else {
       const passwdHash = user.generateHash(newPassword);
       user.password = passwdHash;
+      user.save()
+      .then(result=> {
+        if (result)
+          res.send(result)
+        else
+        res.send({errors: 'error'})  
+      })
+      .catch(err => {
+        res.send(err);
+        console.log('error', err);
+      })
     }
-  }
+  } else 
+    res.send({errors: 'Wrong passwords'})
+}
 
-  user.name = name;
-  user.save(function(err) {
-    res.send(err);
-    console.log(err);
-    return;
-  });
-
-  res.send(user);
-};
-
-module.exports = { showUsers, showUser, updateUser };
+module.exports = { showUsers, showUser, updateUser, changePassword };

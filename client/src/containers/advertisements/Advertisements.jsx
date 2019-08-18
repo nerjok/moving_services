@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { Advertisements as AdvertisementsList } from '../../components/advertisements/Advertisements';
 
 import Search from '../../components/search';
+import Breadcrumb from '../../components/breadcrumb';
 
 export class Advertisements extends React.Component {
 
@@ -48,6 +49,7 @@ export class Advertisements extends React.Component {
   render() {
     return (
       <>
+        {this.props.from !== 'index' ? <Breadcrumb links={[{link:'/advertisements', title: "Advertisements"}]}/> : null }
         <Link to={"/user/advertisements/new"} className="btn btn-sm btn-outline-success m-3 mr-0 float-right">New Advertisement</Link>
 
         <div className="clearfix"></div>

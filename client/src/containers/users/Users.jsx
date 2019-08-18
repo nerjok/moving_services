@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import axios from "axios";
 import Pagination from "react-bootstrap/Pagination";
 import TableList from "../../components/table";
+import Breadcrumb from "../../components/breadcrumb"
 
 class Users extends React.Component {
 
@@ -28,6 +29,8 @@ class Users extends React.Component {
 
   render() {
     return (
+      <>
+      <Breadcrumb links={[{link: "/profiles", title: "Users"}]} />
       <div>
         <TableList items={this.state.users} />
 
@@ -36,8 +39,9 @@ class Users extends React.Component {
           <ul className="pagination justify-content-center" styles={{margin: 'auto', display: 'inline', textAlign: 'center', background: 'green'}}>
             {this.pagination()}
           </ul>
+        </div>
       </div>
-      </div>
+      </>
     )
   }
 

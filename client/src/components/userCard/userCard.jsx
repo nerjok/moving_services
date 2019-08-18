@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faStarHalfAlt, faEnvelope, faInfo, faUserAltSlash } from '@fortawesome/free-solid-svg-icons';
 
-export const UserCard = ({user}) => {
+export const UserCard = ({user, children, hideLinks}) => {
   
   return (
     <div className="card p-0 user-card">
@@ -30,7 +30,7 @@ export const UserCard = ({user}) => {
         <FontAwesomeIcon icon={faStar} size="lg" style={{color: '#26ae61'}} />
         <FontAwesomeIcon icon={faStarHalfAlt} size="lg" style={{color: '#26ae61'}} />
       </div>
-      <div className="m-3">  
+      {!hideLinks && <div className="m-3">  
         <Link to={`/profiles/${user && user._id}`} className="btn btn-sm btn-info user-card__button">
           <FontAwesomeIcon icon={faInfo} size="lg" styles={{color: '#fff'}} />
         </Link>              
@@ -40,7 +40,8 @@ export const UserCard = ({user}) => {
         <button className="btn btn-sm btn-warning  user-card__button">
           <FontAwesomeIcon icon={faUserAltSlash} size="lg" style={{color: '#fff'}} />
         </button>
-      </div>
+      </div>}
+      {children}
     </div>
   </div>
   )

@@ -1,50 +1,47 @@
-import React from 'react'
+import React, { useEffect } from 'react';
 import { loadModules } from 'esri-loader';
-const options = {
-  url: 'https://js.arcgis.com/4.5/'
-};
 
-const styles =  {
-  container: {
-    height: '50vh',
-    width: '100%', background: 'gray'
-  },
-  mapDiv: {
-    padding: 0,
-    margin: 0,
-    height: '100%',
-    width: '100%',
-    position: 'relative'
-  },
-}
+export const Map = (props) => {
 
-class Map extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      status: 'loading'
-    }
-  }
-
-  componentDidMount() {
-    loadModules(['esri/Map', 'esri/views/MapView'], options)
-      .then(([Map, MapView]) => {
-        const map = new Map({ basemap: "dark-gray" });
+  useEffect(() => {
+    loadModules(['esri/Map', 'esri/views/MapView', "esri/Graphic"])
+      .then(([Map, MapView, Graphic]) => {
+        const map = new Map({ basemap: "streets-vector" });
         const view = new MapView({
           container: "viewDiv",
           map,
           zoom: 15,
           center: [23.903597, 54.898521],
-        });        
-      })
-  }
+        });      
+        
+        if (props.location && props.location.coordinates) {
+          let [lat, lng] = props.location.coordinates
+          let point = {
+            type: "point",
+            latitude: lat,
+            longitude: lng
+          }
+          let markerSymbol = {
+            type: "picture-marker",
+            url: "/public/assets/images/marker-32.png",
+            width: "24px",
+            height: "30px"
+          };
+          
+          let graphic = new Graphic()
+          
+          graphic.geometry = point;
+          graphic.symbol = markerSymbol;
+          view.graphics.add(graphic);
+          view.center = [lng, lat];
+        }
 
-  render() {
-    return (
-      <div id='viewDiv' style={{width: '100%', height: '300px'} } />
-    )
-  }
+      })
+  }, [])
+  
+  return (
+    <div id='viewDiv' style={{width: '100%', height: '300px'} } />
+  )
 }
 
 export default Map

@@ -16,11 +16,13 @@ router.post('/api/advertisements/new', requireLogin, advertisements.validate('cr
 
 router.get('/api/advertisements', advertisements.showAdvertisements);
 
+router.get('/api/advertisements/my', requireLogin ,advertisements.myAdvertisements);
+
 router.get('/api/advertisements/filter', advertisements.filterAdvertisements);
 
 router.get('/api/advertisements/:id', advertisements.showAdvertisement);
 
-router.post('/api/advertisements/:id/update', requireLogin, advertisements.updateAdvertisement);
+router.post('/api/advertisements/:id/update', requireLogin, advertisements.validate('createAdvertisement'), advertisements.updateAdvertisement);
 
 router.post('/api/advertisements/:id/uploadphoto', requireLogin, multer.storageMiddleware("ADVERTISEMENT_PHOTO"), advertisements.uploadPhoto);
 

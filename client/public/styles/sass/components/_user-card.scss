@@ -1,15 +1,23 @@
 .user-card {
+  background: $color-table-light-gray !important;
+
+  &:hover {
+    background-color: $color-table-middle-gray !important;
+  }
 
   &__header {
     background-image: linear-gradient(to bottom right, rgba($color-primary, .8), rgba($color-primary-dark, .8));
-   
+    background: $color-grey;
     min-height: 6rem;
     -webkit-clip-path: polygon( 0 0, 100% 0, 100% 6rem, 50% 8rem,0 6rem);
     clip-path: polygon( 0 0, 100% 0, 100% 4rem, 50% 5rem,0 4rem);
    
+    /*
     &:hover {
      background-image: linear-gradient(to bottom right, rgba($color-primary, .9), rgba($color-primary-dark, .9));
+     background: $color-middle-grey;
     }
+    */
    }
 
    &__img-container {

@@ -1,6 +1,6 @@
 export default [
-  {label: 'Title', name: 'title'},
-  {label: 'Description', name: 'description'},
+  {label: 'Title', name: 'title', length: 50},
+  {label: 'Description', name: 'description', length: 20},
   {label: 'Skills required', name: 'skills'},
   {label: 'Tools required', name: 'tools'},
   {label: 'Time and date', name: 'time'},
