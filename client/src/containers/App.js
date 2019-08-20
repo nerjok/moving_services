@@ -28,13 +28,12 @@ import { User } from './user/User'
 import { withRouter } from 'react-router';
 import { Header as HeaderBtn, HeaderHeading} from '../components/header';
 
-function mainRouted(props2) {
+function mainRouted(isLoged) {
   const MainPage2 = props => {
-
     return (
       <div>
         <div className="container"><Advertisements from="index" {...props}/></div>
-        <GetStarted/>
+        {isLoged ? null : <GetStarted/>}
         <BlogSlider/>
       </div>
     )
@@ -49,14 +48,16 @@ class App extends Component {
     }
 
     render () {
+
+      const isLoged = (this.props.auth && this.props.auth._id);
         return (
                 <BrowserRouter>
                       <Header/>
                       {/*<Map/>*/}
                       {/*<Categories/>*/}
-                      <HeaderHeading/>
+                      <HeaderHeading isLoged={isLoged} />
                         <Route path="/" exact component={HeaderBtn}/>
-                        <Route path="/" exact component={mainRouted()}/>
+                        <Route path="/" exact component={mainRouted(isLoged)}/>
                       <div className="container">
                         <Route path="/surveys" exact component={Dashboard} />
                         <Route path="/surveys/new" component={SurveyNew} />
@@ -65,20 +66,13 @@ class App extends Component {
                         <Route path="/advertisements" exact component={Advertisements}/>
                         <Route path="/advertisements/:id" exact component={Advertisement}/>
                         <Route path="/profiles/:id" exact component={Profile}/>
-                        <Route path="/user" component={User}/>
-                        <Route path="/login" exact component={LoginPassword} />
-					  </div>
+                        {isLoged ?
+                          <Route path="/user" component={User}/>
+                        :
+                          <Route path="/login" exact component={LoginPassword} />
+                        }
+					            </div>
 
-                      {/* !this.props.auth || !this.props.auth._id ?
-                        <>
-                          <div className="container"><Advertisements/></div>
-                          <GetStarted/>
-                        </>  
-                        : null
-                      */}
-                      
-                      {/*<RecentAdds/>*/}
-                      {/*<BlogSlider/>*/}
                       <Footer/>
                       <div className="to-top">
                         

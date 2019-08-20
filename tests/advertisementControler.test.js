@@ -48,7 +48,9 @@ describe('Test advertisements controler', () => {
         res.body.should.be.an('object');
         
         res.body.should.contains.all.keys(
-          'deleted', '_id', 'title', 'description', '_user', 'createdAt', 'updatedAt', 'photos'
+          //'deleted', '_id', 'title', 'description', '_user', 'createdAt', 'updatedAt', 'photos'
+          //"__v", "_id", "_user", "deleted", "description", "location", "payment", "photos", "skills", "time", "title", "tools"
+          "__v", "_id", "_user", "deleted", "description", "location", "photos", "title"
         );
 
         done();
@@ -83,15 +85,20 @@ describe('Test advertisements controler', () => {
       })
   })
 
-  it('should create advertisement', done => {
+  it('should create advertisement', done => {console.log('shouldNewCreate')
     agent
       .post('/api/advertisements/new')
       .send({
         title: 'testTitletestTitletestTitletestTitletestTitletestTitle', 
         description: 'testerDescriptiontesterDescriptiontesterDescriptiontesterDescriptiontesterDescriptiontesterDescription',
-        skills: 'testSkilstestSkilstestSkils'
+        skills: 'testSkilstestSkilstestSkils',
+        dateTime: new Date(),
+        location: {
+          type: "Point",
+          coordinates: [55, 23]
+        }
       })
-      .end((err, res) => {
+      .end((err, res) => {console.log('createAdv', err, 'response', res);
         should.not.exist(err);
         res.status.should.equal(200);
         res.type.should.equal('application/json');

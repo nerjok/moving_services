@@ -5,7 +5,10 @@ import { Link } from 'react-router-dom'
 //import { link } from 'fs';
 //import { Search } from './map/search/search'
 
-const hideMenu = () => {console.log('hideMenu');document.getElementById('navigation-toggle').checked = false;}
+const hideMenu = () => {
+  console.log('hideMenu');
+  document.getElementById('navigation-toggle').checked = false;
+}
 
 class Header extends Component {
     state = { isOpen: false }

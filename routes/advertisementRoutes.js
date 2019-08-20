@@ -8,7 +8,7 @@ const advertisements = require('../controllers/advertisementsControler');
 
 router.use(function authorized(req, res, next) {
 
-  console.log('[WantTo continue]');
+  //console.log('[WantTo continue]');
   next();
 })
 

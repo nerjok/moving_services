@@ -40,24 +40,6 @@ import UserCard from '../../components/userCard';
             <a key="logout" href="/api/logout" className="btn btn-danger m-3">Log out</a>
             </div>
           </UserCard>  
-          {/*}
-        <div className="card p-0 user-card">
-          <div className="user-card__header text-center">
-            <h5 className="mt-3">Profile info</h5>
-          </div>
-          
-          <div className="p-3 " styles={{display: 'inline-block', background: 'gray'}}>
-            <Link to={'/user'}>UserInfo</Link>
-            <br/>
-            <Link to={'/user/advertisements'} style={{zIndex: 1}}>My suggestions</Link>
-            <br/>
-            <Link to={'/user/advertisements/new'} style={{zIndex: 1}}>new Advertisement</Link>
-            <br/>
-            <Link to={'/user/works'}>My works</Link>
-            <br/>
-            <a key="logout" href="/api/logout" className="btn btn-danger m-3">Log out</a>
-  </div>
-  </div>*/}
         </div>
       </div>
     </>

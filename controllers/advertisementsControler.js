@@ -176,7 +176,7 @@ const showAdvertisement = async (req, res, next) => {
   const advertisement = await Advertisement.findOne({
     _id: req.params.id
   }).populate("_user");
-  console.log('SendingAdvertisementData', advertisement);
+  //console.log('SendingAdvertisementData', advertisement);
 
   let photos = advertisementPhotos(req.params.id);
   res.send({...advertisement._doc, photos});
@@ -227,7 +227,7 @@ const filterAdvertisements = async (req, res, next) => {
 /** With pagination */
 const page2 = +page + 1;
 const skip = page * limit;
-console.log('skip', skip, 'page', page2)
+//console.log('skip', skip, 'page', page2)
 const advertisementsF = await Advertisement.paginate({
   location: {
     $geoWithin: { $center: [ [lat, lng], 1000 ] } 
@@ -246,7 +246,7 @@ return
 
 
 
-  console.log('filterPArams', req.query)
+  //console.log('filterPArams', req.query)
   const advertisements = new Promise(function(resolve, reject) {
     Advertisement.find({
       location: {
@@ -286,7 +286,7 @@ return
   })
 
   advertisements.then(function(adv) {
-    console.log('AdvertisementsResolation', adv.length, lat, lng, page);
+    //console.log('AdvertisementsResolation', adv.length, lat, lng, page);
     res.send(adv)
   })
 

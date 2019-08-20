@@ -12,7 +12,7 @@ const USER_INPUTS = [
   {name: 'available', type: 'text', title: 'Accepted time', value: 'available', disabled: false},
   {name: 'city', type: 'text', title: "Region of services", value: 'region', disabled: false},
 ]
-const User = (props) => {
+export const User = (props) => {
 
   useEffect(() => {
     if (props.match && props.match.params)
@@ -37,7 +37,7 @@ const User = (props) => {
             {Array.from(USER_INPUTS, ({title, name}) => {
               if (!props.user[name])
                 return null;
-            return <p><b>{title}:</b> {props.user[name] || ''}</p>
+            return <p key={title}><b>{title}:</b> {props.user[name] || ''}</p>
             })}
           </div>
         </div>
@@ -53,7 +53,6 @@ const User = (props) => {
 User.propTypes = {
   auth: PropTypes.object.isRequired
 }
-
 
 function mapStateToProps({user, auth}) {
   return {

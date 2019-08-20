@@ -52,7 +52,8 @@ class AdvertisementForm extends React.Component {
         if (name === 'location') {
           this.props.initialValues[name] = advertisement[name]['coordinates'];
         } else if (name === 'dateTime') { 
-          this.props.initialValues[name] = new Date(advertisement[name]);
+          if (advertisement[name])
+            this.props.initialValues[name] = new Date(advertisement[name]);
         } else
           this.props.initialValues[name] = advertisement[name];
       })};

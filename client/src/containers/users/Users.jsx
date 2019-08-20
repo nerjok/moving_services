@@ -4,35 +4,30 @@ import axios from "axios";
 import Pagination from "react-bootstrap/Pagination";
 import TableList from "../../components/table";
 import Breadcrumb from "../../components/breadcrumb"
+import PropTypes from 'prop-types';
 
-class Users extends React.Component {
+import { fetchUsers } from '../../store/actions';
+
+export class Users extends React.Component {
 
   constructor(props) {
     super(props)
     this.pagination = this.pagination.bind(this)
   }
-
-  state = {
-    users: [],
-    pages: {}
-  }
+  
   componentDidMount() {
-    this.fetchUsers()
-  }
-
-  fetchUsers = async (page = 1) => {
-    const res = await axios.get('/api/users', {params:{page}})
-    if (res.data.users && res.data.users.length > 0) {console.log('fetchdFetchd', res.data.page)
-      this.setState({users: res.data.users, pages: {...res.data, users: []}});
-    }
+    this.props.fetchUsers()
   }
 
   render() {
+    const { users } = this.props;
     return (
       <>
       <Breadcrumb links={[{link: "/profiles", title: "Users"}]} />
       <div>
-        <TableList items={this.state.users} />
+        <TableList 
+          items={users.users} 
+        />
 
         <div className="text-xs-center">
           <br/>
@@ -46,21 +41,22 @@ class Users extends React.Component {
   }
 
   pagination = () => {
-    const { pages: {page, hasPrevPage, hasNextPage} } = this.state
+    const { users } =  this.props
+    const { page, hasPrevPage, hasNextPage, totalPages} = users
     let pagination = []
     if (hasPrevPage) {
-      pagination.push(<Pagination.Prev key="prev-page" onClick={() => this.fetchUsers(+page - 1)}/>)
+      pagination.push(<Pagination.Prev key="prev-page" onClick={() => this.props.fetchUsers(+page - 1)}/>)
     }
-    for (let number = 1; number <= page; number++) {
+    for (let number = 1; number <= totalPages; number++) {
       pagination.push(
-        <Pagination.Item key={number} active={number === page} onClick={() => this.fetchUsers(+number)}>
+        <Pagination.Item key={number} active={number === page} onClick={() => this.props.fetchUsers(+number)}>
           {number}
         </Pagination.Item>,
       );
     }
 
     if (hasNextPage) {
-      pagination.push(<Pagination.Next key="next-page" onClick={() => this.fetchUsers(+page + 1)}/>)
+      pagination.push(<Pagination.Next key="next-page" onClick={() => this.props.fetchUsers(+page + 1)}/>)
     }
 
     return pagination
@@ -68,10 +64,17 @@ class Users extends React.Component {
 }
 
 
-function mapStateToProps({auth}) {
+function mapStateToProps({auth, users}) {
   return {
-      auth
+      auth,
+      users
   }
 }
 
-export default connect(mapStateToProps, null)(Users)
+Users.defaultProps = {
+  users: [],
+  auth: {},
+  fetchUsers: () => []
+}
+
+export default connect(mapStateToProps, { fetchUsers })(Users)

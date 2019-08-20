@@ -3,6 +3,7 @@ node_modules
 uploads
 public/images
 config/tests/coverage
-client/build
 
+client/build
+client/src/__tests__/__snapshots__
 #keys.js

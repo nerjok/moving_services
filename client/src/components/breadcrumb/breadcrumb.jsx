@@ -8,7 +8,7 @@ export const Breadcrumb = ({links}) => {
     <div style={{position: 'relative', paddingBottom: '2rem'}} className="mb-3 mt-3">
       <div className="verticaly-center ">
         <div className="float-left">
-          <Link to={"/"} className="breadcrumb-link">Home</Link>
+          <Link to={"/"} className="breadcrumb-link index-page">Home</Link>
           {_.map(links, ({link, title}) => {
             return (
               <React.Fragment key={title}>

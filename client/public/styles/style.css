@@ -179,14 +179,16 @@
 html {
   scroll-behavior: smooth; }
 
+html, body {
+  overflow-x: hidden; }
+
 .to-top {
   position: fixed;
   bottom: 1rem;
   right: 10vw;
   background: #28583c;
-  width: 4rem;
-  height: 4rem;
-  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
   text-align: center;
   opacity: 0;
   transition: opacity .8s; }
@@ -194,7 +196,7 @@ html {
     background-color: #4d4d4d; }
   .to-top a {
     color: #fff;
-    font-size: 2.3rem;
+    font-size: 1.4rem;
     font-weight: 1000; }
     .to-top a:hover {
       color: #000; }
@@ -476,7 +478,9 @@ html {
   background-image: linear-gradient(to bottom right, rgba(85, 197, 122, 0.8), rgba(40, 180, 133, 0.8)), url("../../../images/apple_pc.jpg");
   background-position: center;
   background-size: cover;
-  background-attachment: fixed; }
+  background-attachment: fixed;
+  margin-top: 2rem;
+  margin-bottom: 2rem; }
   .get-started container {
     display: relative; }
   .get-started__heading-visible {

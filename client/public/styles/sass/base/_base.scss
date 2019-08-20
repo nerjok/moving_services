@@ -2,14 +2,17 @@ html {
   scroll-behavior: smooth;
 }
 
+html, body {overflow-x:hidden; }
+
+
 .to-top {
   position:fixed;
   bottom: 1rem;
   right: 10vw;
   background: $color-dark-green;//$color-black-light;
-  width: 4rem;
-  height: 4rem;
-  border-radius:50%;
+  width: 2rem;
+  height: 2rem;
+  //border-radius:50%;
   text-align: center;
   opacity: 0;
   transition: opacity .8s;
@@ -19,7 +22,7 @@ html {
   }
    & a {
      color: $color-white;
-     font-size: 2.3rem;
+     font-size: 1.4rem;
      font-weight: 1000;
      &:hover {
        color: $color-black;

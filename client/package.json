@@ -34,7 +34,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll=false ",
+    "test2": "jest",
     "eject": "react-scripts eject",
     "compile:sass": "node-sass src/styles/sass/main.scss src/styles/style.css -w",
     "compile:sass2": "node-sass public/styles/sass/main.scss public/styles/style.css -w",
@@ -43,10 +44,21 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!@ngrx|(?!deck.gl)|ng-dynamic)"
+    ]
+  },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "react-test-renderer": "^16.9.0",
+    "redux-mock-store": "^1.5.3"
+  }
 }

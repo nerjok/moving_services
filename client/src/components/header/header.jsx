@@ -7,9 +7,9 @@ import {
 export const Header = props => {
 
   return (
-    <div className={"container"}>
+    <div className={"container"} >
       <div className="row mt-3">
-        <div className="col-md-6">
+        <div className="col-md-6" style={{width:'500px', overflow: "hidden"}}>
           <div className="header-btn header-btn--employers">
             <h1 className="header-btn__heading">
               <span>  

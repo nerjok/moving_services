@@ -29,13 +29,22 @@ describe('test advertisement model', () => {
   })
 
   it('should validate properties succesfuly ', (done) => {
+
+    const location =   { type: 'Point',
+    coordinates: [ 54.897559955566074, 23.90896007328748 ] 
+  }
+
     const advOk = {
       title: 'testTitletestTitletestTitletestTitletestTitletestTitle', 
       description: 'testerDescriptiontesterDescriptiontesterDescriptiontesterDescriptiontesterDescriptiontesterDescription',
-      skills: 'testSkilstestSkilstestSkils'
+      skills: 'testSkilstestSkilstestSkils',
+      dateTime: new Date(),
+      location: {type: "Point", coordinates: [22, 33]},
     }
+    advOk.location.coordinates = new Array(23, 23);
     var advert = new Advertisement(advOk)
-    advert.validate(function(err){console.log('valid data', err)
+    advert.validate(function(err){
+      //console.log('valid data', err)
       expect(err).toBeNull();
       done();
     })

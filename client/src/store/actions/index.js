@@ -1,4 +1,4 @@
-import { REMOVE_ADVERTISEMENT, REMOVE_USER_PROFILE, FETCH_PROFILE, FETCH_USER, FETCH_SURVEYS, LOGIN_PASSWORD, FETCH_ADVERTISEMENTS, FETCH_ADVERTISEMENT } from './types'
+import { REMOVE_ADVERTISEMENT, REMOVE_USER_PROFILE, FETCH_PROFILE, FETCH_USER, FETCH_USERS, FETCH_SURVEYS, LOGIN_PASSWORD, FETCH_ADVERTISEMENTS, FETCH_ADVERTISEMENT } from './types'
 import axios from 'axios';
 
 
@@ -36,6 +36,11 @@ export const submitSurvey = (values, history) => async dispatch => {
   const res = await axios.post('/api/surveys', values)
   dispatch({ type: FETCH_USER, payload: res.data })
   history.push('/surveys')
+}
+
+export const fetchUsers = (page = 1) => async dispatch => {
+  const res = await axios.get('/api/users', {params:{page}})
+  dispatch({ type: FETCH_USERS, payload: res.data })
 }
 
 export const fetchSurveys = () => async dispatch => {
