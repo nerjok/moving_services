@@ -3,6 +3,7 @@ node_modules
 uploads
 public/images
 config/tests/coverage
+.next
 
 client/build
 client/src/__tests__/__snapshots__
