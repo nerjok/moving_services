@@ -24,9 +24,9 @@ router.post('/api/update_user', requireLogin, user.updateUser);
 
 router.post('/api/user/update_password', requireLogin, user.changePassword);
 
-router.get('/api/users', requireLogin, user.showUsers);
+router.get('/api/users', user.showUsers);
 
-router.get('/api/users/:user_id', requireLogin, user.showUser);
+router.get('/api/users/:user_id', user.showUser);
 
 
 module.exports = router;

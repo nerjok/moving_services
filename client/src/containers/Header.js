@@ -39,7 +39,7 @@ class Header extends Component {
 										  className="stickie-nav__menu-link">
 										  Surveys
                     </Link>,*/
-                    <Link key="users" to={"/profiles"} className="stickie-nav__menu-link" onClick={hideMenu}>Users</Link>,
+                    //<Link key="users" to={"/profiles"} className="stickie-nav__menu-link" onClick={hideMenu}>Users</Link>,
                     //<Link to={"/profile"} className="stickie-nav__menu-link">Profile</Link>,
                     <Link key="myProfile" to={"/user"} className="stickie-nav__menu-link" onClick={hideMenu}>Info</Link>,
 
@@ -61,6 +61,7 @@ class Header extends Component {
             </h5>
               <div className="header__links">
               <Link to={"/advertisements"} className="stickie-nav__menu-link">Advertisements</Link>
+              <Link key="users" to={"/profiles"} className="stickie-nav__menu-link" onClick={hideMenu}>Users</Link>
                 {this.renderContent()}
               </div>
               <div className="navigation">
@@ -73,77 +74,14 @@ class Header extends Component {
                 <nav className="navigation__nav">
                   <ul className="navigation__list">
                   <Link to={"/advertisements"} className="stickie-nav__menu-link" onClick={hideMenu}>Advertisements</Link>
+                  <div key={'users'} className="navigation__list__link">
+                    <Link to={"/profiles"} className="stickie-nav__menu-link" onClick={hideMenu}>Users</Link>
+                  </div>
                   {Array.from(this.renderContent(), itm => <div key={itm.key} className="navigation__list__link">{itm}</div>)}
                   </ul>
                 </nav>
               </div>
-          </nav>
-          
- 
-
-{/*}
-          <div className="header-img">
-            &nbsp;
-            <section
-            className="section-header__search"
-            >
-
-            <div className="container header__search"
-              >
-
-
-<div className="row">
-  
-        <div className="col-md-3">
-          <div className="form-group m-0">
-            <input type="text" className="form-controll input-grey" name="keyword" placeholder="Enter keyword" 
-            />
-          </div>
-        </div>
-        
-        <div className="col-md-3">
-          <div className="form-group m-0">
-          <select className="form-controll input-grey" name="city" tabIndex="-98" 
-          >
-                <option value="">Location</option>
-                <option value="1">Kaunas</option>
-                <option value="2">Vilnius</option>
-                <option value="3">Klaipeda</option>
-                <option value="4">Panevezys</option>
-                <option value="4">Siauliai</option>
-              </select>
-          </div>
-        </div>
-        <div className="col-md-3">
-          <div className="form-group m-0">
-          <select className="form-controll input-grey" name="city" tabIndex="-98" 
-          >
-                <option value="">Category</option>
-                <option value="1">Kaunas</option>
-                <option value="2">Vilnius</option>
-                <option value="3">Klaipeda</option>
-                <option value="4">Panevezys</option>
-                <option value="4">Siauliai</option>
-              </select>
-          </div>
-        </div>
-        <div className="col-md-3">
-              <div className="form-group m-0">
-                <button type="submit" 
-                  className=" col-md-12 form-control btn btn-sm btn-danger">
-                    Search
-                  </button>
-              </div>
-            </div>
-        
-      </div>
-
-
-              </div>
-            </section>
-
-          </div>
-*/}          
+          </nav>       
           </>
         )
     }

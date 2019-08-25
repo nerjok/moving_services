@@ -40,7 +40,14 @@ const localLogin = (req, res, next) => {
 
 const googleAuth = passport.authenticate('google', { scope: ['profile', 'email'] });
 
-const googleAuthCallback = (req, res, next) => { res.redirect('/') }
+const googleAuthCallback = (req, res, next) => { 
+  const { user } = req
+  if (!user.description && !user.name || !user.available || !user.city) {
+    res.redirect('/user/editprofile');
+    return;
+  }
+  res.redirect('/') 
+}
 
 module.exports = {
   currentUser,

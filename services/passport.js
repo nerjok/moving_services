@@ -32,43 +32,36 @@ passport.use(
         proxy: true
 }, async (accessToken, refreshToken, profile, done) => {
 
-    const existingUser = await User.findOne({googleId: profile.id})
-console.log('[[googleProfile]]', profile, profile.emails[0].value)
+    //const existingUser = await User.findOne({googleId: profile.id})
+    const existingUser = await User.findOne({email: profile.emails[0].value})
+    console.log('[[googleProfile]]', profile, profile.emails[0].value)
         if (existingUser) {
             return done(null, existingUser);
         }
+
         const user = await new User({googleId: profile.id, name: profile.displayName, email: profile.emails[0].value}).save()
         done(null, user);
 }));
+
+
 
 /**
  * Local login/signup
  */
 passport.use(new LocalStrategy(
-    async function(username, password, done) {console.log('[[LocalStrategy]]', username, password)
-
+    async function(username, password, done) {
+    console.log('[[LocalStrategy]]', username, password)
     const existingUser = await User.findOne({ 'email' :  username })
-    let validUsr = existingUser.validPassword(password);
-    if (existingUser && validUsr) {
+    if (existingUser) {
+      let validUsr = existingUser.validPassword(password);
+      if (existingUser && validUsr) 
         return done(null, existingUser);
     }
     return done(null, false, { message: 'Wrong credentials.' });
-
-
-      User.findOne({ username: username }, function(err, user) {
-        if (err) { return done(err); }
-        if (!user) {
-          return done(null, false, { message: 'Incorrect username.' });
-        }
-        if (!user.validPassword(password)) {
-          return done(null, false, { message: 'Incorrect password.' });
-        }
-        return done(null, user);
-      });
     }
   ));
 
-  passport.use('local-signup', new LocalStrategy({
+passport.use('local-signup', new LocalStrategy({
     usernameField : 'username',
     passwordField : 'password',
     passReqToCallback : true

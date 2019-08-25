@@ -25,6 +25,12 @@
 }
 
 .input {
+
+  &__invalid:invalid {
+    background: $color-warn;
+  }
+
+
   
   &__checkbox {
     display: inline-block;

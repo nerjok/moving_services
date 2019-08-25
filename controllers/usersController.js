@@ -12,8 +12,17 @@ const pagOptions = {
 
 const showUsers = async (req, res, next) => {
   const page = req.query.page || 1;
-  const users = await User.paginate({}, { ...pagOptions, page });
 
+  const searchOpt = {}
+  if (req.query.status)
+    searchOpt.status = req.query.status;
+  if (req.query.city)
+    searchOpt.city = req.query.city;
+  if (req.query.availableTime)
+    searchOpt.availableTime = { $all : req.query.availableTime};
+  
+    const users = await User.paginate(searchOpt, { ...pagOptions, page });
+console.log(req.body, req.query, req.params)
   res.send(users);
 };
 
@@ -29,14 +38,20 @@ const showUser = async (req, res, next) => {
 
 const updateUser = async (req, res, next) => {
   const { user } = req;
-  const { name, description, available, city } = req.body;
-  const updateData = {name, description, available, city}
+  const { name, description, available, city, status } = req.body;
+  let updateData = { name, description, available, city, status }
+  if (status) {
+    updateData = {...req.body}
+  }
 
-
+console.log('updateUser', updateData);
+//next()
+//return
   User.findByIdAndUpdate(user._id, 
     updateData, {
     new: true, 
-    fields: {name: 1, email:1, description: 1, available: 1, city: 1}
+    fields: {name: 1, email:1, description: 1, available: 1, city: 1, status: 1, experience: 1, 
+      scope: 1, prices: 1, availableTime: 1, sphere: 1 }
     }
   )
   .then(result=> {

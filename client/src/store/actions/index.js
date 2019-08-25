@@ -5,6 +5,7 @@ import axios from 'axios';
 export const fetchUser = () => async dispatch => {
   const res = await axios.get('/api/current_user')
   dispatch({ type: FETCH_USER, payload: res.data })
+  console.log('currentUser', res.data)
 };
 
 export const fetchUserProfile = (user_id) => async dispatch => {
@@ -19,11 +20,13 @@ export const removeUserProfile = () => async dispatch => {
 export const loginPassword = (username, password) => async dispatch => {
   const res = await axios.post('/auth/login', { username, password });
   dispatch({ type: LOGIN_PASSWORD, payload: res.data })
+  return res.data;
 }
 
 export const signupPassword = (username, password) => async dispatch => {
   const res = await axios.post('/auth/signup', { username, password });
   dispatch({ type: LOGIN_PASSWORD, payload: res.data })
+  return res.data;
 }
 
 export const handleToken = (token) => async dispatch => {
@@ -38,8 +41,8 @@ export const submitSurvey = (values, history) => async dispatch => {
   history.push('/surveys')
 }
 
-export const fetchUsers = (page = 1) => async dispatch => {
-  const res = await axios.get('/api/users', {params:{page}})
+export const fetchUsers = (page = 1, data = {}) => async dispatch => {
+  const res = await axios.get('/api/users', {params:{page, ...data}, body: "kuku"})
   dispatch({ type: FETCH_USERS, payload: res.data })
 }
 
@@ -52,6 +55,7 @@ export const updateData = data => async dispatch => {
   const res = await axios.post('/api/update_user', data)
   if (typeof res.error == 'undefined')
     dispatch({ type: FETCH_USER, payload: res.data })
+    console.log('updateUser', res.data)
 }
 
 export const updateUserPassw = data => async dispatch => {

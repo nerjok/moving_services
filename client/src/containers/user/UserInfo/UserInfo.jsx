@@ -5,9 +5,14 @@ import { EDIT_INPUTS } from './fields';
 
 import UpdateUser from './updateUser'; 
 import UpdatePassword from './updatePassword';
+import UpdateJobInfo from './updateJobInfo';
 import { Tabs, Tab } from 'react-bootstrap';
 
 class UserInfo extends React.Component {
+
+  state = {
+    activeTab: '/user/profile'
+  }
 
   showProfile() {
     const { auth } = this.props
@@ -18,19 +23,34 @@ class UserInfo extends React.Component {
     )
   }
 
+  componentDidMount() {
+    const { pathname } = this.props.history.location;
+    if (pathname.length > 5)
+      this.setState({activeTab: pathname});
+  }
+
+  handleSelect(route) {
+    this.props.history.push(`${route}`)
+    this.setState({activeTab: route})
+  }
   render() {
     return (
-      <Tabs defaultActiveKey="home" transition={false} id="user-page" className="user-page" unmountOnExit={true}>
-        <Tab eventKey="home" title="Profile">
+      <Tabs activeKey={this.state.activeTab} transition={false} id="user-page" className="user-page" unmountOnExit={true}
+      onSelect={this.handleSelect.bind(this)}
+      >
+        <Tab eventKey="/user/profile" title="Profile">
           {this.showProfile()}
         </Tab>
-        <Tab eventKey="profile" title="Edit">
+        <Tab eventKey="/user/editprofile" title="Edit">
           <UpdateUser/>
         </Tab>
-        <Tab eventKey="contact" title="Photos">
+        <Tab eventKey="/user/jobsinfo" title="Job search">
+          <UpdateJobInfo/>
+        </Tab>
+        <Tab eventKey="/user/photo" title="Photos">
           Photos
         </Tab>
-        <Tab eventKey="security" title="Security">
+        <Tab eventKey="/user/security" title="Security">
           <UpdatePassword/>
         </Tab>
       </Tabs>

@@ -37,7 +37,7 @@
     transform: translateY(-1px);
   }*/ }
   .more-info-2:link, .more-info-2:visited {
-    color: red;
+    color: #ff4000;
     font-weight: 600;
     display: table;
     margin: auto auto;
@@ -52,7 +52,7 @@
     border-bottom: 1px solid #c22020; }
 
 .text-red {
-  color: red; }
+  color: #ff4000; }
 
 .breadcrumb-link {
   color: #000;
@@ -213,7 +213,7 @@ html, body {
 .tab-content {
   border: 1px solid #dee2e6;
   border-top: none;
-  padding: 3rem 4rem; }
+  padding: 3rem 2rem; }
 
 .verticaly-center {
   display: block;
@@ -377,7 +377,7 @@ html, body {
       top: 0px;
       width: 80%;
       background-color: #fff;
-      color: red;
+      color: #ff4000;
       z-index: 2;
       border-bottom-left-radius: 6px;
       border-bottom-right-radius: 6px;
@@ -400,7 +400,7 @@ html, body {
       transform: translate(-50%, -100%);
       width: 80%;
       background-color: #fff;
-      color: red;
+      color: #ff4000;
       font-size: 1rem;
       border-bottom-left-radius: 6px;
       border-bottom-right-radius: 6px;
@@ -513,7 +513,7 @@ html, body {
   .advertisements-row:last-child {
     border-bottom: 0.2px solid #e0e0e0; }
   .advertisements-row--red {
-    border-left: 6px solid red; }
+    border-left: 6px solid #ff4000; }
   .advertisements-row:hover {
     background-color: #f6f6f6; }
   .advertisements-row__badge {
@@ -582,18 +582,18 @@ html, body {
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
     transition: all .5s ease .075s;
-    width: 9rem;
+    width: 10rem;
     display: inline-block;
     background-size: 100%;
     overflow: hidden; }
     .advertisement-status__badge--red {
-      background-image: linear-gradient(to right, red 10%, transparent 10%); }
+      background-image: linear-gradient(to right, #ff4000 10%, transparent 10%); }
     .advertisement-status__badge--blue {
       background-image: linear-gradient(to right, #265a56 10%, transparent 10%); }
     .advertisement-status__badge--green {
       background-image: linear-gradient(to right, #26ae61 10%, transparent 10%); }
     .advertisement-status__badge--yellow {
-      background-image: linear-gradient(to right, red 10%, transparent 10%); }
+      background-image: linear-gradient(to right, #ff4000 10%, transparent 10%); }
     .advertisement-status__badge--gray {
       background-image: linear-gradient(to right, #999 10%, transparent 10%); }
   .advertisement-status__filter:checked ~ .advertisement-status__filter-span {
@@ -692,6 +692,9 @@ html, body {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
   .input-grey:hover {
     background-color: #ccc; }
+
+.input__invalid:invalid {
+  background: #ff8000; }
 
 .input__checkbox {
   display: inline-block;

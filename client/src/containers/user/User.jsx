@@ -19,11 +19,12 @@ import UserCard from '../../components/userCard';
         <div className="col-md-9 mb-1">
 
             <Switch>
-              <Route path="/user" exact component={UserInfo} />
               <Route path="/user/advertisements" exact component={MyAdvertisements} />
               <Route path="/user/advertisements/new" exact component={NewAdvertisement} />
               <Route path="/user/advertisements/:id" exact component={MyAdvertisement} />
               <Route path="/user/works" exact component={cardComponent(Advertisements)} />
+              <Route path="/user" component={UserInfo} />
+
             </Switch>
         </div>
         <div className="col-md-3 ">

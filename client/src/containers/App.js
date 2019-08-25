@@ -89,4 +89,3 @@ function mapStateToProps({auth}) {
   }
 }
 export default connect(mapStateToProps, actions)(App)
-
