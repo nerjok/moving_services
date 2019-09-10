@@ -126,10 +126,8 @@ export const Search = (props) => {
                       <option value="4">HomeServices</option>
                     </select>
                 </div>
-
+            </div>
             
-          </div>
-
           </div>
         </div>
         <div className="col-md-6">
@@ -143,7 +141,7 @@ export const Search = (props) => {
           <div className="input-range-container">
             <input 
               type="range" 
-              min="10" max="100"  
+              min="10" max="50"  
               className="input__range" 
               id="myRange"
               value={distance}
@@ -157,7 +155,8 @@ export const Search = (props) => {
 </div>
 </div>
 </div>
-          <div className="col-md-11">
+
+          <div className="col-md-11">{/*
           <div className="row" styles={styles.whiteCollor}>
               <div className="col-md-2">
                 <label htmlFor="adv-prices">
@@ -180,7 +179,7 @@ export const Search = (props) => {
                   Flexible Hours
                 </label>
               </div>
-            </div>
+          </div>*/}
           </div>
           <div className="col-md-1">
             <div className="form-group">

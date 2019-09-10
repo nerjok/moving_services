@@ -179,7 +179,7 @@
 html {
   scroll-behavior: smooth; }
 
-html, body {
+body {
   overflow-x: hidden; }
 
 .to-top {
@@ -514,6 +514,14 @@ html, body {
     border-bottom: 0.2px solid #e0e0e0; }
   .advertisements-row--red {
     border-left: 6px solid #ff4000; }
+  .advertisements-row--blue {
+    border-left: 6px solid #265a56; }
+  .advertisements-row--green {
+    border-left: 6px solid #26ae61; }
+  .advertisements-row--yellow {
+    border-left: 6px solid #ff4000; }
+  .advertisements-row--gray {
+    border-left: 6px solid #999; }
   .advertisements-row:hover {
     background-color: #f6f6f6; }
   .advertisements-row__badge {
@@ -924,6 +932,25 @@ html, body {
 @media screen and (min-width: 767px) {
   .container-search {
     margin-left: -15px; } }
+
+.badge--red {
+  background: #ff4000;
+  color: #fff; }
+
+.badge--blue {
+  background: #265a56;
+  color: #fff; }
+
+.badge--green {
+  background: #26ae61;
+  color: #fff; }
+
+.badge--yellow {
+  background: #ff4000; }
+
+.badge--gray {
+  background: #999;
+  color: #fff; }
 
 .categories-section {
   min-height: 40vh; }

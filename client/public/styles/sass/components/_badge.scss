@@ -1,0 +1,25 @@
+.badge {
+  &--red {
+    background: $color-red;
+    color: #fff;
+  }
+
+  &--blue {
+    background: $color-blue;
+    color: #fff;
+
+  }
+
+  &--green {
+    background: $color-green;
+    color: #fff;
+  }
+
+  &--yellow {
+    background: $color-red;
+  }
+  &--gray {
+    background: $color-gray;
+    color: #fff;
+  }
+}

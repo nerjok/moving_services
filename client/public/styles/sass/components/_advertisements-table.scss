@@ -13,6 +13,22 @@
       border-left: 6px solid $color-red;
     }
 
+    &--blue {
+      border-left: 6px solid $color-blue;  
+    }
+  
+    &--green {
+      border-left: 6px solid $color-green;
+    }
+  
+    &--yellow {
+      border-left: 6px solid $color-red;
+    }
+    
+    &--gray {
+      border-left: 6px solid $color-gray;
+    }
+
     &:hover {
       background-color: $color-table-middle-gray;
     }

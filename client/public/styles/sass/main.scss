@@ -21,7 +21,10 @@
 @import 'components/card';
 @import 'components/user-card';
 @import 'components/header-button';
-@import 'components/search';
+@import 'components/search',
+        'components/badge'
+;
+
 
 @import 'pages/home';
 

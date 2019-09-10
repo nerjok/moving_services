@@ -11,7 +11,7 @@ import { updateAdvertisement, newAdvertisement, removeAdvertisement } from '../.
 import { MapInput } from './mapInput';
 import Card from '../../../../hoc/cardBorders';
 import { DateTimePicker } from './dateTimePicker';
-
+import { SelectField } from './selectField';
 
 class NewAdvertisement extends React.Component {
 
@@ -28,7 +28,7 @@ class NewAdvertisement extends React.Component {
     }
   }
 
-  invalidServerData = (errors) => {
+  invalidServerData = (errors) => {console.log('serverResponse', errors)
     let wrongData = {}
     errors.forEach(err => {
       wrongData[err['param']] = err.msg
@@ -42,12 +42,14 @@ class NewAdvertisement extends React.Component {
       <form 
         onSubmit={this.props.handleSubmit(this.submitForm) }
         >
-        {_.map(FIELDS, ({label, name}) => {
+        {_.map(FIELDS, ({label, name, options}) => {
           let fieldComp;
           if (name === 'dateTime')
             fieldComp = DateTimePicker;
           else if (name === 'location')
            fieldComp = MapInput;
+          else if (['status', 'workType'].includes(name))
+            fieldComp = SelectField 
           else 
             fieldComp = AdvertisementField;   
           return (
@@ -55,6 +57,7 @@ class NewAdvertisement extends React.Component {
                   key={name}
                   type="text"
                   name={name}
+                  options={['status', 'workType'].includes(name) ? options : []}
                   component={fieldComp}
                   label={label}
               />
@@ -73,8 +76,8 @@ class NewAdvertisement extends React.Component {
 const validate = (values) => {
   const errors= {};
  
-  _.each(FIELDS, ({name})=>{
-    if (!values[name] || ((values[name].length < 50 && ['description'].includes(name)) && name !== 'location'))
+  _.each(FIELDS, ({name})=>{console.log('name', name)
+    if (!values[name] || ((values[name].length < 50 && ['description'].includes(name)) && !['location', 'status', 'workType'].includes(name)))
       errors[name] = "You must provide data!";
   })
 

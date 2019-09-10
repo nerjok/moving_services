@@ -5,18 +5,38 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart,  faSearch, faTrash} from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
+import { StatusBtn } from '../../statusBtn/statusBtn';
 
+export const Advertisement = ({status, workType, title, description, _id, location, advCallback, deleteAdvertisement, page}) => {
+  let statusColor, statusStr, timeColor;
 
-export const Advertisement = ({title, description, _id, location, advCallback, deleteAdvertisement, page}) => {
+  switch (workType) {
+    case 2:
+      timeColor = 'advertisements-row--green';
+      break;
+    case 3:
+      timeColor = 'advertisements-row--blue';
+      break;
+    case 4:
+      timeColor = 'advertisements-row--gray';
+      break;
+    case 1:
+      timeColor = 'advertisements-row--red';
+      break;
+  
+    default:
+        timeColor = 'advertisements-row--green';
+      break;
+  }
 
   return (
-    <div className="row advertisements-row advertisements-row--red">
+    <div className={`row advertisements-row ${timeColor}`} >
       <div className="col-md-5 advertisements-row__description">
         <h5><a href="#show-details" id={_id} onClick={advCallback}>{title}</a></h5>
         {description}
       </div>
       <div className="col-md-2 flex" styles={{background: 'lightgray'}}>
-          <span className="badge badge-success advertisements-row__badge">Active</span>
+          <StatusBtn status={status} />
       </div>
       <div className="col-md-2 flex">
           <span className="advertisements-row__info-txt">Vilnius</span> 

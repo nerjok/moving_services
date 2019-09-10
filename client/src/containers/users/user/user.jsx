@@ -21,6 +21,8 @@ export const User = (props) => {
     return () => {props.removeUserProfile()};
   }, [])
 
+  if (!props.user)
+    return <div class="spinner-border mt-5"></div> 
   return (
     <>
     <Breadcrumb links={[{link: "/profiles", title: "Users"}, {link: "#", title: "User"}]} />

@@ -65,6 +65,8 @@ export class Users extends React.Component {
 
   render() {
     const { users } = this.props;
+    if (!users)
+      return <div class="spinner-border mt-5"></div> 
     return (
       <>
         <Breadcrumb links={[{link: "/profiles", title: "Users"}]} />

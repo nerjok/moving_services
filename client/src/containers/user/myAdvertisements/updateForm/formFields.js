@@ -6,5 +6,17 @@ export default [
   {label: 'Time and date', name: 'time'},
   {label: 'Payment info', name: 'payment'},
   {label: 'Date and Time:', name: 'dateTime'},
-  {label: 'Search address:', name: 'location'}
+  {label: 'Search address:', name: 'location'},
+  {label: 'WorkType', name: 'workType', options: [
+    {title: 'Part Time', color: 'red', value: 1},
+    {title: 'Full Time', color: 'green', value: 2},
+    {title: 'Freelance', color: 'blue', value: 3},
+    {title: 'Flexible Hours', color: 'gray', value: 4},
+  ]},
+  {label: 'Status', name: 'status', options: [
+    {title: 'Available', color: 'green', value: 1},
+    {title: 'Asap', color: 'red', value: 2},
+    {title: 'Pending', color: 'blue', value: 3},
+    {title: 'Near Future', color: 'gray', value: 4},
+  ]}
 ];

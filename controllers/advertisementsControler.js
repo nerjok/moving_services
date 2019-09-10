@@ -35,7 +35,7 @@ const validate = method => {
           .isLength({ min: 10, max: 500 }),
         body("status")
           .optional()
-          .isIn(["enabled", "disabled"])
+          //.isIn(["enabled", "disabled"])
       ];
     }
   }
@@ -94,7 +94,7 @@ const createAdvertisement = async (req, res, next) => {
     return res.json({ errors: errors.array() });
   }
 
-  const { title, description, skills, tools, payment, time, dateTime, location } = req.body;
+  const { title, description, skills, tools, payment, time, dateTime, location, status, workType} = req.body;
 
   let resp = await Advertisement.create({
     title,
@@ -104,6 +104,8 @@ const createAdvertisement = async (req, res, next) => {
     tools,
     time,
     dateTime,
+    status,
+    workType,
     location: {
       type: "Point",
       coordinates: location
@@ -125,7 +127,7 @@ const updateAdvertisement = async (req, res, next) => {
     return res.json({ errors: errors.array() });
   }
 
-  const { title, description, skills, tools, payment, time, dateTime, location } = req.body;
+  const { title, description, skills, tools, payment, time, dateTime, location, status, workType } = req.body;
 
   const resp = await Advertisement.findOneAndUpdate(
     { _id: req.params.id, _user: req.user._id },
@@ -137,6 +139,8 @@ const updateAdvertisement = async (req, res, next) => {
       payment,
       time,
       dateTime,
+      status,
+      workType,
       location: {
         type: "Point",
         coordinates: location
@@ -219,19 +223,33 @@ const deleteAdvertisement = async (req, res, next) => {
 
 const filterAdvertisements = async (req, res, next) => {
 
-  const {lat, lng} = req.query
+  const {lat, lng, distance, keyword, status, workType} = req.query
   const page = req.query.page || 0
   const limit = 5;
 
 
-/** With pagination */
-const page2 = +page + 1;
-const skip = page * limit;
-//console.log('skip', skip, 'page', page2)
-const advertisementsF = await Advertisement.paginate({
-  location: {
-    $geoWithin: { $center: [ [lat, lng], 1000 ] } 
+  /** With pagination */
+  const page2 = +page + 1;
+  const skip = page * limit;
+  console.log('geoadvertismentSearch', req.query)
+
+  const searchObj = {};
+  if (lat && lng && distance ) {
+    searchObj.location= {
+      $geoWithin: { $centerSphere: [ [lat, lng], distance / 6371.1 ] } 
+    }
   }
+  if (keyword) {
+      searchObj.$or = [{description: { $regex: '.*' + keyword + '.*' }}, {title: { $regex: '.*' + keyword + '.*' }}];
+  }
+
+  if (status)
+    searchObj.status = status;
+  if (workType)
+    searchObj.workType = workType;
+
+const advertisementsF = await Advertisement.paginate({
+  ...searchObj
 },{
   ...pagOptions,
   page: page2,

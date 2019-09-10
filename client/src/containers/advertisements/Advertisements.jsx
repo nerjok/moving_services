@@ -10,6 +10,8 @@ import { Advertisements as AdvertisementsList } from '../../components/advertise
 import Search from '../../components/search';
 import Breadcrumb from '../../components/breadcrumb';
 
+import FilterCard from '../../components/filtercard';
+
 export class Advertisements extends React.Component {
 
   constructor(props) {
@@ -20,10 +22,13 @@ export class Advertisements extends React.Component {
     page = isNaN(page) ? 0 : parseInt(page)
     this.state = {
       page,
-      activeAdvertisement: {}
+      activeAdvertisement: {},
+      status: [],
+      workType: [],
     }
     this.displayAdvertisementPopup = this.displayAdvertisementPopup.bind(this);
     this.searchAdvertisements = this.searchAdvertisements.bind(this);
+    this.changeStatus = this.changeStatus.bind(this);
   }
   
   componentDidMount() {
@@ -42,11 +47,30 @@ export class Advertisements extends React.Component {
   }
 
   searchAdvertisements(location, distance, keyword) {
-    this.props.filterAdvertisements(this.state.page, location, distance, keyword)
+    this.props.filterAdvertisements(this.state.page, location, distance, keyword, this.state.status, this.state.workType)
     console.log('[[filterAdvertisements]]', location, distance, keyword, this.props.filterAdvertisements);
   }
 
+  changeStatus({target}) {
+    console.log('changeTime', target)
+    const {value, checked } = target;
+    const name = target.getAttribute('name');
+
+    var status  = this.state[name].slice()
+    console.log('statusState', name,  status, typeof status)
+
+
+      if (!checked) {
+        status = status.filter(itm => itm != value);
+      } else {
+        status.push(value);
+      }
+      this.setState({[name]: status})
+  }
+
   render() {
+    if (!this.props.advertisements)
+      return <div class="spinner-border mt-5"></div>  
     return (
       <>
         {this.props.from !== 'index' ? <Breadcrumb links={[{link:'/advertisements', title: "Advertisements"}]}/> : null }
@@ -100,93 +124,32 @@ export class Advertisements extends React.Component {
           </div>
           <div className="col-md-3">
 
-            <ul className="advertisement-statuses">
-              <li className="advertisement-status">
-								<label className="advertisement-status__label" htmlFor="filter-2">
-                  <input type="checkbox" id="filter-2" className="checkbox-filter advertisement-status__filter"/>
-									<span className="advertisement-status__badge advertisement-status__badge--red">
-										&nbsp; &nbsp; Part Time &nbsp;
-									</span>                
-                  <span className="checkbox-filter advertisement-status__filter-span"></span>
-								</label>
-              </li>
+            <FilterCard 
+              title={"Time info"} 
+              items={[
+                {title: 'Part Time', color: 'red', value: 1},
+                {title: 'Full Time', color: 'green', value: 2},
+                {title: 'Freelance', color: 'blue', value: 3},
+                {title: 'Flexible Hours', color: 'gray', value: 4},
+              ]}
+              name="workType"
+              filterChange={this.changeStatus}
+            />
 
-              <li className="advertisement-status">
-								<label className="advertisement-status__label" htmlFor="filter-full">
-                  <input type="checkbox" id="filter-full" className="checkbox-filter advertisement-status__filter"/>
-									<span className="advertisement-status__badge advertisement-status__badge--green">
-										&nbsp; &nbsp; Full time &nbsp;
-									</span>                
-                  <span className="checkbox-filter advertisement-status__filter-span"></span>
-								</label>
-              </li>
+            <FilterCard 
+              title={"Status"} 
+              items={[
+                {title: 'Available', color: 'green', value: 1},
+                {title: 'Asap', color: 'red', value: 2},
+                {title: 'Pending', color: 'blue', value: 3},
+                {title: 'Near Future', color: 'gray', value: 4},
+              ]}
+              name="status"
+              filterChange={this.changeStatus}
+            />
 
-              <li className="advertisement-status">
-								<label className="advertisement-status__label" htmlFor="filter-freelance">
-                  <input type="checkbox" id="filter-freelance" className="checkbox-filter advertisement-status__filter"/>
-									<span className="advertisement-status__badge advertisement-status__badge--blue">
-										&nbsp; &nbsp; Freelance &nbsp;
-									</span>                
-                  <span className="checkbox-filter advertisement-status__filter-span"></span>
-								</label>
-              </li>
-
-              <li className="advertisement-status">
-								<label className="advertisement-status__label" htmlFor="filter-flex">
-                  <input type="checkbox" id="filter-flex" className="checkbox-filter advertisement-status__filter"/>
-									<span className="advertisement-status__badge advertisement-status__badge--gray">
-										&nbsp; &nbsp; Flexible hours &nbsp;
-									</span>                
-                  <span className="checkbox-filter advertisement-status__filter-span"></span>
-								</label>
-              </li>
-            </ul>
-
-
-            <div className="text-center">
-              <h5>Status</h5>
-            </div>
-              <ul className="advertisement-statuses">
-                <li className="advertisement-status">
-                  <label className="advertisement-status__label" htmlFor="filter-available">
-                    <input type="checkbox" id="filter-available" className="checkbox-filter advertisement-status__filter"/>
-                    <span className="advertisement-status__badge advertisement-status__badge--green">
-                      &nbsp; &nbsp; Available &nbsp;
-                    </span>                
-                    <span className="checkbox-filter advertisement-status__filter-span"></span>
-                  </label>
-                </li>
-                <li className="advertisement-status">
-                  <label className="advertisement-status__label" htmlFor="filter-pending">
-                    <input type="checkbox" id="filter-pending" className="checkbox-filter advertisement-status__filter"/>
-                    <span className="advertisement-status__badge advertisement-status__badge--green">
-                      &nbsp; &nbsp; Pending &nbsp;
-                    </span>                
-                    <span className="checkbox-filter advertisement-status__filter-span"></span>
-                  </label>
-                </li>
-                <li className="advertisement-status">
-                  <label className="advertisement-status__label" htmlFor="filter-asap">
-                    <input type="checkbox" id="filter-asap" className="checkbox-filter advertisement-status__filter"/>
-                    <span className="advertisement-status__badge advertisement-status__badge--green">
-                      &nbsp; &nbsp; Asap &nbsp;
-                    </span>                
-                    <span className="checkbox-filter advertisement-status__filter-span"></span>
-                  </label>
-                </li>
-                <li className="advertisement-status">
-                  <label className="advertisement-status__label" htmlFor="filter-nearfuture">
-                    <input type="checkbox" id="filter-nearfuture" className="checkbox-filter advertisement-status__filter"/>
-                    <span className="advertisement-status__badge advertisement-status__badge--green">
-                      &nbsp; &nbsp; Near future &nbsp;
-                    </span>                
-                    <span className="checkbox-filter advertisement-status__filter-span"></span>
-                  </label>
-                </li>
-              </ul>
-            
           </div>
-          </div>
+        </div>
       </>
     );
   }

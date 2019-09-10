@@ -11,6 +11,8 @@ const advertisementSchema = new Schema({
     tools: String,
     time: String,
     payment: String,
+    status: String,
+    workType: Number,
     dateTime: {type: Date, required: true},
     location: {
 			type: { type: String, enum: ['Point'], required: true},
@@ -24,7 +26,7 @@ const advertisementSchema = new Schema({
 }, { timestamps: true });
 
 
-advertisementSchema.index({'location': '2dsphere'});
+advertisementSchema.index({'location.coordinates': '2dsphere'});
 advertisementSchema.plugin(mongoosePaginate);
 advertisementSchema.plugin(mongoose_delete, { deletedAt : true, overrideMethods: true});
 

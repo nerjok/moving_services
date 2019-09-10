@@ -10,7 +10,7 @@ import "react-image-gallery/styles/css/image-gallery.css";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAddressCard, faShareSquare, faBan } from '@fortawesome/free-solid-svg-icons'
-
+import { StatusBtn, WorkTypeBtn } from '../../components/statusBtn/statusBtn';
 
 import ImageGallery from 'react-image-gallery';
 
@@ -29,10 +29,16 @@ export class Advertisement extends React.Component {
 
   render() {
     const { advertisement } = this.props
-    if (!advertisement)
-      return null;
+   
 
-    const {title, description, _user: user, payment, photos, skills, time, tools, _id, dateTime } = advertisement;
+    if (!advertisement)
+      return <div class="spinner-border mt-5"></div>      ;
+       console.log('advertisement', advertisement, typeof advertisement.updatedAt)
+    let upDate = advertisement.updatedAt || advertisement.createdAt
+    if (upDate) {
+      upDate = new Date(upDate).toDateString();
+    }
+    const {title, description, _user: user, payment, photos, skills, time, tools, _id, dateTime, status, workType, updatedAt } = advertisement;
     const options = { weekday: 'long', year: 'numeric', month: '2-digit', day: 'numeric', hour: '2-digit', minute: '2-digit', ahourCycle: 'h24' };
     const brdCrumb = [
                       { link: '/advertisements', title: "Advertisements"},
@@ -49,35 +55,20 @@ export class Advertisement extends React.Component {
         </div>
         <div className="col-md-9 mb-1">
           <div className="card" >
-            {/*}
-            <div className="card__header">
-              <h5 className="card-title">{title}</h5>
-              {/*}
-              <div className="verticaly-centerr ">
-                <div className="float-left">
-                  
-                </div>
 
-                <div className="float-right mr-3 ">
-                  <button className="btn btn-sm btn-outline-success">
-                    <FontAwesomeIcon icon={faAddressCard} size="lg" style={{color: '#000'}} />
-                  </button>
-                  <button className="btn btn-sm btn-outline-dark m-1">
-                    <FontAwesomeIcon icon={faShareSquare} size="lg" style={{color: '#fff'}} />
-                  </button> 
-                  <button className="btn btn-sm btn-outline-warning">
-                    <FontAwesomeIcon icon={faBan} size="lg" style={{color: '#fff'}} />
-                  </button>    
-                </div>
-    </div>*/}
-            {/*</div>
-            */}
             <div className="card-body card__body">
               <h5 className="card-title">{title}</h5>
+              <div className="float-right">
+                <span className="mr-1 p-1">
+                  <small>Published: {upDate}</small>
+                </span>
+                
+                <StatusBtn status={status} />
+                <WorkTypeBtn status={workType} />
+              </div>
 
-              <br/>
-              <div> <b>Description</b><br/> {description}</div>
-              <br/>
+              <div className="mt-5 mb-5"> <b>Description</b><br/> {description}</div>
+              
               {skills && <div><b>Skils and experience required </b>{skills}</div>}
               {time && <div><b> Time information </b>{time}</div>}
               {tools && <div><b>Tools required </b>{tools}</div>}

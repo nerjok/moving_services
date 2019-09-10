@@ -11,6 +11,7 @@ import { updateAdvertisement, newAdvertisement, removeAdvertisement } from '../.
 import { MapInput } from './mapInput'
 import Card from '../../../../hoc/cardBorders';
 import { DateTimePicker } from './dateTimePicker';
+import { SelectField } from './selectField';
 
 
 class AdvertisementForm extends React.Component {
@@ -46,6 +47,7 @@ class AdvertisementForm extends React.Component {
 
   componentDidMount() {
     const { advertisement } = this.props
+    console.log('advertisement', advertisement)
     if (advertisement) {
       // eslint-disable-next-line no-lone-blocks
       {_.each(FIELDS, ({name}) => {
@@ -66,12 +68,14 @@ class AdvertisementForm extends React.Component {
         <form 
           onSubmit={this.props.handleSubmit(this.submitForm) }
         >
-          {_.map(FIELDS, ({label, name}) => {
+          {_.map(FIELDS, ({label, name, options}) => {
             let fieldComp;
             if (name === 'dateTime')
               fieldComp = DateTimePicker;
             else if (name === 'location')
             fieldComp = MapInput;
+            else if (['status', 'workType'].includes(name))
+              fieldComp = SelectField 
             else 
               fieldComp = AdvertisementField;   
             return (
@@ -79,6 +83,7 @@ class AdvertisementForm extends React.Component {
                     key={name}
                     type="text"
                     name={name}
+                    options={['status', 'workType'].includes(name) ? options : []}
                     component={fieldComp}
                     label={label}
                 />
@@ -97,7 +102,7 @@ class AdvertisementForm extends React.Component {
 const validate = (values) => {
   const errors = {};
   _.each(FIELDS, ({ name }) => {
-    if (!values[name] || ((values[name].length < 50 && ['description', 'title'].includes(name)) && name !== 'location'))
+    if (!values[name] || ((values[name].length < 50 && ['description'].includes(name)) && !['location', 'status', 'workType'].includes(name)))
       errors[name] = "You must provide data!";
   })
   return errors

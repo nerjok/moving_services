@@ -5,7 +5,6 @@ import axios from 'axios';
 export const fetchUser = () => async dispatch => {
   const res = await axios.get('/api/current_user')
   dispatch({ type: FETCH_USER, payload: res.data })
-  console.log('currentUser', res.data)
 };
 
 export const fetchUserProfile = (user_id) => async dispatch => {
@@ -55,12 +54,10 @@ export const updateData = data => async dispatch => {
   const res = await axios.post('/api/update_user', data)
   if (typeof res.error == 'undefined')
     dispatch({ type: FETCH_USER, payload: res.data })
-    console.log('updateUser', res.data)
 }
 
 export const updateUserPassw = data => async dispatch => {
   const res = await axios.post('/api/user/update_password', data);
-  console.log('updatePassResponse', res.data);
 }
 
 export const fetchAdvertisements = ( page = 0) => async dispatch => {
@@ -73,10 +70,9 @@ export const myAdvertisements = ( page = 0) => async dispatch => {
   dispatch({ type: FETCH_ADVERTISEMENTS, payload: res.data });
 }
 
-export const filterAdvertisements = ( page = 0, location, distance, keyword) => async dispatch => {
+export const filterAdvertisements = ( page = 0, location, distance, keyword, status, workType) => async dispatch => {
   const [lat, lng] = location
-  const res = await axios.get('/api/advertisements/filter', {params:{page, lat, lng, distance, keyword}});
-console.log('[FilterResponseFrom Server]', res.data)
+  const res = await axios.get('/api/advertisements/filter', {params:{page, lat, lng, distance, keyword, status, workType}});
   dispatch({ type: FETCH_ADVERTISEMENTS, payload: res.data });
 }
 
@@ -92,19 +88,16 @@ export const removeAdvertisement = () => async dispatch => {console.log('removeA
 
 export const newAdvertisement = (data, history) => async dispatch => {
   const res = await axios.post('/api/advertisements/new', data );
-  console.log('newAdvData', data, history)
   if (res.data && !res.data.errors) {
     dispatch({ type: FETCH_ADVERTISEMENT, payload: res.data });
     history.push(`/user/advertisements/${res.data._id}`);
   } else {
-    console.log('newAdvertisement', res);
     return {errors: res.data.errors};
   }
 }
 
 export const updateAdvertisement = (data, history) => async dispatch => {
   const res = await axios.post('/api/advertisements/'+data.id+'/update', data );
-console.log('[idIsTrue]', res);
   if (res.data._id) {
     history.push(`/user/advertisements/${res.data._id}`)
     dispatch({ type: FETCH_ADVERTISEMENT, payload: res.data });
