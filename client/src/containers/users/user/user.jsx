@@ -4,7 +4,7 @@ import UserCard from '../../../components/userCard';
 import PropTypes from 'prop-types';
 import { fetchUserProfile, removeUserProfile } from '../../../store/actions';
 import Breadcrumb from '../../../components/breadcrumb';
-
+import Spinner from '../../../components/spinner';
 const USER_INPUTS = [
   {name: 'email', type: 'text', title: 'Email address', value: 'email', disabled: true},
   {name: 'name', type: 'text', title: 'Name', value: 'name', disabled: false},
@@ -22,7 +22,7 @@ export const User = (props) => {
   }, [])
 
   if (!props.user)
-    return <div class="spinner-border mt-5"></div> 
+    return <Spinner/> 
   return (
     <>
     <Breadcrumb links={[{link: "/profiles", title: "Users"}, {link: "#", title: "User"}]} />

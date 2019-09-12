@@ -5,6 +5,7 @@ const requireLogin = require('../middlewares/requireLogin');
 const multer = require('../middlewares/storageMiddleware');
 const advertisements = require('../controllers/advertisementsControler');
 
+const messages = require('../controllers/messageThreadController');
 
 router.use(function authorized(req, res, next) {
 
@@ -30,5 +31,18 @@ router.delete('/api/advertisements/:id/deletephoto/:photo', requireLogin, advert
 
 router.delete('/api/advertisements/:id', requireLogin, advertisements.deleteAdvertisement);
 
+
+
+router.get('/api/messages', requireLogin, messages.getMessages);
+
+router.post('/api/messages', requireLogin, messages.addMessage);
+
+router.get('/api/messages/:id', requireLogin, messages.showThreadMessages);
+
+router.get('/api/messages_topics', requireLogin, messages.showMessageThreads);
+
+router.post('/api/new_message', requireLogin, messages.createMessage);
+
+router.post('/api/new_thread', requireLogin, messages.createThread);
 
 module.exports = router;

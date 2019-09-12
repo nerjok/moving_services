@@ -9,6 +9,8 @@ import {cardComponent } from '../../hoc/card/card';
 import  NewAdvertisement  from './myAdvertisements/updateForm/newAdvertisement';
 import Breadcrumb from '../../components/breadcrumb';
 import UserCard from '../../components/userCard';
+import Messages from './messages';
+import MessagesList from './messages/messagesList/messagesList';
 
  export const User = props => {
  const [breadcrumb, setBreadcrumb] = useState([{link: '/user', title: "User page"}])
@@ -22,6 +24,8 @@ import UserCard from '../../components/userCard';
               <Route path="/user/advertisements" exact component={MyAdvertisements} />
               <Route path="/user/advertisements/new" exact component={NewAdvertisement} />
               <Route path="/user/advertisements/:id" exact component={MyAdvertisement} />
+              <Route path="/user/messages" exact component={Messages} />
+              <Route path="/user/messages/:id" exact component={MessagesList} />
               <Route path="/user/works" exact component={cardComponent(Advertisements)} />
               <Route path="/user" component={UserInfo} />
 
@@ -33,6 +37,8 @@ import UserCard from '../../components/userCard';
             <Link to={'/user'}>UserInfo</Link>
             <br/>
             <Link to={'/user/advertisements'} style={{zIndex: 1}}>My suggestions</Link>
+            <br/>
+            <Link to={'/user/messages'} style={{zIndex: 1}}>My messages</Link>
             <br/>
             <Link to={'/user/advertisements/new'} style={{zIndex: 1}}>new Advertisement</Link>
             <br/>

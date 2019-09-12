@@ -1,4 +1,4 @@
-import { REMOVE_ADVERTISEMENT, REMOVE_USER_PROFILE, FETCH_PROFILE, FETCH_USER, FETCH_USERS, FETCH_SURVEYS, LOGIN_PASSWORD, FETCH_ADVERTISEMENTS, FETCH_ADVERTISEMENT } from './types'
+import { ADD_MESSAGE, FETCH_MESSAGES, FETCH_MESSAGES_THREAD, REMOVE_ADVERTISEMENT, REMOVE_USER_PROFILE, FETCH_PROFILE, FETCH_USER, FETCH_USERS, FETCH_SURVEYS, LOGIN_PASSWORD, FETCH_ADVERTISEMENTS, FETCH_ADVERTISEMENT } from './types'
 import axios from 'axios';
 
 
@@ -119,4 +119,50 @@ export const deletePhoto = (id, photo) => async dispatch => {
 export const deleteAdvertisement = data => async dispatch => {
   const res = await axios.delete(`/api/advertisements/${data.id}?page=${data.page}`, data );
   dispatch({ type: FETCH_ADVERTISEMENTS, payload: res.data });
+}
+
+
+/** Messages */
+
+export const applyJob = data => async dispatch => {
+  const res = await axios.post('/api/new_thread', data);
+  console.log('applyJob', res.data);
+  if (res.data._id) {
+    return {}
+  } else {
+    return {error: 'Action not completed'};
+  }
+}
+
+export const sendMessage = data => async dispatch => {
+  const res = await axios.post('/api/new_message', data);
+  console.log(res.data);
+  if (res.data._id) {
+    return {}
+  } else {
+    return {error: 'Action not completed'};
+  }
+}
+
+export const addMessage = data => async dispatch => {
+  const res = await axios.post('/api/messages', data);
+  console.log(res.data);
+  if (res.data._id) {
+    dispatch({type: ADD_MESSAGE, payload: res.data})
+    return {}
+  } else {
+    return {error: 'Action not completed'};
+  }
+}
+
+export const fetchMessagesThread = () => async dispatch => {
+  const res = await axios.get('/api/messages_topics', {});
+  console.log('msgThreads', res.data)
+  dispatch({ type: FETCH_MESSAGES_THREAD, payload: res.data });
+}
+
+export const fetchMessages = (_id) => async dispatch => {
+  const res = await axios.get(`/api/messages/${_id}`, {});
+  console.log('topicMessages', res.data)
+  dispatch({ type: FETCH_MESSAGES, payload: res.data });
 }

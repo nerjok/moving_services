@@ -1,3 +1,18 @@
+a {
+  color: $color-black;
+}
+
+.black-link {
+  color: $color-black;
+  font-size:1.2rem;
+  //font-weight: 400;
+  margin-left: .5rem;
+  display: inline-block;
+  text-decoration: none !important;
+  &:hover {
+    color: $color-dark-green;
+  }
+}
 .footer__text {
   color: #999;
 }

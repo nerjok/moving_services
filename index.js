@@ -8,6 +8,8 @@ require("./models/Advertisement");
 require("./models/User");
 require("./models/Survey");
 require("./services/passport");
+require('./models/MessageThread');
+require('./models/Message');
 const flash = require("connect-flash");
 
 const mongoose = require("mongoose");

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from 'react'
-import { fetchAdvertisement } from '../../store/actions'
+import { fetchAdvertisement, applyJob, sendMessage } from '../../store/actions'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import Map from '../map/Map';
@@ -11,7 +11,9 @@ import "react-image-gallery/styles/css/image-gallery.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAddressCard, faShareSquare, faBan } from '@fortawesome/free-solid-svg-icons'
 import { StatusBtn, WorkTypeBtn } from '../../components/statusBtn/statusBtn';
-
+import Spinner from '../../components/spinner';
+import ApplyJob from '../../components/applyJob';
+import Messaging from '../../components/messaging';
 import ImageGallery from 'react-image-gallery';
 
 const toGallery = (id, images) => {
@@ -22,9 +24,28 @@ const toGallery = (id, images) => {
 }
 
 export class Advertisement extends React.Component {
-
+  state = {error: ''}
   componentDidMount() {
+    
     this.props.fetchAdvertisement(this.props.match.params.id)
+    this.applyForJob = this.applyForJob.bind(this);
+    this.sendMessage = this.sendMessage.bind(this);
+  }
+
+  applyForJob = async (message) => {
+    const { advertisement: { _id: advertisement_id, _user: { _id: receiver_id } } } = this.props
+    const data = { advertisement_id, receiver_id, message }
+
+    this.props.applyJob(data).then(succ => {
+      this.setState({error: succ.error});
+    })
+    .catch(err=>console.log('err', err));
+  }
+
+  sendMessage(message) {
+    const {advertisement: {_id: advertisement_id, _user: {_id: receiver_id}}} = this.props
+    console.log('sendMessage', message, receiver_id);
+    this.props.sendMessage({message, receiver_id, advertisement_id});
   }
 
   render() {
@@ -32,8 +53,8 @@ export class Advertisement extends React.Component {
    
 
     if (!advertisement)
-      return <div class="spinner-border mt-5"></div>      ;
-       console.log('advertisement', advertisement, typeof advertisement.updatedAt)
+      return <Spinner/>;
+       //console.log('advertisement', advertisement, typeof advertisement.updatedAt)
     let upDate = advertisement.updatedAt || advertisement.createdAt
     if (upDate) {
       upDate = new Date(upDate).toDateString();
@@ -58,14 +79,18 @@ export class Advertisement extends React.Component {
 
             <div className="card-body card__body">
               <h5 className="card-title">{title}</h5>
-              <div className="float-right">
+              <div className="text-right">
                 <span className="mr-1 p-1">
                   <small>Published: {upDate}</small>
                 </span>
                 
                 <StatusBtn status={status} />
                 <WorkTypeBtn status={workType} />
+                <ApplyJob apply={this.applyForJob}/>
               </div>
+              <div className="float-right">
+                {this.state.error && <small>{this.state.error}</small>}
+              </div> 
 
               <div className="mt-5 mb-5"> <b>Description</b><br/> {description}</div>
               
@@ -84,7 +109,10 @@ export class Advertisement extends React.Component {
           </div>
         </div>
         <div className="col-md-3 mb-1">
-          <UserCard user={user}/>
+          <UserCard user={user}>
+            {user && <Messaging sendMsg={this.sendMessage}/>}
+
+          </UserCard>
         </div>
       </div>
       </>
@@ -94,4 +122,4 @@ export class Advertisement extends React.Component {
 
 
 const mapStateToProps = ({advertisements: {advertisements, total, page, advertisement}}) => ({advertisement, advertisements, total, page });
-export default connect(mapStateToProps, {fetchAdvertisement})(Advertisement)
+export default connect(mapStateToProps, { fetchAdvertisement, applyJob, sendMessage })(Advertisement)

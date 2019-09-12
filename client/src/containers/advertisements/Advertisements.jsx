@@ -9,7 +9,7 @@ import { Advertisements as AdvertisementsList } from '../../components/advertise
 
 import Search from '../../components/search';
 import Breadcrumb from '../../components/breadcrumb';
-
+import Spinner from '../../components/spinner';
 import FilterCard from '../../components/filtercard';
 
 export class Advertisements extends React.Component {
@@ -69,8 +69,7 @@ export class Advertisements extends React.Component {
   }
 
   render() {
-    if (!this.props.advertisements)
-      return <div class="spinner-border mt-5"></div>  
+
     return (
       <>
         {this.props.from !== 'index' ? <Breadcrumb links={[{link:'/advertisements', title: "Advertisements"}]}/> : null }
@@ -80,7 +79,9 @@ export class Advertisements extends React.Component {
         {this.props.from !== 'index' ? <Search filterAdvertisements={this.searchAdvertisements}/> : null}
         <div className="row advertisements-row--mobile">
         <div className="col-md-9"> 
-        
+        {(!this.props.advertisements || this.props.advertisements.length < 1)?
+          <Spinner/> 
+          : 
         <div className="advertisements">
           <AdvertisementsList 
             advertisements={this.props.advertisements} 
@@ -91,7 +92,7 @@ export class Advertisements extends React.Component {
             page={this.state.page}
             />
         </div>
-
+        }
           <div style={{position: 'relative', padding: '1rem', margin: '1.5rem'}}>
             <div style={{
                           boxSizing: 'border-box',

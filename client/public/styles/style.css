@@ -1,3 +1,15 @@
+a {
+  color: #000; }
+
+.black-link {
+  color: #000;
+  font-size: 1.2rem;
+  margin-left: .5rem;
+  display: inline-block;
+  text-decoration: none !important; }
+  .black-link:hover {
+    color: #28583c; }
+
 .footer__text {
   color: #999; }
 
@@ -222,6 +234,12 @@ body {
   position: absolute;
   top: 50%;
   transform: translateY(-50%); }
+
+.total-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
 
 /** Image slider */
 .image-gallery-slide img {
