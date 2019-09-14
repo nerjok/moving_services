@@ -1,2 +1,2 @@
-import { UserCard } from './userCard';
+import UserCard  from './userCard';
 export default UserCard;

@@ -3,9 +3,6 @@ a {
 
 .black-link {
   color: #000;
-  font-size: 1.2rem;
-  margin-left: .5rem;
-  display: inline-block;
   text-decoration: none !important; }
   .black-link:hover {
     color: #28583c; }
@@ -793,23 +790,24 @@ body {
   .menu-navigation:hover {
     background-image: linear-gradient(to bottom right, rgba(85, 197, 122, 0.9), rgba(40, 180, 133, 0.9)); }
 
-.card__header {
-  position: relative;
-  display: table;
-  padding: 15px;
-  min-height: 2rem;
-  background: #eee;
-  /*
+.card {
+  height: 100%; }
+  .card__header {
+    position: relative;
+    display: table;
+    padding: 15px;
+    min-height: 2rem;
+    background: #eee;
+    /*
     &:hover {
       background-image: linear-gradient(to bottom right, rgba($color-primary-dark, .8), rgba($color-primary, .8));
       background: $color-middle-grey;
     }
     */ }
-
-.card__body {
-  background: #fafafa !important; }
-  .card__body:hover {
-    background-color: #f6f6f6 !important; }
+  .card__body {
+    background: #fafafa !important; }
+    .card__body:hover {
+      background-color: #f6f6f6 !important; }
 
 .user-page {
   background: #eee; }

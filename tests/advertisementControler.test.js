@@ -15,7 +15,7 @@ describe('Test advertisements controler', () => {
   beforeAll(function () {
     agent
       .post('/auth/login')
-      .send({username: 'tester', password: 'tester'})
+      .send({username: 'tester@tester.com', password: 'tester'})
       .end((err, res) => {})
   });
 
@@ -85,7 +85,7 @@ describe('Test advertisements controler', () => {
       })
   })
 
-  it('should create advertisement', done => {console.log('shouldNewCreate')
+  it('should create advertisement', done => {
     agent
       .post('/api/advertisements/new')
       .send({
@@ -93,12 +93,9 @@ describe('Test advertisements controler', () => {
         description: 'testerDescriptiontesterDescriptiontesterDescriptiontesterDescriptiontesterDescriptiontesterDescription',
         skills: 'testSkilstestSkilstestSkils',
         dateTime: new Date(),
-        location: {
-          type: "Point",
-          coordinates: [55, 23]
-        }
+        location: [55, 23]
       })
-      .end((err, res) => {console.log('createAdv', err, 'response', res);
+      .end((err, res) => {
         should.not.exist(err);
         res.status.should.equal(200);
         res.type.should.equal('application/json');
@@ -123,7 +120,8 @@ describe('Test advertisements controler', () => {
       .send({
         title: 'testTitletestTitletestTitletestTitletestTitletestTitle', 
         description: 'testerDescriptiontesterDescriptiontesterDescriptiontesterDescriptiontesterDescriptiontesterDescription',
-        skills: 'updateSkills'
+        skills: 'updateSkills',
+        location: [55, 23]
       })
       .end((err, res) => {
         should.not.exist(err);

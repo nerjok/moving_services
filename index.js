@@ -18,7 +18,7 @@ mongoose.connect(keys.mongoURI, {
 																	useCreateIndex: true,
 																	useFindAndModify: false
                                                                 });
-mongoose.set('debug', true)
+//mongoose.set('debug', true)
 
 mongoose.connection.on("connected", function () {
     console.log("conected");

@@ -25,7 +25,7 @@ class Header extends Component {
                       <Link 
                         key="login"
                         to={"/login"} 
-                        className="stickie-nav__menu-link"
+                        className="stickie-nav__menu-linkk black-link breadcrumb-link mr-3"
                         onClick={hideMenu}
                         >
                           Login
@@ -41,7 +41,7 @@ class Header extends Component {
                     </Link>,*/
                     //<Link key="users" to={"/profiles"} className="stickie-nav__menu-link" onClick={hideMenu}>Users</Link>,
                     //<Link to={"/profile"} className="stickie-nav__menu-link">Profile</Link>,
-                    <Link key="myProfile" to={"/user"} className="stickie-nav__menu-link" onClick={hideMenu}>Info</Link>,
+                    <Link key="myProfile" to={"/user"} className="stickie-nav__menu-linkk black-link breadcrumb-link mr-3" onClick={hideMenu}>Info</Link>,
 
                 ]
                 );
@@ -60,8 +60,8 @@ class Header extends Component {
               </Link>
             </h5>
               <div className="header__links">
-              <Link to={"/advertisements"} className="stickie-nav__menu-link">Advertisements</Link>
-              <Link key="users" to={"/profiles"} className="stickie-nav__menu-link" onClick={hideMenu}>Users</Link>
+              <Link to={"/advertisements"} className="stickie-nav__menu-linkk black-link breadcrumb-link mr-3">Advertisements</Link>
+              <Link key="users" to={"/profiles"} className="stickie-nav__menu-linkk black-link breadcrumb-link mr-3" onClick={hideMenu}>Users</Link>
                 {this.renderContent()}
               </div>
               <div className="navigation">
@@ -73,9 +73,9 @@ class Header extends Component {
                 <div className="navigation__background">&nbsp;</div>
                 <nav className="navigation__nav">
                   <ul className="navigation__list">
-                  <Link to={"/advertisements"} className="stickie-nav__menu-link" onClick={hideMenu}>Advertisements</Link>
+                  <Link to={"/advertisements"} className="stickie-nav__menu-linkk black-link breadcrumb-link mr-3" onClick={hideMenu}>Advertisements</Link>
                   <div key={'users'} className="navigation__list__link">
-                    <Link to={"/profiles"} className="stickie-nav__menu-link" onClick={hideMenu}>Users</Link>
+                    <Link to={"/profiles"} className="stickie-nav__menu-linkk black-link breadcrumb-link mr-3" onClick={hideMenu}>Users</Link>
                   </div>
                   {Array.from(this.renderContent(), itm => <div key={itm.key} className="navigation__list__link">{itm}</div>)}
                   </ul>

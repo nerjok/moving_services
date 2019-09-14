@@ -14,7 +14,7 @@ const messageThreadSchema = new mongoose.Schema({
     },
     sender_id: {type: Schema.Types.ObjectId, ref: 'User', required: true},
     receiver_id: {type: Schema.Types.ObjectId, ref: 'User', required: true},
-});
+}, { timestamps: true });
 
-messageThreadSchema.index({advertisement_id: 1, receiver_id: 1}, {unique: true});
-module.exports = mongoose.model('MessageTread', messageThreadSchema);
+messageThreadSchema.index({advertisement_id: 1, receiver_id: 1, sender_id: 1}, {unique: true});
+module.exports = mongoose.model('MessageThread', messageThreadSchema);

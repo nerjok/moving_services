@@ -55,8 +55,13 @@ const showAdvertisements = async (req, res, next) => {
     skip,
     limit,
     sort: {'_id': -1}
+  }).then(advertisements => {
+    res.send({...advertisements, total: Math.ceil(advertisements.totalDocs / limit)});
+
+  })
+  .catch(err=> {
+    res.send({advertisements: [], total: Math.ceil(advertisements.totalDocs / limit)});
   });
-  res.send({...advertisements, total: Math.ceil(advertisements.totalDocs / limit)});
 }
 
 
@@ -89,7 +94,6 @@ const myAdvertisements = async (req, res, next) => {
 
 const createAdvertisement = async (req, res, next) => {
   const errors = validationResult(req);
-
   if (!errors.isEmpty()) {
     return res.json({ errors: errors.array() });
   }

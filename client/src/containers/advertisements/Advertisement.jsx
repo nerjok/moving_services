@@ -109,8 +109,8 @@ export class Advertisement extends React.Component {
           </div>
         </div>
         <div className="col-md-3 mb-1">
-          <UserCard user={user}>
-            {user && <Messaging sendMsg={this.sendMessage}/>}
+          <UserCard user={user} advertisement_id={_id}>
+            {/*user && <Messaging sendMsg={this.sendMessage}/>*/}
 
           </UserCard>
         </div>

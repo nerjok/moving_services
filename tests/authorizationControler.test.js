@@ -33,7 +33,7 @@ describe('should test user authorization routes', () => {
   it('should login user', (done) => {
     agent
       .post('/auth/login')
-      .send({username: 'tester', password: 'tester'})
+      .send({username: 'tester@tester.com', password: 'tester'})
       .end((err, res) => {
         res.status.should.equal(200);
         res.type.should.equal('application/json');

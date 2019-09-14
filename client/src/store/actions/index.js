@@ -125,23 +125,37 @@ export const deleteAdvertisement = data => async dispatch => {
 /** Messages */
 
 export const applyJob = data => async dispatch => {
-  const res = await axios.post('/api/new_thread', data);
-  console.log('applyJob', res.data);
-  if (res.data._id) {
-    return {}
-  } else {
+  return axios.post('/api/new_thread', data)
+  .then(res => {
+    if (res.data._id) {
+      return {}
+    } else {
+      return {error: 'Action not completed'};
+    }
+  })
+  .catch(({response}) => {
+    if (response.data)
+     return response.data;
     return {error: 'Action not completed'};
-  }
+  });
 }
 
 export const sendMessage = data => async dispatch => {
-  const res = await axios.post('/api/new_message', data);
-  console.log(res.data);
-  if (res.data._id) {
-    return {}
-  } else {
-    return {error: 'Action not completed'};
-  }
+  return axios.post('/api/new_message', data)
+  .then(res => {
+    console.log('actionSendMessage', res.data);
+    if (res.data._id) {
+      return {}
+    } else {
+      return {error: 'Action not completed'};
+    }
+  })
+  .catch(({response})=> {
+    console.log('errResponse', response)
+    if (response.data)
+    return response.data;
+   return {error: 'Action not completed'};
+  });
 }
 
 export const addMessage = data => async dispatch => {
@@ -163,6 +177,5 @@ export const fetchMessagesThread = () => async dispatch => {
 
 export const fetchMessages = (_id) => async dispatch => {
   const res = await axios.get(`/api/messages/${_id}`, {});
-  console.log('topicMessages', res.data)
   dispatch({ type: FETCH_MESSAGES, payload: res.data });
 }

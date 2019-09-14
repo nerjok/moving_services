@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
 import React, {Component} from 'react'
-import { BrowserRouter, Route} from 'react-router-dom'
+import { BrowserRouter, Route, Router} from 'react-router-dom'
 import {connect} from 'react-redux'
 import * as actions from '../store/actions'
 
@@ -27,7 +27,7 @@ import { GetStarted } from './GetStarted'
 import { User } from './user/User'
 import { withRouter } from 'react-router';
 import { Header as HeaderBtn, HeaderHeading} from '../components/header';
-
+import ScrollIntoView from '../hoc/scrollIntoView';
 function mainRouted(isLoged) {
   const MainPage2 = props => {
     return (
@@ -41,6 +41,7 @@ function mainRouted(isLoged) {
   return withRouter(MainPage2)
 }
 
+
 class App extends Component {
 
     componentDidMount() {
@@ -52,6 +53,7 @@ class App extends Component {
       const isLoged = (this.props.auth && this.props.auth._id);
         return (
                 <BrowserRouter>
+                  <ScrollIntoView>
                       <Header/>
                       {/*<Map/>*/}
                       {/*<Categories/>*/}
@@ -78,6 +80,7 @@ class App extends Component {
                         
                         <a href="#">&#8616;</a>
                         </div>
+                    </ScrollIntoView>
                 </BrowserRouter>
         )
     }
