@@ -7,10 +7,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faStarHalfAlt, faEnvelope, faInfo, faUserAltSlash } from '@fortawesome/free-solid-svg-icons';
 import Messaging from '../messaging';
 import { Collapse } from 'react-bootstrap';
-import { fetchAdvertisement, applyJob, sendMessage } from '../../store/actions'
+import { fetchAdvertisement, applyJob, sendMessage, subscribeUser } from '../../store/actions'
 import { connect } from 'react-redux'
 
-const UserCard = ({user, children, hideLinks, sendMessage, advertisement_id}) => {
+
+const userStars = stars => {
+  let visiblStars = []
+  for(let i=0; i<5;i++) {
+    if (stars > i && stars < i +1)
+      visiblStars.push(<FontAwesomeIcon icon={faStarHalfAlt} size="lg" style={{color: '#26ae61'}} />);
+    else if (stars >= i)
+      visiblStars.push(<FontAwesomeIcon icon={faStar} size="lg" style={{color: '#26ae61'}} />);
+  }
+  return visiblStars;
+}
+const UserCard = ({user, children, hideLinks, sendMessage, advertisement_id, subscribeUser}) => {
   const [open, setOpen] = useState(false);
   const [resp, setResp] = useState('');
 
@@ -28,6 +39,8 @@ const UserCard = ({user, children, hideLinks, sendMessage, advertisement_id}) =>
                 });
   }
 
+  const followUser = () => subscribeUser(user._id)
+  
   return (
     <div className="card p-0 user-card">
     <div className="user-card__header text-center p-3">
@@ -37,21 +50,22 @@ const UserCard = ({user, children, hideLinks, sendMessage, advertisement_id}) =>
     <div className="text-center">
       <div className="user-card__img-container">
         <img 
-          src={"/public/images/man_icon.svg"} 
-          alt="Image cannot be displayed"
+          src={user.profile_photo ?  `/${user.profile_photo}`: '/public/images/man_icon.svg'}
+          alt=""
           className={"user-card__image"}
         />
       </div>
       <br/>
       <div>
-        <FontAwesomeIcon icon={faStar} size="lg" style={{color: '#26ae61'}} />
-        <FontAwesomeIcon icon={faStar} size="lg" style={{color: '#26ae61'}} />
-        <FontAwesomeIcon icon={faStar} size="lg" style={{color: '#26ae61'}} />
-        <FontAwesomeIcon icon={faStar} size="lg" style={{color: '#26ae61'}} />
-        <FontAwesomeIcon icon={faStarHalfAlt} size="lg" style={{color: '#26ae61'}} />
+        {(user && user.rate) && <Link 
+                        to={`/profiles/${user && user._id}/rates`} 
+                        title="Preview rates">
+                        {userStars(user.rate)}
+                        <br/><small className="text-success">{user.rate}</small>
+                      </Link>}
       </div>
       {!hideLinks && <div className="m-3">  
-        <Link to={`/profiles/${user && user._id}`} className="btn btn-sm btn-info user-card__button" titke="Preview profile">
+        <Link to={`/profiles/${user && user._id}`} className="btn btn-sm btn-info user-card__button" title="Preview profile">
           <FontAwesomeIcon icon={faInfo} size="lg" styles={{color: '#fff'}} />
         </Link>              
         <button 
@@ -63,7 +77,7 @@ const UserCard = ({user, children, hideLinks, sendMessage, advertisement_id}) =>
           >
           <FontAwesomeIcon icon={faEnvelope} size="lg" styles={{color: '#fff'}} />
         </button>
-        <button className="btn btn-sm btn-warning  user-card__button" title="Subsbscibe user">
+        <button className="btn btn-sm btn-warning  user-card__button" title="Subsbscibe user" onClick={followUser}>
           <FontAwesomeIcon icon={faUserAltSlash} size="lg" style={{color: '#fff'}} />
         </button>
       </div>}
@@ -74,14 +88,13 @@ const UserCard = ({user, children, hideLinks, sendMessage, advertisement_id}) =>
           {resp && <small className="text-danger">{resp}</small>}
         </div>
       </Collapse>}
-
       {children}
     </div>
   </div>
   )
 }
 
-export default connect(null, {  sendMessage })(UserCard)
+export default connect(null, {  sendMessage, subscribeUser })(UserCard)
 
 UserCard.propTypes = {
   user: PropTypes.object.isRequired,

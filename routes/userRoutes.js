@@ -6,6 +6,7 @@ const auth = require('../controllers/authorizationController');
 const user = require('../controllers/usersController');
 const passport = require('passport');
 
+const multer = require('../middlewares/storageMiddleware');
 
 
 router.get('/api/current_user', requireLogin, auth.currentUser);
@@ -28,5 +29,12 @@ router.get('/api/users', user.showUsers);
 
 router.get('/api/users/:user_id', user.showUser);
 
+router.post('/api/user/:id/upload_photo', requireLogin, multer.storageMiddleware("PROFILE_PHOTO"), user.uploadPhoto);
 
+router.post('/api/user/:id/work_photos', requireLogin, multer.storageMiddleware("WORK_PHOTOS"), user.workPhotos);
+
+router.post('/api/user/:id/delete_photo', requireLogin, user.deletePhoto);
+
+
+//'/api/user/'+id+'/delete_photo/'+photo
 module.exports = router;

@@ -1,4 +1,4 @@
-import { ADD_MESSAGE, FETCH_MESSAGES, FETCH_MESSAGES_THREAD, REMOVE_ADVERTISEMENT, REMOVE_USER_PROFILE, FETCH_PROFILE, FETCH_USER, FETCH_USERS, FETCH_SURVEYS, LOGIN_PASSWORD, FETCH_ADVERTISEMENTS, FETCH_ADVERTISEMENT } from './types'
+import { FETCH_CONTACTS, FETCH_RATES, ADD_MESSAGE, FETCH_MESSAGES, FETCH_MESSAGES_THREAD, REMOVE_ADVERTISEMENT, REMOVE_USER_PROFILE, FETCH_PROFILE, FETCH_USER, FETCH_USERS, FETCH_SURVEYS, LOGIN_PASSWORD, FETCH_ADVERTISEMENTS, FETCH_ADVERTISEMENT } from './types'
 import axios from 'axios';
 
 
@@ -178,4 +178,79 @@ export const fetchMessagesThread = () => async dispatch => {
 export const fetchMessages = (_id) => async dispatch => {
   const res = await axios.get(`/api/messages/${_id}`, {});
   dispatch({ type: FETCH_MESSAGES, payload: res.data });
+}
+
+
+export const fetchRates = (id) => async dispatch => {
+  const res = await axios.get(`/api/rates/${id}`, {});
+  dispatch({type: FETCH_RATES, payload: res.data})
+}
+
+export const submitRate = (data) => async dispatch => {
+   axios.post(`/api/rates`, data)
+  .then(rez => {
+    console.log('successRated',rez.data)
+  })
+  .catch(err=>console.log(err.response));
+  //console.log('submitRateResponse', res);
+  //dispatch({type: FETCH_RATES, payload: res.data})
+}
+
+export const subscribeUser = id => async dispatch => {
+  axios.post('/api/contactList', {id}).then(res => {
+    console.log('subscribeUserAction', res.data)
+  })
+  .catch(err=> console.log(err.response))
+}
+
+export const fetchContacts = () => async dispatch => {
+  const res = await axios.get(`/api/contactList`, {});
+  console.log('fetchContacts', res.data)
+  dispatch({type: FETCH_CONTACTS, payload: res.data})
+}
+
+export const unsubscribeUser = id => async dispatch => {
+  axios.post('/api/contactList/unsubscribe', {id}).then(res => {
+    console.log('subscribeUserAction', res.data);
+    dispatch({type: FETCH_CONTACTS, payload: res.data})
+  })
+  .catch(err=> console.log(err.response))
+}
+
+
+//Profile
+
+export const uploadProfilePhoto = (id, photos) => async dispatch => {
+   axios.post('/api/user/'+id+'/upload_photo', photos)
+   .then(res => {
+    console.log('succesfullUpload', res.data);
+    if (res.data && res.data._id)
+    //dispatch({ type: FETCH_USER, payload: res.data });
+      window.location = '/user';
+  })
+  .catch(err=> console.log('errorUploading', err.response));
+   
+   
+  //dispatch({ type: FETCH_ADVERTISEMENT, payload: res.data });
+}
+
+export const uploadWorkPhoto = (id, photos) => async dispatch => {
+  console.log('[uploadProfilePhoto]', id, 'photos, ', photos)
+   axios.post('/api/user/'+id+'/work_photos', photos)
+   .then(res => {
+    console.log('succesfullUpload', res.data);
+    if (res.data && res.data._id)
+      dispatch({ type: FETCH_USER, payload: res.data });
+      //window.location = '/user';
+  })
+  .catch(err=> console.log('errorUploading', err.response))
+   ;
+  //dispatch({ type: FETCH_ADVERTISEMENT, payload: res.data });
+}
+
+export const deleteWorkPhoto = (id, photo) => async dispatch => {
+  const res = await axios.post('/api/user/'+id+'/delete_photo/', {photo});
+  
+  console.log('delete photoResponse', res.data)
+  dispatch({ type: FETCH_USER, payload: res.data })
 }

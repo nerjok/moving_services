@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const User = mongoose.model("User");
 const Advertisement = mongoose.model("Advertisement");
+const  deletePicture = require('../helpers/advertisements');
 
 const pagOptions = {
   page: 1,
@@ -92,4 +93,75 @@ const changePassword = (req, res, next) => {
     res.send({errors: 'Wrong passwords'})
 }
 
-module.exports = { showUsers, showUser, updateUser, changePassword };
+const uploadPhoto = async (req, res, next) => {
+  if (req.files && !req.fileValidationError) {
+
+    const profile_photo = req.files[0].path;
+
+    User.findByIdAndUpdate(req.user._id, {profile_photo}, {new: true})
+    .then(result=> {
+      if (result)
+        res.send(result)
+      else
+        res.send({errors: 'error'})  
+    })
+    .catch(err => {
+      res.send(err);
+    });
+   return;
+  }
+  res.send({msg: 'controller message', error: 'Controllwe upload error'})
+}
+
+
+const workPhotos = async (req, res, next) => {
+  if (req.files && !req.fileValidationError) {
+
+//console.log('workPhotos', req.files)
+    work_photos = [];
+    req.files.forEach(file => {
+      work_photos.push(file.path);
+    });
+    
+
+    User.findByIdAndUpdate(req.user._id, {work_photos}, {new: true})
+    .then(result=> {
+      if (result)
+        res.send(result)
+      else
+        res.send({errors: 'error'})  
+    })
+    .catch(err => {
+      res.send(err);
+    });
+    
+   //res.send({})
+   return;
+  }
+  res.send({msg: 'controller message', error: 'Controllwe upload error'})
+}
+
+const deletePhoto = async (req, res, next) => {
+  const picture = req.body.photo;
+  
+  let { work_photos } = req.user
+  work_photos = work_photos.filter(itm => itm != picture)
+  
+  User.findByIdAndUpdate(req.user._id, {work_photos}, {new: true})
+  .then(result=> {
+    if (result) {console.log('deletionResult', result.work_photos)
+      deletePicture.deletePhoto(picture).catch(err=>{console.log(err)});
+      res.send(result);
+    } else
+      res.send({errors: 'error'})  
+  })
+  .catch(err => {
+    res.send(err);
+  });
+
+
+
+  //res.send({kuku:'kuku'});
+}
+
+module.exports = { showUsers, showUser, updateUser, changePassword, uploadPhoto, workPhotos, deletePhoto };

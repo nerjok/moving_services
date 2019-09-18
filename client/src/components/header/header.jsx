@@ -9,7 +9,7 @@ export const Header = props => {
   return (
     <div className={"container"} >
       <div className="row mt-3">
-        <div className="col-md-6">
+        <div className="col-md-6 mb-3">
           <div className="header-btn header-btn--employers">
             <h1 className="header-btn__heading">
               <span>  
@@ -25,7 +25,7 @@ export const Header = props => {
           </div>
         </div>
 
-        <div className="col-md-6">  
+        <div className="col-md-6 mb-3">  
                     <div className="header-btn header-btn--workers">
             <h1 className="header-btn__heading">
               <span>  

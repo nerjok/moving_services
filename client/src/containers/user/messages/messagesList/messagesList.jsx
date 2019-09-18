@@ -21,7 +21,7 @@ const MessagesList = (props) => {
     <Card>
       <div >
 
-        { props.msgThread.sender_id && <span className="d-block mb-2 text-right">
+        { props.msgThread.sender_id && <span className="d-block mb-5 text-right">
                   <b>Sender:</b> &nbsp;
                   <Link to={`/profiles/${(user_id == sender_id.id) ? receiver_id._id : sender_id._id}`} className="text-success">
                     {(user_id == sender_id.id) ? receiver_id.name : sender_id.name}
@@ -31,7 +31,9 @@ const MessagesList = (props) => {
                   <Link to={`/advertisements/${advertisement_id}`} className="text-success">
                     <b>View advertisement</b>
                   </Link></>}
-  
+                  <Link to={`/profiles/${(user_id == sender_id.id) ? receiver_id.id : sender_id.id}`} style={{zIndex: 1}}>
+                  <img src='/public/images/man_icon.svg' className="ml-3" width="50px" alt='Image not found'/>
+                </Link>
                 </span>}
 
 

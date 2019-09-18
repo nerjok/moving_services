@@ -23,8 +23,9 @@ import { Footer } from './footer'
 //import { RecentAdds } from './recentAdds'
 //import Categories from './categories/Categories'
 import { GetStarted } from './GetStarted'
-
-import { User } from './user/User'
+import Rates from './users/rates';
+import Rate from './users/rate/rate';
+import  User  from './user/User'
 import { withRouter } from 'react-router';
 import { Header as HeaderBtn, HeaderHeading} from '../components/header';
 import ScrollIntoView from '../hoc/scrollIntoView';
@@ -68,6 +69,8 @@ class App extends Component {
                         <Route path="/advertisements" exact component={Advertisements}/>
                         <Route path="/advertisements/:id" exact component={Advertisement}/>
                         <Route path="/profiles/:id" exact component={Profile}/>
+                        <Route path="/profiles/:id/rates" exact component={Rates}/>
+                        <Route path="/profiles/:id/rate/:message_thread_id" exact component={Rate}/>
                         {isLoged ?
                           <Route path="/user" component={User}/>
                         :

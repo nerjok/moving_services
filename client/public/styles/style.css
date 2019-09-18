@@ -854,6 +854,7 @@ body {
     width: 150px;
     height: 150px;
     border-radius: 50%;
+    object-fit: cover;
     transition: all .5s ease-in-out; }
     .user-card__image:hover {
       -webkit-filter: blur(0.5px);

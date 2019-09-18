@@ -25,3 +25,11 @@ exports.deletePhotos = (advertisementId, photo) => {console.log('[deletePhotos]'
     return err;
   });
 }
+
+exports.deletePhoto = async (path) => {console.log('[deletePhoto]')
+  return fs.unlink(path, (err) => {
+    if (err) throw err;
+    console.log("errorDeletion", err);
+    return err;
+  });
+}

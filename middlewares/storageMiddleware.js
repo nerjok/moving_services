@@ -1,6 +1,43 @@
 const fs = require("fs");
 var multer = require("multer");
+const mime = require('mime-types');
 const STORAGE_ROOT = "public";
+
+
+//Work Photos
+const work_storage = multer.diskStorage({
+  destination: function(req, file, cb) {console.log('file', file, file.extension)
+    let { id } = req.params;
+    let existence = fs.existsSync(`${STORAGE_ROOT}/images/users/${id}/works`);
+
+    if (!existence) {
+      fs.mkdir(`${STORAGE_ROOT}/images/users/${id}/works`, function dirCreation(err) {
+      });
+    }
+    cb(null, `${STORAGE_ROOT}/images/users/${id}/works`);
+  },
+  filename: function(req, file, cb) {
+    let fileName = file.originalname.replace(/\s/g, '');
+    cb(null, Date.now() + "-" + fileName);
+  }
+});
+//Profile Photo
+const user_storage = multer.diskStorage({
+  destination: function(req, file, cb) {console.log('file', file, file.extension)
+    let { id } = req.params;
+    let existence = fs.existsSync(`${STORAGE_ROOT}/images/users/${id}/`);
+
+    if (!existence) {
+      fs.mkdir(`${STORAGE_ROOT}/images/users/${id}/`, function dirCreation(err) {
+      });
+    }
+    cb(null, `${STORAGE_ROOT}/images/users/${id}/`);
+  },
+  filename: function(req, file, cb) {
+    let ext = mime.extension(file.mimetype);
+    cb(null, `profile.${ext}`);
+  }
+});
 
 /** storage settings */
 const storage = multer.diskStorage({
@@ -19,6 +56,9 @@ const storage = multer.diskStorage({
   }
 });
 
+
+
+
 /** filter file extensions */
 const fileFilter = (req, file, cb) => {
   if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
@@ -36,7 +76,11 @@ exports.storageMiddleware = function(type) {
       upload = multer({ storage, dest: STORAGE_ROOT, fileFilter });
       return upload.array("photos[]", 4);
     case "PROFILE_PHOTO":
-      return () => {};
+      upload = multer({ storage: user_storage, dest: STORAGE_ROOT, fileFilter });
+      return upload.array("photos[]", 4);
+    case "WORK_PHOTOS":
+      upload = multer({ storage: work_storage, dest: STORAGE_ROOT, fileFilter });
+      return upload.array("photos[]", 4);  
     default:
       return () => {};
   }

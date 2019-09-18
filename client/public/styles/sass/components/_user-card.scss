@@ -25,6 +25,7 @@
     height: 150px;
     overflow: hidden;
     background: lightgreen;
+    //background-image: url('/public/images/man_icon.svg');
     display: inline-block;
     border-radius: 50%;
     transition: all .5s ease-in-out;
@@ -49,6 +50,7 @@
     width: 150px;
     height: 150px;
     border-radius: 50%;
+    object-fit: cover;
     transition: all .5s ease-in-out;
 
     &:hover {

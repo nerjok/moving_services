@@ -5,6 +5,8 @@ import userReducer from './userReducer'
 import usersReducer from './usersReducer'
 import messagesThreadReaducer from './messageThreadReducer'
 import messagesReducer from './messagesReducer'
+import ratesReducer from './ratesReducer'
+import contactsReducer from './contactsReducer'
 import { combineReducers } from 'redux'
 import { reducer as reduxForm} from 'redux-form'
 
@@ -17,5 +19,7 @@ export default combineReducers({
     user: userReducer,
     users: usersReducer,
     messageThreads: messagesThreadReaducer,
-    messages: messagesReducer
+    messages: messagesReducer,
+    rates: ratesReducer,
+    contacts: contactsReducer
 })

@@ -30,6 +30,10 @@ const Messages = (props) => {
                     <b>View advertisement</b>
                   </Link></>}
                   &nbsp; | &nbsp;
+                  <Link to={`/profiles/${(user_id == sender_id.id) ? receiver_id._id : sender_id._id}/rate/${_id}`} className="text-success">
+                    Rate User
+                  </Link>
+                  &nbsp; | &nbsp; 
                   <Link to={`/user/messages/${_id}`} className="text-success">
                     <b>Read messages</b>
                   </Link>
