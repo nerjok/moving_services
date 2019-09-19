@@ -10,7 +10,7 @@ const pagOptions = {
     docs: "users"
   }
 };
-
+module.exports = (nextApp) => {
 const showUsers = async (req, res, next) => {
   const page = req.query.page || 1;
 
@@ -164,4 +164,12 @@ const deletePhoto = async (req, res, next) => {
   //res.send({kuku:'kuku'});
 }
 
-module.exports = { showUsers, showUser, updateUser, changePassword, uploadPhoto, workPhotos, deletePhoto };
+const test = async (req, res) => {
+  const actualPage = '/index'
+  const query = { id: 'req.params.id' } 
+  nextApp.render(req, res,  '/index', query);
+
+    //res.send({server: 'started'})
+}
+
+return { showUsers, showUser, updateUser, changePassword, uploadPhoto, workPhotos, deletePhoto, test }};

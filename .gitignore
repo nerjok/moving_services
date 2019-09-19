@@ -6,4 +6,5 @@ config/tests/coverage
 
 client/build
 client/src/__tests__/__snapshots__
+.next/
 #keys.js

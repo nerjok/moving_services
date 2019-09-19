@@ -12,6 +12,12 @@ require("./models/Survey");
 require("./services/passport");
 require('./models/MessageThread');
 require('./models/Message');
+
+const next = require('next')
+const dev = process.env.NODE_ENV !== 'production'
+const nextApp = next({ dev })
+const handle = nextApp.getRequestHandler()
+
 const flash = require("connect-flash");
 
 const mongoose = require("mongoose");
@@ -22,52 +28,63 @@ mongoose.connect(keys.mongoURI, {
                                                                 });
 //mongoose.set('debug', true)
 
-mongoose.connection.on("connected", function () {
-    console.log("conected");
-});
-mongoose.connection.on("error", function (err) {
-    console.warn("err", err);
-});
+
 
 const app = express();
-app.use(flash());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true })); //proxy body
+//(() => nextApp.prepare())()
+var  server;
+nextApp.prepare()
+  .then(async () => {
 
-app.use(
-    cookieSession({
-        maxAge: 30 * 24 * 60 * 60 * 1000,
-        keys: [keys.cookieKey]
-    })
-);
-app.use(flash());
+    app.use(flash());
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true })); //proxy body
 
-app.use(passport.initialize());
-app.use(passport.session());
+    app.use(
+        cookieSession({
+            maxAge: 30 * 24 * 60 * 60 * 1000,
+            keys: [keys.cookieKey]
+        })
+    );
+    app.use(flash());
 
-// docker run -p 27017:27017 -d mongo
+    app.use(passport.initialize());
+    app.use(passport.session());
 
-const advertisementsRoutes = require("./routes/advertisementRoutes");
-const userRoutes = require("./routes/userRoutes");
-app.use("/", advertisementsRoutes);
-app.use("/", userRoutes);
+    // docker run -p 27017:27017 -d mongo
 
-require("./routes/billingRoutes")(app);
-require("./routes/surveyRoutes")(app);
+    const advertisementsRoutes = require("./routes/advertisementRoutes");
+    const userRoutes = require("./routes/userRoutes")(nextApp);
+    app.use("/", advertisementsRoutes);
+    app.use("/", userRoutes);
 
-app.use("/public", express.static(__dirname + "/public"));
+    require("./routes/billingRoutes")(app);
+    require("./routes/surveyRoutes")(app);
 
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static("client/build"));
-    const path = require("path");
+    app.use("/public", express.static(__dirname + "/public"));
 
-    app.get("*", (req, res) => {
-        res.sendfile(path.resolve(__dirname, "client", "build", "index.html"));
-    });
-}
 
-const PORT = process.env.PORT || 5000;
-const server = app.listen(PORT);
+    if (process.env.NODE_ENV === "production") {
+        app.use(express.static("client/build"));
+        const path = require("path");
+
+        app.get("*", (req, res) => {
+            res.sendfile(path.resolve(__dirname, "client", "build", "index.html"));
+        });
+    }
+  if ( process.env.NODE_ENV != 'test') {
+    const PORT = process.env.PORT || 5000;
+    server =  await app.listen(PORT);
+  }
+
+})
+.catch((ex) => {
+  console.error(ex.stack)
+  process.exit(1)
+})
+
+
+
 
 module.exports = app;
 module.exports.server2 = server;

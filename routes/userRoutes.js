@@ -1,40 +1,46 @@
-const express = require('express');
-const router = express.Router();
-const requireLogin = require('../middlewares/requireLogin');
+module.exports = nextApp => {
 
-const auth = require('../controllers/authorizationController');
-const user = require('../controllers/usersController');
-const passport = require('passport');
+  const express = require('express');
+  const router = express.Router();
+  const requireLogin = require('../middlewares/requireLogin');
 
-const multer = require('../middlewares/storageMiddleware');
+  const auth = require('../controllers/authorizationController');
+  const user = require('../controllers/usersController')(nextApp);
+  const passport = require('passport');
 
-
-router.get('/api/current_user', requireLogin, auth.currentUser);
-
-router.get('/api/logout', requireLogin, auth.logout);
-
-router.post('/auth/signup', auth.localSignup);
-
-router.post('/auth/login', auth.localLogin);
-
-router.get('/auth/google', auth.googleAuth);
-
-router.get('/auth/google/callback', passport.authenticate('google'), auth.googleAuthCallback);
-
-router.post('/api/update_user', requireLogin, user.updateUser);
-
-router.post('/api/user/update_password', requireLogin, user.changePassword);
-
-router.get('/api/users', user.showUsers);
-
-router.get('/api/users/:user_id', user.showUser);
-
-router.post('/api/user/:id/upload_photo', requireLogin, multer.storageMiddleware("PROFILE_PHOTO"), user.uploadPhoto);
-
-router.post('/api/user/:id/work_photos', requireLogin, multer.storageMiddleware("WORK_PHOTOS"), user.workPhotos);
-
-router.post('/api/user/:id/delete_photo', requireLogin, user.deletePhoto);
+  const multer = require('../middlewares/storageMiddleware');
 
 
-//'/api/user/'+id+'/delete_photo/'+photo
-module.exports = router;
+  router.get('/api/current_user', requireLogin, auth.currentUser);
+
+  router.get('/api/logout', requireLogin, auth.logout);
+
+  router.post('/auth/signup', auth.localSignup);
+
+  router.post('/auth/login', auth.localLogin);
+
+  router.get('/auth/google', auth.googleAuth);
+
+  router.get('/auth/google/callback', passport.authenticate('google'), auth.googleAuthCallback);
+
+  router.post('/api/update_user', requireLogin, user.updateUser);
+
+  router.post('/api/user/update_password', requireLogin, user.changePassword);
+
+  router.get('/api/users', user.showUsers);
+
+  router.get('/api/users/:user_id', user.showUser);
+
+  router.post('/api/user/:id/upload_photo', requireLogin, multer.storageMiddleware("PROFILE_PHOTO"), user.uploadPhoto);
+
+  router.post('/api/user/:id/work_photos', requireLogin, multer.storageMiddleware("WORK_PHOTOS"), user.workPhotos);
+
+  router.post('/api/user/:id/delete_photo', requireLogin, user.deletePhoto);
+
+
+  router.get('/api/test', user.test);
+
+
+  return router;
+}
+//module.exports = router;
