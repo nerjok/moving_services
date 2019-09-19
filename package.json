@@ -17,7 +17,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\" \"npm run webhook2\"",
     "dev2": "concurrently \"npm run server\" \"npm run client\"",
     "dev-server": "concurrently \"npm run server\" \"npm run webhook2\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run build",
     "heroku-postbuild2": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "webhook2": "lt -p 5000 -s nlpnlp",
     "webhook": "./sendgrid_webhook.sh"
