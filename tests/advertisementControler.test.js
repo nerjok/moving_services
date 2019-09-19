@@ -16,8 +16,19 @@ describe('Test advertisements controler', () => {
     agent
       .post('/auth/login')
       .send({username: 'tester@tester.com', password: 'tester'})
-      .end((err, res) => {})
+      .end((err, res) => {})     
   });
+
+
+  it('should get it workin', done => {
+    agent
+      .get(`/test`)
+      .end((err, res) => {
+        should.not.exist(err);
+        res.status.should.equal(200);
+        done();
+      })
+  })
 
   it("should get last advertisements", (done) => {
     chai.request(app)

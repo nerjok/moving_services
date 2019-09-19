@@ -166,10 +166,11 @@ const deletePhoto = async (req, res, next) => {
 
 const test = async (req, res) => {
   const actualPage = '/index'
-  const query = { id: 'req.params.id' } 
+  const query = { id: 'req.params.hhhjjkkllvvoooo', test: 'testPropertyNN' } 
   nextApp.render(req, res,  '/index', query);
 
     //res.send({server: 'started'})
 }
 
-return { showUsers, showUser, updateUser, changePassword, uploadPhoto, workPhotos, deletePhoto, test }};
+return { showUsers, showUser, updateUser, changePassword, uploadPhoto, workPhotos, deletePhoto, test }
+};

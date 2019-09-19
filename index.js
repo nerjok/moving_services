@@ -14,7 +14,7 @@ require('./models/MessageThread');
 require('./models/Message');
 
 const next = require('next')
-const dev = process.env.NODE_ENV !== 'production'
+const dev = (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test')
 const nextApp = next({ dev })
 const handle = nextApp.getRequestHandler()
 
@@ -33,9 +33,10 @@ mongoose.connect(keys.mongoURI, {
 const app = express();
 //(() => nextApp.prepare())()
 var  server;
-nextApp.prepare()
-  .then(async () => {
 
+nextApp.prepare()
+  .then(() => {
+/** */
     app.use(flash());
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true })); //proxy body
@@ -51,19 +52,32 @@ nextApp.prepare()
     app.use(passport.initialize());
     app.use(passport.session());
 
-    // docker run -p 27017:27017 -d mongo
 
     const advertisementsRoutes = require("./routes/advertisementRoutes");
     const userRoutes = require("./routes/userRoutes")(nextApp);
     app.use("/", advertisementsRoutes);
     app.use("/", userRoutes);
 
+
+
     require("./routes/billingRoutes")(app);
     require("./routes/surveyRoutes")(app);
 
     app.use("/public", express.static(__dirname + "/public"));
 
-
+    app.get("/test", (req, res) => {
+      const actualPage = '/index'
+      const query = { id: 'req.params.hhhjjkkllvvoooo', test: 'testPropertyNN' } 
+      nextApp.render(req, res,  '/index', query);
+    })
+    
+    const PORT = process.env.PORT || 5000;
+    server =   app.listen(PORT, function()
+    {
+      console.log( 'Server running on http://%s:%s' )
+      app.emit( "app_started" )
+    })
+    
     if (process.env.NODE_ENV === "production") {
         app.use(express.static("client/build"));
         const path = require("path");
@@ -72,16 +86,17 @@ nextApp.prepare()
             res.sendfile(path.resolve(__dirname, "client", "build", "index.html"));
         });
     }
-  if ( process.env.NODE_ENV != 'test') {
-    const PORT = process.env.PORT || 5000;
-    server =  await app.listen(PORT);
-  }
+    
 
 })
 .catch((ex) => {
-  console.error(ex.stack)
+  console.log('ERROR', ex)
   process.exit(1)
 })
+/**/
+//if ( process.env.NODE_ENV != 'testt') {
+
+//}
 
 
 
