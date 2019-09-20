@@ -60,9 +60,8 @@ require("./routes/surveyRoutes")(app);
 
 app.use("/public", express.static(__dirname + "/public"));
 
-//app.use("/_next", express.static(__dirname + "/.next"));
 
-
+app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 
 nextApp.prepare()
   .then(() => {

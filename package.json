@@ -18,8 +18,10 @@
     "dev2": "concurrently \"npm run server\" \"npm run client\"",
     "dev-server": "concurrently \"npm run server\" \"npm run webhook2\"",
     "dev-next": "next",
+    "compile:sass": "node-sass client/public/styles/sass/main.scss public/styles/style.css",
+    "compile:sassw": "node-sass client/public/styles/sass/main.scss public/styles/style.css -w",
     "export": "next export",
-    "run-prod": "NPM_CONFIG_PRODUCTION=true npm start",
+    "prod": "NPM_CONFIG_PRODUCTION=true npm start",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run build",
     "heroku-postbuild2": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "webhook2": "lt -p 5000 -s nlpnlp",
@@ -44,6 +46,7 @@
     "multer": "^1.4.2",
     "next": "^9.0.6",
     "next-redux-wrapper": "^3.0.0",
+    "node-sass": "^4.12.0",
     "nodemon": "^1.19.2",
     "passport": "^0.4.0",
     "passport-facebook": "^3.0.0",
@@ -57,7 +60,12 @@
     "redux-form": "^8.2.6",
     "redux-thunk": "^2.3.0",
     "sendgrid": "^5.2.3",
-    "stripe": "^6.20.0"
+    "stripe": "^6.20.0",
+    "react-bootstrap": "^1.0.0-beta.8",
+    "bootstrap": "^4.3.1",
+    "@fortawesome/fontawesome-svg-core": "^1.2.18",
+    "@fortawesome/free-solid-svg-icons": "^5.8.2",
+    "@fortawesome/react-fontawesome": "^0.1.4"
   },
   "devDependencies": {
     "chai": "^4.2.0",
