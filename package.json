@@ -19,6 +19,7 @@
     "dev-server": "concurrently \"npm run server\" \"npm run webhook2\"",
     "dev-next": "next",
     "export": "next export",
+    "run-prod": "NPM_CONFIG_PRODUCTION=true npm start",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run build",
     "heroku-postbuild2": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "webhook2": "lt -p 5000 -s nlpnlp",
@@ -27,6 +28,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.19.0",
     "concurrently": "^4.1.1",
