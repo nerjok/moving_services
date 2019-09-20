@@ -31,75 +31,56 @@ mongoose.connect(keys.mongoURI, {
 
 
 const app = express();
-//(() => nextApp.prepare())()
 var  server;
+
+
+app.use(flash());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); //proxy body
+
+app.use(
+    cookieSession({
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        keys: [keys.cookieKey]
+    })
+);
+app.use(flash());
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+const advertisementsRoutes = require("./routes/advertisementRoutes");
+const userRoutes = require("./routes/userRoutes");
+app.use("/", advertisementsRoutes);
+app.use("/", userRoutes);
+
+require("./routes/billingRoutes")(app);
+require("./routes/surveyRoutes")(app);
+
+app.use("/public", express.static(__dirname + "/public"));
+
+//app.use("/_next", express.static(__dirname + "/.next"));
+
+
 
 nextApp.prepare()
   .then(() => {
-/** */
-    app.use(flash());
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended: true })); //proxy body
-
-    app.use(
-        cookieSession({
-            maxAge: 30 * 24 * 60 * 60 * 1000,
-            keys: [keys.cookieKey]
-        })
-    );
-    app.use(flash());
-
-    app.use(passport.initialize());
-    app.use(passport.session());
-
-
-    const advertisementsRoutes = require("./routes/advertisementRoutes");
-    const userRoutes = require("./routes/userRoutes")(nextApp);
-    app.use("/", advertisementsRoutes);
-    app.use("/", userRoutes);
-
-
-
-    require("./routes/billingRoutes")(app);
-    require("./routes/surveyRoutes")(app);
-
-    app.use("/public", express.static(__dirname + "/public"));
-
-    app.get("/test", (req, res) => {
-      const actualPage = '/index'
-      const query = { id: 'req.params.hhhjjkkllvvoooo', test: 'testPropertyNN' } 
-      nextApp.render(req, res,  '/index', query);
-    })
+    const pagesRoutes = require('./routes/pagesRoutes')(nextApp);
+    app.use('/', pagesRoutes);
     
+    app.get('*', (req, res) => {
+      return handle(req, res);
+    });
+
     const PORT = process.env.PORT || 5000;
-    server =   app.listen(PORT, function()
-    {
-      console.log( 'Server running on http://%s:%s' )
-      app.emit( "app_started" )
-    })
+    app.listen(PORT)
     
-    if (process.env.NODE_ENV === "production") {
-        app.use(express.static("client/build"));
-        const path = require("path");
-
-        app.get("*", (req, res) => {
-            res.sendfile(path.resolve(__dirname, "client", "build", "index.html"));
-        });
-    }
-    
-
 })
 .catch((ex) => {
   console.log('ERROR', ex)
   process.exit(1)
 })
-/**/
-//if ( process.env.NODE_ENV != 'testt') {
-
-//}
-
-
-
 
 module.exports = app;
 module.exports.server2 = server;

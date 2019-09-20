@@ -10,7 +10,7 @@ const pagOptions = {
     docs: "users"
   }
 };
-module.exports = (nextApp) => {
+
 const showUsers = async (req, res, next) => {
   const page = req.query.page || 1;
 
@@ -164,6 +164,7 @@ const deletePhoto = async (req, res, next) => {
   //res.send({kuku:'kuku'});
 }
 
+/*
 const test = async (req, res) => {
   const actualPage = '/index'
   const query = { id: 'req.params.hhhjjkkllvvoooo', test: 'testPropertyNN' } 
@@ -171,6 +172,6 @@ const test = async (req, res) => {
 
     //res.send({server: 'started'})
 }
+*/
+module.exports = { showUsers, showUser, updateUser, changePassword, uploadPhoto, workPhotos, deletePhoto }
 
-return { showUsers, showUser, updateUser, changePassword, uploadPhoto, workPhotos, deletePhoto, test }
-};
