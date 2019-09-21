@@ -1,3 +1,4 @@
+
 export const EDIT_INPUTS = [
   {name: 'email', type: 'text', title: 'Email address', value: 'email', disabled: true},
   {name: 'name', type: 'text', title: 'Name', value: 'name', disabled: false},

@@ -41,13 +41,10 @@ const updateUser = async (req, res, next) => {
   const { user } = req;
   const { name, description, available, city, status } = req.body;
   let updateData = { name, description, available, city, status }
-  if (status) {
+  if (!name && !description) {
     updateData = {...req.body}
   }
 
-console.log('updateUser', updateData);
-//next()
-//return
   User.findByIdAndUpdate(user._id, 
     updateData, {
     new: true, 

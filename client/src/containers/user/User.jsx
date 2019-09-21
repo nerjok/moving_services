@@ -15,7 +15,8 @@ import MessagesList from './messages/messagesList/messagesList';
 import ContactList from './contactList/contactList';
 
  export const User = props => {
- const [breadcrumb, setBreadcrumb] = useState([{link: '/user', title: "User page"}])
+  // eslint-disable-next-line 
+  const [breadcrumb, setBreadcrumb] = useState([{link: '/user', title: "User page"}])
   return (
     <>
     <Breadcrumb links={breadcrumb}/>

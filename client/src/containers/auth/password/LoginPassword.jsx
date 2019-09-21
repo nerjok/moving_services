@@ -62,7 +62,7 @@ class LoginPassword extends React.Component {
 
   login = async () => {
     console.log(this.username.current.value, this.password.current.value,  this.props);
-
+    // eslint-disable-next-line
     const emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if (this.username.current.value && this.username.current.value.length > 5 && emailReg.test(this.username.current.value)) {

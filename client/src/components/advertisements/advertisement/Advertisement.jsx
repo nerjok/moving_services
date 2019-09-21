@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import { StatusBtn } from '../../statusBtn/statusBtn';
 
 export const Advertisement = ({status, workType, title, description, _id, location, advCallback, deleteAdvertisement, page}) => {
-  let statusColor, statusStr, timeColor;
+  let timeColor;
 
   switch (workType) {
     case 2:
@@ -33,7 +33,7 @@ export const Advertisement = ({status, workType, title, description, _id, locati
     <div className={`row advertisements-row ${timeColor}`} >
       <div className="col-md-5 advertisements-row__description">
         <h5><a href="#show-details" id={_id} onClick={advCallback}>{title}</a></h5>
-        {description}
+        {/*description*/}
       </div>
       <div className="col-md-2 flex" styles={{background: 'lightgray'}}>
           <StatusBtn status={status} />

@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import { loadModules } from "esri-loader";
-import PropTypes from 'prop-types';
 
 export const MapInput = ({label, name, input, defaultValue, onChange, meta: {error, touched}}) => {
   const [location, setLocation] = useState([]);

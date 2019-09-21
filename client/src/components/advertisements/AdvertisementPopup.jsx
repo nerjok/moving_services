@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 export const AdvertisementPopup = ({title, description}) => {
   
   const disableMod = ({target}) => {
-    if (target.id == 'show-details') {
+    if (target.id === 'show-details') {
       document.location.hash = "x";
       window.history.replaceState(null, null, ' ');
     }

@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
 import React, {Component} from 'react'
-import { BrowserRouter, Route, Router} from 'react-router-dom'
+import { BrowserRouter, Route} from 'react-router-dom'
 import {connect} from 'react-redux'
 import * as actions from '../store/actions'
 
@@ -12,7 +12,10 @@ import SurveyNew from './surveys/SurveyNew'
 import Advertisements from './advertisements/Advertisements'
 import Advertisement from './advertisements/Advertisement'
 
+
+import Ads from './Ads';
 import LoginPassword from './auth/password/LoginPassword'
+
 
 import Users from './users/Users';
 import Profile from './users/user/user';
@@ -29,11 +32,16 @@ import  User  from './user/User'
 import { withRouter } from 'react-router';
 import { Header as HeaderBtn, HeaderHeading} from '../components/header';
 import ScrollIntoView from '../hoc/scrollIntoView';
-function mainRouted(isLoged) {
+import TableList from "../components/table";
+
+function mainRouted(isLoged, advertisements, users) {
   const MainPage2 = props => {
     return (
       <div>
-        <div className="container"><Advertisements from="index" {...props}/></div>
+        <div className="container">
+          {/*<Advertisements from="index" {...props}/>*/}
+
+          </div>
         {isLoged ? null : <GetStarted/>}
         <BlogSlider/>
       </div>
@@ -49,8 +57,14 @@ class App extends Component {
         this.props.fetchUser()
     }
 
-    render () {
+    currentUrlPath = () => {
+      if (this.props.history.location.pathname === '/')
+        return '/advertisements'
+      return this.props.history.location.pathname
+    }
 
+    render () {
+      console.log('propsadvUser', this.props.users)
       const isLoged = (this.props.auth && this.props.auth._id);
         return (
                 <BrowserRouter>
@@ -58,10 +72,14 @@ class App extends Component {
                       <Header/>
                       {/*<Map/>*/}
                       {/*<Categories/>*/}
-                      <HeaderHeading isLoged={isLoged} />
+                      {/*<HeaderHeading isLoged={isLoged} />*/}
+                      <Route path="/" exact component={HeaderHeading}/>
                         <Route path="/" exact component={HeaderBtn}/>
+                        <Route path="/" exact component={Ads}/>
                         <Route path="/" exact component={mainRouted(isLoged)}/>
+
                       <div className="container">
+
                         <Route path="/surveys" exact component={Dashboard} />
                         <Route path="/surveys/new" component={SurveyNew} />
                         {/*<Route path="/profile" exact component={Profile}/>*/}
@@ -89,9 +107,11 @@ class App extends Component {
     }
 }
 
-function mapStateToProps({auth}) {
+function mapStateToProps({auth/*, users: {users}, advertisements: {advertisements}*/}) {
   return {
-      auth
+      auth,
+      //users,
+      //advertisements
   }
 }
 export default connect(mapStateToProps, actions)(App)

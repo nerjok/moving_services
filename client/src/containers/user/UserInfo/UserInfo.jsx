@@ -62,7 +62,7 @@ class UserInfo extends React.Component {
         </Tab>
         <Tab eventKey="/user/photo" title="Photos">
           Photos
-          {auth.work_photos.map(photo => {
+          { auth.work_photos && auth.work_photos.map(photo => {
             console.log('photo', photo)
             
                       return (<div key={photo} style={{position:'relative', width: "90%", margin: "5px"}} key={photo}>

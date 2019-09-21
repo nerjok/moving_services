@@ -1,4 +1,4 @@
-import React, { useRef, useState, useReducer } from 'react';
+import React, { useReducer } from 'react';
 import {connect } from 'react-redux';
 import _ from 'lodash';
 

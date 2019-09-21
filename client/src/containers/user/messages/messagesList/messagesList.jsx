@@ -23,29 +23,29 @@ const MessagesList = (props) => {
 
         { props.msgThread.sender_id && <span className="d-block mb-5 text-right">
                   <b>Sender:</b> &nbsp;
-                  <Link to={`/profiles/${(user_id == sender_id.id) ? receiver_id._id : sender_id._id}`} className="text-success">
-                    {(user_id == sender_id.id) ? receiver_id.name : sender_id.name}
+                  <Link to={`/profiles/${(user_id === sender_id.id) ? receiver_id._id : sender_id._id}`} className="text-success">
+                    {(user_id === sender_id.id) ? receiver_id.name : sender_id.name}
                   </Link>
                   {updatedAt && <>&nbsp; | &nbsp;<span className="text-success">{new Date(updatedAt).toDateString()}</span></>}
                   {advertisement_id && <>&nbsp; | &nbsp;
                   <Link to={`/advertisements/${advertisement_id}`} className="text-success">
                     <b>View advertisement</b>
                   </Link></>}
-                  <Link to={`/profiles/${(user_id == sender_id.id) ? receiver_id.id : sender_id.id}`} style={{zIndex: 1}}>
-                  <img src='/public/images/man_icon.svg' className="ml-3" width="50px" alt='Image not found'/>
+                  <Link to={`/profiles/${(user_id === sender_id.id) ? receiver_id.id : sender_id.id}`} style={{zIndex: 1}}>
+                  <img src='/public/images/man_icon.svg' className="ml-3" width="50px" />
                 </Link>
                 </span>}
 
 
         {props.messages.map(({_id, message, sender_id, updatedAt}) =>
             <div 
-              className={`row advertisements-row advertisements-row--${(user_id == sender_id.id || user_id == sender_id) ? 'green' : 'gray text-right'}`} 
+              className={`row advertisements-row advertisements-row--${(user_id === sender_id.id || user_id === sender_id) ? 'green' : 'gray text-right'}`} 
               key={_id}
               >
               <div className="col-md-12">
                 {message} 
                 <br/>
-                {(user_id != sender_id.id) &&<small className="d-inline-block mt-3 text-left"><b>Sender:</b> {sender_id.name}</small>}
+                {(user_id !== sender_id.id) &&<small className="d-inline-block mt-3 text-left"><b>Sender:</b> {sender_id.name}</small>}
                 {updatedAt && <>&nbsp;  &nbsp;<small className="text-success">{new Date(updatedAt).toDateString()}</small></>}
               </div>
             </div>

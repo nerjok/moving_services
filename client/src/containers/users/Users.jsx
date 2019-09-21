@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import axios from "axios";
 import Pagination from "react-bootstrap/Pagination";
 import TableList from "../../components/table";
 import Breadcrumb from "../../components/breadcrumb"
@@ -36,7 +35,7 @@ export class Users extends React.Component {
 
 
       if (!checked) {
-        status = status.filter(itm => itm != value);
+        status = status.filter(itm => itm !== value);
       } else {
         status.push(value);
       }
@@ -173,6 +172,10 @@ Users.defaultProps = {
   users: [],
   auth: {},
   fetchUsers: () => []
+}
+
+Users.propTypes ={
+  users: PropTypes.array.isRequired
 }
 
 export default connect(mapStateToProps, { fetchUsers })(Users)

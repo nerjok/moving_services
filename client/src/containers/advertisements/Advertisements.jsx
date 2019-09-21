@@ -61,7 +61,7 @@ export class Advertisements extends React.Component {
 
 
       if (!checked) {
-        status = status.filter(itm => itm != value);
+        status = status.filter(itm => itm !== value);
       } else {
         status.push(value);
       }

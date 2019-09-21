@@ -1,5 +1,4 @@
 import { FETCH_MESSAGES, ADD_MESSAGE } from '../actions/types';
-import { statement } from '@babel/template';
 
 export default (state = {messages: [], msgThread: {}}, { type, payload }) => {
   switch (type) {

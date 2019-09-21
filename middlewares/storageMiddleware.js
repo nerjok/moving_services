@@ -27,6 +27,12 @@ const user_storage = multer.diskStorage({
     let { id } = req.params;
     let existence = fs.existsSync(`${STORAGE_ROOT}/images/users/${id}/`);
 
+
+    if (!fs.existsSync(`${STORAGE_ROOT}/images/users/`)) {
+      fs.mkdir(`${STORAGE_ROOT}/images/users/`, function dirCreation(err) {
+      });
+    }
+    
     if (!existence) {
       fs.mkdir(`${STORAGE_ROOT}/images/users/${id}/`, function dirCreation(err) {
       });

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
 var mongoosePaginate = require('mongoose-paginate-v2');
-
+const { cities, availability } = require('../constants');
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
@@ -31,12 +31,23 @@ userSchema.virtual('advertisements', {
     foreignField: '_user',
   });
 
-  userSchema.virtual('advertisementsCount', {
+userSchema.virtual('advertisementsCount', {
     ref: 'Advertisement',
     localField: '_id',
     foreignField: '_user',
     count: true
   });  
+
+userSchema.virtual('cityName').get(function name(params) {
+  let cityName = cities.find(city => city.value == this.city)
+  return cityName;
+})  
+
+userSchema.virtual('availability').get(function name(params) {
+  let avl = availability.find(city => city.value == this.status)
+  return avl;
+})  
+
 
 userSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
