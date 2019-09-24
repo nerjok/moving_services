@@ -1,8 +1,6 @@
-import React from 'react'
-
-import {
-  Link
-} from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Trans } from 'react-i18next';
 
 export const Header = props => {
 
@@ -13,15 +11,15 @@ export const Header = props => {
           <div className="header-btn header-btn--employers">
             <h1 className="header-btn__heading">
               <span>  
-                Share needed services
+                <Trans>Share needed services</Trans>
               </span>
               </h1>
             <p className="header-btn__description">
               <span>  
-                Share needed services what it can be seen by apropriate persons
+                <Trans>Share needed services what it can be seen by apropriate persons</Trans>
               </span>
             </p>
-            <Link to="/user" className="btn btn-sm btn-success">Get started</Link>
+            <Link to="/user" className="btn btn-sm btn-success"><Trans>Get started</Trans></Link>
           </div>
         </div>
 
@@ -29,15 +27,15 @@ export const Header = props => {
                     <div className="header-btn header-btn--workers">
             <h1 className="header-btn__heading">
               <span>  
-                Search work in surounding places
+                <Trans>Search work in surounding places</Trans>
               </span>
               </h1>
             <p className="header-btn__description">
               <span>  
-                Search suround works or works by your sphere
+                <Trans>Search suround works or works by your sphere</Trans>
               </span>
             </p>
-            <Link to="/advertisements" className="btn btn-sm btn-success">Search now</Link>
+            <Link to="/advertisements" className="btn btn-sm btn-success"><Trans>Search now</Trans></Link>
           </div>
         </div>
       </div>

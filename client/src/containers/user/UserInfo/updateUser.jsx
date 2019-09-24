@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Trans } from 'react-i18next';
 
 import { connect } from 'react-redux'
 import { updateData } from '../../../store/actions/index'
@@ -43,13 +44,13 @@ const UpdateUser = (props) => {
                 component={component}
                 options={options}
                 multiple={multiple}
-                label={title}
+                label={<Trans>{title}</Trans>}
               />
             )}
           )}
 
 
-          <button type="submit" className="btn btn-outline-dark">Submit</button>
+          <button type="submit" className="btn btn-sm btn-outline-dark"><Trans>Submit</Trans></button>
         </form>
       </>
   )

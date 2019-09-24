@@ -1,6 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import Pagination from "react-bootstrap/Pagination";
+import ReactPaginate from 'react-paginate';
+import { withTranslation, Trans } from 'react-i18next';
+
 import TableList from "../../components/table";
 import Breadcrumb from "../../components/breadcrumb"
 import PropTypes from 'prop-types';
@@ -63,25 +66,32 @@ export class Users extends React.Component {
   }
 
   render() {
+    const { t } = this.props;
     const { users } = this.props;
+    let  { url } = this.props.match;
+    if (url.length <=1 ) {
+      url = '';
+    }    
     if (!users)
       return <div class="spinner-border mt-5"></div> 
     return (
       <>
-        <Breadcrumb links={[{link: "/profiles", title: "Users"}]} />
+        <Breadcrumb links={[{link: url, title: "Users"}]} />
         <div className="row advertisements-row--mobile">
           <div className="col-md-9"> 
             <div>
               <TableList 
                 items={users.users} 
+                url={url}
               />
 
-              <div className="text-xs-center">
+              {/*<div className="text-xs-center">
                 <br/>
                 <ul className="pagination justify-content-center" styles={{margin: 'auto', display: 'inline', textAlign: 'center', background: 'green'}}>
                   {this.pagination()}
                 </ul>
-              </div>
+              </div>*/}
+              {this.reactPagination()}
             </div>
           </div>
         
@@ -89,31 +99,31 @@ export class Users extends React.Component {
           <button 
             type="button"  
             onClick={this.filterUsers}
-            className="btn btn-sm btn-outline-success form-control mb-3">Filter</button>
+            className="btn btn-sm btn-outline-success form-control mb-3"><Trans>Filter</Trans></button>
           <FilterCard 
-            title={"User Status"} 
+            title={t("User Status")} 
             items={[
-              {title: 'Not Available', color: 'red', value: 1},
-              {title: 'Available', color: 'green', value: 2},
-              {title: 'Available future', color: 'blue', value: 3},
-              {title: 'Part time', color: 'gray', value: 4},
+              {title: t('Not Available'), color: 'red', value: 1},
+              {title: t('Available'), color: 'green', value: 2},
+              {title: t('Available future'), color: 'blue', value: 3},
+              {title: t('Partly'), color: 'gray', value: 4},
             ]}
             name="status"
             filterChange={this.filterChange}
           />
           <FilterCard
-            title={"Available times"}
+            title={t("Available times")}
             items={[
-              {title: 'Working hours', value: 0},
-              {title: 'Evenings', value: 1},
-              {title: 'Weekends', value: 3},
-              {title: 'Nights',  value: 4},
+              {title: t('Working hours'), value: 0},
+              {title: t('Evenings'), value: 1},
+              {title: t('Weekends'), value: 3},
+              {title: t('Nights'),  value: 4},
             ]}
             name="availableTime"
             filterChange={this.filterChange}
           />
           <FilterCard
-            title={'Region of services'}
+            title={t('Region of services')}
             items={[
               {title: "Vilnius", value: 9},
               {title: "Kaunas", value: 6}, 
@@ -158,6 +168,56 @@ export class Users extends React.Component {
 
     return pagination
   }
+
+
+
+  reactPagination = () => {
+    const { users } =  this.props
+    const { page, hasPrevPage, hasNextPage, totalPages} = users
+    const { t } = this.props;
+
+    return (
+      <div style={{position: 'relative', padding: '1rem', margin: '1.5rem'}}>
+      <div style={{
+                    boxSizing: 'border-box',
+                    position: 'absolute',
+                    left: '50%',
+                    top: '50%',
+                    transform: 'translate(-50%, -50%)'
+                  }}>
+                <ReactPaginate
+                  previousLabel={t('Previous')}
+                  nextLabel={t('Next')}
+                  breakLabel={'...'}
+                  breakClassName={'break-me'}
+                  pageCount={totalPages}
+                  marginPagesDisplayed={2}
+                  pageRangeDisplayed={2}
+                  initialPage={page - 1}
+                  forcePage={page - 1}
+                  onPageChange={this.updatePage}
+                  pageClassName="page-item"
+                  pageLinkClassName="page-link"
+                  containerClassName={'pagination'}
+                  subContainerClassName={'pages pagination'}
+                  previousClassName="page-link"
+                  nextClassName="page-link"
+                  activeClassName={'active'}
+                />
+      </div>
+    </div>
+    )
+  }
+
+  updatePage = ({selected}) => {
+    this.setState({page: selected})
+
+    let currentUrlParams = new URLSearchParams(window.location.search);
+    currentUrlParams.set('page', selected);
+    if (this.props.history)
+      this.props.history.push(window.location.pathname + "?" + currentUrlParams.toString());
+    this.props.fetchUsers(+selected + 1, this.filterState());
+  }
 }
 
 
@@ -178,4 +238,4 @@ Users.propTypes ={
   users: PropTypes.array.isRequired
 }
 
-export default connect(mapStateToProps, { fetchUsers })(Users)
+export default withTranslation()(connect(mapStateToProps, { fetchUsers })(Users))

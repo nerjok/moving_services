@@ -5,17 +5,23 @@ import { Link } from 'react-router-dom'
 //import { link } from 'fs';
 //import { Search } from './map/search/search'
 
-const hideMenu = () => {
-  console.log('hideMenu');
-  document.getElementById('navigation-toggle').checked = false;
-}
+import { Trans } from 'react-i18next';
+import i18next from 'i18next'
+
+const hideMenu = () => document.getElementById('navigation-toggle').checked = false;
+
 
 class Header extends Component {
     state = { isOpen: false }
 
+
     renderContent() {
     const { auth } = this.props
     const email = (auth.email ||auth.name) || false
+    let  { url } = this.props.match;
+    if (url.length <=1 ) {
+      url = '';
+    }    
 
 		switch(email) {
             case null:
@@ -24,11 +30,11 @@ class Header extends Component {
                 return [
                       <Link 
                         key="login"
-                        to={"/login"} 
+                        to={`${url}/login`} 
                         className="stickie-nav__menu-linkk black-link breadcrumb-link mr-3"
                         onClick={hideMenu}
                         >
-                          Login
+                          <Trans>Login</Trans>
 										  </Link>
                 ];
             default:
@@ -41,28 +47,60 @@ class Header extends Component {
                     </Link>,*/
                     //<Link key="users" to={"/profiles"} className="stickie-nav__menu-link" onClick={hideMenu}>Users</Link>,
                     //<Link to={"/profile"} className="stickie-nav__menu-link">Profile</Link>,
-                    <Link key="myProfile" to={"/user"} className="stickie-nav__menu-linkk black-link breadcrumb-link mr-3" onClick={hideMenu}>Info</Link>,
+                    <Link key="myProfile" to={`${url}/user`} className="stickie-nav__menu-linkk black-link breadcrumb-link mr-3" onClick={hideMenu}><Trans>Profile</Trans></Link>,
 
                 ]
                 );
         }
     }
 
+    changeLanguage = ({target}) => {
+      const { i18n } = this.props;
+
+      const lang = target.getAttribute('lang')
+      const language =   i18next.language;      
+      const { pathname } = window.location;
+      console.log('changeLanguage', lang, language)
+      
+      if (lang != language) {
+        if (lang == 'lt')
+          window.location.href = '/';
+        else
+          window.location.href = `/${lang}`;
+      }
+    }
+
+    langGroup() {
+      const language =   i18next.language;  
+
+      return (
+        <div className="btn-group btn-group-sm" role="group" aria-label="Basic example">
+        <button type="button" onClick={this.changeLanguage} lang="lt" className={`btn btn-success ${language == 'lt' ? 'active' : ''}`}>Lt</button>
+        <button type="button" onClick={this.changeLanguage} lang="en" className={`btn btn-success ${language == 'en' ? 'active' : ''}`}>En</button>
+        <button type="button" onClick={this.changeLanguage} lang="ru" className={`btn btn-success ${language == 'ru' ? 'active' : ''}`}>Ru</button>
+      </div>
+      )
+    }
     render() {
+      let { url } = this.props.match;
+      if (url.length <=1 ) {
+        url = '';
+      }
         return (
           <>
            <nav className="navbar stickie-nav">
             <h5 className="stickie-nav__logo">
              <Link 
-                to="/"
+                to={url}
                 className="stickie-nav__logo">
                 TempusWork
               </Link>
             </h5>
               <div className="header__links">
-              <Link to={"/advertisements"} className="stickie-nav__menu-linkk black-link breadcrumb-link mr-3">Advertisements</Link>
-              <Link key="users" to={"/profiles"} className="stickie-nav__menu-linkk black-link breadcrumb-link mr-3" onClick={hideMenu}>Users</Link>
+              <Link to={`${url}/advertisements`} className="stickie-nav__menu-linkk black-link breadcrumb-link mr-3"><Trans>Advertisements</Trans></Link>
+              <Link key="users" to={url+'/profiles'} className="stickie-nav__menu-linkk black-link breadcrumb-link mr-3" onClick={hideMenu}><Trans>Users</Trans></Link>
                 {this.renderContent()}
+                {this.langGroup()}
               </div>
               <div className="navigation">
                 <input type="checkbox" id="navigation-toggle" className="navigation__checkbox"/>
@@ -73,11 +111,12 @@ class Header extends Component {
                 <div className="navigation__background">&nbsp;</div>
                 <nav className="navigation__nav">
                   <ul className="navigation__list">
-                  <Link to={"/advertisements"} className="stickie-nav__menu-linkk black-link breadcrumb-link mr-3" onClick={hideMenu}>Advertisements</Link>
+                  <Link to={`${url}/advertisements`} className="stickie-nav__menu-linkk black-link breadcrumb-link mr-3" onClick={hideMenu}><Trans>Advertisements</Trans></Link>
                   <div key={'users'} className="navigation__list__link">
-                    <Link to={"/profiles"} className="stickie-nav__menu-linkk black-link breadcrumb-link mr-3" onClick={hideMenu}>Users</Link>
+                    <Link to={`${url}/profiles`} className="stickie-nav__menu-linkk black-link breadcrumb-link mr-3" onClick={hideMenu}><Trans>Users</Trans></Link>
                   </div>
                   {Array.from(this.renderContent(), itm => <div key={itm.key} className="navigation__list__link">{itm}</div>)}
+                  {this.langGroup()}
                   </ul>
                 </nav>
               </div>

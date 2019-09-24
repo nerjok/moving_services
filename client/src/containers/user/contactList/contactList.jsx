@@ -6,6 +6,7 @@ import Card from '../../../hoc/cardBorders';
 import { Link} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart,  faSearch } from '@fortawesome/free-solid-svg-icons';
+import { Trans } from 'react-i18next';
 
 const ContactList = (props) => {
   
@@ -16,13 +17,12 @@ const ContactList = (props) => {
 
   const unsubscribe = ({target}) => {
     const contact = target.getAttribute('contact')
-    console.log(target, contact)
     props.unsubscribeUser(contact)
   }
 
   return (
     <div>
-      ContactList
+      <h3><Trans>ContactList</Trans></h3>
 
       {props.contacts.map(({_id, contact_person, message, advertisement_id, updatedAt}) => 
             <div className="row advertisements-row advertisements-row--green" key={_id}>
@@ -35,7 +35,7 @@ const ContactList = (props) => {
               </div>
               <div className="col-md-2 advertisements-row__description">
                   <span className="text-success" contact={_id} onClick={unsubscribe}>
-                    Unsubscribe
+                    <Trans>Unsubscribe</Trans>
                   </span>
               </div>
             </div>

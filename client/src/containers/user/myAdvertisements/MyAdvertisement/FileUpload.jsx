@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withTranslation, Trans } from 'react-i18next';
 
 class FileUpload extends Component {
 
@@ -79,7 +80,7 @@ class FileUpload extends Component {
             </div>
             </div>
 
-            <button className={"btn btn-sm btn-outline-success"} onClick={this.submitForm}>Submit Photos</button>
+            <button className={"btn btn-sm btn-outline-success"} onClick={this.submitForm}><Trans>Submit</Trans></button>
       </div>
     )
   }

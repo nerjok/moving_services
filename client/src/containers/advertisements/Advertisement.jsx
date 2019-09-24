@@ -24,6 +24,8 @@ import ApplyJob from "../../components/applyJob";
 import Messaging from "../../components/messaging";
 import ImageGallery from "react-image-gallery";
 
+import { withTranslation, Trans } from 'react-i18next';
+
 const toGallery = (id, images) => {
   return images.map(image => ({
     original: `/public/images/${id}/${image}`
@@ -66,6 +68,12 @@ export class Advertisement extends React.Component {
     this.props.sendMessage({ message, receiver_id, advertisement_id });
   }
 
+  parentPath = () => {
+    let  { url } = this.props.match;
+    let ats = url.slice(0, url.lastIndexOf('/'))
+    return ats
+  }
+
   render() {
     const { advertisement } = this.props;
 
@@ -98,9 +106,15 @@ export class Advertisement extends React.Component {
       minute: "2-digit",
       ahourCycle: "h24"
     };
+
+    let  { url } = this.props.match;
+    if (url.length <=1 ) {
+      url = '';
+    }    
+    const { t } = this.props;
     const brdCrumb = [
-      { link: "/advertisements", title: "Advertisements" },
-      { link: "#", title: "Advertisement" }
+      { link: this.parentPath(), title: t("Advertisements") },
+      { link: "#", title: t("Advertisement") }
     ];
     return (
       <>
@@ -125,7 +139,7 @@ export class Advertisement extends React.Component {
             <hr />
             <div className="text-right">
               <span className="mr-1 p-1">
-                <small>Published: {upDate}</small>
+                <small><Trans>Published</Trans>: {upDate}</small>
               </span>
 
               <StatusBtn status={status} />
@@ -138,7 +152,7 @@ export class Advertisement extends React.Component {
 
             <div className="mt-5 mb-5">
               {" "}
-              <b>Description</b>
+              <b><Trans>Description</Trans></b>
               <br /> {description}
             </div>
           </div>
@@ -151,7 +165,7 @@ export class Advertisement extends React.Component {
                     size="lg"
                     style={{ color: "gray" }}
                   />
-                  <b> Skils and experience required </b>
+                  <b> <Trans>Skils and experience required</Trans> </b>
                   <span className="mt-1  ml-4 d-block">{skills}</span>
                 </div>
               )}
@@ -163,7 +177,7 @@ export class Advertisement extends React.Component {
                     size="lg"
                     style={{ color: "gray" }}
                   />
-                  <b> Tools required </b>
+                  <b> <Trans>Tools required</Trans> </b>
                   <span className="mt-1  ml-4 d-block">{tools}</span>
                 </div>
               )}
@@ -174,7 +188,7 @@ export class Advertisement extends React.Component {
                     size="lg"
                     style={{ color: "gray" }}
                   />
-                  <b> Precise time information </b>
+                  <b> <Trans>Precise time information</Trans> </b>
                   <span className="mt-1  ml-4 d-block">
                     {time && <div>{time}</div>}
                     {new Date(dateTime).toLocaleDateString("lt-LT", options)}
@@ -188,7 +202,7 @@ export class Advertisement extends React.Component {
                     size="lg"
                     style={{ color: "gray" }}
                   />
-                  <b> Payment information </b>
+                  <b> <Trans>Payment information</Trans> </b>
                   <span className="mt-1  ml-4 d-block">{payment}</span>
                 </div>
               )}
@@ -214,7 +228,7 @@ export class Advertisement extends React.Component {
 const mapStateToProps = ({
   advertisements: { advertisements, total, page, advertisement }
 }) => ({ advertisement, advertisements, total, page });
-export default connect(
+export default withTranslation()(connect(
   mapStateToProps,
   { fetchAdvertisement, applyJob, sendMessage }
-)(Advertisement);
+)(Advertisement));

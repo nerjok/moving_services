@@ -1,4 +1,5 @@
 import React from 'react';
+import { Trans } from 'react-i18next';
 import _ from 'lodash';
 import { reduxForm, Field, SubmissionError } from 'redux-form';
 import FIELDS from './formFields';
@@ -59,7 +60,7 @@ class NewAdvertisement extends React.Component {
                   name={name}
                   options={['status', 'workType'].includes(name) ? options : []}
                   component={fieldComp}
-                  label={label}
+                  label={<Trans>{label}</Trans>}
               />
           )
         })}

@@ -4,6 +4,8 @@ import * as actions from '../store/actions'
 
 import { Advertisements } from '../components/advertisements/Advertisements'; 
 import TableList from "../components/table";
+import { withTranslation, Trans } from 'react-i18next';
+
 
 class Ads extends React.Component {
 
@@ -14,12 +16,17 @@ class Ads extends React.Component {
 
   render() {
     const { advertisements, users } = this.props
-    console.log('renderADS', advertisements, users)
+    const { t, i18n } = this.props;
+    const { language } =   i18n;
+    let url = '/profiles'
+    if (language != 'lt')
+      url = `/${language}/profiles`;
+
     return (
       <div className="container">
         <div className="row">
         <div className="col-md-6 p-3">
-        <h5 className="card-title">Advertisements</h5>
+        <h5 className="card-title"><Trans>Advertisements</Trans></h5>
           <Advertisements
             advertisements={advertisements}
             advCallback={()=> {}}
@@ -30,9 +37,10 @@ class Ads extends React.Component {
           />
         </div>
           <div className="col-md-6 p-3">
-          <h5 className="card-title">Users</h5>
+          <h5 className="card-title"><Trans>Users</Trans></h5>
             <TableList 
                 items={users} 
+                url={url}
             />
           </div>
         </div>
@@ -47,4 +55,8 @@ function mapStateToProps({ users: {users}, advertisements: {advertisements}}) {
       advertisements
   }
 }
-export default connect(mapStateToProps, actions)(Ads)
+
+export default withTranslation()(connect(
+  mapStateToProps,
+  actions
+)(Ads));

@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
 import React, {Component} from 'react'
-import { BrowserRouter, Route} from 'react-router-dom'
+import { BrowserRouter, Route } from 'react-router-dom'
 import {connect} from 'react-redux'
 import * as actions from '../store/actions'
 
@@ -34,6 +34,10 @@ import { Header as HeaderBtn, HeaderHeading} from '../components/header';
 import ScrollIntoView from '../hoc/scrollIntoView';
 import TableList from "../components/table";
 
+import { useTranslation, withTranslation, Trans, Translation } from 'react-i18next';
+import i18next from 'i18next'
+import i18n from '../i18n'
+
 function mainRouted(isLoged, advertisements, users) {
   const MainPage2 = props => {
     return (
@@ -63,38 +67,64 @@ class App extends Component {
       return this.props.history.location.pathname
     }
 
+    detectLanguage(lang = 'lt') {
+      const { i18n } = this.props;
+      const language =   i18next.language;
+      
+      if (lang != language) {
+        i18next.changeLanguage(lang);
+      }
+    }
+
+
+
     render () {
-      console.log('propsadvUser', this.props.users)
+      const { i18n } = this.props;
+
       const isLoged = (this.props.auth && this.props.auth._id);
         return (
                 <BrowserRouter>
                   <ScrollIntoView>
-                      <Header/>
+                      {/*<Header/>*/}
                       {/*<Map/>*/}
                       {/*<Categories/>*/}
                       {/*<HeaderHeading isLoged={isLoged} />*/}
-                      <Route path="/" exact component={HeaderHeading}/>
-                        <Route path="/" exact component={HeaderBtn}/>
-                        <Route path="/" exact component={Ads}/>
-                        <Route path="/" exact component={mainRouted(isLoged)}/>
 
-                      <div className="container">
 
-                        <Route path="/surveys" exact component={Dashboard} />
-                        <Route path="/surveys/new" component={SurveyNew} />
-                        {/*<Route path="/profile" exact component={Profile}/>*/}
-                        <Route path="/profiles" exact component={Users}/>
-                        <Route path="/advertisements" exact component={Advertisements}/>
-                        <Route path="/advertisements/:id" exact component={Advertisement}/>
-                        <Route path="/profiles/:id" exact component={Profile}/>
-                        <Route path="/profiles/:id/rates" exact component={Rates}/>
-                        <Route path="/profiles/:id/rate/:message_thread_id" exact component={Rate}/>
-                        {isLoged ?
-                          <Route path="/user" component={User}/>
-                        :
-                          <Route path="/login" exact component={LoginPassword} />
-                        }
-					            </div>
+                      
+
+                        <Route path="/:lang(en|lt|ru)?" render={({ match: { url, params: {lang} } }) => {
+                          this.detectLanguage(lang);
+                          return (
+                          <>
+                          <Route path={`${url}/`} component={Header}/>
+                          <div className="container">
+                            
+                            <Route path={`${url}/`} exact component={HeaderHeading}/>
+                            <Route path={`${url}/`} exact component={HeaderBtn}/>
+                            <Route path={`${url}/`} exact component={Ads}/>
+                            <Route path={`${url}/`} exact component={mainRouted(isLoged)}/>
+
+                            <Route path={`${url}/surveys`} component={Dashboard} exact />
+
+                            <Route path={`${url}/surveys/new`} component={SurveyNew} />
+                            {/*<Route path="/profile" exact component={Profile}/>*/}
+                            <Route path={`${url}/profiles`} exact component={Users}/>
+                            <Route path={`${url}/advertisements`} exact component={Advertisements}/>
+                            <Route path={`${url}/advertisements/:id`} exact component={Advertisement}/>
+                            <Route path={`${url}/profiles/:id`} exact component={Profile}/>
+                            <Route path={`${url}/profiles/:id/rates`} exact component={Rates}/>
+                            <Route path={`${url}/profiles/:id/rate/:message_thread_id`} exact component={Rate}/>
+                            {isLoged ?
+                              <Route path={`${url}/user`} component={User}/>
+                            :
+                              <Route path={`${url}/login`} exact component={LoginPassword} />
+                            }
+                              </div>
+                            </>
+                          )}} 
+                        />
+					            
 
                       <Footer/>
                       <div className="to-top">

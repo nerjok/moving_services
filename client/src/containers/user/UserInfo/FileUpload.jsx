@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Trans } from 'react-i18next';
 
 
 //change ProfilePhoto
@@ -61,7 +62,7 @@ class FileUpload extends Component {
             </div>
             </div>
 
-            <button className={"btn btn-sm btn-outline-success"} onClick={this.submitForm}>Submit Photos</button>
+            <button className="btn btn-sm btn-outline-dark" onClick={this.submitForm}><Trans>Submit</Trans></button>
       </div>
     )
   }

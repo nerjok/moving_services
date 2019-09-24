@@ -1,13 +1,14 @@
 import React, { useReducer } from 'react';
 import {connect } from 'react-redux';
+import { Trans } from 'react-i18next';
 import _ from 'lodash';
 
 import { updateUserPassw } from '../../../store/actions/index';
 
 const FIELDS = [ 
-  {name: 'newPassword', type: 'password', title: 'New password:', disabled: false},
-  {name: 'repeatPassword', type: 'password', title: 'Repeat password:', disabled: false},
-  {name: 'currentPassword', type: 'password', title: 'Current password:', disabled: false}
+  {name: 'newPassword', type: 'password', title: 'New password', disabled: false},
+  {name: 'repeatPassword', type: 'password', title: 'Repeat password', disabled: false},
+  {name: 'currentPassword', type: 'password', title: 'Current password', disabled: false}
 ]
 
 export const UpdatePassword = (props) => {
@@ -39,12 +40,12 @@ export const UpdatePassword = (props) => {
       <>
         {_.map(FIELDS, ({name, type, title, value, disabled}) => <React.Fragment key={name}>
           <div className="form-group">
-            <label htmlFor={name}>{title}</label>
+            <label htmlFor={name}><Trans>{title}</Trans></label>
             <input name={name} type={type} className="form-control" id={name} onChange={changeValue}/>
           </div>
         </React.Fragment>
         )}
-        <button type="button" onClick={submitData} className="btn btn-primary">Submit</button>
+        <button type="button" onClick={submitData} className="btn btn-sm btn-outline-dark"><Trans>Submit</Trans></button>
       </>
   )
 }

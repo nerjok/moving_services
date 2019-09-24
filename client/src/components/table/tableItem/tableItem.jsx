@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 
-export const TableItem = ({name, email, _id}) => {
+export const TableItem = ({name, email, _id, url}) => {
 
   return (
         <div className="row advertisements-row advertisements-row--red">
@@ -21,7 +21,7 @@ export const TableItem = ({name, email, _id}) => {
           </div>
           <div className="col-md-3 flex">
             <div className="advertisements-row__info-txt">
-              <Link to={`/profiles/${_id}`} className="btn btn-sm btn-outline-info">
+              <Link to={`${url}/${_id}`} className="btn btn-sm btn-outline-info">
                 <FontAwesomeIcon icon={faSearch} size="lg" style={{color: 'lightblue'}} />
               </Link>
               <a href="#ff" className="btn btn-sm btn-outline-danger m-1">

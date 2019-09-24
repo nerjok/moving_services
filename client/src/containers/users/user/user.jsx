@@ -7,6 +7,8 @@ import Breadcrumb from '../../../components/breadcrumb';
 import Spinner from '../../../components/spinner';
 import ImageGallery from "react-image-gallery";
 
+import { withTranslation, Trans } from 'react-i18next';
+
 import {
   faEnvelope, faCity, faCalendar
 } from "@fortawesome/free-solid-svg-icons";
@@ -48,9 +50,18 @@ export const User = (props) => {
     return <Spinner/> 
   const { name, work_photos } = user
     console.log("userPAge", props.user)
+
+  const parentPath = () => {
+      let  { url } = props.match;
+      let ats = url.slice(0, url.lastIndexOf('/'))
+      //console.log('url atc' ,ats);
+      return ats
+  }
+
+  const url = parentPath();
   return (
     <>
-    <Breadcrumb links={[{link: "/profiles", title: "Users"}, {link: "#", title: "User"}]} />
+    <Breadcrumb links={[{link: url, title: <Trans>Users</Trans>}, {link: "#", title: <Trans>Profile</Trans>}]} />
     <div className="row" style={{marginTop: '2rem', marginBottom: '2rem'}}>
 
 
@@ -78,7 +89,7 @@ export const User = (props) => {
             {Array.from(USER_INPUTS, ({title, name}) => {
               if (!props.user[name])
                 return null;
-            return <React.Fragment key={`maininf-${name}`}><b>{title}:</b><p  className="mt-2" key={title}> {props.user[name] || ''}</p></React.Fragment>
+            return <React.Fragment key={`maininf-${name}`}><b><Trans>{title}</Trans>:</b><p  className="mt-2" key={title}> {props.user[name] || ''}</p></React.Fragment>
             })}
 
         </div>
@@ -100,7 +111,7 @@ export const User = (props) => {
                           size="lg"
                           style={{ color: "gray" }}
                         />
-                        <b> {title}</b>
+                        <b> <Trans>{title}</Trans></b>
                         <span className="mt-1  ml-4 d-block">{txt}</span>
                       </div>
                   );

@@ -1,6 +1,8 @@
 import React, { useState} from 'react';
 import { Switch, Route, Link} from 'react-router-dom';
 import { connect } from 'react-redux';
+import { withTranslation, Trans } from 'react-i18next';
+import i18next from 'i18next';
 
 import UserInfo from './UserInfo/UserInfo';
 import MyAdvertisements from './myAdvertisements/MyAdvertisements';
@@ -16,7 +18,13 @@ import ContactList from './contactList/contactList';
 
  export const User = props => {
   // eslint-disable-next-line 
-  const [breadcrumb, setBreadcrumb] = useState([{link: '/user', title: "User page"}])
+  const { language } =   i18next;
+  let url = '';
+  if (language != 'lt') {
+    url = `/${language}`;
+  }
+  console.log('language', language, url)
+ const [breadcrumb, setBreadcrumb] = useState([{link: '/user', title: <Trans>Profile</Trans>}])
   return (
     <>
     <Breadcrumb links={breadcrumb}/>
@@ -24,33 +32,33 @@ import ContactList from './contactList/contactList';
         <div className="col-md-9 mb-1">
 
             <Switch>
-              <Route path="/user/advertisements" exact component={MyAdvertisements} />
-              <Route path="/user/advertisements/new" exact component={NewAdvertisement} />
-              <Route path="/user/advertisements/:id" exact component={MyAdvertisement} />
-              <Route path="/user/messages" exact component={Messages} />
-              <Route path="/user/contacts" exact component={ContactList} />
-              <Route path="/user/messages/:id" exact component={MessagesList} />
-              <Route path="/user/works" exact component={cardComponent(Advertisements)} />
-              <Route path="/user" component={UserInfo} />
+              <Route path="/:lang(en|lt|ru)?/user/advertisements" exact component={MyAdvertisements} />
+              <Route path="/:lang(en|lt|ru)?/user/advertisements/new" exact component={NewAdvertisement} />
+              <Route path="/:lang(en|lt|ru)?/user/advertisements/:id" exact component={MyAdvertisement} />
+              <Route path="/:lang(en|lt|ru)?/user/messages" exact component={Messages} />
+              <Route path="/:lang(en|lt|ru)?/user/contacts" exact component={ContactList} />
+              <Route path="/:lang(en|lt|ru)?/user/messages/:id" exact component={MessagesList} />
+              <Route path="/:lang(en|lt|ru)?/user/works" exact component={cardComponent(Advertisements)} />
+              <Route path="/:lang(en|lt|ru)?/user" component={UserInfo} />
 
             </Switch>
         </div>
         <div className="col-md-3 ">
           <UserCard user={props.auth} hideLinks={true}>
             <div className="p-2 mt-2">
-            <Link to={'/user'}>UserInfo</Link>
+            <Link to={`${url}/user`}><Trans>User info</Trans></Link>
             <br/>
-            <Link to={'/user/advertisements'} style={{zIndex: 1}}>My suggestions</Link>
+            <Link to={`${url}/user/advertisements`} style={{zIndex: 1}}><Trans>My suggestions</Trans></Link>
             <br/>
-            <Link to={'/user/messages'} style={{zIndex: 1}}>My messages</Link>
+            <Link to={`${url}/user/messages`} style={{zIndex: 1}}><Trans>My messages</Trans></Link>
             <br/>
-            <Link to={'/user/contacts'} style={{zIndex: 1}}>Contacts</Link>
+            <Link to={`${url}/user/contacts`} style={{zIndex: 1}}><Trans>ContactList</Trans></Link>
             <br/>
-            <Link to={'/user/advertisements/new'} style={{zIndex: 1}}>new Advertisement</Link>
+            <Link to={`${url}/user/advertisements/new`} style={{zIndex: 1}}><Trans>New Advertisement</Trans></Link>
+            {/*<br/>
+            <Link to={`${url}/user/works`}>My works</Link>*/}
             <br/>
-            <Link to={'/user/works'}>My works</Link>
-            <br/>
-            <a key="logout" href="/api/logout" className="btn btn-danger m-3">Log out</a>
+            <a key="logout" href="/api/logout" className="btn btn-danger m-3"><Trans>Log out</Trans></a>
             </div>
           </UserCard>  
         </div>
@@ -65,5 +73,4 @@ function mapStateToProps({auth}) {
   }
 }
 
-export default connect(mapStateToProps, {})(User)
-//export User;
+export default withTranslation()(connect(mapStateToProps, {})(User))

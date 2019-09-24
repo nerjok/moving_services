@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { myAdvertisements, deleteAdvertisement } from '../../../store/actions'
 import { Advertisements } from '../../../components/advertisements/Advertisements'
 import ReactPaginate from 'react-paginate'
+import { Trans } from 'react-i18next';
 
 export class MyAdvertisements extends React.Component {
 
@@ -45,8 +46,8 @@ export class MyAdvertisements extends React.Component {
                           transform: 'translate(-50%, -50%)'
                         }}>
                       <ReactPaginate
-                      previousLabel={'previous'}
-                      nextLabel={'next'}
+                      previousLabel={<Trans>Previous</Trans>}
+                      nextLabel={<Trans>Next</Trans>}
                       breakLabel={'...'}
                       breakClassName={'break-me'}
                       pageCount={this.props.total}

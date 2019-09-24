@@ -2,6 +2,7 @@
 import React from 'react'
 import { fetchAdvertisement, updateAdvertisement, uploadPhoto, deletePhoto, removeAdvertisement } from '../../../../store/actions'
 import { connect } from 'react-redux'
+import { Trans } from 'react-i18next';
 
 import AdvertisementForm from '../updateForm/AdvertisementUpdateForm'
 import FileUpload from './FileUpload'
@@ -23,15 +24,15 @@ export class MyAdvertisement extends React.Component {
 
     return (
       <>
-        <div styles={{display:'block', background: 'gray'}}><b>Title:</b> {title}</div>        
+        <div styles={{display:'block', background: 'gray'}}><b><Trans>Title</Trans>:</b> {title}</div>        
         <br/>
-        <div><b>Description</b> {description}</div>
-        <div><b>Skils and experience required</b>{skills}</div>
+        <div><b><Trans>Description</Trans></b> {description}</div>
+        <div><b><Trans>Skils and experience required</Trans></b>{skills}</div>
               <br/>
-              <div><b>Time information</b>{time}</div>
+              <div><b><Trans>Date and Time</Trans></b>{time}</div>
               <br/>
-              <div><b>Payment information</b>{payment}</div>
-              <div><b>Tools required</b>{tools}</div>
+              <div><b><Trans>Payment information</Trans></b>{payment}</div>
+              <div><b><Trans>Tools required</Trans></b>{tools}</div>
               <br/>
       </>
     )
@@ -77,13 +78,13 @@ export class MyAdvertisement extends React.Component {
     return (
       <>
         <Tabs defaultActiveKey="home" transition={false} id="noanim-tab-example" className="user-page" unmountOnExit={true}>
-        <Tab eventKey="home" title="Advertisement">
+        <Tab eventKey="home" title={<Trans>Advertisement</Trans>}>
           {this.show()}
         </Tab>
-        <Tab eventKey="profile" title="Edit">
+        <Tab eventKey="profile" title={<Trans>Edit</Trans>}>
           {this.update()}
         </Tab>
-        <Tab eventKey="contact" title="Photos">
+        <Tab eventKey="contact" title={<Trans>Photos</Trans>}>
           {this.photos()}
         </Tab>
       </Tabs>

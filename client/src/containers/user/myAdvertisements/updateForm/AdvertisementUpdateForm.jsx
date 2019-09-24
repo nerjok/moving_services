@@ -5,6 +5,7 @@ import FIELDS from './formFields'
 import { AdvertisementField } from './advertisementField'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
+import { Trans } from 'react-i18next';
 
 
 import { updateAdvertisement, newAdvertisement, removeAdvertisement } from '../../../../store/actions'
@@ -85,14 +86,14 @@ class AdvertisementForm extends React.Component {
                     name={name}
                     options={['status', 'workType'].includes(name) ? options : []}
                     component={fieldComp}
-                    label={label}
+                    label={<Trans>{label}</Trans>}
                 />
             )
           })}
 
           <br/>
           <br/>
-          <button type="submit" className="btn btn-outline-dark">Submit</button>
+          <button type="submit" className="btn btn-sm btn-outline-dark"><Trans>Submit</Trans></button>
         </form>
       </Card>
   )

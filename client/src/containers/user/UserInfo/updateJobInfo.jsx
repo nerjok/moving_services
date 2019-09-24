@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Trans } from 'react-i18next';
 
 import { connect } from 'react-redux'
 import { updateData } from '../../../store/actions/index'
@@ -34,7 +35,7 @@ const UpdateJobInfo = (props) => {
 
 
 
-  <h4 className="mb-3">Work search</h4>
+  <h4 className="mb-3"><Trans>Work search</Trans></h4>
   <hr/>
   {_.map(SEARCH_JOB_INPUTS, ({name, type, title, value, disabled, options, multiple}) => {
     let component = type == 'textArea' ? TextAreaField : type == 'select' ? SelectField : UserField; 
@@ -48,12 +49,12 @@ const UpdateJobInfo = (props) => {
           component={component}
           options={options}
           multiple={multiple}
-          label={title}
+          label={<Trans>{title}</Trans>}
         />
       )}
     )}
 
-          <button type="submit" className="btn btn-outline-dark">Submit</button>
+          <button type="submit" className="btn btn-sm btn-outline-dark"><Trans>Submit</Trans></button>
         </form>
       </>
   )

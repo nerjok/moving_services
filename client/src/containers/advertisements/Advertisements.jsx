@@ -11,6 +11,7 @@ import Search from '../../components/search';
 import Breadcrumb from '../../components/breadcrumb';
 import Spinner from '../../components/spinner';
 import FilterCard from '../../components/filtercard';
+import { withTranslation } from 'react-i18next';
 
 export class Advertisements extends React.Component {
 
@@ -69,11 +70,16 @@ export class Advertisements extends React.Component {
   }
 
   render() {
+    let  { url } = this.props.match;
+    if (url.length <=1 ) {
+      url = '';
+    }    
+    const { t } = this.props;
 
     return (
       <>
-        {this.props.from !== 'index' ? <Breadcrumb links={[{link:'/advertisements', title: "Advertisements"}]}/> : null }
-        <Link to={"/user/advertisements/new"} className="btn btn-sm btn-outline-success m-3 mr-0 float-right">New Advertisement</Link>
+        {this.props.from !== 'index' ? <Breadcrumb links={[{link: url, title: t('Advertisements')}]}/> : null }
+        <Link to={"/user/advertisements/new"} className="btn btn-sm btn-outline-success m-3 mr-0 float-right">{t('New Advertisement')}</Link>
 
         <div className="clearfix"></div>
         {this.props.from !== 'index' ? <Search filterAdvertisements={this.searchAdvertisements}/> : null}
@@ -102,8 +108,8 @@ export class Advertisements extends React.Component {
                           transform: 'translate(-50%, -50%)'
                         }}>
                       <ReactPaginate
-                      previousLabel={'previous'}
-                      nextLabel={'next'}
+                      previousLabel={t('Previous')}
+                      nextLabel={t('Next')}
                       breakLabel={'...'}
                       breakClassName={'break-me'}
                       pageCount={this.props.total}
@@ -126,24 +132,24 @@ export class Advertisements extends React.Component {
           <div className="col-md-3">
 
             <FilterCard 
-              title={"Time info"} 
+              title={t("Time info")} 
               items={[
-                {title: 'Part Time', color: 'red', value: 1},
-                {title: 'Full Time', color: 'green', value: 2},
-                {title: 'Freelance', color: 'blue', value: 3},
-                {title: 'Flexible Hours', color: 'gray', value: 4},
+                {title: t('Part Time'), color: 'red', value: 1},
+                {title: t('Full Time'), color: 'green', value: 2},
+                {title: t('Freelance'), color: 'blue', value: 3},
+                {title: t('Flexible Hours'), color: 'gray', value: 4},
               ]}
               name="workType"
               filterChange={this.changeStatus}
             />
 
             <FilterCard 
-              title={"Status"} 
+              title={t("Status")} 
               items={[
-                {title: 'Available', color: 'green', value: 1},
-                {title: 'Asap', color: 'red', value: 2},
-                {title: 'Pending', color: 'blue', value: 3},
-                {title: 'Near Future', color: 'gray', value: 4},
+                {title: t('Available'), color: 'green', value: 1},
+                {title: t('Asap'), color: 'red', value: 2},
+                {title: t('Pending'), color: 'blue', value: 3},
+                {title: t('Near Future'), color: 'gray', value: 4},
               ]}
               name="status"
               filterChange={this.changeStatus}
@@ -172,4 +178,4 @@ export class Advertisements extends React.Component {
 
 
 const mapStateToProps = ({advertisements: {advertisements, total, page}}) => ({advertisements, total, page });
-export default connect(mapStateToProps, {fetchAdvertisements, deleteAdvertisement, filterAdvertisements})(Advertisements)
+export default withTranslation()(connect(mapStateToProps, {fetchAdvertisements, deleteAdvertisement, filterAdvertisements})(Advertisements))

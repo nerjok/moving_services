@@ -1,8 +1,18 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
  // eslint-disable-next-line jsx-a11y/anchor-is-valid
-import React from 'react'
+import React from 'react';
+import { Trans } from 'react-i18next';
+import i18next from 'i18next';
+import { Link} from 'react-router-dom';
+
 
 export const Footer = (props) => {
+
+  const { language } =   i18next;
+  let url = '';
+  if (language != 'lt') {
+    url = `/${language}`;
+  }
 
   return (
     <section className="footer">
@@ -10,40 +20,35 @@ export const Footer = (props) => {
              
           <div className="row">
             <div className="col-md-6">
-              <h5>About</h5>
+              <h5><Trans>About</Trans></h5>
               <p className="footer__text">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima, assumenda ipsum quibusdam necessitatibus 
-                quo quia aut neque adipisci debitis! Voluptatem nostrum cumque quo quod eos corrupti, 
-                error corporis iusto laudantium.
+                <Trans>About description</Trans>
               </p>
-              <a href="#about" className="more-info">More &rarr;</a>
+              <a href="#about" className="more-info"><Trans>More</Trans> &rarr;</a>
             </div>
             <div className="col-md-2">
-              <h5>For seakers</h5>
+              <h5><Trans>For seakers</Trans></h5>
               <ul className="footer__list">
                
-                <li><a href="#" className="white-link">Types</a></li>
-                <li><a href="#" className="white-link">Proposals</a></li>
-                <li><a href="#" className="white-link">Search</a></li>
-                <li><a href="#" className="white-link">My tasks</a></li>
+                <li><a href="#" className="white-link"><Trans>Types</Trans></a></li>
+                <li><Link to={`${url}/profiles`} className="white-link"><Trans>Users</Trans></Link></li>
+                <li><a href="#" className="white-link"><Trans>My tasks</Trans></a></li>
               </ul>
             </div>
             <div className="col-md-2">
-              <h5>For employees</h5>
+              <h5><Trans>For employees</Trans></h5>
               <ul className="footer__list">
-                <li><a href="#" className="white-link">Seekers</a></li>
-                <li><a href="#" className="white-link">Jobs</a></li>
-                <li><a href="#" className="white-link">Eployess</a></li>
-                <li><a href="#" className="white-link">My tasks</a></li>
+                <li><Link to={`${url}/advertisements`} className="white-link"><Trans>Advertisements</Trans></Link></li>
+                <li><a href="#" className="white-link"><Trans>Messages</Trans></a></li>
+                <li><a href="#" className="white-link"><Trans>My works</Trans></a></li>
               </ul>
             </div>
             <div className="col-md-2">
-              <h5>Other</h5>
+              <h5><Trans>Other</Trans></h5>
               <ul className="footer__list">
-                <li><a href="#" className="white-link">Main</a></li>
-                <li><a href="#" className="white-link">Rules</a></li>
-                <li><a href="#" className="white-link">Blog</a></li>
-                <li><a href="#" className="white-link">Contacts</a></li>
+                <li><a href="#" className="white-link"><Trans>Rules</Trans></a></li>
+                <li><a href="#" className="white-link"><Trans>Blog</Trans></a></li>
+                <li><a href="#" className="white-link"><Trans>Contacts</Trans></a></li>
               </ul>
             </div>
 
