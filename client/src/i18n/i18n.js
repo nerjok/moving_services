@@ -1,5 +1,5 @@
 import i18n from 'i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
+//import LanguageDetector from 'i18next-browser-languagedetector';
  
 i18n
   .use('lt')
@@ -100,7 +100,6 @@ i18n
           "ContactList": "Contacts list",
 
           "Log out": "Log out",
-          "ContactList": "Contacts list",
           "My messages": "My messages",
           "My suggestions": "My suggestions",
           "User info": "User info",
@@ -121,7 +120,11 @@ i18n
           "Rules": "Rules",
           "Blog": "Blog",
           "Contacts": "Contacts",
-          
+          "Forgot password": "Forgot password",
+          "search phrase": "Search phrase",
+          "Please fulfil field to continue": "Please fulfil field to continue",
+          "New password": "New password",
+
           "Welcome to React.js": "Welcome to React.js",
           "Declarative": "Declarative eng",
           "Translation cool": 'english translation',
@@ -248,12 +251,22 @@ i18n
           "Types": "Patarimai",
           "My tasks": "Mano pasiūlymai",
           "Messages": "Pranešimai",
-          "My works": "sožiulomos paslaugos",
+          "My works": "Siulomos paslaugos",
           "Rules": "Taisyklės",
           "Blog": "Tinklaraštis",
           "Contacts": "Kontaktai",
+          "search phrase": "Raktažodis",
 
+          "Register": "Registruotis",
+          "Welcome": "Sveiki sugrįžę",
+          "Please login by choosing the folowing methods": "Prašome prisijungti pasirinktu būdais",
+          "Log in with Facebook": "Facebook",
+          "Log in with Google": "Google",
+          "Please fill the folowing fields to register": "Užpildykite registracijos laukus",
+          "Forgot password": "Priminti slaptažodį",
+          "Please fulfil field to continue": "Užpildykite reikalinus laukus",
 
+          "New password": "Naujas slaptazodis",
 
           "Welcome to React.js": "Καλώς 'Ηρθατε στο React.js!",
           "Declarative": "Δηλωτικό lithuanian",

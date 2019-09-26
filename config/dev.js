@@ -10,5 +10,6 @@ module.exports = {
     stripeSecretKey: "sk_test_Il98QoV7o79ygZBZwQvqoHCV",
     sendGridKey: "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",
     redirectDomain: 'http://localhost:5000',
-    baseUrl: '127.0.0.1:5000'
+    baseUrl: '127.0.0.1:5000',
+    clientUrl:  'https://nlpnlp.localtunnel.me'
 };

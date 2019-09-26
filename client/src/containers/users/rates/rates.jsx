@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import UserCard from '../../../components/userCard';
-import PropTypes from 'prop-types';
 import { fetchUserProfile, removeUserProfile, fetchRates } from '../../../store/actions';
 import Spinner from '../../../components/spinner';
 import Breadcrumb from '../../../components/breadcrumb';
 import { Link} from 'react-router-dom';
+//import PropTypes from 'prop-types';
 
 export const Rates = (props) => {
   useEffect(() => {
@@ -14,7 +14,7 @@ export const Rates = (props) => {
       props.fetchRates(props.match.params.id);
     }
     return () => {props.removeUserProfile()};
-  }, [])
+  }, [props.fetchRates, props.fetchRates, props.match])
 
   if (!props.user)
     return <Spinner/> 

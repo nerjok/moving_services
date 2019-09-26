@@ -191,6 +191,9 @@ html {
 body {
   overflow-x: hidden; }
 
+.full-width {
+  width: 100%; }
+
 .to-top {
   position: fixed;
   bottom: 1rem;
@@ -217,7 +220,7 @@ body {
   justify-content: center; }
 
 #entrance-point .nav-tabs a {
-  width: 50%; }
+  width: 33.333%; }
 
 .tab-content {
   border: 1px solid #dee2e6;

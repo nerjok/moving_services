@@ -12,9 +12,21 @@ const pagOptions = {
 };
 
 const showUsers = async (req, res, next) => {
-  const page = req.query.page || 1;
+  
 
+  const page = req.query.page || 1;
+  const { keyword } = req.query
   const searchOpt = {}
+  if (keyword) {
+    searchOpt.$or = [
+                      {description: { $regex: '.*' + keyword + '.*' }}, 
+                      {name: { $regex: '.*' + keyword + '.*' }},
+                      {email: { $regex: '.*' + keyword + '.*' }},
+                      {experience: { $regex: '.*' + keyword + '.*' }},
+                      {scope: { $regex: '.*' + keyword + '.*' }},
+                      {sphere: { $regex: '.*' + keyword + '.*' }},
+                    ];
+  }
   if (req.query.status)
     searchOpt.status = req.query.status;
   if (req.query.city)

@@ -76,7 +76,7 @@ class UserInfo extends React.Component {
           { auth.work_photos && auth.work_photos.map(photo => {
             
                       return (<div key={photo} style={{position:'relative', width: "90%", margin: "5px"}} key={photo}>
-                      <img src={`/${photo}`}  width={"100%"} alt="image not displayd"/>
+                      <img src={`/${photo}`}  width={"100%"}/>
                       <button
                         className="btn btn-sm btn-danger" 
                         photo_id={photo} 

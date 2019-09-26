@@ -48,18 +48,14 @@ export class Advertisements extends React.Component {
   }
 
   searchAdvertisements(location, distance, keyword) {
-    this.props.filterAdvertisements(this.state.page, location, distance, keyword, this.state.status, this.state.workType)
-    console.log('[[filterAdvertisements]]', location, distance, keyword, this.props.filterAdvertisements);
+    this.props.filterAdvertisements(0, location, distance, keyword, this.state.status, this.state.workType)
   }
 
   changeStatus({target}) {
-    console.log('changeTime', target)
     const {value, checked } = target;
     const name = target.getAttribute('name');
 
     var status  = this.state[name].slice()
-    console.log('statusState', name,  status, typeof status)
-
 
       if (!checked) {
         status = status.filter(itm => itm !== value);

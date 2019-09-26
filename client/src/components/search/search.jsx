@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { loadModules } from "esri-loader";
+import i18next from 'i18next';
 
 
 const styles = {
@@ -82,6 +83,11 @@ export const Search = (props) => {
         setLocation([latitude, longitude])
         return true;
       });
+
+      searchWidget.on("search-clear", function(event){
+        setLocation([]);
+      });
+
     });
   }, [])
   
@@ -91,11 +97,7 @@ export const Search = (props) => {
 
   const changeVal = () => {}
   
-  const submitSearch = () => {
-    //console.log('Search variables', location, distance, keyword)
-    props.filterAdvertisements(location, distance, keyword);
-  }
-  
+  const submitSearch = () => props.filterAdvertisements(location, distance, keyword);
 
   return (
     <div 
@@ -104,40 +106,29 @@ export const Search = (props) => {
       <div id="locus-search" style={{height:"1px", width: "100%", opacity: 0}}></div>
 
       <div className="row">
-        <div className="col-md-6">
+        <div className="col-md-12">
           <div className="row">
             <div className="col-md-12">
               <div className="form-group">
-                <input type="text" className="form-control form-control-sm" name="keyword" placeholder="Enter keyword" 
-                style={styles.input}
-                onChange={setSearchStrings}
-                />
+                <input 
+                  type="text" 
+                  className="form-control form-control-sm" 
+                  name="keyword" 
+                  placeholder={i18next.t("search phrase")} 
+                  style={styles.input}
+                  onChange={setSearchStrings}
+                  />
               </div>
             </div>
-
-            <div className="col-md-12 mt-2" >
-              <div className="form-group">
-                <select className="form-control form-control-sm" name="city" tabIndex="-98" style={styles.input}>
-                      <option value="">Category</option>
-                      <option value="1">Services</option>
-                      <option value="2">Transport</option>
-                      <option value="3">Short works</option>
-                      <option value="4">Teaching</option>
-                      <option value="4">HomeServices</option>
-                    </select>
-                </div>
-            </div>
-            
           </div>
         </div>
-        <div className="col-md-6">
-          <div className="row">
         <div className="col-md-12">
+          <div className="row">
+        <div className="col-md-6">
           <div id="search-input"></div>
         </div>
 
-        <div className="col-md-12" >
-        <br/>
+        <div className="col-md-4" >
           <div className="input-range-container">
             <input 
               type="range" 
@@ -152,48 +143,25 @@ export const Search = (props) => {
             />
             <output className={"input__range__output"} id="rangevalue2">{distance} km.</output>
           </div>
-</div>
-</div>
-</div>
+        </div>
 
-          <div className="col-md-11">{/*
-          <div className="row" styles={styles.whiteCollor}>
-              <div className="col-md-2">
-                <label htmlFor="adv-prices">
-                <input className="input__checkbox__input" type="checkbox" id="adv-prices" name="prices"/>
-                <span className="input__checkbox"></span>
-                  With prices
-                </label>
-              </div>
-              <div className="col-md-2">
-                <label htmlFor="adv-bill">
-                  <input className="input__checkbox__input" type="checkbox" id="adv-bill" name="bill"/>
-                  <span className="input__checkbox"></span>
-                  Required bill
-                </label>
-              </div>
-              <div className="col-md-2">
-                <label htmlFor="adv-hours">
-                  <input className="input__checkbox__input" type="checkbox" id="adv-hours" name="hours"/>
-                  <span className="input__checkbox"></span>
-                  Flexible Hours
-                </label>
-              </div>
-          </div>*/}
+        <div className="col-md-2">
+          <div className="form-group">
+            <button type="submit" 
+              data-ajax-response="map" 
+              data-ajax-data-file="assets/external/data_2.php" 
+              data-ajax-auto-zoom="1" 
+              style={styles.input}
+              onClick={submitSearch}
+              className=" form-control-sm btn btn-sm btn-primary form-control"
+            >
+              {i18next.t('Filter')}
+            </button>
           </div>
-          <div className="col-md-1">
-            <div className="form-group">
-              <button type="submit" 
-                data-ajax-response="map" 
-                data-ajax-data-file="assets/external/data_2.php" 
-                data-ajax-auto-zoom="1" 
-                style={styles.input}
-                onClick={submitSearch}
-                className=" form-control-sm btn btn-sm btn-primary">
-                  Search
-                </button>
-              </div>
-            </div>
+        </div>
+      </div>
+    </div>
+
       </div>
     </div>
   )

@@ -8,9 +8,9 @@ import { Link} from 'react-router-dom';
 
 export const Footer = (props) => {
 
-  const { language } =   i18next;
+  const { language } =  i18next;
   let url = '';
-  if (language != 'lt') {
+  if (language !== 'lt') {
     url = `/${language}`;
   }
 

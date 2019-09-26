@@ -3,7 +3,7 @@ import { Trans } from 'react-i18next';
 
 import { connect } from 'react-redux'
 import { updateData } from '../../../store/actions/index'
-import { reduxForm, Field, SubmissionError, getFormValues } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import _ from 'lodash'
 
@@ -15,13 +15,13 @@ import { SelectField } from './selectField';
 
 const UpdateUser = (props) => {
 
+  const { auth } = props
   useEffect(() => {
-    const { auth } = props
     if (auth) {
       // eslint-disable-next-line no-lone-blocks
       {_.each(EDIT_INPUTS, ({name}) => props.initialValues[name] = auth[name])};
      }
-  }, [])
+  }, [auth, props.initialValues]);
   
   const submitForm = (values) => {
     props.updateData(values);
@@ -33,7 +33,7 @@ const UpdateUser = (props) => {
           onSubmit={props.handleSubmit(submitForm) }
         >
           {_.map(EDIT_INPUTS, ({name, type, title, value, disabled, options, multiple}) => {
-          let component = type == 'textArea' ? TextAreaField : type == 'select' ? SelectField : UserField; 
+          let component = type === 'textArea' ? TextAreaField : type === 'select' ? SelectField : UserField; 
 
             return (
               <Field

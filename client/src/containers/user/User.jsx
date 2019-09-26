@@ -20,7 +20,7 @@ import ContactList from './contactList/contactList';
   // eslint-disable-next-line 
   const { language } =   i18next;
   let url = '';
-  if (language != 'lt') {
+  if (language !== 'lt') {
     url = `/${language}`;
   }
   console.log('language', language, url)

@@ -2,8 +2,7 @@ import React, { useState} from 'react';
 import PropTypes from 'prop-types';
 
 export const ApplyJob = ({apply}) => {
-  let initText = 'Hi there, i would like to apply for provided advertisement. As description and time suis to me, \
-  but there some details i would like to get further, please let me know.';
+  let initText = "Hi there, i would like to apply for provided advertisement. As description and time suis to me, but there some details i would like to get further, please let me know.";
 
   const [text, setText] = useState(initText);
   
@@ -15,7 +14,7 @@ export const ApplyJob = ({apply}) => {
   }
 
   const disableMod = ({target}) => {
-    if (target.id == 'apply-job')
+    if (target.id === 'apply-job')
       document.location.hash = "";
   }
 

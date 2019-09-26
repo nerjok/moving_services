@@ -55,15 +55,12 @@ class Header extends Component {
     }
 
     changeLanguage = ({target}) => {
-      const { i18n } = this.props;
 
       const lang = target.getAttribute('lang')
       const language =   i18next.language;      
-      const { pathname } = window.location;
-      console.log('changeLanguage', lang, language)
       
-      if (lang != language) {
-        if (lang == 'lt')
+      if (lang !== language) {
+        if (lang === 'lt')
           window.location.href = '/';
         else
           window.location.href = `/${lang}`;
@@ -75,15 +72,15 @@ class Header extends Component {
 
       return (
         <div className="btn-group btn-group-sm" role="group" aria-label="Basic example">
-        <button type="button" onClick={this.changeLanguage} lang="lt" className={`btn btn-success ${language == 'lt' ? 'active' : ''}`}>Lt</button>
-        <button type="button" onClick={this.changeLanguage} lang="en" className={`btn btn-success ${language == 'en' ? 'active' : ''}`}>En</button>
-        <button type="button" onClick={this.changeLanguage} lang="ru" className={`btn btn-success ${language == 'ru' ? 'active' : ''}`}>Ru</button>
+        <button type="button" onClick={this.changeLanguage} lang="lt" className={`btn btn-success ${language === 'lt' ? 'active' : ''}`}>Lt</button>
+        <button type="button" onClick={this.changeLanguage} lang="en" className={`btn btn-success ${language === 'en' ? 'active' : ''}`}>En</button>
+        <button type="button" onClick={this.changeLanguage} lang="ru" className={`btn btn-success ${language === 'ru' ? 'active' : ''}`}>Ru</button>
       </div>
       )
     }
     render() {
       let { url } = this.props.match;
-      if (url.length <=1 ) {
+      if (url.length <= 1 ) {
         url = '';
       }
         return (

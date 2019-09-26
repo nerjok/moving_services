@@ -17,6 +17,10 @@ router.post('/auth/signup', auth.localSignup);
 
 router.post('/auth/login', auth.localLogin);
 
+router.post('/auth/forgot', auth.forgotPswd);
+
+router.post('/auth/reset_password', auth.reset_password);
+
 router.get('/auth/google', auth.googleAuth);
 
 router.get('/auth/google/callback', passport.authenticate('google'), auth.googleAuthCallback);

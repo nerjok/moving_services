@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withTranslation, Trans } from 'react-i18next';
+import { Trans } from 'react-i18next';
 
 class FileUpload extends Component {
 

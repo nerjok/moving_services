@@ -4,22 +4,23 @@ import { fetchMessagesThread } from '../../../store/actions';
 import { Trans } from 'react-i18next';
 import i18next from 'i18next';
 
-import Card from '../../../hoc/cardBorders';
 import { Link} from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart,  faSearch } from '@fortawesome/free-solid-svg-icons';
+
 
 const Messages = (props) => {
   const { language } =   i18next;
   let url = '';
-  if (language != 'lt') {
+  if (language !== 'lt') {
     url = `/${language}`;
   }
+    const { fetchMessagesThread } = props 
 
   useEffect(() => {
-    props.fetchMessagesThread();
-  }, [])
+    fetchMessagesThread();
+  }, [fetchMessagesThread])
+
   const { user: {_id: user_id } } = props;
+
   return (
     <>
       <div>
@@ -28,8 +29,8 @@ const Messages = (props) => {
               <div className="col-md-10 advertisements-row__description">
                 <small className="d-block mb-2">
                   <b><Trans>User</Trans>:</b> &nbsp;
-                  <Link to={`${url}/profiles/${(user_id == sender_id.id) ? receiver_id._id : sender_id._id}`} className="text-success">
-                    {(user_id == sender_id.id) ? receiver_id.name : sender_id.name}
+                  <Link to={`${url}/profiles/${(user_id === sender_id.id) ? receiver_id._id : sender_id._id}`} className="text-success">
+                    {(user_id === sender_id.id) ? receiver_id.name : sender_id.name}
                   </Link>
                   {updatedAt && <>&nbsp; | &nbsp;<span className="text-success">{new Date(updatedAt).toDateString()}</span></>}
                   {advertisement_id && <>&nbsp; | &nbsp;
@@ -37,7 +38,7 @@ const Messages = (props) => {
                     <b><Trans>View advertisement</Trans></b>
                   </Link></>}
                   &nbsp; | &nbsp;
-                  <Link to={`${url}/profiles/${(user_id == sender_id.id) ? receiver_id._id : sender_id._id}/rate/${_id}`} className="text-success">
+                  <Link to={`${url}/profiles/${(user_id === sender_id.id) ? receiver_id._id : sender_id._id}/rate/${_id}`} className="text-success">
                     <Trans>Rate User</Trans>
                   </Link>
                   &nbsp; | &nbsp; 
@@ -50,8 +51,8 @@ const Messages = (props) => {
                 </Link>
               </div>
               <div className="col-md-2 advertisements-row__description">
-                <Link to={`${url}/profiles/${(user_id == sender_id.id) ? receiver_id.id : sender_id.id}`} style={{zIndex: 1}}>
-                  <img src='/public/images/man_icon.svg' width="100px" alt='Image not found'/>
+                <Link to={`${url}/profiles/${(user_id === sender_id.id) ? receiver_id.id : sender_id.id}`} style={{zIndex: 1}}>
+                  <img src='/public/images/man_icon.svg' width="100px" alt="not displayed"/>
                 </Link>
               </div>
             </div>

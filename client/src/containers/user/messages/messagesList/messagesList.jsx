@@ -8,9 +8,10 @@ import { Trans } from 'react-i18next';
 
 const MessagesList = (props) => {
 
+  const { fetchMessages } = props
   useEffect(() => {
-    props.fetchMessages(props.match.params.id);
-  }, []);
+    fetchMessages(props.match.params.id);
+  }, [fetchMessages, props.match.params.id]);
 
   const sendMessage = (message) => {
     const message_thread_id = props.match.params.id;
@@ -33,7 +34,7 @@ const MessagesList = (props) => {
                     <b><Trans>View advertisement</Trans></b>
                   </Link></>}
                   <Link to={`/profiles/${(user_id === sender_id.id) ? receiver_id.id : sender_id.id}`} style={{zIndex: 1}}>
-                  <img src='/public/images/man_icon.svg' className="ml-3" width="50px" />
+                  <img src='/public/images/man_icon.svg' className="ml-3" width="50px" alt="not displayed"/>
                 </Link>
                 </span>}
 

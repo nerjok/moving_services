@@ -1,22 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import UserCard from '../../../components/userCard';
-import PropTypes from 'prop-types';
-import { fetchUserProfile, removeUserProfile, fetchRates, submitRate } from '../../../store/actions';
+import { fetchUserProfile, removeUserProfile, submitRate } from '../../../store/actions';
 import Spinner from '../../../components/spinner';
 import Breadcrumb from '../../../components/breadcrumb';
-import { Link} from 'react-router-dom';
+//import PropTypes from 'prop-types';
 
 export const Rate = (props) => {
   const [rate, setRate] = useState('');
   const [message, setMessage] = useState('');
-
+  const { match, fetchUserProfile, removeUserProfile } = props
   useEffect(() => {
-    if (props.match && props.match.params){
-      props.fetchUserProfile(props.match.params.id);
+    if (match && match.params){
+      fetchUserProfile(match.params.id);
     }
-    return () => {props.removeUserProfile()};
-  }, [])
+    return () => {removeUserProfile()};
+  }, [match, fetchUserProfile, removeUserProfile]);
 
 
 
@@ -28,9 +27,9 @@ export const Rate = (props) => {
     if (rate && message) {
       const data = {rate, message, message_thread_id: props.match.params.message_thread_id, rate_for: props.match.params.id}
       props.submitRate(data)
-      console.log(props.match.params)
     }
   }
+
   return (
     <>
       <Breadcrumb links={[{link: "/profiles", title: "Users"}, {link: `/profiles/${props.user._id}`, title: props.user.name}, {link: '#', title: 'Rate user'}]} />

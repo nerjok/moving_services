@@ -16,10 +16,10 @@ class Ads extends React.Component {
 
   render() {
     const { advertisements, users } = this.props
-    const { t, i18n } = this.props;
+    const { i18n } = this.props;
     const { language } =   i18n;
     let url = '/profiles'
-    if (language != 'lt')
+    if (language !== 'lt')
       url = `/${language}/profiles`;
 
     return (

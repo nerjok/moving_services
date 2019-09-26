@@ -32,11 +32,11 @@ import  User  from './user/User'
 import { withRouter } from 'react-router';
 import { Header as HeaderBtn, HeaderHeading} from '../components/header';
 import ScrollIntoView from '../hoc/scrollIntoView';
-import TableList from "../components/table";
+import ResetPassword from './auth/password/ResetPassword';
+//import TableList from "../components/table";
 
-import { useTranslation, withTranslation, Trans, Translation } from 'react-i18next';
+//import { useTranslation, withTranslation, Trans } from 'react-i18next';
 import i18next from 'i18next'
-import i18n from '../i18n'
 
 function mainRouted(isLoged, advertisements, users) {
   const MainPage2 = props => {
@@ -68,10 +68,9 @@ class App extends Component {
     }
 
     detectLanguage(lang = 'lt') {
-      const { i18n } = this.props;
       const language =   i18next.language;
       
-      if (lang != language) {
+      if (lang !== language) {
         i18next.changeLanguage(lang);
       }
     }
@@ -79,7 +78,6 @@ class App extends Component {
 
 
     render () {
-      const { i18n } = this.props;
 
       const isLoged = (this.props.auth && this.props.auth._id);
         return (
@@ -96,14 +94,18 @@ class App extends Component {
                         <Route path="/:lang(en|lt|ru)?" render={({ match: { url, params: {lang} } }) => {
                           this.detectLanguage(lang);
                           return (
-                          <>
+                          <> 
                           <Route path={`${url}/`} component={Header}/>
                           <div className="container">
+                            
                             
                             <Route path={`${url}/`} exact component={HeaderHeading}/>
                             <Route path={`${url}/`} exact component={HeaderBtn}/>
                             <Route path={`${url}/`} exact component={Ads}/>
-                            <Route path={`${url}/`} exact component={mainRouted(isLoged)}/>
+                            
+                            {isLoged ? null :
+                             <Route path={`${url}/reset_password`} component={ResetPassword} exact />
+                            }
 
                             <Route path={`${url}/surveys`} component={Dashboard} exact />
 
@@ -121,6 +123,7 @@ class App extends Component {
                               <Route path={`${url}/login`} exact component={LoginPassword} />
                             }
                               </div>
+                              <Route path={`${url}/`} exact component={mainRouted(isLoged)}/>
                             </>
                           )}} 
                         />

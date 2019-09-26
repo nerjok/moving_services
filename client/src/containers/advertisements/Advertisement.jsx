@@ -2,7 +2,6 @@
 import React from "react";
 import { fetchAdvertisement, applyJob, sendMessage } from "../../store/actions";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import Map from "../map/Map";
 import UserCard from "../../components/userCard";
 import BreadCrumb from "../../components/breadcrumb";
@@ -10,9 +9,6 @@ import "react-image-gallery/styles/css/image-gallery.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faAddressCard,
-  faShareSquare,
-  faBan,
   faCalendarAlt,
   faTools,
   faHandHoldingUsd,
@@ -21,7 +17,6 @@ import {
 import { StatusBtn, WorkTypeBtn } from "../../components/statusBtn/statusBtn";
 import Spinner from "../../components/spinner";
 import ApplyJob from "../../components/applyJob";
-import Messaging from "../../components/messaging";
 import ImageGallery from "react-image-gallery";
 
 import { withTranslation, Trans } from 'react-i18next';
@@ -95,7 +90,6 @@ export class Advertisement extends React.Component {
       dateTime,
       status,
       workType,
-      updatedAt
     } = advertisement;
     const options = {
       weekday: "long",

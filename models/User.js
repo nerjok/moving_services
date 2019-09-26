@@ -18,9 +18,10 @@ const userSchema = new Schema({
     profile_photo: {type: String},
     work_photos: {type: [String]},
     sphere: {type: String, minlenght: 10},
-    availableTime: {type: [Number], unique: true },
+    availableTime: {type: [Number], unique: false },
     rate: Number,
     password: String,
+    password_reset: String,
     credits: {type: Number, default: 0},
     //_advertisements: [{type: Schema.Types.ObjectId, ref: 'advertisements'}],
 }, { toJSON: { virtuals: true }, timestamps: true });
@@ -48,6 +49,30 @@ userSchema.virtual('availability').get(function name(params) {
   return avl;
 })  
 
+
+userSchema.methods.passwordReset = async function() {
+  const password_reset = this.generateHash(+new Date());
+  return this.updateOne({password_reset} , {new: true}).then(data => {
+    console.log('restData', data)
+    if (data.ok)
+     return password_reset;
+    else
+      return {err: 'err'}
+  })
+  .catch(err => err);
+}
+
+userSchema.methods.passwordSet = function(passwordd) {
+  const password  = this.generateHash(passwordd);
+  return this.updateOne({password} , {new: true}).then(data => {
+    console.log('restData', data)
+    if (data.ok)
+     return {ok: 'ok'};
+    else
+      return {err: 'err'}
+  })
+  .catch(err => err);
+}
 
 userSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);

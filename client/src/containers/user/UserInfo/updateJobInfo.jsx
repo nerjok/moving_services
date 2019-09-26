@@ -3,30 +3,31 @@ import { Trans } from 'react-i18next';
 
 import { connect } from 'react-redux'
 import { updateData } from '../../../store/actions/index'
-import { reduxForm, Field, SubmissionError, getFormValues } from 'redux-form';
+import { reduxForm, Field, getFormValues } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import _ from 'lodash'
 
 
-import { EDIT_INPUTS, SEARCH_JOB_INPUTS } from './fields';
+import {  SEARCH_JOB_INPUTS } from './fields';
 import { UserField } from './field';
 import { TextAreaField } from './textAreaField'; 
 import { SelectField } from './selectField';
 
 const UpdateJobInfo = (props) => {
-
+  const { auth } = props
+  
   useEffect(() => {
-    const { auth } = props
+    
     if (auth) {
       // eslint-disable-next-line no-lone-blocks
       {_.each(SEARCH_JOB_INPUTS, ({name}) => props.initialValues[name] = auth[name])};
      }
-  }, [])
+  }, [auth, props.initialValues])
   
-  const submitForm = (values) => {console.log('submitFrom', values)
+  const submitForm = (values) => {
     props.updateData(values);
   }
-  console.log('formValuesProps', props.formStates)
+
   return (
     <>
       <form 
@@ -38,7 +39,7 @@ const UpdateJobInfo = (props) => {
   <h4 className="mb-3"><Trans>Work search</Trans></h4>
   <hr/>
   {_.map(SEARCH_JOB_INPUTS, ({name, type, title, value, disabled, options, multiple}) => {
-    let component = type == 'textArea' ? TextAreaField : type == 'select' ? SelectField : UserField; 
+    let component = type === 'textArea' ? TextAreaField : type === 'select' ? SelectField : UserField; 
 
       return (
         <Field

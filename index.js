@@ -1,4 +1,5 @@
 const express = require("express");
+const Sentry = require('@sentry/node');
 const keys = require("./config/keys");
 const cookieSession = require("cookie-session");
 const passport = require("passport");
@@ -15,6 +16,8 @@ require('./models/Message');
 const flash = require("connect-flash");
 
 const mongoose = require("mongoose");
+
+
 mongoose.connect(keys.mongoURI, { 
 																	useNewUrlParser: true,  
 																	useCreateIndex: true,
@@ -30,6 +33,13 @@ mongoose.connection.on("error", function (err) {
 });
 
 const app = express();
+
+if (process.env.NODE_ENV === "production") {
+    Sentry.init({ dsn: 'https://040ebcb3ac4e46ca8d73ecf82261ab75@sentry.io/1762480' });
+    app.use(Sentry.Handlers.requestHandler());
+    app.use(Sentry.Handlers.errorHandler());
+}
+
 app.use(flash());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); //proxy body
@@ -56,6 +66,11 @@ require("./routes/billingRoutes")(app);
 require("./routes/surveyRoutes")(app);
 
 app.use("/public", express.static(__dirname + "/public"));
+
+app.use(function (err, req, res, next) {
+    //Sentry.captureMessage(err);
+    res.status(500).send('Something broke!')
+})
 
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));

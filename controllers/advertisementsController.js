@@ -244,17 +244,20 @@ const filterAdvertisements = async (req, res, next) => {
     }
   }
   if (keyword) {
-      searchObj.$or = [{description: { $regex: '.*' + keyword + '.*' }}, {title: { $regex: '.*' + keyword + '.*' }}];
+      searchObj.$or = [
+                        {description: { $regex: '.*' + keyword + '.*' }}, 
+                        {title: { $regex: '.*' + keyword + '.*' }}
+                      ];
   }
 
   if (status)
     searchObj.status = status;
   if (workType)
     searchObj.workType = workType;
-
-const advertisementsF = await Advertisement.paginate({
-  ...searchObj
-},{
+// await User.paginate(searchOpt, { ...pagOptions, page });
+const advertisementsF = await Advertisement.paginate(
+  searchObj
+,{
   ...pagOptions,
   page: page2,
   skip: 4,
@@ -266,7 +269,7 @@ return
 /** //End pagination */
 
 
-
+/*
 
   //console.log('filterPArams', req.query)
   const advertisements = new Promise(function(resolve, reject) {
@@ -285,14 +288,6 @@ return
       Advertisement.countDocuments({    
         location: {
           $geoWithin: { $center: [ [lat, lng], 1000 ] } 
-          /*
-          $near: {
-            $maxDistance: 10000000,
-            $geometry: {
-              type: "Point",
-              coordinates: [lat, lng]
-            }
-          }*/
       }
       }).exec(function(err, total) {
         if (advertisements && total) {
@@ -311,7 +306,7 @@ return
     //console.log('AdvertisementsResolation', adv.length, lat, lng, page);
     res.send(adv)
   })
-
+*/
 }
 
 module.exports = {

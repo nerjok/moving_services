@@ -1,4 +1,7 @@
 const passport = require('passport');
+const PasswordMail = require('../services/PasswordMail');
+const mongoose = require("mongoose");
+const User = mongoose.model("User");
 
 const currentUser = async (req, res, next) => {
   res.send(req.user);
@@ -49,11 +52,53 @@ const googleAuthCallback = (req, res, next) => {
   res.redirect('/') 
 }
 
+const forgotPswd = async ( req, res) => {
+  const { email } = req.body
+
+  
+  const usr = await User.findOne({email})
+
+  if (usr) {
+
+    const password_reset = await usr.passwordReset();
+    if (!password_reset.err) {
+
+    
+    const pswMail = new PasswordMail({subject: 'afdfa', password_reset }, '');
+    pswMail.send();
+    res.send({'msg': "Email sucessfuly registered"});
+    return;
+    console.log('[PSWDHASH]', password_reset);
+    }
+  }
+
+  res.send({err: "Password error"});
+}
+
+
+const reset_password = async (req, res) => {
+  console.log('PAsswordResed', req.body);
+
+  const { password, email, password_reset} = req.body;
+  const usr = await User.findOne({email, password_reset})
+  console.log('resetPassword', password_reset, usr, email);
+  if (usr && usr._id) {
+    const resp = await usr.passwordSet(password);
+    if (resp.ok) {
+     res.send({'msg': "Password changed sucessfuly"});
+     return;
+    } 
+  }
+  res.send({error: "Error, provided data doesn't match"});
+}
+
 module.exports = {
   currentUser,
   logout,
   localSignup,
   localLogin,
   googleAuth,
-  googleAuthCallback
+  googleAuthCallback,
+  forgotPswd,
+  reset_password
 };

@@ -37,7 +37,7 @@ export const Map = (props) => {
         }
 
       })
-  }, [])
+  }, [props.location])
   
   return (
     <div id='viewDiv' style={{width: '100%', height: '300px'} } />

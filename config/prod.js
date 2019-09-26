@@ -11,5 +11,6 @@
     stripePublishableKey: "pk_test_ItA2ayIlsJB4byNF1bj4hITx",
     stripeSecretKey: "sk_test_Il98QoV7o79ygZBZwQvqoHCV",
     sendGridKey: "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",
-    redirectDomain: process.env.redirectDomain
+    redirectDomain: process.env.redirectDomain,
+    clientUrl:  'https://thawing-sierra-48336.herokuapp.com'
  }

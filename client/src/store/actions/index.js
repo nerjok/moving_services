@@ -22,10 +22,30 @@ export const loginPassword = (username, password) => async dispatch => {
   return res.data;
 }
 
-export const signupPassword = (username, password) => async dispatch => {
+export const signupPassword = (username, password, history) => async dispatch => {
   const res = await axios.post('/auth/signup', { username, password });
   dispatch({ type: LOGIN_PASSWORD, payload: res.data })
+  if (res.data && res.data._id)
+    history.push('/');
   return res.data;
+}
+
+export const forgotPswd = (email, history) => async dispatch => {
+  const res = await axios.post('/auth/forgot', { email });
+  if (res.data && res.data.msg) {
+    history.push('/');
+  }
+  console.log('forgotAction', res.data)
+}
+
+export const resetPassword = (email, password, password_reset, history) => async dispatch => {
+  const res = await axios.post('/auth/reset_password', { email, password, password_reset });
+  console.log('PAssword resetion', res.data);
+  if (res.data && res.data.msg) {
+    history.push('/');
+  } else if (res.data && res.data.error) {
+    return res.data;
+  }
 }
 
 export const handleToken = (token) => async dispatch => {
