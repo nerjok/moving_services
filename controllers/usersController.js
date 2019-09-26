@@ -35,7 +35,6 @@ const showUsers = async (req, res, next) => {
     searchOpt.availableTime = { $all : req.query.availableTime};
   
     const users = await User.paginate(searchOpt, { ...pagOptions, page });
-console.log(req.body, req.query, req.params)
   res.send(users);
 };
 
@@ -95,7 +94,6 @@ const changePassword = (req, res, next) => {
       })
       .catch(err => {
         res.send(err);
-        console.log('error', err);
       })
     }
   } else 
@@ -126,7 +124,6 @@ const uploadPhoto = async (req, res, next) => {
 const workPhotos = async (req, res, next) => {
   if (req.files && !req.fileValidationError) {
 
-//console.log('workPhotos', req.files)
     work_photos = [];
     req.files.forEach(file => {
       work_photos.push(file.path);
@@ -158,7 +155,7 @@ const deletePhoto = async (req, res, next) => {
   
   User.findByIdAndUpdate(req.user._id, {work_photos}, {new: true})
   .then(result=> {
-    if (result) {console.log('deletionResult', result.work_photos)
+    if (result) {
       deletePicture.deletePhoto(picture).catch(err=>{console.log(err)});
       res.send(result);
     } else

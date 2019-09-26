@@ -67,7 +67,7 @@ function mapStateToProps(state) {
       formStates: getFormValues('userJobUpdate')(state)
   }
 }
-const validate = values => {console.log('ValidationValues', values);
+const validate = values => {
   let errors = {};
   if (values.status > 1) {
     _.each(SEARCH_JOB_INPUTS, ({ name }) => {

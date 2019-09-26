@@ -9,7 +9,6 @@ export default function(state = {advertisements: [], total: 0, page: 0, advertis
         case FETCH_ADVERTISEMENT:
            return {...state, advertisement: action.payload}  
         case REMOVE_ADVERTISEMENT:
-            console.log('[RemoveReducer]', state)
             return {...state, advertisement: {}};     
         default:
             return state;    

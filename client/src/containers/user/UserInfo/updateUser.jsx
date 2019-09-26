@@ -26,7 +26,7 @@ const UpdateUser = (props) => {
   const submitForm = (values) => {
     props.updateData(values);
   }
-  console.log('formValuesProps', props.formStates)
+
   return (
     <>
       <form 
@@ -38,7 +38,6 @@ const UpdateUser = (props) => {
             return (
               <Field
                 key={name}
-                //type="text"
                 name={name}
                 disabled={disabled}
                 component={component}
@@ -61,7 +60,7 @@ function mapStateToProps({auth}) {
       auth
   }
 }
-const validate = values => {console.log('ValidationValues', values);
+const validate = values => {
   let errors = {};
   _.each(EDIT_INPUTS, ({ name }) => {
     if (!values[name] || values[name].length < 10)

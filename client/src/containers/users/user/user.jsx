@@ -78,12 +78,10 @@ export const User = props => {
   const { user } = props;
   if (!user) return <Spinner />;
   const { name, work_photos } = user;
-  console.log("userPAge", props.user);
 
   const parentPath = () => {
     let { url } = props.match;
     let ats = url.slice(0, url.lastIndexOf("/"));
-    //console.log('url atc' ,ats);
     return ats;
   };
 

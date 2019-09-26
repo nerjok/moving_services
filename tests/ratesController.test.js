@@ -54,7 +54,7 @@ describe('Test rates controler', () => {
       .send({
         contact_person: '5cbd8be47da35752f2cd2b63'
       })
-      .end((err, res) => {console.log('subscribeuser', res.body, 'data:', res.data)
+      .end((err, res) => {
         should.not.exist(err);
         res.status.should.equal(200);
         res.type.should.equal('application/json');

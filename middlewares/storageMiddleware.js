@@ -6,7 +6,7 @@ const STORAGE_ROOT = "public";
 
 //Work Photos
 const work_storage = multer.diskStorage({
-  destination: function(req, file, cb) {console.log('file', file, file.extension)
+  destination: function(req, file, cb) {
     let { id } = req.params;
     let existence = fs.existsSync(`${STORAGE_ROOT}/images/users/${id}/works`);
 
@@ -23,7 +23,7 @@ const work_storage = multer.diskStorage({
 });
 //Profile Photo
 const user_storage = multer.diskStorage({
-  destination: function(req, file, cb) {console.log('file', file, file.extension)
+  destination: function(req, file, cb) {
     let { id } = req.params;
     let existence = fs.existsSync(`${STORAGE_ROOT}/images/users/${id}/`);
 

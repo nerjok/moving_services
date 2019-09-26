@@ -48,7 +48,6 @@ class AdvertisementForm extends React.Component {
 
   componentDidMount() {
     const { advertisement } = this.props
-    console.log('advertisement', advertisement)
     if (advertisement) {
       // eslint-disable-next-line no-lone-blocks
       {_.each(FIELDS, ({name}) => {

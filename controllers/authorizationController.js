@@ -22,7 +22,6 @@ const localSignup = async (req, res, next) => {
     req.logIn(user, function(err) {
       if (err) 
         return res.send({error: info.message})
-        console.log(user)
       return res.send(user);
     });
   })(req, res, next);
@@ -68,7 +67,6 @@ const forgotPswd = async ( req, res) => {
     pswMail.send();
     res.send({'msg': "Email sucessfuly registered"});
     return;
-    console.log('[PSWDHASH]', password_reset);
     }
   }
 
@@ -77,11 +75,9 @@ const forgotPswd = async ( req, res) => {
 
 
 const reset_password = async (req, res) => {
-  console.log('PAsswordResed', req.body);
 
   const { password, email, password_reset} = req.body;
   const usr = await User.findOne({email, password_reset})
-  console.log('resetPassword', password_reset, usr, email);
   if (usr && usr._id) {
     const resp = await usr.passwordSet(password);
     if (resp.ok) {

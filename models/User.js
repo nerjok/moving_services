@@ -53,7 +53,6 @@ userSchema.virtual('availability').get(function name(params) {
 userSchema.methods.passwordReset = async function() {
   const password_reset = this.generateHash(+new Date());
   return this.updateOne({password_reset} , {new: true}).then(data => {
-    console.log('restData', data)
     if (data.ok)
      return password_reset;
     else
@@ -65,7 +64,6 @@ userSchema.methods.passwordReset = async function() {
 userSchema.methods.passwordSet = function(passwordd) {
   const password  = this.generateHash(passwordd);
   return this.updateOne({password} , {new: true}).then(data => {
-    console.log('restData', data)
     if (data.ok)
      return {ok: 'ok'};
     else

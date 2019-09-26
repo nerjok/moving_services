@@ -23,27 +23,7 @@ class FileUpload extends Component {
     images.forEach((file, i) => {
       formData.append(i, file)
     })
-/*
-    console.log('photosSubmited', formData, 'FilesArray', files);
-
-    for (var p of formData) {
-      console.log('FormData', p);
-    }*/
-
     this.setState({images})
-/*
-    fetch(`${API_URL}/image-upload`, {
-      method: 'POST',
-      body: formData
-    })
-    .then(res => res.json())
-    .then(images => {
-      this.setState({ 
-        uploading: false,
-        images
-      })
-    })
-    /** */
   }
 
   submitForm() {
@@ -56,12 +36,6 @@ class FileUpload extends Component {
         formData.append('photos[]', file)
       })
       
-     //formData.append
-      for (var p of formData) {
-        console.log('FormData', p);
-      }
-
-      console.log("submitingForm", formData)
       this.props.uploadPhoto(this.props.id, formData);
     } else 
       console.log('Form is empty');

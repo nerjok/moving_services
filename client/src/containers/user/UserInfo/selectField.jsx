@@ -1,7 +1,6 @@
 import React from 'react';
 
 export const SelectField = ({label, name, input, defaultValue, disabled, options, multiple, meta: {error, touched}}) => {
-  console.log('SelectField', input.value, 'defaultVal', defaultValue)
   let inputVal = []
   if (multiple){
     if (Array.isArray(input.value))

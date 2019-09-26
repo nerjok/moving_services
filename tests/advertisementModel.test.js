@@ -44,7 +44,6 @@ describe('test advertisement model', () => {
     advOk.location.coordinates = new Array(23, 23);
     var advert = new Advertisement(advOk)
     advert.validate(function(err){
-      //console.log('valid data', err)
       expect(err).toBeNull();
       done();
     })

@@ -42,7 +42,7 @@ class Mailer extends helper.Mail {
         this.addPersonalization(personalize);
     }
 
-    async send() {console.log('[[Send funktion]]')
+    async send() {
         const request = this.sgApi.emptyRequest({
             method: 'POST',
             path: '/v3/mail/send',

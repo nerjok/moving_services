@@ -1,4 +1,4 @@
-import { FETCH_CONTACTS, FETCH_RATES, ADD_MESSAGE, FETCH_MESSAGES, FETCH_MESSAGES_THREAD, REMOVE_ADVERTISEMENT, REMOVE_USER_PROFILE, FETCH_PROFILE, FETCH_USER, FETCH_USERS, FETCH_SURVEYS, LOGIN_PASSWORD, FETCH_ADVERTISEMENTS, FETCH_ADVERTISEMENT } from './types'
+import { LOGOUT_USER, FETCH_CONTACTS, FETCH_RATES, ADD_MESSAGE, FETCH_MESSAGES, FETCH_MESSAGES_THREAD, REMOVE_ADVERTISEMENT, REMOVE_USER_PROFILE, FETCH_PROFILE, FETCH_USER, FETCH_USERS, FETCH_SURVEYS, LOGIN_PASSWORD, FETCH_ADVERTISEMENTS, FETCH_ADVERTISEMENT } from './types'
 import axios from 'axios';
 
 
@@ -20,6 +20,13 @@ export const loginPassword = (username, password) => async dispatch => {
   const res = await axios.post('/auth/login', { username, password });
   dispatch({ type: LOGIN_PASSWORD, payload: res.data })
   return res.data;
+}
+
+export const logout = (history) => async dispatch => {
+  await axios.get('/api/logout/')
+  dispatch({ type: LOGOUT_USER, payload: {} });
+  dispatch({type: REMOVE_USER_PROFILE});
+  history.push('/');
 }
 
 export const signupPassword = (username, password, history) => async dispatch => {

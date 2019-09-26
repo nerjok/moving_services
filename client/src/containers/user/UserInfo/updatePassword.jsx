@@ -13,7 +13,7 @@ const FIELDS = [
 
 export const UpdatePassword = (props) => {
 
-  const stateReducer = (state, action) => {//console.log("stateReducer", state, action);
+  const stateReducer = (state, action) => {
     switch (action.type) {
       case 'UPDATE':
         return {...state, ...action.payload};
@@ -24,17 +24,11 @@ export const UpdatePassword = (props) => {
 
   const [passwords, dispatch] = useReducer(stateReducer, [])
 
-  const changeValue = ({target}) => {
-    //console.log('changeValue', target.name, target.value, target.getAttribute('name'))
-    dispatch({type: 'UPDATE', payload: {[target.getAttribute('name')]: target.value}});
-  }
+  const changeValue = ({target}) => dispatch({type: 'UPDATE', payload: {[target.getAttribute('name')]: target.value}});
 
 
-  const submitData = () => {
-    //console.log("values", newPassword.current.value, repeatPassword.current.value, currentPassword.current.value)
-    console.log("StateValues", passwords);
-    props.updateUserPassw(passwords);
-  }
+  const submitData = () => props.updateUserPassw(passwords);
+  
 
   return (
       <>
@@ -51,4 +45,4 @@ export const UpdatePassword = (props) => {
 }
 
 
-export default connect(null, { updateUserPassw })(UpdatePassword)
+export default connect(null, { updateUserPassw })(UpdatePassword);

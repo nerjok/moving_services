@@ -10,7 +10,6 @@ exports.advertisementPhotos = (advertisementId) => {
   let advArray = []
   if (existence) {
     fs.readdirSync(uri).forEach(file => {
-      console.log(file);
       advArray.push(file)
     });
   }
@@ -18,18 +17,18 @@ exports.advertisementPhotos = (advertisementId) => {
 }
 
 
-exports.deletePhotos = (advertisementId, photo) => {console.log('[deletePhotos]')
+exports.deletePhotos = (advertisementId, photo) => {
   return fs.unlink(`public/images/${advertisementId}/${photo}`, (err) => {
     if (err) throw err;
-    console.log("errorDeletion", err);
+      console.log("errorDeletion", err);
     return err;
   });
 }
 
-exports.deletePhoto = async (path) => {console.log('[deletePhoto]')
+exports.deletePhoto = async (path) => {
   return fs.unlink(path, (err) => {
     if (err) throw err;
-    console.log("errorDeletion", err);
+      console.log("errorDeletion", err);
     return err;
   });
 }

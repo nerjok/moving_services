@@ -9,11 +9,9 @@ const recalculateRate = async rate_for => {
          const total = rates.length;
          let rateSum = 0;
          rates.forEach(rate => {
-           //console.log(rate, rate.rate);
            rateSum += +rate.rate
          })
          const averigeRate = rateSum / total;
-         console.log('totalAverage', averigeRate, rateSum, total);
          User.findByIdAndUpdate(rate_for,{rate: averigeRate.toFixed(2)})
              .then(ats => {
              }).catch(err=>{console.log(err)})
@@ -23,7 +21,7 @@ const recalculateRate = async rate_for => {
        })
 }
 
-const createRate = async (req, res , next) => {console.log('createRate')
+const createRate = async (req, res , next) => {
 
   const { message_thread_id, message, rate_for, rate } = req.body;
 
@@ -42,7 +40,6 @@ const createRate = async (req, res , next) => {console.log('createRate')
   .catch(err => {
     res.status(400).send(err);
   })
-  console.log('createRate', data)
 }
 
 const indexRates = async (req, res, next) => {

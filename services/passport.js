@@ -34,7 +34,6 @@ passport.use(
 
     //const existingUser = await User.findOne({googleId: profile.id})
     const existingUser = await User.findOne({email: profile.emails[0].value})
-    console.log('[[googleProfile]]', profile, profile.emails[0].value)
         if (existingUser) {
             return done(null, existingUser);
         }
@@ -50,7 +49,6 @@ passport.use(
  */
 passport.use(new LocalStrategy(
     async function(username, password, done) {
-    console.log('[[LocalStrategy]]', username, password)
     const existingUser = await User.findOne({ 'email' :  username })
     if (existingUser) {
       let validUsr = existingUser.validPassword(password);
@@ -67,11 +65,9 @@ passport.use('local-signup', new LocalStrategy({
     passReqToCallback : true
 },
 function(req, email, password, done) {
-    console.log('[[signupAAA]]')
     process.nextTick(function() {
 
     User.findOne({ 'email' :  email }, function(err, user) {
-      console.log('[[signupBBB]]')
         if (err)
             return done(null, false, { message: err });
 

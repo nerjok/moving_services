@@ -184,7 +184,6 @@ const showAdvertisement = async (req, res, next) => {
   const advertisement = await Advertisement.findOne({
     _id: req.params.id
   }).populate("_user");
-  //console.log('SendingAdvertisementData', advertisement);
 
   let photos = advertisementPhotos(req.params.id);
   res.send({...advertisement._doc, photos});
@@ -235,7 +234,6 @@ const filterAdvertisements = async (req, res, next) => {
   /** With pagination */
   const page2 = +page + 1;
   const skip = page * limit;
-  console.log('geoadvertismentSearch', req.query)
 
   const searchObj = {};
   if (lat && lng && distance ) {
@@ -264,49 +262,7 @@ const advertisementsF = await Advertisement.paginate(
   limit,
   sort: {'_id': -1}
 })
-res.send({...advertisementsF, total: Math.ceil(advertisementsF.totalDocs / limit)})
-return
-/** //End pagination */
-
-
-/*
-
-  //console.log('filterPArams', req.query)
-  const advertisements = new Promise(function(resolve, reject) {
-    Advertisement.find({
-      location: {
-        $near: {
-          $maxDistance: 10000000,
-          $geometry: {
-            type: "Point",
-            //coordinates: [55.416670000000074, 22.733330000000027]
-            coordinates: [lat, lng]
-          }
-        }
-      }
-    }).limit(limit).skip(limit*page).exec((err, advertisements) => {
-      Advertisement.countDocuments({    
-        location: {
-          $geoWithin: { $center: [ [lat, lng], 1000 ] } 
-      }
-      }).exec(function(err, total) {
-        if (advertisements && total) {
-          resolve({
-            advertisements,
-            total,
-            page: +page,
-            pages: total / +page
-          })
-        }
-      })
-    })
-  })
-
-  advertisements.then(function(adv) {
-    //console.log('AdvertisementsResolation', adv.length, lat, lng, page);
-    res.send(adv)
-  })
-*/
+res.send({...advertisementsF, total: Math.ceil(advertisementsF.totalDocs / limit)});
 }
 
 module.exports = {

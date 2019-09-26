@@ -1,6 +1,8 @@
 import React, { useState} from 'react';
 import { Switch, Route, Link} from 'react-router-dom';
 import { connect } from 'react-redux';
+
+import { logout } from '../../store/actions';
 import { withTranslation, Trans } from 'react-i18next';
 import i18next from 'i18next';
 
@@ -23,8 +25,11 @@ import ContactList from './contactList/contactList';
   if (language !== 'lt') {
     url = `/${language}`;
   }
-  console.log('language', language, url)
- const [breadcrumb, setBreadcrumb] = useState([{link: '/user', title: <Trans>Profile</Trans>}])
+  const [breadcrumb, setBreadcrumb] = useState([{link: '/user', title: <Trans>Profile</Trans>}])
+  const logout = () => {
+  props.logout(props.history);
+ }
+
   return (
     <>
     <Breadcrumb links={breadcrumb}/>
@@ -58,7 +63,12 @@ import ContactList from './contactList/contactList';
             {/*<br/>
             <Link to={`${url}/user/works`}>My works</Link>*/}
             <br/>
-            <a key="logout" href="/api/logout" className="btn btn-danger m-3"><Trans>Log out</Trans></a>
+            <a 
+              key="logout" 
+              //href="/api/logout" 
+              onClick={logout}
+              className="btn btn-danger m-3"
+            ><Trans>Log out</Trans></a>
             </div>
           </UserCard>  
         </div>
@@ -73,4 +83,4 @@ function mapStateToProps({auth}) {
   }
 }
 
-export default withTranslation()(connect(mapStateToProps, {})(User))
+export default withTranslation()(connect(mapStateToProps, { logout })(User))

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export const SelectField = ({label, name, input, defaultValue, options, meta: {error, touched}}) => {
-console.log('options', input.name, input.value)
   return (
     <div className="form-group">
       <label className="widget__field-label" htmlFor={`input-${label}`}>{label}:</label>

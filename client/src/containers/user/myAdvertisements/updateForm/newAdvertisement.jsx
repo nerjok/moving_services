@@ -29,7 +29,7 @@ class NewAdvertisement extends React.Component {
     }
   }
 
-  invalidServerData = (errors) => {console.log('serverResponse', errors)
+  invalidServerData = (errors) => {
     let wrongData = {}
     errors.forEach(err => {
       wrongData[err['param']] = err.msg
@@ -77,7 +77,7 @@ class NewAdvertisement extends React.Component {
 const validate = (values) => {
   const errors= {};
  
-  _.each(FIELDS, ({name})=>{console.log('name', name)
+  _.each(FIELDS, ({name})=>{
     if (!values[name] || ((values[name].length < 50 && ['description'].includes(name)) && !['location', 'status', 'workType'].includes(name)))
       errors[name] = "You must provide data!";
   })

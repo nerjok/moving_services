@@ -78,8 +78,6 @@ export const Search = (props) => {
       searchWidget.on("select-result", function(event) {
         let latitude = event.result.feature.geometry.latitude;
         let longitude = event.result.feature.geometry.longitude;
-        console.log(latitude, longitude);
-        //input.onChange([latitude, longitude]);
         setLocation([latitude, longitude])
         return true;
       });

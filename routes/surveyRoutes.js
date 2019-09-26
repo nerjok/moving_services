@@ -28,7 +28,7 @@ module.exports = app => {
         res.send(surveys);
     });
 
-    app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {console.log('api/surveys')
+    app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
         const { title, subject, body, recipients } = req.body;
 
         const survey = new Survey({
@@ -82,13 +82,6 @@ module.exports = app => {
                 ).exec();
             })
             .value();
-
-
-
-        console.log(events);
-
-
-
         res.send({})
     })
 }

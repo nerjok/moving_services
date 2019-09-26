@@ -109,7 +109,6 @@ const showThreadMessages = async (req, res) => {
   const msgThread = await MessageThread.findById(id)
                                        .populate('sender_id', 'name email')
                                        .populate('receiver_id', 'name email');
-                                      //.then(res=>{console.log('thID', res)})
 
   Message.find({message_thread_id: id})
     .sort({ createdAt: -1 })

@@ -5,7 +5,6 @@ const ContactList = mongoose.model("ContactList");
 const subscribeUser = async (req, res) => {
 
   const contact_person = req.body.id
-console.log('contactPErson', contact_person)
   if (contact_person == req.user._id) {
     res.status(400).send('You cannot subscribe yourself');
     return;

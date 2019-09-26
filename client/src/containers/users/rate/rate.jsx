@@ -23,7 +23,7 @@ export const Rate = (props) => {
     return <Spinner/> 
 
 
-  const submitRate = () => {console.log(props.match.params, 'submitRate', rate, message)
+  const submitRate = () => {
     if (rate && message) {
       const data = {rate, message, message_thread_id: props.match.params.message_thread_id, rate_for: props.match.params.id}
       props.submitRate(data)

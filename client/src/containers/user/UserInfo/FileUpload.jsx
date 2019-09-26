@@ -38,12 +38,7 @@ class FileUpload extends Component {
         formData.append('photos[]', file)
       })
       formData.append('type', 'profile_photo')
-     //formData.append
-      for (var p of formData) {
-        console.log('FormData', p);
-      }
 
-      console.log("submitingForm", formData)
       this.props.uploadPhoto(this.props.id, formData);
     } else 
       console.log('Form is empty');

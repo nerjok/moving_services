@@ -27,14 +27,12 @@ const UserCard = ({user, children, hideLinks, sendMessage, advertisement_id, sub
 
   const sendMsg = (message) => {
     const receiver_id = user._id
-    console.log('sendMessageUserCard', message, receiver_id);
     sendMessage({message, receiver_id, advertisement_id})
                 .then(resp => {
-                  console.log('thenResp', resp)
                   let ats = resp.error || ''
                   setResp(ats)
                 })
-                .catch(err=>{console.log('msgError', err);
+                .catch(err=>{
                   setResp('Message not sent')
                 });
   }
