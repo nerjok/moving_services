@@ -42,12 +42,10 @@ export const forgotPswd = (email, history) => async dispatch => {
   if (res.data && res.data.msg) {
     history.push('/');
   }
-  console.log('forgotAction', res.data)
 }
 
 export const resetPassword = (email, password, password_reset, history) => async dispatch => {
   const res = await axios.post('/auth/reset_password', { email, password, password_reset });
-  console.log('PAssword resetion', res.data);
   if (res.data && res.data.msg) {
     history.push('/');
   } else if (res.data && res.data.error) {
@@ -109,7 +107,7 @@ export const fetchAdvertisement = _id => async dispatch => {
   dispatch({ type: FETCH_ADVERTISEMENT, payload: res.data });
 }
 
-export const removeAdvertisement = () => async dispatch => {console.log('removeAdvertisement')
+export const removeAdvertisement = () => async dispatch => {
   dispatch({ type: REMOVE_ADVERTISEMENT, payload: {} });
 }
 
@@ -170,7 +168,6 @@ export const applyJob = data => async dispatch => {
 export const sendMessage = data => async dispatch => {
   return axios.post('/api/new_message', data)
   .then(res => {
-    console.log('actionSendMessage', res.data);
     if (res.data._id) {
       return {}
     } else {
@@ -178,7 +175,6 @@ export const sendMessage = data => async dispatch => {
     }
   })
   .catch(({response})=> {
-    console.log('errResponse', response)
     if (response.data)
     return response.data;
    return {error: 'Action not completed'};
@@ -187,7 +183,6 @@ export const sendMessage = data => async dispatch => {
 
 export const addMessage = data => async dispatch => {
   const res = await axios.post('/api/messages', data);
-  console.log(res.data);
   if (res.data._id) {
     dispatch({type: ADD_MESSAGE, payload: res.data})
     return {}
@@ -198,7 +193,6 @@ export const addMessage = data => async dispatch => {
 
 export const fetchMessagesThread = () => async dispatch => {
   const res = await axios.get('/api/messages_topics', {});
-  console.log('msgThreads', res.data)
   dispatch({ type: FETCH_MESSAGES_THREAD, payload: res.data });
 }
 
@@ -216,29 +210,24 @@ export const fetchRates = (id) => async dispatch => {
 export const submitRate = (data) => async dispatch => {
    axios.post(`/api/rates`, data)
   .then(rez => {
-    console.log('successRated',rez.data)
   })
   .catch(err=>console.log(err.response));
-  //console.log('submitRateResponse', res);
-  //dispatch({type: FETCH_RATES, payload: res.data})
+
 }
 
 export const subscribeUser = id => async dispatch => {
   axios.post('/api/contactList', {id}).then(res => {
-    console.log('subscribeUserAction', res.data)
   })
   .catch(err=> console.log(err.response))
 }
 
 export const fetchContacts = () => async dispatch => {
   const res = await axios.get(`/api/contactList`, {});
-  console.log('fetchContacts', res.data)
   dispatch({type: FETCH_CONTACTS, payload: res.data})
 }
 
 export const unsubscribeUser = id => async dispatch => {
   axios.post('/api/contactList/unsubscribe', {id}).then(res => {
-    console.log('subscribeUserAction', res.data);
     dispatch({type: FETCH_CONTACTS, payload: res.data})
   })
   .catch(err=> console.log(err.response))
@@ -250,22 +239,15 @@ export const unsubscribeUser = id => async dispatch => {
 export const uploadProfilePhoto = (id, photos) => async dispatch => {
    axios.post('/api/user/'+id+'/upload_photo', photos)
    .then(res => {
-    console.log('succesfullUpload', res.data);
     if (res.data && res.data._id)
-    //dispatch({ type: FETCH_USER, payload: res.data });
       window.location = '/user';
   })
-  .catch(err=> console.log('errorUploading', err.response));
-   
-   
-  //dispatch({ type: FETCH_ADVERTISEMENT, payload: res.data });
+  .catch(err=> console.log('errorUploading', err.response));   
 }
 
 export const uploadWorkPhoto = (id, photos) => async dispatch => {
-  console.log('[uploadProfilePhoto]', id, 'photos, ', photos)
    axios.post('/api/user/'+id+'/work_photos', photos)
    .then(res => {
-    console.log('succesfullUpload', res.data);
     if (res.data && res.data._id)
       dispatch({ type: FETCH_USER, payload: res.data });
       //window.location = '/user';
@@ -277,7 +259,5 @@ export const uploadWorkPhoto = (id, photos) => async dispatch => {
 
 export const deleteWorkPhoto = (id, photo) => async dispatch => {
   const res = await axios.post('/api/user/'+id+'/delete_photo/', {photo});
-  
-  console.log('delete photoResponse', res.data)
   dispatch({ type: FETCH_USER, payload: res.data })
 }

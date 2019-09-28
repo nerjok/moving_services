@@ -3,6 +3,13 @@ const should = chai.should();
 
 let chaiHttp = require('chai-http');
 
+
+require('../models/User');
+require('../models/Advertisement');
+const advertisement = require('../controllers/advertisementsController');
+const mockingoose = require('mockingoose').default;
+
+
 const app = require('../config/keys').baseUrl;
 chai.use(chaiHttp);
 chai.should();
@@ -150,5 +157,149 @@ describe('Test advertisements controler', () => {
           );
         done();
       })
+  })
+
+
+  test('show advertisements list ', done => {
+    const send = jest.fn((resp) => {});
+    let mockReq = {
+      query: {
+        page: 0, kuku:'kuk'
+      },
+    };
+
+    var mockRes = { send };
+
+    mockingoose.Advertisement.toReturn({advertisements: []}, 'paginate');
+
+    advertisement.showAdvertisements(mockReq, mockRes)
+    setTimeout(()=>{
+
+      expect(send).toHaveBeenCalled();
+      expect(send).toHaveBeenLastCalledWith(
+        //expect.toHaveProperty('page', 'limit', 'totalDocs', 'advertisements', 'totalPages')
+        expect.objectContaining({
+          page: 1, limit: 5
+         })
+      );
+      done()
+    }, 100);  
+  })
+
+  test('show advertisement', done => {
+    const send = jest.fn((resp) => {});
+    let mockReq = {
+      params: {
+        id: 'abcde', kuku:'kuk'
+      },
+    };
+
+    var mockRes = { send };
+
+    mockingoose.Advertisement.toReturn({title: 'testTitle', _id: 'abcde'}, 'findOne');
+
+    advertisement.showAdvertisement(mockReq, mockRes)
+    setTimeout(()=>{
+
+      expect(send).toHaveBeenCalled();
+      expect(send).toHaveBeenLastCalledWith(
+        //expect.toHaveProperty('page', 'limit', 'totalDocs', 'advertisements', 'totalPages')
+        expect.objectContaining({
+          deleted: false, title: 'testTitle'
+         })
+      );
+      done()
+    }, 100);  
+  })
+
+
+  test('create Advertisement', done => {
+    const send = jest.fn((resp) => {});
+    let mockReq = {
+      body: {
+        title: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 
+        description:'aaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaa \
+        aaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+        dateTime: new Date().toDateString(),
+        location: [55, 23]
+      },
+    };
+
+    var mockRes = { send };
+
+    mockingoose.Advertisement.toReturn({title: 'testTitle', _id: 'abcde'}, 'create');
+
+    advertisement.createAdvertisement(mockReq, mockRes)
+    setTimeout(()=>{
+
+      expect(send).toHaveBeenCalled();
+      /*expect(send).toHaveBeenCalledWith(
+        expect.objectContaining({
+          deleted: false, 
+          title: mockReq.body.title, 
+          description: mockReq.body.description,
+          dateTime: mockReq.body.dateTime
+         })
+      );*/
+      done()
+    }, 100);  
+  })
+
+  test('create Advertisement', done => {
+    const send = jest.fn((resp) => {});
+    let mockReq = {
+      body: {
+        title: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 
+        description:'aaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaa \
+        aaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+        dateTime: new Date().toDateString(),
+        location: [55, 23]
+      },
+      params: {
+        id: 'abcde'
+      },
+      user: {
+        _id: 'sdfsdfsd'
+      }
+    };
+
+    var mockRes = { send };
+
+    mockingoose.Advertisement.toReturn({title: 'testTitle', _id: 'abcde'}, 'findOneAndUpdate');
+
+    advertisement.updateAdvertisement(mockReq, mockRes)
+    setTimeout(()=>{
+
+      expect(send).toHaveBeenCalled();
+
+      done()
+    }, 100);  
+  })
+  
+
+  test('filter advertisements list ', done => {
+    const send = jest.fn((resp) => {});
+    let mockReq = {
+      query: {
+        page: 0, kuku:'kuk'
+      },
+    };
+
+    var mockRes = { send };
+
+    mockingoose.Advertisement.toReturn({advertisements: []}, 'paginate');
+
+    advertisement.filterAdvertisements(mockReq, mockRes)
+    setTimeout(()=>{
+
+      expect(send).toHaveBeenCalled();
+      expect(send).toHaveBeenLastCalledWith(
+        //expect.toHaveProperty('page', 'limit', 'totalDocs', 'advertisements', 'totalPages')
+        expect.objectContaining({
+          page: 1, limit: 5
+         })
+      );
+      done()
+    }, 100);  
   })
 })  

@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-class BlogSlider extends React.Component {
+export class BlogSlider extends React.Component {
 
   render() {
     return (

@@ -40,8 +40,7 @@ class FileUpload extends Component {
       formData.append('type', 'profile_photo')
 
       this.props.uploadPhoto(this.props.id, formData);
-    } else 
-      console.log('Form is empty');
+    }
   }
 
   render() {

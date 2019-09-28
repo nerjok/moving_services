@@ -3,6 +3,8 @@ node_modules
 uploads
 public/images
 config/tests/coverage
+coverage
+.vscode
 
 client/build
 client/src/__tests__/__snapshots__

@@ -18,13 +18,9 @@
     <script>
       window.addEventListener('scroll', function(e) {
         let sY = window.scrollY;
-        //console.log('scrollYPosition', sY)
         if (sY > 180) {
-          //document.getElementsByClassName('stickie-nav')[0].style.background = '#28583c';
-          //.backgroundImage = "linear-gradient(to right, rgba(red, .5), #197c5b), url('./images/geometry.png')";
           document.getElementsByClassName('to-top')[0].style.opacity = 1;
         } else {
-        //document.getElementsByClassName('stickie-nav')[0].style.background = 'transparent';
         document.getElementsByClassName('to-top')[0].style.opacity = 0;
         }
         

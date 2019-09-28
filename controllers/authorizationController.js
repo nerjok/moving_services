@@ -27,9 +27,11 @@ const localSignup = async (req, res, next) => {
   })(req, res, next);
 }
 
-const localLogin = (req, res, next) => {
-  passport.authenticate('local', function(err, user, info) {
-    if (err || !user) 
+const localLogin = async (req, res, next) => {
+  const {username, password } = req.body
+  passport.authenticate('local', function(err, user, info) {  
+   
+   if (err || !user) 
      return res.send({error: info.message})
 
     req.logIn(user, function(err) {
@@ -52,24 +54,18 @@ const googleAuthCallback = (req, res, next) => {
 }
 
 const forgotPswd = async ( req, res) => {
-  const { email } = req.body
-
-  
-  const usr = await User.findOne({email})
+  const { email } = req.body;
+  const usr = await User.findOne({email});
 
   if (usr) {
-
     const password_reset = await usr.passwordReset();
     if (!password_reset.err) {
-
-    
-    const pswMail = new PasswordMail({subject: 'afdfa', password_reset }, '');
-    pswMail.send();
-    res.send({'msg': "Email sucessfuly registered"});
-    return;
+      const pswMail = new PasswordMail({subject: 'afdfa', password_reset }, '');
+      pswMail.send();
+      res.send({'msg': "Email sucessfuly registered"});
+      return;
     }
   }
-
   res.send({err: "Password error"});
 }
 

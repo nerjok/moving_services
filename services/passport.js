@@ -44,27 +44,28 @@ passport.use(
 
 
 
-/**
- * Local login/signup
- */
-passport.use(new LocalStrategy(
+	/**
+	 * Local login/signup
+	 */
+	passport.use(new LocalStrategy(
     async function(username, password, done) {
-    const existingUser = await User.findOne({ 'email' :  username })
-    if (existingUser) {
-      let validUsr = existingUser.validPassword(password);
-      if (existingUser && validUsr) 
-        return done(null, existingUser);
-    }
-    return done(null, false, { message: 'Wrong credentials.' });
+			const existingUser = await User.findOne({ 'email' :  username })
+
+			if (existingUser) {
+					let validUsr = existingUser.validPassword(password);
+					if (existingUser && validUsr)
+						return done(null, existingUser);
+			}
+			return done(null, false, { message: 'Wrong credentials.' });
     }
   ));
 
-passport.use('local-signup', new LocalStrategy({
-    usernameField : 'username',
-    passwordField : 'password',
-    passReqToCallback : true
-},
-function(req, email, password, done) {
+	passport.use('local-signup', new LocalStrategy({
+			usernameField : 'username',
+			passwordField : 'password',
+			passReqToCallback : true
+	},
+	function(req, email, password, done) {
     process.nextTick(function() {
 
     User.findOne({ 'email' :  email }, function(err, user) {
@@ -86,9 +87,6 @@ function(req, email, password, done) {
                 return done(null, newUser);
             });
         }
-
     });    
-
-    });
-
+  });
 }));

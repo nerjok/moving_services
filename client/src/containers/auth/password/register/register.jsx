@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import i18next from 'i18next';
 
-export const Register = ({username, password, password2, login, signupErr}) => {
+export const Register = ({email, pswd, pswd2, change, login, signupErr}) => {
   return (
         <div className="cardd web-login">
           <div className="card-body">
@@ -16,17 +16,40 @@ export const Register = ({username, password, password2, login, signupErr}) => {
               <div className="col-md-6">
                 <div>
                   <label>{i18next.t('Email')}:</label>
-                  <input type="email" className="form-control form-control-sm input__invalid" name="username" ref={username}/>
+                  <input 
+                    type="email" 
+                    className="form-control form-control-sm input__invalid" 
+                    name="email"
+                    id="register-mail" 
+                    value={email}
+                    onChange={change}
+                  />
                   <br/>
                 </div>
                 <div>
                   <label>{i18next.t('Password')}:</label>
-                  <input type="password" pattern=".{5,}"  className="form-control form-control-sm input__invalid" name="password" ref={password}/>
+                  <input 
+                    type="password" 
+                    pattern=".{5,}"  
+                    className="form-control form-control-sm input__invalid" 
+                    name="password" 
+                    value={pswd}
+                    onChange={change}
+                    id="register-password" 
+                  />
                 </div>
                 <br/>
                 <div>
                   <label>{i18next.t('Repeat password')}:</label>
-                  <input type="password" pattern=".{5,}"  className="form-control form-control-sm input__invalid" name="password2" ref={password2}/>
+                  <input 
+                    type="password" 
+                    pattern=".{5,}"  
+                    className="form-control form-control-sm input__invalid" 
+                    name="password2" 
+                    value={pswd2}
+                    onChange={change}
+                    id="register-password" 
+                  />
                 </div>
                 <br/>
 
@@ -42,8 +65,8 @@ export const Register = ({username, password, password2, login, signupErr}) => {
 
 Register.propTypes = {
   signupErr: PropTypes.string,
-  username: PropTypes.object.isRequired,
-  password: PropTypes.object.isRequired,
-  password2: PropTypes.object.isRequired,
+  email: PropTypes.string.isRequired,
+  pswd: PropTypes.string.isRequired,
+  pswd2: PropTypes.string.isRequired,
   login: PropTypes.func.isRequired
 }

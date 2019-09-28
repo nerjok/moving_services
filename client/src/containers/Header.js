@@ -11,7 +11,7 @@ import i18next from 'i18next'
 const hideMenu = () => document.getElementById('navigation-toggle').checked = false;
 
 
-class Header extends Component {
+export class Header extends Component {
     state = { isOpen: false }
 
 

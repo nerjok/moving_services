@@ -38,7 +38,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --watchAll=false ",
+    "test": "react-scripts test --watchAll=false --collectCoverage",
     "test2": "jest",
     "eject": "react-scripts eject",
     "compile:sass": "node-sass src/styles/sass/main.scss src/styles/style.css -w",

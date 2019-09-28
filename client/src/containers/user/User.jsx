@@ -26,9 +26,8 @@ import ContactList from './contactList/contactList';
     url = `/${language}`;
   }
   const [breadcrumb, setBreadcrumb] = useState([{link: '/user', title: <Trans>Profile</Trans>}])
-  const logout = () => {
-  props.logout(props.history);
- }
+  const logout = () => props.logout(props.history);
+ 
 
   return (
     <>
@@ -60,12 +59,9 @@ import ContactList from './contactList/contactList';
             <Link to={`${url}/user/contacts`} style={{zIndex: 1}}><Trans>ContactList</Trans></Link>
             <br/>
             <Link to={`${url}/user/advertisements/new`} style={{zIndex: 1}}><Trans>New Advertisement</Trans></Link>
-            {/*<br/>
-            <Link to={`${url}/user/works`}>My works</Link>*/}
             <br/>
             <a 
               key="logout" 
-              //href="/api/logout" 
               onClick={logout}
               className="btn btn-danger m-3"
             ><Trans>Log out</Trans></a>
@@ -83,4 +79,4 @@ function mapStateToProps({auth}) {
   }
 }
 
-export default withTranslation()(connect(mapStateToProps, { logout })(User))
+export default connect(mapStateToProps, { logout })(User);

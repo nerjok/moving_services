@@ -92,7 +92,7 @@ export class Search extends React.Component {
           </div>
           <div className="col-6">
             <div style={styles.wrapperStyle}>
-              <Range min={0} max={30} defaultValue={[3, 10]} marks={{ 0: '0 EU', 30: '30 EU' }} tipFormatter={value => `${value} eu`} onChange={val => console.log(val)} />
+              <Range min={0} max={30} defaultValue={[3, 10]} marks={{ 0: '0 EU', 30: '30 EU' }} tipFormatter={value => `${value} eu`} />
             </div>
 
           </div>

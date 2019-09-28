@@ -17,7 +17,6 @@ export const RecalPswd = props => {
   }
 
   return (
-    <div>
       <div className="row">
 
         <div className="col-md-6">
@@ -32,19 +31,18 @@ export const RecalPswd = props => {
           <label>{i18next.t('Email')}:</label>
           <input type="email" onChange={updEmail} className="form-control form-control-sm input__invalid" name="email"/>
         </div>
-                <br/>
-                {/*loginErr && <div className="alert alert-danger" role="alert">{loginErr}</div>*/}
-                  <button 
-                    type="button" 
-                    className={"btn btn-success full-width"} 
-                    onClick={recallPswd}
-                  >
-                      {i18next.t("Submit")}
-                  </button>
+          <br/>
+          {/*loginErr && <div className="alert alert-danger" role="alert">{loginErr}</div>*/}
+          <button 
+            type="button" 
+            className={"btn btn-success full-width"} 
+            onClick={recallPswd}
+            id="recall-button"
+          >
+            {i18next.t("Submit")}
+          </button>
         </div>
 
       </div>  
-
-    </div>
   )
 }

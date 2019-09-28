@@ -8,8 +8,9 @@
     "npm": "6.8.0"
   },
   "scripts": {
+    "test": "jest --config  ./jest.config.js",
     "test0": "jest --verbose ./tests --detectOpenHandles --forceExit",
-    "test": "jest --config ./config/tests/jest.config.js",
+    "test1": "jest --config  ./config/tests/jest.config.js",
     "start": "node index.js",
     "server": "nodemon index.js",
     "client": "npm run start --prefix client",
@@ -50,8 +51,10 @@
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "jest": "24.8.0",
-    "mocha": "^6.2.0",
+    "jest-cli": "24.8.0",
+    "jest-express": "^1.10.1",
     "localtunnel": "^1.9.2",
-    "jest-cli": "24.8.0"
+    "mocha": "^6.2.0",
+    "mockingoose": "^2.13.2"
   }
 }

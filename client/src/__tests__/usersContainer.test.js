@@ -10,6 +10,13 @@ import configureMockStore from "redux-mock-store";
 import { Users } from "../containers/users/Users";
 import User from "../containers/users/user";
 import Breadcrumb from "../components/breadcrumb";
+import { Provider } from 'react-redux'
+
+//import i18n from '../i18n/i18n';
+//import { I18nextProvider } from 'react-i18next';
+//import i18next from 'i18next';
+//i18next.use(I18nextProvider);
+
 
 const mockStore = configureMockStore();
 const store = mockStore({});
@@ -19,20 +26,27 @@ configure({adapter: new Adapter()});//Enzyme
 const onSubmitSpy = jest.fn();
 const fetchUsers2 = onSubmitSpy;
 
+
+/**
+ * 
+ * Public pages of users
+ */
 describe("User container test", () => {
 
 
   test("Matches the snapshot", () => {
     const user = create(
       <BrowserRouter>
-        <Users store={store} />
+        <Users 
+          store={store} 
+          match={{url:'/kuku'}}
+          t={(text) => text}
+        />
       </BrowserRouter>
     );
     
     const instance = user.getInstance();
     const tree = user.toJSON();
-
-    //console.log('TREE', tree)
     expect(tree).toMatchSnapshot();
   });
 
@@ -61,6 +75,8 @@ describe("User container test", () => {
         fetchUsers={fetchProfiles} 
         store={store} 
         users={users}
+        match={{url:'/kuku'}}
+        t={(text) => text}
       />
   );
     const userInstance = user.instance()
@@ -79,14 +95,17 @@ describe('Users User container test', () => {
   test('should match snapshot', (done) => {
 
     const user = create(
+      <Provider store={store}>
         <BrowserRouter>
           <User 
-            store={store} 
             auth={{}}
+            match={{url:'/kuku'}}
+            t={(text) => text}
             user={{email: "email", name:"name", description: "Description", available: "available", city: "city"}}  
           />
         </BrowserRouter>
-      );
+      </Provider>
+    );
       
       const instance = user.getInstance();
       const tree = user.toJSON();
@@ -101,19 +120,22 @@ describe('Users User container test', () => {
     const userData = {email: "email", name:"name", description: "Description", available: "available", city: "city"};
 
     const user = mount(
-      <BrowserRouter>
-      <User 
-        store={store} 
-        auth={{}}
-        user={userData}  
-        removeUserProfile={removeProfile}
-      />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <User 
+            store={store} 
+            auth={{}}
+            match={{url:'/kuku'}}
+            user={userData}  
+            t={(text) => text}
+            removeUserProfile={removeProfile}
+          />
+        </BrowserRouter>
+      </Provider>
   );
     const userInstance = user.instance()
 
-    const userProfile = userInstance.props.children;
-    //console.log('UserInstance', userProfile)
+    const userProfile = userInstance.props.children.props.children;
     
     expect(userProfile.props.user).toBe(userData)
 

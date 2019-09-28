@@ -42,13 +42,11 @@ const validate = method => {
 };
 
 const showAdvertisements = async (req, res, next) => {
-  //const page = req.query.page ? +req.query.page +1 : 1
   var page = req.query.page || 0;
   page++;
   const user = req.user;
   const limit = 5;
   const skip = page * limit;
-
   const advertisements = await Advertisement.paginate({},{
     ...pagOptions,
     page,

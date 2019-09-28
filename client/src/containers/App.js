@@ -6,7 +6,6 @@ import {connect} from 'react-redux'
 import * as actions from '../store/actions'
 
 import Header from './Header'
-//import Landing from './Landing'
 import Dashboard from './Dashboard'
 import SurveyNew from './surveys/SurveyNew'
 import Advertisements from './advertisements/Advertisements'

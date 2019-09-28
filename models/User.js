@@ -87,6 +87,13 @@ userSchema.methods.checkPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
 };
 
+userSchema.methods.toJSON = function() {
+  var obj = this.toObject();
+  delete obj.password;
+  delete obj.password_reset;
+  return obj;
+ }
+
 userSchema.plugin(mongoosePaginate);
 
 mongoose.model('User', userSchema);

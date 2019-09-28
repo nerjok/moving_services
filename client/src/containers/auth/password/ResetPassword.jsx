@@ -7,7 +7,7 @@ import { Login } from './login/login';
 import { RecalPswd } from './recalPswd/recalPswd';
 import i18next from 'i18next';
 
-class ResetPassword extends React.Component {
+export class ResetPassword extends React.Component {
 
   state = {
     signupErr: '',
@@ -46,7 +46,7 @@ class ResetPassword extends React.Component {
               <div className="col-md-6">
                 <div>
                   <label>{i18next.t('Email')}:</label>
-                  <input type="email" className="form-control form-control-sm input__invalid" name="username" ref={this.username}/>
+                  <input type="email" className="form-control form-control-sm input__invalid" name="email" ref={this.username}/>
                   <br/>
                 </div>
                 <div>
@@ -62,7 +62,7 @@ class ResetPassword extends React.Component {
 
                 {this.state.signupErr && <div className="alert alert-danger" role="alert">{this.state.signupErr}</div>}
                 <div>
-                    <input type="button" className={"form-control form-control-sm btn btn-success"} onClick={this.login} value={i18next.t("Submit")}/>
+                    <input type="button" id="reset-button" className={"form-control form-control-sm btn btn-success"} onClick={this.login} value={i18next.t("Submit")}/>
                 </div>
               </div>
             </div>
