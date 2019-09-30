@@ -3,6 +3,8 @@ const proxy = require('http-proxy-middleware')
 module.exports = function(app) {
     app.use(proxy('/auth/google', { target: 'http://localhost:5000' }))
     app.use(proxy('/auth/*', { target: 'http://localhost:5000' }))
+    app.use(proxy('/en/auth/*', { target: 'http://localhost:5000' }))
+    app.use(proxy('/ru/auth/*', { target: 'http://localhost:5000' }))
     app.use(proxy('/public/**', { target: 'http://localhost:5000' }))
     //app.use(proxy('/api/users/*', { target: 'http://localhost:5000' }))
 

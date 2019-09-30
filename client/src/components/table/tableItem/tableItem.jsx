@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 
-export const TableItem = ({name, email, _id, url}) => {
+export const TableItem = ({sphere, description, name, email, _id, url}) => {
 
   return (
         <div className="row advertisements-row advertisements-row--red">
           <div className="col-md-5 advertisements-row__description">
-            <h5>{name}</h5>
-            {email}
+            {sphere && <h5>{sphere.substring(0, 50)}</h5>}
+            {name || email}
           </div>
           <div className="col-md-2 flex" styles={{background: 'lightgray'}}>
               <span className="badge badge-success advertisements-row__badge">Active</span>

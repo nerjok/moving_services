@@ -124,7 +124,9 @@ i18n
           "search phrase": "Search phrase",
           "Please fulfil field to continue": "Please fulfil field to continue",
           "New password": "New password",
+          "Phone": "Phone",
 
+          "Part Time Part Time": "Part Time Part Time",
           "Welcome to React.js": "Welcome to React.js",
           "Declarative": "Declarative eng",
           "Translation cool": 'english translation',
@@ -173,7 +175,7 @@ i18n
 
           "Part time": "Nepilna diena",
           "Full Time": "Visa diena",
-          "Freelance": "Freelance",
+          "Freelance": "Laisvu laiku",
           "Flexible Hours": "Lankstus laikas",
 
           "Available": "Aktyvus",
@@ -267,6 +269,8 @@ i18n
           "Please fulfil field to continue": "Užpildykite reikalinus laukus",
 
           "New password": "Naujas slaptazodis",
+          "Phone": "Telefonas",
+          "Part Time Part Time": "Part Time Part Time",
 
           "Welcome to React.js": "Καλώς 'Ηρθατε στο React.js!",
           "Declarative": "Δηλωτικό lithuanian",

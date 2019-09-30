@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { StatusBtn } from '../../statusBtn/statusBtn';
 
-export const Advertisement = ({status, workType, title, description, _id, location, advCallback, deleteAdvertisement, page}) => {
+export const Advertisement = ({my, status, workType, title, description, _id, location, advCallback, deleteAdvertisement, page}) => {
   let timeColor;
 
   switch (workType) {
@@ -32,8 +32,12 @@ export const Advertisement = ({status, workType, title, description, _id, locati
   return (
     <div className={`row advertisements-row ${timeColor}`} >
       <div className="col-md-5 advertisements-row__description">
-        <h5><a href="#show-details" id={_id} onClick={advCallback}>{title}</a></h5>
-        {/*description*/}
+        <h5>
+          {/*<a href="#show-details" id={_id} onClick={advCallback}>{title}</a>*/}
+          <Link to={`${location()}/${_id}`} >
+            {title}
+          </Link>
+        </h5>
       </div>
       <div className="col-md-2 flex" styles={{background: 'lightgray'}}>
           <StatusBtn status={status} />
@@ -49,11 +53,11 @@ export const Advertisement = ({status, workType, title, description, _id, locati
           <a href="#ff" className="btn btn-sm btn-outline-danger m-1">
             <FontAwesomeIcon icon={faHeart} size="lg" style={{color: 'red'}} />
           </a>
-          <a className="btn btn-sm btn-outline-danger" 
+          { my && <a className="btn btn-sm btn-outline-danger" 
             onClick={() => {
               deleteAdvertisement({page, id: _id})}}>
                 <FontAwesomeIcon icon={faTrash} size="lg" style={{color: 'gray'}} /> 
-          </a>
+          </a>}
         </div>
       </div>
     </div>

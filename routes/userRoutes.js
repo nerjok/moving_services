@@ -21,7 +21,8 @@ router.post('/auth/forgot', auth.forgotPswd);
 
 router.post('/auth/reset_password', auth.reset_password);
 
-router.get('/auth/google', auth.googleAuth);
+router.get('/:lang?/auth/google', auth.googleAuth);
+
 
 router.get('/auth/google/callback', passport.authenticate('google'), auth.googleAuthCallback);
 

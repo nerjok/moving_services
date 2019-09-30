@@ -3,7 +3,7 @@ import { Switch, Route, Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { logout } from '../../store/actions';
-import { withTranslation, Trans } from 'react-i18next';
+import { Trans } from 'react-i18next';
 import i18next from 'i18next';
 
 import UserInfo from './UserInfo/UserInfo';
@@ -61,6 +61,7 @@ import ContactList from './contactList/contactList';
             <Link to={`${url}/user/advertisements/new`} style={{zIndex: 1}}><Trans>New Advertisement</Trans></Link>
             <br/>
             <a 
+              href="#mm"
               key="logout" 
               onClick={logout}
               className="btn btn-danger m-3"

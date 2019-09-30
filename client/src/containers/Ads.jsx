@@ -19,8 +19,11 @@ class Ads extends React.Component {
     const { i18n } = this.props;
     const { language } =   i18n;
     let url = '/profiles'
-    if (language !== 'lt')
+    let urlAdv = '/advertisements';
+    if (language !== 'lt') {
       url = `/${language}/profiles`;
+      urlAdv = `/${language}/advertisements`;
+    }
 
     return (
       <div className="container">
@@ -33,7 +36,7 @@ class Ads extends React.Component {
             activeAdvertisement={{}}
             deleteAdvertisement={()=> {}}
             page={0}
-            location={()=> {return '/advertisements'}}
+            location={()=> {return urlAdv}}
           />
         </div>
           <div className="col-md-6 p-3">

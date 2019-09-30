@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import Pagination from "react-bootstrap/Pagination";
 import ReactPaginate from "react-paginate";
 import { withTranslation, Trans } from "react-i18next";
 
@@ -20,13 +19,22 @@ export class Users extends React.Component {
 
   constructor(props) {
     super(props);
-    this.pagination = this.pagination.bind(this);
     this.filterUsers = this.filterUsers.bind(this);
+    this.filterChange = this.filterChange.bind(this);
+
   }
 
   componentDidMount() {
-    this.props.fetchUsers();
-    this.filterChange = this.filterChange.bind(this);
+    const his = window.history.state
+    if (his && (this.props.users.users && this.props.users.users.length) ) {
+      try {
+        const state = JSON.parse(his)
+        this.setState({...state})
+      } catch(e) {
+        this.props.fetchUsers();
+      }
+    } else
+      this.props.fetchUsers();
   }
 
   filterChange({ target }) {
@@ -39,13 +47,20 @@ export class Users extends React.Component {
     } else {
       status.push(value);
     }
-    this.setState({ [name]: status });
+    this.setState({ [name]: status }, () => {this.preventState()});
   }
 
   setKeyword = ({ target }) => {
     const keyword = target.value;
-    this.setState({ keyword });
+    this.setState({ keyword }, ()=> {this.preventState()});
   };
+
+  preventState = () => {
+    const state  = { ...this.state }
+
+    let stt = JSON.stringify(state)
+    window.history.pushState(stt, "page 2");
+  }
 
   filterState() {
     const { status, availableTime, city, keyword } = this.state;
@@ -64,6 +79,7 @@ export class Users extends React.Component {
   filterUsers() {
     const data = this.filterState();
     this.props.fetchUsers(1, data);
+    this.preventState()
   }
 
   render() {
@@ -74,6 +90,7 @@ export class Users extends React.Component {
       url = "";
     }
     if (!users) return <div class="spinner-border mt-5"></div>;
+
     return (
       <>
         <Breadcrumb links={[{ link: url, title: "Users" }]} />
@@ -81,13 +98,6 @@ export class Users extends React.Component {
           <div className="col-md-9">
             <div>
               <TableList items={users.users} url={url} />
-
-              {/*<div className="text-xs-center">
-                <br/>
-                <ul className="pagination justify-content-center" styles={{margin: 'auto', display: 'inline', textAlign: 'center', background: 'green'}}>
-                  {this.pagination()}
-                </ul>
-              </div>*/}
               {this.reactPagination()}
             </div>
           </div>
@@ -121,6 +131,7 @@ export class Users extends React.Component {
                 { title: t("Partly"), color: "gray", value: 4 }
               ]}
               name="status"
+              state={this.state.status}
               filterChange={this.filterChange}
             />
             <FilterCard
@@ -132,6 +143,7 @@ export class Users extends React.Component {
                 { title: t("Nights"), value: 4 }
               ]}
               name="availableTime"
+              state={this.state.availableTime}
               filterChange={this.filterChange}
             />
             <FilterCard
@@ -151,6 +163,7 @@ export class Users extends React.Component {
                 { title: "Kita", value: 12 }
               ]}
               name="city"
+              state={this.state.city}
               filterChange={this.filterChange}
             />
           </div>
@@ -158,42 +171,6 @@ export class Users extends React.Component {
       </>
     );
   }
-
-  pagination = () => {
-    const { users } = this.props;
-    const { page, hasPrevPage, hasNextPage, totalPages } = users;
-    let pagination = [];
-    if (hasPrevPage) {
-      pagination.push(
-        <Pagination.Prev
-          key="prev-page"
-          onClick={() => this.props.fetchUsers(+page - 1, this.filterState())}
-        />
-      );
-    }
-    for (let number = 1; number <= totalPages; number++) {
-      pagination.push(
-        <Pagination.Item
-          key={number}
-          active={number === page}
-          onClick={() => this.props.fetchUsers(+number, this.filterState())}
-        >
-          {number}
-        </Pagination.Item>
-      );
-    }
-
-    if (hasNextPage) {
-      pagination.push(
-        <Pagination.Next
-          key="next-page"
-          onClick={() => this.props.fetchUsers(+page + 1, this.filterState())}
-        />
-      );
-    }
-
-    return pagination;
-  };
 
   reactPagination = () => {
     const { users } = this.props;
@@ -235,6 +212,7 @@ export class Users extends React.Component {
             previousClassName="page-link"
             nextClassName="page-link"
             activeClassName={"active"}
+            disableInitialCallback={true}
           />
         </div>
       </div>
@@ -243,7 +221,6 @@ export class Users extends React.Component {
 
   updatePage = ({ selected }) => {
     this.setState({ page: selected });
-
     let currentUrlParams = new URLSearchParams(window.location.search);
     currentUrlParams.set("page", selected);
     if (this.props.history)
@@ -251,6 +228,8 @@ export class Users extends React.Component {
         window.location.pathname + "?" + currentUrlParams.toString()
       );
     this.props.fetchUsers(+selected + 1, this.filterState());
+
+    this.preventState()
   };
 }
 

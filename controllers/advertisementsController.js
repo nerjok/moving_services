@@ -250,17 +250,19 @@ const filterAdvertisements = async (req, res, next) => {
     searchObj.status = status;
   if (workType)
     searchObj.workType = workType;
-// await User.paginate(searchOpt, { ...pagOptions, page });
-const advertisementsF = await Advertisement.paginate(
-  searchObj
-,{
-  ...pagOptions,
-  page: page2,
-  skip: 4,
-  limit,
-  sort: {'_id': -1}
-})
-res.send({...advertisementsF, total: Math.ceil(advertisementsF.totalDocs / limit)});
+
+  // await User.paginate(searchOpt, { ...pagOptions, page });
+  const advertisementsF = await Advertisement.paginate(
+    searchObj
+  ,{
+    ...pagOptions,
+    page: page2,
+    skip: 4,
+    limit,
+    sort: {'_id': -1}
+  })
+  
+  res.send({...advertisementsF, total: Math.ceil(advertisementsF.totalDocs / limit)});
 }
 
 module.exports = {

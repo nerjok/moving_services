@@ -8,6 +8,7 @@ const userSchema = new Schema({
     googleId: String,
     name: {type: String, required: false, minlength: 5},
     email: {type: String, required: true, minlength: 5},
+    phone: String,
     description: {type: String, required: false, minlength: 10},
     available: {type: String, required: false, minlength: 10},
     city: {type: String, required: false, minlength: 10},
@@ -24,7 +25,15 @@ const userSchema = new Schema({
     password_reset: String,
     credits: {type: Number, default: 0},
     //_advertisements: [{type: Schema.Types.ObjectId, ref: 'advertisements'}],
-}, { toJSON: { virtuals: true }, timestamps: true });
+}, { toJSON: { 
+              virtuals: true,
+              transform: function (doc, ret) {
+                delete ret.password;
+                delete ret.password_reset;
+                return ret;
+              }
+            
+            }, timestamps: true });
 
 userSchema.virtual('advertisements', {
     ref: 'Advertisement',
@@ -86,14 +95,14 @@ userSchema.methods.checkPassword = function(password) {
       return true;
     return bcrypt.compareSync(password, this.password);
 };
-
+/*
 userSchema.methods.toJSON = function() {
   var obj = this.toObject();
   delete obj.password;
   delete obj.password_reset;
   return obj;
  }
-
+*/
 userSchema.plugin(mongoosePaginate);
 
 mongoose.model('User', userSchema);

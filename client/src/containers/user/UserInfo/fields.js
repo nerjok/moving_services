@@ -2,6 +2,7 @@
 export const EDIT_INPUTS = [
   {name: 'email', type: 'text', title: 'Email address', value: 'email', disabled: true},
   {name: 'name', type: 'text', title: 'Name', value: 'name', disabled: false},
+  {name: 'phone', type: 'text', title: 'Phone', value: 'phone', disabled: false},
   {name: 'description', type: 'textArea', title: 'Description', value: 'description', disabled: false},
   /*
   {name:'status', type: 'select', title: 'Status for job applications', value: 'status', disabled: false, multiple: false,

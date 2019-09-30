@@ -12,7 +12,8 @@ import { Trans } from "react-i18next";
 import {
   faEnvelope,
   faCity,
-  faCalendar
+  faCalendar,
+  faPhoneAlt
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -49,6 +50,7 @@ const USER_INPUTS = [
 
 const SUMMURY = [
   { name: "email", title: "Email", icon: faEnvelope, path: "" },
+  { name: "phone", title: "Phone", icon: faPhoneAlt, path: "" },
   {
     name: "cityName",
     title: "Region of services",
@@ -84,7 +86,6 @@ export const User = props => {
     let ats = url.slice(0, url.lastIndexOf("/"));
     return ats;
   };
-
   const url = parentPath();
   return (
     <>
@@ -116,7 +117,7 @@ export const User = props => {
             {user.updatedAt && new Date(user.updatedAt).toDateString()}
           </small>
           <hr />
-          {props.user.status > 0 ? (
+          {props.user.status > 1 ? (
             Array.from(USER_INPUTS, ({ title, name }) => {
               if (!props.user[name]) return null;
               return (

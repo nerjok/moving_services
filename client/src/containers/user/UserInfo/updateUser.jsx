@@ -63,7 +63,7 @@ function mapStateToProps({auth}) {
 const validate = values => {
   let errors = {};
   _.each(EDIT_INPUTS, ({ name }) => {
-    if (!values[name] || values[name].length < 10)
+    if (!values[name] || values[name].length < 8)
       errors[name] = "You must provide data!";
   })
   return errors;

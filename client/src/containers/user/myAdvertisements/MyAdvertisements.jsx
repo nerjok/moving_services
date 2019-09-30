@@ -35,6 +35,7 @@ export class MyAdvertisements extends React.Component {
           advertisements={this.props.advertisements} 
           location={this.currentUrlPath}
           activeAdvertisement={{}}
+          my={true}
           />
 
         <div style={{position: 'relative', padding: '1rem', margin: '1.5rem'}}>
@@ -46,24 +47,24 @@ export class MyAdvertisements extends React.Component {
                           transform: 'translate(-50%, -50%)'
                         }}>
                       <ReactPaginate
-                      previousLabel={<Trans>Previous</Trans>}
-                      nextLabel={<Trans>Next</Trans>}
-                      breakLabel={'...'}
-                      breakClassName={'break-me'}
-                      pageCount={this.props.total}
-                      marginPagesDisplayed={2}
-                      pageRangeDisplayed={2}
-                      initialPage={this.state.page}
-                      forcePage={this.state.page}
-                      onPageChange={this.updatePage}
-                      pageClassName="page-item"
-                      pageLinkClassName="page-link"
-                      containerClassName={'pagination'}
-                      subContainerClassName={'pages pagination'}
-                      previousClassName="page-link"
-                      nextClassName="page-link"
-                      activeClassName={'active'}
-                    />
+                        previousLabel={<Trans>Previous</Trans>}
+                        nextLabel={<Trans>Next</Trans>}
+                        breakLabel={'...'}
+                        breakClassName={'break-me'}
+                        pageCount={this.props.total}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={2}
+                        initialPage={this.state.page}
+                        forcePage={this.state.page}
+                        onPageChange={this.updatePage}
+                        pageClassName="page-item"
+                        pageLinkClassName="page-link"
+                        containerClassName={'pagination'}
+                        subContainerClassName={'pages pagination'}
+                        previousClassName="page-link"
+                        nextClassName="page-link"
+                        activeClassName={'active'}
+                      />
             </div>
           </div>
       </div>

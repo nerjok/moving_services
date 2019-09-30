@@ -1,10 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import { resetPassword } from '../../../store/actions';
-import {Tabs, Tab} from 'react-bootstrap';
-import { Register } from './register/register';
-import { Login } from './login/login';
-import { RecalPswd } from './recalPswd/recalPswd';
 import i18next from 'i18next';
 
 export class ResetPassword extends React.Component {

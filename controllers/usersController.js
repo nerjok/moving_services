@@ -16,25 +16,34 @@ const showUsers = async (req, res, next) => {
 
   const page = req.query.page || 1;
   const { keyword } = req.query
+  const searchObj = {$and: [{status: {$gt: 1}}]}
   const searchOpt = {}
   if (keyword) {
-    searchOpt.$or = [
+    let keyw = { $or: [
                       {description: { $regex: '.*' + keyword + '.*' }}, 
                       {name: { $regex: '.*' + keyword + '.*' }},
                       {email: { $regex: '.*' + keyword + '.*' }},
                       {experience: { $regex: '.*' + keyword + '.*' }},
                       {scope: { $regex: '.*' + keyword + '.*' }},
                       {sphere: { $regex: '.*' + keyword + '.*' }},
-                    ];
+                    ]}
+
+    searchObj.$and.push(keyw)
   }
-  if (req.query.status)
-    searchOpt.status = req.query.status;
-  if (req.query.city)
-    searchOpt.city = req.query.city;
-  if (req.query.availableTime)
-    searchOpt.availableTime = { $all : req.query.availableTime};
+  if (req.query.status) {
+    let stats = {status: req.query.status}
+    searchObj.$and.push(stats)
+  }
+  if (req.query.city) {
+    let cit = {city: req.query.city}
+    searchObj.$and.push(cit)
+  }
+  if (req.query.availableTime) {
+    let avTm = {availableTime: { $all : req.query.availableTime}}
+    searchObj.$and.push(avTm)
+  }
   
-    const users = await User.paginate(searchOpt, { ...pagOptions, page });
+    const users = await User.paginate(searchObj, { ...pagOptions, page });
   res.send(users);
 };
 
@@ -50,8 +59,8 @@ const showUser = async (req, res, next) => {
 
 const updateUser = async (req, res, next) => {
   const { user } = req;
-  const { name, description, available, city, status } = req.body;
-  let updateData = { name, description, available, city, status }
+  const { name, description, available, city, status, phone } = req.body;
+  let updateData = { name, description, available, city, status, phone }
   if (!name && !description) {
     updateData = {...req.body}
   }
@@ -60,7 +69,7 @@ const updateUser = async (req, res, next) => {
     updateData, {
     new: true, 
     fields: {name: 1, email:1, description: 1, available: 1, city: 1, status: 1, experience: 1, 
-      scope: 1, prices: 1, availableTime: 1, sphere: 1 }
+      scope: 1, prices: 1, availableTime: 1, sphere: 1, phone: 1 }
     }
   )
   .then(result=> {
@@ -164,10 +173,6 @@ const deletePhoto = async (req, res, next) => {
   .catch(err => {
     res.send(err);
   });
-
-
-
-  //res.send({kuku:'kuku'});
 }
 
 module.exports = { showUsers, showUser, updateUser, changePassword, uploadPhoto, workPhotos, deletePhoto };

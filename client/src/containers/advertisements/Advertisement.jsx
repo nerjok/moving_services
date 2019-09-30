@@ -12,7 +12,8 @@ import {
   faCalendarAlt,
   faTools,
   faHandHoldingUsd,
-  faBriefcase
+  faBriefcase,
+  faPhoneAlt
 } from "@fortawesome/free-solid-svg-icons";
 import { StatusBtn, WorkTypeBtn } from "../../components/statusBtn/statusBtn";
 import Spinner from "../../components/spinner";
@@ -71,7 +72,6 @@ export class Advertisement extends React.Component {
 
   render() {
     const { advertisement } = this.props;
-
     if (!advertisement) return <Spinner />;
     let upDate = advertisement.updatedAt || advertisement.createdAt;
     if (upDate) {
@@ -150,8 +150,22 @@ export class Advertisement extends React.Component {
               <br /> {description}
             </div>
           </div>
+
           <div className="col-md-4 mb-1">
             <UserCard user={user} advertisement_id={_id}>
+
+              {(user && user.phone) && (
+                <div className="mt-3">
+                  <FontAwesomeIcon
+                    icon={faPhoneAlt}
+                    size="lg"
+                    style={{ color: "gray" }}
+                  />
+                  <b> <Trans>Phone</Trans> </b>
+                  <span className="mt-1  ml-4 d-block">{user.phone}</span>
+                </div>
+              )}
+
               {skills && (
                 <div className="mt-3">
                   <FontAwesomeIcon

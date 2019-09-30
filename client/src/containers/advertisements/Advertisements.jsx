@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react/jsx-no-comment-textnodes */
 import React from 'react'
-import { fetchAdvertisements, deleteAdvertisement, filterAdvertisements } from '../../store/actions'
+import { filterAdvertisements } from '../../store/actions'
 import { connect } from 'react-redux'
 import ReactPaginate from 'react-paginate';
 import { Link } from 'react-router-dom';
@@ -26,6 +26,9 @@ export class Advertisements extends React.Component {
       activeAdvertisement: {},
       status: [],
       workType: [],
+      location: [],
+      keyword: '',
+      distance: 30
     }
     this.displayAdvertisementPopup = this.displayAdvertisementPopup.bind(this);
     this.searchAdvertisements = this.searchAdvertisements.bind(this);
@@ -33,7 +36,26 @@ export class Advertisements extends React.Component {
   }
   
   componentDidMount() {
-    this.props.fetchAdvertisements(this.state.page)
+    const { page, location, distance, keyword, status, workType} = this.state
+
+    const his = window.history.state
+    if (his && this.props.advertisements.length) {
+      try {
+      const state = JSON.parse(his)
+      this.setState({...state})
+      } catch(e) {
+        this.props.filterAdvertisements(page, location, distance, keyword, status, workType)
+      }
+    } else
+     this.props.filterAdvertisements(page, location, distance, keyword, status, workType)
+
+  }
+
+  preventState = () => {
+    const state  = { ...this.state }
+
+    let stt = JSON.stringify(state)
+    window.history.pushState(stt, "page 2");
   }
 
   currentUrlPath = () => {
@@ -47,8 +69,15 @@ export class Advertisements extends React.Component {
     this.setState({activeAdvertisement})
   }
 
-  searchAdvertisements(location, distance, keyword) {
-    this.props.filterAdvertisements(0, location, distance, keyword, this.state.status, this.state.workType)
+  searchAdvertisements(location, distance, keyword, page = 0) {
+    this.setState({location, distance, keyword, page})
+    let currentUrlParams = new URLSearchParams(window.location.search);
+    currentUrlParams.set('page', 0);
+    if (this.props.history)
+      this.props.history.push(window.location.pathname + "?" + currentUrlParams.toString());
+
+    this.props.filterAdvertisements(page, location, distance, keyword, this.state.status, this.state.workType)
+    this.preventState()
   }
 
   changeStatus({target}) {
@@ -71,7 +100,10 @@ export class Advertisements extends React.Component {
       url = '';
     }    
     const { t } = this.props;
-
+    let page = 0;
+    if (this.props.page ){
+      page = this.props.page - 1;
+    }
     return (
       <>
         {this.props.from !== 'index' ? <Breadcrumb links={[{link: url, title: t('Advertisements')}]}/> : null }
@@ -104,24 +136,25 @@ export class Advertisements extends React.Component {
                           transform: 'translate(-50%, -50%)'
                         }}>
                       <ReactPaginate
-                      previousLabel={t('Previous')}
-                      nextLabel={t('Next')}
-                      breakLabel={'...'}
-                      breakClassName={'break-me'}
-                      pageCount={this.props.total}
-                      marginPagesDisplayed={2}
-                      pageRangeDisplayed={2}
-                      initialPage={this.state.page}
-                      forcePage={this.state.page}
-                      onPageChange={this.updatePage}
-                      pageClassName="page-item"
-                      pageLinkClassName="page-link"
-                      containerClassName={'pagination'}
-                      subContainerClassName={'pages pagination'}
-                      previousClassName="page-link"
-                      nextClassName="page-link"
-                      activeClassName={'active'}
-                    />
+                        previousLabel={t('Previous')}
+                        nextLabel={t('Next')}
+                        breakLabel={'...'}
+                        breakClassName={'break-me'}
+                        pageCount={this.props.total}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={2}
+                        initialPage={page}
+                        forcePage={page}
+                        onPageChange={this.updatePage}
+                        pageClassName="page-item"
+                        pageLinkClassName="page-link"
+                        containerClassName={'pagination'}
+                        subContainerClassName={'pages pagination'}
+                        previousClassName="page-link"
+                        nextClassName="page-link"
+                        activeClassName={'active'}
+                        disableInitialCallback={true}
+                      />
             </div>
           </div>
           </div>
@@ -136,6 +169,7 @@ export class Advertisements extends React.Component {
                 {title: t('Flexible Hours'), color: 'gray', value: 4},
               ]}
               name="workType"
+              state={this.state.workType}
               filterChange={this.changeStatus}
             />
 
@@ -148,6 +182,7 @@ export class Advertisements extends React.Component {
                 {title: t('Near Future'), color: 'gray', value: 4},
               ]}
               name="status"
+              state={this.state.status}
               filterChange={this.changeStatus}
             />
 
@@ -162,16 +197,20 @@ export class Advertisements extends React.Component {
 
   updatePage = ({selected}) => {
     this.setState({page: selected})
+    
+    const { location, distance, keyword, status, workType } = this.state;
 
     let currentUrlParams = new URLSearchParams(window.location.search);
     currentUrlParams.set('page', selected);
     if (this.props.history)
       this.props.history.push(window.location.pathname + "?" + currentUrlParams.toString());
 
-    this.props.fetchAdvertisements(selected)
+
+    this.props.filterAdvertisements(selected, location, distance, keyword, status, workType)
+    this.preventState()
   }
 }
 
 
 const mapStateToProps = ({advertisements: {advertisements, total, page}}) => ({advertisements, total, page });
-export default withTranslation()(connect(mapStateToProps, {fetchAdvertisements, deleteAdvertisement, filterAdvertisements})(Advertisements))
+export default withTranslation()(connect(mapStateToProps, { deleteAdvertisement: () => {}, filterAdvertisements})(Advertisements))

@@ -9,6 +9,7 @@ import Messaging from '../messaging';
 import { Collapse } from 'react-bootstrap';
 import { sendMessage, subscribeUser } from '../../store/actions'
 import { connect } from 'react-redux'
+import i18next from 'i18next';
 
 
 const userStars = stars => {
@@ -21,9 +22,16 @@ const userStars = stars => {
   }
   return visiblStars;
 }
+
 const UserCard = ({user, children, hideLinks, sendMessage, advertisement_id, subscribeUser}) => {
   const [open, setOpen] = useState(false);
   const [resp, setResp] = useState('');
+
+  const { language } =  i18next;
+  let url = '';
+  if (language !== 'lt') {
+    url = `/${language}`;
+  }
 
   const sendMsg = (message) => {
     const receiver_id = user._id
@@ -52,7 +60,7 @@ const UserCard = ({user, children, hideLinks, sendMessage, advertisement_id, sub
 
       <h5 className="text-center mt-1">{user && 
           <Link 
-            to={`/profiles/${user && user._id}`} 
+            to={`${url}/profiles/${user && user._id}`} 
             className="text-secondary" 
             title="Preview profile">
             {user.name || user.email}
@@ -63,7 +71,7 @@ const UserCard = ({user, children, hideLinks, sendMessage, advertisement_id, sub
     <div className="text-center">
       <div>
         {(user && user.rate) && <Link 
-                        to={`/profiles/${user && user._id}/rates`} 
+                        to={`${url}/profiles/${user && user._id}/rates`} 
                         title="Preview rates">
                         {userStars(user.rate)}
                         <small className="text-success">&nbsp; {user.rate}</small>
