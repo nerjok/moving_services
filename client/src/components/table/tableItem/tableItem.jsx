@@ -3,21 +3,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart,  faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { StatusBtnServ } from '../../statusBtn/statusBtnServ';
 
 
-export const TableItem = ({sphere, description, name, email, _id, url}) => {
+export const TableItem = ({cityName, status, sphere, description, name, email, _id, url}) => {
 
   return (
         <div className="row advertisements-row advertisements-row--red">
           <div className="col-md-5 advertisements-row__description">
-            {sphere && <h5>{sphere.substring(0, 50)}</h5>}
+            {sphere && <h5><Link to={`${url}/${_id}`} >
+              {sphere.substring(0, 50)}
+            </Link></h5>}
             {name || email}
           </div>
           <div className="col-md-2 flex" styles={{background: 'lightgray'}}>
-              <span className="badge badge-success advertisements-row__badge">Active</span>
+              <StatusBtnServ status={status}/>
           </div>
           <div className="col-md-2 flex">
-              <span className="advertisements-row__info-txt">Vilnius</span> 
+            {(cityName && cityName.title) && <span className="advertisements-row__info-txt">{cityName.title}</span> }
           </div>
           <div className="col-md-3 flex">
             <div className="advertisements-row__info-txt">

@@ -96,7 +96,7 @@ const createAdvertisement = async (req, res, next) => {
     return res.json({ errors: errors.array() });
   }
 
-  const { title, description, skills, tools, payment, time, dateTime, location, status, workType} = req.body;
+  const { title, description, skills, tools, payment, time, dateTime, location, status, workType, city} = req.body;
 
   let resp = await Advertisement.create({
     title,
@@ -108,6 +108,7 @@ const createAdvertisement = async (req, res, next) => {
     dateTime,
     status,
     workType,
+    city,
     location: {
       type: "Point",
       coordinates: location
@@ -129,7 +130,7 @@ const updateAdvertisement = async (req, res, next) => {
     return res.json({ errors: errors.array() });
   }
 
-  const { title, description, skills, tools, payment, time, dateTime, location, status, workType } = req.body;
+  const { title, description, skills, tools, payment, time, dateTime, location, status, workType, city } = req.body;
 
   const resp = await Advertisement.findOneAndUpdate(
     { _id: req.params.id, _user: req.user._id },
@@ -143,6 +144,7 @@ const updateAdvertisement = async (req, res, next) => {
       dateTime,
       status,
       workType,
+      city,
       location: {
         type: "Point",
         coordinates: location
@@ -182,8 +184,11 @@ const showAdvertisement = async (req, res, next) => {
   const advertisement = await Advertisement.findOne({
     _id: req.params.id
   }).populate("_user");
-
   let photos = advertisementPhotos(req.params.id);
+
+  console.log('advertisementSho', advertisement.cityName)
+advertisement.photos = photos
+res.send(advertisement);return
   res.send({...advertisement._doc, photos});
 };
 

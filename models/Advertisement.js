@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 var mongoosePaginate = require('mongoose-paginate-v2');
 const mongoose_delete = require('mongoose-delete');
+const { cities } = require('../constants');
 
 
 const advertisementSchema = new Schema({
@@ -13,6 +14,7 @@ const advertisementSchema = new Schema({
     payment: String,
     status: String,
     workType: Number,
+    city: {type: String, required: false},
     dateTime: {type: Date, required: true},
     location: {
       type: { type: String, 
@@ -26,8 +28,13 @@ const advertisementSchema = new Schema({
 		},
 		
     _user: {type: Schema.Types.ObjectId, ref: 'User'},
-}, { timestamps: true });
+}, { toJSON: { virtuals: true } },{ timestamps: true });
 
+
+advertisementSchema.virtual('cityName').get(function name(params) {
+  let cityName = cities.find(city => city.value == this.city)
+  return cityName;
+})  
 
 advertisementSchema.index({'location.coordinates': '2dsphere'});
 advertisementSchema.plugin(mongoosePaginate);

@@ -9,8 +9,8 @@ export const Advertisements = ({ my, advertisements, location, advCallback, acti
   return (
     <div className="advertisements">
       <AdvertisementPopup {...activeAdvertisement} />
-      {Array.from(advertisements, ({_id, title, description, status, workType}) => 
-        <Advertisement  my={my} key={_id} _id={_id} title={title} status={status} workType={workType} page={page} deleteAdvertisement={deleteAdvertisement} description={description} location={location} advCallback={advCallback}/>
+      {Array.from(advertisements, ({_id, title, description, status, workType, cityName}) => 
+        <Advertisement  my={my} key={_id} _id={_id} cityName={cityName} title={title} status={status} workType={workType} page={page} deleteAdvertisement={deleteAdvertisement} description={description} location={location} advCallback={advCallback}/>
       )}
     </div> 
   )

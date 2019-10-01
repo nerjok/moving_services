@@ -24,15 +24,14 @@ export const Footer = (props) => {
               <p className="footer__text">
                 <Trans>About description</Trans>
               </p>
-              <a href="#about" className="more-info"><Trans>More</Trans> &rarr;</a>
+              <Link to={`${url}/about`} className="more-info"><Trans>More</Trans>&rarr;</Link>
             </div>
             <div className="col-md-2">
               <h5><Trans>For seakers</Trans></h5>
               <ul className="footer__list">
-               
-                <li><a href="#" className="white-link"><Trans>Types</Trans></a></li>
+                <li><Link to={`${url}/advices`} className="white-link"><Trans>Types</Trans></Link></li>
                 <li><Link to={`${url}/profiles`} className="white-link"><Trans>Users</Trans></Link></li>
-                <li><a href="#" className="white-link"><Trans>My tasks</Trans></a></li>
+                {/*<li><a href="#" className="white-link"><Trans>My tasks</Trans></a></li>*/}
               </ul>
             </div>
             <div className="col-md-2">
@@ -40,15 +39,15 @@ export const Footer = (props) => {
               <ul className="footer__list">
                 <li><Link to={`${url}/advertisements`} className="white-link"><Trans>Advertisements</Trans></Link></li>
                 <li><a href="#" className="white-link"><Trans>Messages</Trans></a></li>
-                <li><a href="#" className="white-link"><Trans>My works</Trans></a></li>
+                {/*<li><a href="#" className="white-link"><Trans>My works</Trans></a></li>*/}
               </ul>
             </div>
             <div className="col-md-2">
               <h5><Trans>Other</Trans></h5>
               <ul className="footer__list">
-                <li><a href="#" className="white-link"><Trans>Rules</Trans></a></li>
+                <li><Link to={`${url}/rules`} className="white-link"><Trans>Rules</Trans></Link></li>
                 <li><a href="#" className="white-link"><Trans>Blog</Trans></a></li>
-                <li><a href="#" className="white-link"><Trans>Contacts</Trans></a></li>
+                {/*<li><Link to={`${url}/contacts`} className="white-link"><Trans>Contacts</Trans></Link></li>*/}
               </ul>
             </div>
 

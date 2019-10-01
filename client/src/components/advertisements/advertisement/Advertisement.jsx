@@ -7,9 +7,8 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { StatusBtn } from '../../statusBtn/statusBtn';
 
-export const Advertisement = ({my, status, workType, title, description, _id, location, advCallback, deleteAdvertisement, page}) => {
+export const Advertisement = ({my, cityName, status, workType, title, description, _id, location, advCallback, deleteAdvertisement, page}) => {
   let timeColor;
-
   switch (workType) {
     case 2:
       timeColor = 'advertisements-row--green';
@@ -43,7 +42,7 @@ export const Advertisement = ({my, status, workType, title, description, _id, lo
           <StatusBtn status={status} />
       </div>
       <div className="col-md-2 flex">
-          <span className="advertisements-row__info-txt">Vilnius</span> 
+        {(cityName && cityName.title) && <span className="advertisements-row__info-txt">{cityName.title}</span> }
       </div>
       <div className="col-md-3 flex">
         <div className="advertisements-row__info-txt">

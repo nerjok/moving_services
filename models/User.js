@@ -11,7 +11,7 @@ const userSchema = new Schema({
     phone: String,
     description: {type: String, required: false, minlength: 10},
     available: {type: String, required: false, minlength: 10},
-    city: {type: String, required: false, minlength: 10},
+    city: {type: String, required: false},
     status: {type: Number, default: 1 },
     experience: {type: String, minlength: 10},
     prices: {type: String, minlength: 10},
@@ -95,14 +95,7 @@ userSchema.methods.checkPassword = function(password) {
       return true;
     return bcrypt.compareSync(password, this.password);
 };
-/*
-userSchema.methods.toJSON = function() {
-  var obj = this.toObject();
-  delete obj.password;
-  delete obj.password_reset;
-  return obj;
- }
-*/
+
 userSchema.plugin(mongoosePaginate);
 
 mongoose.model('User', userSchema);

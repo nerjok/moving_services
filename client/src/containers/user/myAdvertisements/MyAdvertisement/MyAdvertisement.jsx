@@ -20,19 +20,20 @@ export class MyAdvertisement extends React.Component {
   }
 
   show() {
-    const { title, description, payment, skills, time, tools } = this.props.advertisement
-
+    const { title, description, payment, skills, time, tools, cityName } = this.props.advertisement
+console.log('advertisement', this.props.advertisement)
     return (
       <>
         <div styles={{display:'block', background: 'gray'}}><b><Trans>Title</Trans>:</b> {title}</div>        
         <br/>
         <div><b><Trans>Description</Trans></b> {description}</div>
-        <div><b><Trans>Skils and experience required</Trans></b>{skills}</div>
+        <div><b><Trans>Skils and experience required</Trans></b> {skills}</div>
               <br/>
-              <div><b><Trans>Date and Time</Trans></b>{time}</div>
+              <div><b><Trans>Date and Time</Trans></b> {time}</div>
               <br/>
-              <div><b><Trans>Payment information</Trans></b>{payment}</div>
-              <div><b><Trans>Tools required</Trans></b>{tools}</div>
+              <div><b><Trans>Payment information</Trans></b> {payment}</div>
+              <div><b><Trans>Tools required</Trans></b> {tools}</div>
+              {(cityName && cityName.title) && <div><b><Trans>Region</Trans></b> {cityName.title}</div>}
               <br/>
       </>
     )

@@ -125,6 +125,21 @@ i18n
           "Please fulfil field to continue": "Please fulfil field to continue",
           "New password": "New password",
           "Phone": "Phone",
+          "Region": "Region",
+
+          "about-title": 
+          "Work suggestions and services website, providing conections of peer to peer to lengthen and fasten communication.",
+          "about-par1": 
+          "Project consist of two main advertisement part - client and service providers. To quaranty accecilibilty \
+          both come with search support for better performance, As we still growing, we care every user experience and feedback with suggestions are always welcome.",
+          
+          "about-par2": "The idea of project to tie customer and services within local area for short term proposal, payment and taxes\
+          due are users obligation. For credibility and cleareance website covers some user protection by letting evaluate other\
+          the hire rate is the more reliable looks shows.",
+
+          "about-par3": 
+          "Looking to the future we are always welcome to new ideas and collaboration offers broadly to extend and provide \
+          the services in its better consistency. In case of question leave  a message at shortcomings@baltfly.com",
 
           "Part Time Part Time": "Part Time Part Time",
           "Welcome to React.js": "Welcome to React.js",
@@ -246,8 +261,8 @@ i18n
           "About description": "Laikinų ir ilgalaikių darbo ir paslaugų žiniatinklio svetainė. Sėkmingam naudojimuisi prašom užsiregistruoti ir \
           peržiūrėti taisyklių ir patarimų skiltis.  Iškilus klausimams kreipkitės kontaktuose nurodytais budais arba el-paštu.",
           "More": "Pačiau",
-          "For seakers": "Darbų pasiūla",
-          "For employees": "Darbų paieška",
+          "For seakers": "Užsakovams",
+          "For employees": "Darbuotojams",
           "Other": "Kita",
 
           "Types": "Patarimai",
@@ -271,7 +286,17 @@ i18n
           "New password": "Naujas slaptazodis",
           "Phone": "Telefonas",
           "Part Time Part Time": "Part Time Part Time",
+          "Region": "Miestas",
 
+
+          "about-title":
+          "Darbo pasiūlymų ir paslaugų svetainė p2p spartesnei komunikacijai tarp paslaugų teikėjo iki vartotojo.",
+          "about-par1": 
+          "Projektas susideda iš dviejų skelbimo dalių - kliento ir paslaugų teikėjo. Užtikrinti paslaugų pasiekiamumą idiegta paieškos sistema, Plėtojant projektą kiekviena vartotojų patirtis ir grįžtamasis ryšys su pasiūlymais yra visada laukiami.",
+          "about-par2":
+          "Projekto idėja susieti klientą ir paslaugos teikėją jo regione trumpalaikiam darbo ar paslaugos pasiūlymui Užmokesčiai ir mokami mokesčiai yra vartotojų įsipareigojimas. Siekiant užtikrinti vartotojų patikimumą sudaryta vartotojų vertinimo funkcija vartotojų patikimumui vertinti.",
+          "about-par3": 
+          "Žvelgdami į priekį, mes esame visada sutelkę mintis į  naujsa idėjas ir bendradarbiavimo pasiūlymus, siekiant plėtoti projekto funkcijas ir naujas idėjas. Iškilus klausimams palikite žinutę shortcomings@baltfly.com",
           "Welcome to React.js": "Καλώς 'Ηρθατε στο React.js!",
           "Declarative": "Δηλωτικό lithuanian",
           "Translation cool": 'lithuanian translation',

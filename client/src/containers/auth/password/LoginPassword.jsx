@@ -36,6 +36,7 @@ export class LoginPassword extends React.Component {
 
   render() {
     return (
+      <section className="page-height">
       <div id="entrance-point" className="m-5">
         <Tabs
           defaultActiveKey="login"
@@ -75,6 +76,7 @@ export class LoginPassword extends React.Component {
         </Tabs>
         <br />
       </div>
+      </section>
     );
   }
 

@@ -74,7 +74,7 @@ class AdvertisementForm extends React.Component {
               fieldComp = DateTimePicker;
             else if (name === 'location')
             fieldComp = MapInput;
-            else if (['status', 'workType'].includes(name))
+            else if (['status', 'workType', 'city'].includes(name))
               fieldComp = SelectField 
             else 
               fieldComp = AdvertisementField;   
@@ -83,7 +83,7 @@ class AdvertisementForm extends React.Component {
                     key={name}
                     type="text"
                     name={name}
-                    options={['status', 'workType'].includes(name) ? options : []}
+                    options={['status', 'workType', 'city'].includes(name) ? options : []}
                     component={fieldComp}
                     label={<Trans>{label}</Trans>}
                 />

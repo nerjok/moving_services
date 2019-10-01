@@ -5,15 +5,17 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import {connect} from 'react-redux'
 import * as actions from '../store/actions'
 
-import Header from './Header'
-import Dashboard from './Dashboard'
-import SurveyNew from './surveys/SurveyNew'
-import Advertisements from './advertisements/Advertisements'
-import Advertisement from './advertisements/Advertisement'
-
+import Header from './Header';
+import Dashboard from './Dashboard';
+import SurveyNew from './surveys/SurveyNew';
+import Advertisements from './advertisements/Advertisements';
+import Advertisement from './advertisements/Advertisement';
+import About from '../components/about';
+import Advices from '../components/advices';
+import Rules from '../components/rules';
 
 import Ads from './Ads';
-import LoginPassword from './auth/password/LoginPassword'
+import LoginPassword from './auth/password/LoginPassword';
 
 
 import Users from './users/Users';
@@ -107,7 +109,9 @@ class App extends Component {
                             }
 
                             <Route path={`${url}/surveys`} component={Dashboard} exact />
-
+                            <Route path={`${url}/about`} exact component={About}/>
+                            <Route path={`${url}/advices`} exact component={Advices}/>
+                            <Route path={`${url}/rules`} exact component={Rules}/>
                             <Route path={`${url}/surveys/new`} component={SurveyNew} />
                             {/*<Route path="/profile" exact component={Profile}/>*/}
                             <Route path={`${url}/profiles`} exact component={Users}/>

@@ -27,6 +27,7 @@ export class ResetPassword extends React.Component {
   render () {
 
     return (
+      <section className="page-height">
       <div id="entrance-point" className="m-5">
 
       <div className=" card card-body">
@@ -67,6 +68,7 @@ export class ResetPassword extends React.Component {
 
         <br/>
     </div>
+    </section>
     );
   }
 

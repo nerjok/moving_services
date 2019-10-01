@@ -8,6 +8,10 @@ body {overflow-x:hidden; }
   width: 100%;
 }
 
+.page-height {
+  min-height: 70vh;
+}
+
 .to-top {
   position:fixed;
   bottom: 1rem;

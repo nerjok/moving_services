@@ -13,7 +13,8 @@ import {
   faTools,
   faHandHoldingUsd,
   faBriefcase,
-  faPhoneAlt
+  faPhoneAlt,
+  faCity
 } from "@fortawesome/free-solid-svg-icons";
 import { StatusBtn, WorkTypeBtn } from "../../components/statusBtn/statusBtn";
 import Spinner from "../../components/spinner";
@@ -90,6 +91,7 @@ export class Advertisement extends React.Component {
       dateTime,
       status,
       workType,
+      cityName
     } = advertisement;
     const options = {
       weekday: "long",
@@ -163,6 +165,18 @@ export class Advertisement extends React.Component {
                   />
                   <b> <Trans>Phone</Trans> </b>
                   <span className="mt-1  ml-4 d-block">{user.phone}</span>
+                </div>
+              )}
+
+              {(cityName && cityName.title) && (
+                <div className="mt-3">
+                  <FontAwesomeIcon
+                    icon={faCity}
+                    size="lg"
+                    style={{ color: "gray" }}
+                  />
+                  <b> <Trans>Region</Trans> </b>
+                  <span className="mt-1  ml-4 d-block">{cityName.title}</span>
                 </div>
               )}
 

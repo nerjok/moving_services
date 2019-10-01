@@ -78,7 +78,7 @@ export const User = props => {
     };
   }, []);
   const { user } = props;
-  if (!user) return <Spinner />;
+  if (!user || (user && !user._id)) return <Spinner />;
   const { name, work_photos } = user;
 
   const parentPath = () => {
