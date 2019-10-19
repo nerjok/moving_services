@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
 import React, {Component} from 'react'
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import {connect} from 'react-redux'
 import * as actions from '../store/actions'
 
@@ -13,11 +13,11 @@ import Advertisement from './advertisements/Advertisement';
 import About from '../components/about';
 import Advices from '../components/advices';
 import Rules from '../components/rules';
-
+import NotFound from './404';
 import Ads from './Ads';
 import LoginPassword from './auth/password/LoginPassword';
 
-
+import Admin from './admin';
 import Users from './users/Users';
 import Profile from './users/user/user';
 
@@ -29,14 +29,12 @@ import { Footer } from './footer'
 import { GetStarted } from './GetStarted'
 import Rates from './users/rates';
 import Rate from './users/rate/rate';
-import  User  from './user/User'
+import  User  from './user/User';
 import { withRouter } from 'react-router';
 import { Header as HeaderBtn, HeaderHeading} from '../components/header';
 import ScrollIntoView from '../hoc/scrollIntoView';
 import ResetPassword from './auth/password/ResetPassword';
-//import TableList from "../components/table";
 
-//import { useTranslation, withTranslation, Trans } from 'react-i18next';
 import i18next from 'i18next'
 
 function mainRouted(isLoged, advertisements, users) {
@@ -102,8 +100,8 @@ class App extends Component {
                             
                             <Route path={`${url}/`} exact component={HeaderHeading}/>
                             <Route path={`${url}/`} exact component={HeaderBtn}/>
+                            <Switch>
                             <Route path={`${url}/`} exact component={Ads}/>
-                            
                             {isLoged ? null :
                              <Route path={`${url}/reset_password`} component={ResetPassword} exact />
                             }
@@ -113,7 +111,6 @@ class App extends Component {
                             <Route path={`${url}/advices`} exact component={Advices}/>
                             <Route path={`${url}/rules`} exact component={Rules}/>
                             <Route path={`${url}/surveys/new`} component={SurveyNew} />
-                            {/*<Route path="/profile" exact component={Profile}/>*/}
                             <Route path={`${url}/profiles`} exact component={Users}/>
                             <Route path={`${url}/advertisements`} exact component={Advertisements}/>
                             <Route path={`${url}/advertisements/:id`} exact component={Advertisement}/>
@@ -125,11 +122,15 @@ class App extends Component {
                             :
                               <Route path={`${url}/login`} exact component={LoginPassword} />
                             }
-                              </div>
-                              <Route path={`${url}/`} exact component={mainRouted(isLoged)}/>
-                            </>
-                          )}} 
-                        />
+                            <Route path={`${url}/admin/`} exact component={Admin}/>
+                            <Route  component={NotFound}/>
+
+                            </Switch>
+                          </div>
+                        <Route path={`${url}/`} exact component={mainRouted(isLoged)}/>
+                      </>
+                    )}} 
+                  />
 					            
 
                       <Footer/>

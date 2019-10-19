@@ -21,7 +21,7 @@ import Spinner from "../../components/spinner";
 import ApplyJob from "../../components/applyJob";
 import ImageGallery from "react-image-gallery";
 
-import { withTranslation, Trans } from 'react-i18next';
+import { withTranslation, Trans } from "react-i18next";
 
 const toGallery = (id, images) => {
   return images.map(image => ({
@@ -66,10 +66,10 @@ export class Advertisement extends React.Component {
   }
 
   parentPath = () => {
-    let  { url } = this.props.match;
-    let ats = url.slice(0, url.lastIndexOf('/'))
-    return ats
-  }
+    let { url } = this.props.match;
+    let ats = url.slice(0, url.lastIndexOf("/"));
+    return ats;
+  };
 
   render() {
     const { advertisement } = this.props;
@@ -103,20 +103,21 @@ export class Advertisement extends React.Component {
       ahourCycle: "h24"
     };
 
-    let  { url } = this.props.match;
-    if (url.length <=1 ) {
-      url = '';
-    }    
+    let { url } = this.props.match;
+    if (url.length <= 1) {
+      url = "";
+    }
     const { t } = this.props;
     const brdCrumb = [
       { link: this.parentPath(), title: t("Advertisements") },
       { link: "#", title: t("Advertisement") }
     ];
+
     return (
       <>
         <BreadCrumb links={brdCrumb} />
 
-        <div className="row mt-2 mb-2">
+        <div className="row mt-2 mb-2 scale-to">
           <div className="col-md-12 mb-5">
             {photos && photos.length > 0 && (
               <div className="mt-5" style={{ border: "15px solid black" }}>
@@ -135,7 +136,9 @@ export class Advertisement extends React.Component {
             <hr />
             <div className="text-right">
               <span className="mr-1 p-1">
-                <small><Trans>Published</Trans>: {upDate}</small>
+                <small>
+                  <Trans>Published</Trans>: {upDate}
+                </small>
               </span>
 
               <StatusBtn status={status} />
@@ -148,34 +151,41 @@ export class Advertisement extends React.Component {
 
             <div className="mt-5 mb-5">
               {" "}
-              <b><Trans>Description</Trans></b>
+              <b>
+                <Trans>Description</Trans>
+              </b>
               <br /> {description}
             </div>
           </div>
 
           <div className="col-md-4 mb-1">
             <UserCard user={user} advertisement_id={_id}>
-
-              {(user && user.phone) && (
+              {user && user.phone && (
                 <div className="mt-3">
                   <FontAwesomeIcon
                     icon={faPhoneAlt}
                     size="lg"
                     style={{ color: "gray" }}
                   />
-                  <b> <Trans>Phone</Trans> </b>
+                  <b>
+                    {" "}
+                    <Trans>Phone</Trans>{" "}
+                  </b>
                   <span className="mt-1  ml-4 d-block">{user.phone}</span>
                 </div>
               )}
 
-              {(cityName && cityName.title) && (
+              {cityName && cityName.title && (
                 <div className="mt-3">
                   <FontAwesomeIcon
                     icon={faCity}
                     size="lg"
                     style={{ color: "gray" }}
                   />
-                  <b> <Trans>Region</Trans> </b>
+                  <b>
+                    {" "}
+                    <Trans>Region</Trans>{" "}
+                  </b>
                   <span className="mt-1  ml-4 d-block">{cityName.title}</span>
                 </div>
               )}
@@ -187,7 +197,10 @@ export class Advertisement extends React.Component {
                     size="lg"
                     style={{ color: "gray" }}
                   />
-                  <b> <Trans>Skils and experience required</Trans> </b>
+                  <b>
+                    {" "}
+                    <Trans>Skils and experience required</Trans>{" "}
+                  </b>
                   <span className="mt-1  ml-4 d-block">{skills}</span>
                 </div>
               )}
@@ -199,7 +212,10 @@ export class Advertisement extends React.Component {
                     size="lg"
                     style={{ color: "gray" }}
                   />
-                  <b> <Trans>Tools required</Trans> </b>
+                  <b>
+                    {" "}
+                    <Trans>Tools required</Trans>{" "}
+                  </b>
                   <span className="mt-1  ml-4 d-block">{tools}</span>
                 </div>
               )}
@@ -210,7 +226,10 @@ export class Advertisement extends React.Component {
                     size="lg"
                     style={{ color: "gray" }}
                   />
-                  <b> <Trans>Precise time information</Trans> </b>
+                  <b>
+                    {" "}
+                    <Trans>Precise time information</Trans>{" "}
+                  </b>
                   <span className="mt-1  ml-4 d-block">
                     {time && <div>{time}</div>}
                     {new Date(dateTime).toLocaleDateString("lt-LT", options)}
@@ -224,7 +243,10 @@ export class Advertisement extends React.Component {
                     size="lg"
                     style={{ color: "gray" }}
                   />
-                  <b> <Trans>Payment information</Trans> </b>
+                  <b>
+                    {" "}
+                    <Trans>Payment information</Trans>{" "}
+                  </b>
                   <span className="mt-1  ml-4 d-block">{payment}</span>
                 </div>
               )}
@@ -247,10 +269,13 @@ export class Advertisement extends React.Component {
   }
 }
 
-const mapStateToProps = ({
+export const mapStateToProps = ({
   advertisements: { advertisements, total, page, advertisement }
 }) => ({ advertisement, advertisements, total, page });
-export default withTranslation()(connect(
-  mapStateToProps,
-  { fetchAdvertisement, applyJob, sendMessage }
-)(Advertisement));
+
+export default withTranslation()(
+  connect(
+    mapStateToProps,
+    { fetchAdvertisement, applyJob, sendMessage }
+  )(Advertisement)
+);

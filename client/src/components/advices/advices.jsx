@@ -5,7 +5,7 @@ import React from 'react';
 export const Advices = (params) => {
   return (
     <section className="page-height">
-    <div className="container p-5">
+    <div className="container p-5  scale-to">
       <h1 className="text-right">Advices</h1>
       <div>
         <ul className="list-group">

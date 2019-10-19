@@ -95,7 +95,7 @@ export const User = props => {
           { link: "#", title: <Trans>Profile</Trans> }
         ]}
       />
-      <div className="row" style={{ marginTop: "2rem", marginBottom: "2rem" }}>
+      <div className="row  scale-to" style={{ marginTop: "2rem", marginBottom: "2rem" }}>
         <div className="col-md-12 mb-5">
           {work_photos && work_photos.length > 0 && (
             <div className="mt-5" style={{ border: "15px solid black" }}>

@@ -7,7 +7,7 @@ export const About = (props) => {
   
   return (
     <section className="page-height">
-      <div className="container p-5">
+      <div className="container p-5  scale-to">
         <h1 className="text-right"><Trans>About</Trans></h1>
 
         <div className="row mt-3">

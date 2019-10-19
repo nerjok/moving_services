@@ -1,7 +1,7 @@
 const keys = require('../../config/keys');
 
 module.exports = secret => {
-    return `
+  return `
         <html>
             <body>
                 <div style="text-align: center;">

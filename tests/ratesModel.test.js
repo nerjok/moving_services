@@ -9,11 +9,11 @@ const Rate = mongoose.model("Rate");
 describe('test rates model', () => {
 
   it('should throw error on save and forbid', (done) => {
-    var adv = new Rate({})
+    var adv = new Rate({});
 
     adv.validate(function(err){
-      err.should.contains.all.keys('errors')
+      err.should.contains.all.keys('errors');
       done();
-    })
-  })
-})
+    });
+  });
+});

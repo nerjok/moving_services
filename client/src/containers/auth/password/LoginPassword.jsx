@@ -37,7 +37,7 @@ export class LoginPassword extends React.Component {
   render() {
     return (
       <section className="page-height">
-      <div id="entrance-point" className="m-5">
+      <div id="entrance-point" className="m-5  scale-to">
         <Tabs
           defaultActiveKey="login"
           id="entrance-points"

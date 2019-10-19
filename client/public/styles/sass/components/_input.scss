@@ -79,7 +79,7 @@
   }
   &__range {
     -webkit-appearance: none;
-    width: 80%;
+    width: 70%;
     height: 1.2rem;
     background: #d3d3d3;
     outline: none;
@@ -90,7 +90,7 @@
 
     &__output {
       border: 1px solid #d7dbdd;
-      color: $color-white;
+      color: $color-black;
       font-family: 'Lato', sans-serif;
       font-size: 12px;
       font-weight: 600;

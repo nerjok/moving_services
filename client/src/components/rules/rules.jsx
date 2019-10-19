@@ -4,7 +4,7 @@ import React from 'react';
 
 export const Rules = (params) => {
   return (
-    <section className="page-height">
+    <section className="page-height  scale-to">
     <div className="container p-5">
       <h1 className="text-right">Rules</h1>
 

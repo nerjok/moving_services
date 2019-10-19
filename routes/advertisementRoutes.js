@@ -9,7 +9,7 @@ const contactList = require('../controllers/contactListController');
 const messages = require('../controllers/messageThreadController');
 
 
-router.post('/api/advertisements/new', requireLogin, advertisements.validate('createAdvertisement'), advertisements.createAdvertisement)
+router.post('/api/advertisements/new', requireLogin, advertisements.validate('createAdvertisement'), advertisements.createAdvertisement);
 
 router.get('/api/advertisements', advertisements.showAdvertisements);
 
@@ -19,9 +19,11 @@ router.get('/api/advertisements/filter', advertisements.filterAdvertisements);
 
 router.get('/api/advertisements/:id', advertisements.showAdvertisement);
 
-router.post('/api/advertisements/:id/update', requireLogin, advertisements.validate('createAdvertisement'), advertisements.updateAdvertisement);
+router.post('/api/advertisements/:id/update', 
+  requireLogin, advertisements.validate('createAdvertisement'), advertisements.updateAdvertisement);
 
-router.post('/api/advertisements/:id/uploadphoto', requireLogin, multer.storageMiddleware("ADVERTISEMENT_PHOTO"), advertisements.uploadPhoto);
+router.post('/api/advertisements/:id/uploadphoto', 
+  requireLogin, multer.storageMiddleware("ADVERTISEMENT_PHOTO"), multer.resizeImages, advertisements.uploadPhoto);
 
 router.delete('/api/advertisements/:id/deletephoto/:photo', requireLogin, advertisements.deletePhoto);
 
@@ -54,6 +56,6 @@ router.post('/api/contactList', requireLogin, contactList.subscribeUser);
 
 router.get('/api/contactList', requireLogin, contactList.contactList);
 
-router.post('/api/contactList/unsubscribe', requireLogin, contactList.unsubscribe)
+router.post('/api/contactList/unsubscribe', requireLogin, contactList.unsubscribe);
 
 module.exports = router;

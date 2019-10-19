@@ -28,7 +28,7 @@ export class ResetPassword extends React.Component {
 
     return (
       <section className="page-height">
-      <div id="entrance-point" className="m-5">
+      <div id="entrance-point" className="m-5 scale-to">
 
       <div className=" card card-body">
 

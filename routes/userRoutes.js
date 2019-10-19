@@ -23,6 +23,7 @@ router.post('/auth/reset_password', auth.reset_password);
 
 router.get('/:lang?/auth/google', auth.googleAuth);
 
+router.get('/confirm_user/:id', auth.confirmEmail);
 
 router.get('/auth/google/callback', passport.authenticate('google'), auth.googleAuthCallback);
 
@@ -34,12 +35,11 @@ router.get('/api/users', user.showUsers);
 
 router.get('/api/users/:user_id', user.showUser);
 
-router.post('/api/user/:id/upload_photo', requireLogin, multer.storageMiddleware("PROFILE_PHOTO"), user.uploadPhoto);
+router.post('/api/user/:id/upload_photo', requireLogin, multer.storageMiddleware("PROFILE_PHOTO"), multer.resizeImages, user.uploadPhoto);
 
-router.post('/api/user/:id/work_photos', requireLogin, multer.storageMiddleware("WORK_PHOTOS"), user.workPhotos);
+router.post('/api/user/:id/work_photos', requireLogin, multer.storageMiddleware("WORK_PHOTOS"), multer.resizeImages, user.workPhotos);
 
 router.post('/api/user/:id/delete_photo', requireLogin, user.deletePhoto);
 
 
-//'/api/user/'+id+'/delete_photo/'+photo
 module.exports = router;

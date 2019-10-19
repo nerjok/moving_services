@@ -41,6 +41,8 @@ export const forgotPswd = (email, history) => async dispatch => {
   const res = await axios.post('/auth/forgot', { email });
   if (res.data && res.data.msg) {
     history.push('/');
+  } else if (res.data && res.data.error){
+    return res.data;
   }
 }
 
@@ -133,6 +135,7 @@ export const updateAdvertisement = (data, history) => async dispatch => {
 
 export const uploadPhoto = (id, photos) => async dispatch => {
     const res = await axios.post('/api/advertisements/'+id+'/uploadphoto', photos);
+    console.log('advertisementUploadPhoto', res.data)
     dispatch({ type: FETCH_ADVERTISEMENT, payload: res.data });
 }
 

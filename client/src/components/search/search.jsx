@@ -4,20 +4,6 @@ import { loadModules } from "esri-loader";
 import i18next from 'i18next';
 
 
-const styles = {
-  input: {    
-    boxShadow: 'inset 0px 0px 0px 30px rgba(0, 0, 0, 0.23)',
-    color: '#fff',
-    backgroundColor: '#333333',
-    borderRadius: 0,
-    border: 'none',
-    opacity: 1
-  },
-  wrapperStyle: { width: 200, marginLeft: 20 },
-  whiteCollor: {color: '#fff'}
-}
-
-
 export const Search = (props) => {
 
   const [location, setLocation] = useState([]);
@@ -98,35 +84,30 @@ export const Search = (props) => {
   const submitSearch = () => props.filterAdvertisements(location, distance, keyword);
 
   return (
-    <div 
-      className="container-search" 
-    >
+    <div className="card user-card p-1 pb-0" style={{height: 'auto'}}>
+
       <div id="locus-search" style={{height:"1px", width: "100%", opacity: 0}}></div>
 
       <div className="row">
-        <div className="col-md-12">
-          <div className="row">
+
             <div className="col-md-12">
               <div className="form-group">
                 <input 
                   type="text" 
-                  className="form-control form-control-sm" 
+                  className="form-control " 
                   name="keyword" 
                   placeholder={i18next.t("search phrase")} 
-                  style={styles.input}
                   onChange={setSearchStrings}
                   />
               </div>
             </div>
-          </div>
-        </div>
+
+
         <div className="col-md-12">
-          <div className="row">
-        <div className="col-md-6">
           <div id="search-input"></div>
         </div>
 
-        <div className="col-md-4" >
+        <div className="col-md-12 mt-3 mb-3" >
           <div className="input-range-container">
             <input 
               type="range" 
@@ -143,23 +124,19 @@ export const Search = (props) => {
           </div>
         </div>
 
-        <div className="col-md-2">
-          <div className="form-group">
+        <div className="col-md-12">
+          <div className="form-group m-0">
             <button type="submit" 
               data-ajax-response="map" 
               data-ajax-data-file="assets/external/data_2.php" 
               data-ajax-auto-zoom="1" 
-              style={styles.input}
               onClick={submitSearch}
-              className=" form-control-sm btn btn-sm btn-primary form-control"
+              className="btn btn-sm btn-outline-success form-control"
             >
               {i18next.t('Filter')}
             </button>
           </div>
         </div>
-      </div>
-    </div>
-
       </div>
     </div>
   )

@@ -1,0 +1,10 @@
+node_modules
+
+uploads
+public/images
+config/tests/coverage
+coverage
+.vscode
+
+client/
+tests

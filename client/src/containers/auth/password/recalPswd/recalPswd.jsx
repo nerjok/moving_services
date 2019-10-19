@@ -4,15 +4,19 @@ import i18next from 'i18next';
 
 export const RecalPswd = props => {
 
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
 
   const updEmail = ({target}) => setEmail(target.value);
 
-  const recallPswd = () => {
+  const recallPswd = async () => {
     const emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     
     if (emailReg.test(email)) {
-      props.forgotPswd(email, props.history);
+     let ats = await props.forgotPswd(email, props.history);
+     if (ats && ats.error) {
+       setError(ats.error)
+     }
     }
   }
 
@@ -32,7 +36,7 @@ export const RecalPswd = props => {
           <input type="email" onChange={updEmail} className="form-control form-control-sm input__invalid" name="email"/>
         </div>
           <br/>
-          {/*loginErr && <div className="alert alert-danger" role="alert">{loginErr}</div>*/}
+          {error && <div className="alert alert-danger" role="alert">{error}</div>}
           <button 
             type="button" 
             className={"btn btn-success full-width"} 

@@ -94,7 +94,7 @@ export class Users extends React.Component {
     return (
       <>
         <Breadcrumb links={[{ link: url, title: "Users" }]} />
-        <div className="row advertisements-row--mobile">
+        <div className="row advertisements-row--mobile scale-to">
           <div className="col-md-9">
             <div>
               <TableList items={users.users} url={url} />

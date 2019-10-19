@@ -93,3 +93,12 @@ body {overflow-x:hidden; }
 .image-gallery-right-nav {
   outline: none !important;
 }
+
+
+.not-found {
+  display: flex;
+  min-height: 60vh;
+  align-items: center;
+  justify-content: center;
+  //background-color: darkcyan;
+}

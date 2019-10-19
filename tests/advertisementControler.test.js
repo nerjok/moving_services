@@ -14,7 +14,7 @@ const app = require('../config/keys').baseUrl;
 chai.use(chaiHttp);
 chai.should();
 
-var agent = chai.request.agent(app)
+var agent = chai.request.agent(app);
 
 describe('Test advertisements controler', () => {
   var advertisementId;
@@ -23,27 +23,27 @@ describe('Test advertisements controler', () => {
     agent
       .post('/auth/login')
       .send({username: 'tester@tester.com', password: 'tester'})
-      .end((err, res) => {})
+      .end((err, res) => {});
   });
 
   it("should get last advertisements", (done) => {
     chai.request(app)
-        .get('/api/advertisements')
-        .end((err, res) => {
-            should.not.exist(err);
-            res.status.should.equal(200);
-            res.type.should.equal('application/json');
-            res.body.should.be.an('object');
-            res.body.should.have.all.keys(
-              'advertisements', 'totalDocs', 'limit', 'hasPrevPage', 'hasNextPage', 'page', 'totalPages', 'pagingCounter', 
-              'prevPage', 'nextPage', 'total'
-              );
+      .get('/api/advertisements')
+      .end((err, res) => {
+        should.not.exist(err);
+        res.status.should.equal(200);
+        res.type.should.equal('application/json');
+        res.body.should.be.an('object');
+        res.body.should.have.all.keys(
+          'advertisements', 'totalDocs', 'limit', 'hasPrevPage', 'hasNextPage', 'page', 'totalPages', 'pagingCounter', 
+          'prevPage', 'nextPage', 'total'
+        );
 
-              if (adv = res.body.advertisements[0]) {
-                advertisementId = adv._id
-              }
-            done();
-         });
+        if (adv = res.body.advertisements[0]) {
+          advertisementId = adv._id;
+        }
+        done();
+      });
   });
 
   it('should get advertisement', (done) => {
@@ -61,7 +61,7 @@ describe('Test advertisements controler', () => {
         );
 
         done();
-      })
+      });
   });
 
   it('should not save advertisement', done => {
@@ -74,8 +74,8 @@ describe('Test advertisements controler', () => {
         res.body.should.be.an('object');
         res.body.should.to.eql({ error: 'You must login' });
         done();
-      })
-  })
+      });
+  });
 
   it('should get create advertisement validation error', done => {
     agent
@@ -87,10 +87,10 @@ describe('Test advertisements controler', () => {
         res.body.should.be.an('object');
         res.body.should.have.all.keys(
           'errors'
-        )
+        );
         done();
-      })
-  })
+      });
+  });
 
   it('should create advertisement', done => {
     agent
@@ -109,17 +109,17 @@ describe('Test advertisements controler', () => {
         res.body.should.be.an('object');
         res.body.should.not.have.all.keys(
           'errors'
-        )
+        );
         res.body.should.contain.all.keys(
           '_id', 'title', 'description', 'skills', '_user'
         );
 
         if (id = res.body._id) {
-          advertisementId = id
+          advertisementId = id;
         }
         done();
-      })
-  })
+      });
+  });
 
   it('should update advertisement', done => {
     agent
@@ -141,8 +141,8 @@ describe('Test advertisements controler', () => {
 
         res.body.skills.should.be.equal('updateSkills');
         done();
-      })
-  })
+      });
+  });
 
   it('should delete advertisement', done => {
     agent
@@ -154,10 +154,10 @@ describe('Test advertisements controler', () => {
         res.body.should.be.an('object');
         res.body.should.have.all.keys(
           'advertisements', 'page', 'total'
-          );
+        );
         done();
-      })
-  })
+      });
+  });
 
 
   test('show advertisements list ', done => {
@@ -172,7 +172,7 @@ describe('Test advertisements controler', () => {
 
     mockingoose.Advertisement.toReturn({advertisements: []}, 'paginate');
 
-    advertisement.showAdvertisements(mockReq, mockRes)
+    advertisement.showAdvertisements(mockReq, mockRes);
     setTimeout(()=>{
 
       expect(send).toHaveBeenCalled();
@@ -180,11 +180,11 @@ describe('Test advertisements controler', () => {
         //expect.toHaveProperty('page', 'limit', 'totalDocs', 'advertisements', 'totalPages')
         expect.objectContaining({
           page: 1, limit: 5
-         })
+        })
       );
-      done()
+      done();
     }, 100);  
-  })
+  });
 
   test('show advertisement', done => {
     const send = jest.fn((resp) => {});
@@ -198,7 +198,7 @@ describe('Test advertisements controler', () => {
 
     mockingoose.Advertisement.toReturn({title: 'testTitle', _id: 'abcde'}, 'findOne');
 
-    advertisement.showAdvertisement(mockReq, mockRes)
+    advertisement.showAdvertisement(mockReq, mockRes);
     setTimeout(()=>{
 
       expect(send).toHaveBeenCalled();
@@ -206,11 +206,11 @@ describe('Test advertisements controler', () => {
         //expect.toHaveProperty('page', 'limit', 'totalDocs', 'advertisements', 'totalPages')
         expect.objectContaining({
           deleted: false, title: 'testTitle'
-         })
+        })
       );
-      done()
+      done();
     }, 100);  
-  })
+  });
 
 
   test('create Advertisement', done => {
@@ -229,7 +229,7 @@ describe('Test advertisements controler', () => {
 
     mockingoose.Advertisement.toReturn({title: 'testTitle', _id: 'abcde'}, 'create');
 
-    advertisement.createAdvertisement(mockReq, mockRes)
+    advertisement.createAdvertisement(mockReq, mockRes);
     setTimeout(()=>{
 
       expect(send).toHaveBeenCalled();
@@ -241,9 +241,9 @@ describe('Test advertisements controler', () => {
           dateTime: mockReq.body.dateTime
          })
       );*/
-      done()
+      done();
     }, 100);  
-  })
+  });
 
   test('create Advertisement', done => {
     const send = jest.fn((resp) => {});
@@ -267,14 +267,14 @@ describe('Test advertisements controler', () => {
 
     mockingoose.Advertisement.toReturn({title: 'testTitle', _id: 'abcde'}, 'findOneAndUpdate');
 
-    advertisement.updateAdvertisement(mockReq, mockRes)
+    advertisement.updateAdvertisement(mockReq, mockRes);
     setTimeout(()=>{
 
       expect(send).toHaveBeenCalled();
 
-      done()
+      done();
     }, 100);  
-  })
+  });
   
 
   test('filter advertisements list ', done => {
@@ -289,7 +289,7 @@ describe('Test advertisements controler', () => {
 
     mockingoose.Advertisement.toReturn({advertisements: []}, 'paginate');
 
-    advertisement.filterAdvertisements(mockReq, mockRes)
+    advertisement.filterAdvertisements(mockReq, mockRes);
     setTimeout(()=>{
 
       expect(send).toHaveBeenCalled();
@@ -297,9 +297,9 @@ describe('Test advertisements controler', () => {
         //expect.toHaveProperty('page', 'limit', 'totalDocs', 'advertisements', 'totalPages')
         expect.objectContaining({
           page: 1, limit: 5
-         })
+        })
       );
-      done()
+      done();
     }, 100);  
-  })
-})  
+  });
+});  

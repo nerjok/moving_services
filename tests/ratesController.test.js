@@ -7,17 +7,17 @@ const app = require('../config/keys').baseUrl;
 chai.use(chaiHttp);
 chai.should();
 
-var agent = chai.request.agent(app)
+var agent = chai.request.agent(app);
 
 
 describe('Test rates controler', () => {
-  var user = {}
+  var user = {};
   it('should login', done => {
     agent
       .post('/auth/login')
       .send({username: 'tester@tester.com', password: 'tester'})
-      .end((err, res) => {user = res.body; done();})
-  })
+      .end((err, res) => {user = res.body; done();});
+  });
 
   it('should get all rates', done => {
     agent
@@ -29,8 +29,8 @@ describe('Test rates controler', () => {
         res.body.should.be.an('array');
         msgThread = res.body[0];
         done();
-      })
-  })
+      });
+  });
 
   it('should rate user', done => {
     agent
@@ -43,8 +43,8 @@ describe('Test rates controler', () => {
         res.body.should.be.an('object');
         msgThread = res.body[0];
         done();
-      })
-  })
+      });
+  });
 
 
   //ContactList test
@@ -61,8 +61,8 @@ describe('Test rates controler', () => {
         res.body.should.be.an('object');
         msgThread = res.body[0];
         done();
-      })
-  })
+      });
+  });
 
   it('should get contactList', done => {
     agent
@@ -74,7 +74,7 @@ describe('Test rates controler', () => {
         res.body.should.be.an('array');
         msgThread = res.body[0];
         done();
-      })
-  })
+      });
+  });
 
-})
+});
