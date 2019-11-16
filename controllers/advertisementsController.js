@@ -15,29 +15,28 @@ const pagOptions = {
 
 const validate = method => {
   switch (method) {
-  case "createAdvertisement": {
-    return [
-      body("title", "Invalid title").isLength({ min: 10, max: 100 }),
-      body("description", "Invalid description")
-        .exists()
-        .isLength({ min: 50, max: 1000 }),
-      body("skills")
-        .exists()
-        .isLength({ min: 5, max: 500 }),
-      body("tools")
-        .optional()
-        .isLength({ min: 10, max: 500 }),
-      body("time")
-        .optional()
-        .isLength({ min: 10, max: 500 }),
-      body("payment")
-        .optional()
-        .isLength({ min: 10, max: 500 }),
-      body("status")
-        .optional()
-      //.isIn(["enabled", "disabled"])
-    ];
-  }
+    case "createAdvertisement": {
+      return [
+        body("title", "Invalid title").isLength({ min: 10, max: 100 }),
+        body("description", "Invalid description")
+          .exists()
+          .isLength({ min: 50, max: 1000 }),
+        body("skills")
+          .exists()
+          .isLength({ min: 5, max: 500 }),
+        body("tools")
+          .optional()
+          .isLength({ min: 10, max: 500 }),
+        body("time")
+          .optional()
+          .isLength({ min: 10, max: 500 }),
+        body("payment")
+          .optional()
+          .isLength({ min: 10, max: 500 }),
+        body("status").optional()
+        //.isIn(["enabled", "disabled"])
+      ];
+    }
   }
 };
 
@@ -46,19 +45,19 @@ const showAdvertisements = async (req, res) => {
   page++;
   const limit = 5;
   const skip = page * limit;
-  const advertisements = await Advertisement.paginate({},{
+  const advertisements = await Advertisement.paginate({}, {
     ...pagOptions,
     page,
     skip,
     limit,
-    sort: {'_id': -1}
+    sort: { '_id': -1 }
   }).then(advertisements => {
-    res.send({...advertisements, total: Math.ceil(advertisements.totalDocs / limit)});
+    res.send({ ...advertisements, total: Math.ceil(advertisements.totalDocs / limit) });
 
   })
-  // eslint-disable-next-line no-unused-vars
+    // eslint-disable-next-line no-unused-vars
     .catch((err) => {
-      res.send({advertisements: [], total: Math.ceil(advertisements.totalDocs / limit)});
+      res.send({ advertisements: [], total: Math.ceil(advertisements.totalDocs / limit) });
     });
 };
 
@@ -68,23 +67,23 @@ const myAdvertisements = async (req, res) => {
   var page = req.query.page || 0;
   const limit = 5;
   const skip = page * limit;
- 
+
   const usr = await User.findById(req.user._id)
     .populate({
       path: 'advertisements',
       options: {
         skip,
         limit,
-        sort: {'_id': -1}
+        sort: { '_id': -1 }
       },
     })
     .populate('advertisementsCount');
 
   if (!usr || !usr.advertisements) {
-    res.send({advertisements: []});
+    res.send({ advertisements: [] });
     return;
   }
-  const ads = {advertisements: usr.advertisements, total: Math.ceil(usr.advertisementsCount / limit), page};
+  const ads = { advertisements: usr.advertisements, total: Math.ceil(usr.advertisementsCount / limit), page };
 
   res.send(ads);
 };
@@ -95,7 +94,7 @@ const createAdvertisement = async (req, res) => {
     return res.json({ errors: errors.array() });
   }
 
-  const { title, description, skills, tools, time, dateTime, location, status, workType, city} = req.body;
+  const { title, description, skills, tools, time, dateTime, location, status, workType, city } = req.body;
 
   let resp = await Advertisement.create({
     title,
@@ -192,10 +191,10 @@ const uploadPhoto = async (req, res) => {
     const advertisement = await Advertisement.findOne({
       _id: req.params.id
     }).populate("_user");
-  
+
     return res.send(advertisement);
   }
-  res.send({msg: 'error uploading photos', error: 'upload error'});
+  res.send({ msg: 'error uploading photos', error: 'upload error' });
 };
 
 const deletePhoto = async (req, res) => {
@@ -220,7 +219,7 @@ const deleteAdvertisement = async (req, res) => {
 
 const filterAdvertisements = async (req, res) => {
 
-  const {lat, lng, distance, keyword, status, workType} = req.query;
+  const { lat, lng, distance, keyword, status, workType } = req.query;
   const page = req.query.page || 0;
   const limit = 5;
 
@@ -229,15 +228,15 @@ const filterAdvertisements = async (req, res) => {
   const page2 = +page + 1;
 
   const searchObj = {};
-  if (lat && lng && distance ) {
-    searchObj.location= {
-      $geoWithin: { $centerSphere: [ [lat, lng], distance / 6371.1 ] } 
+  if (lat && lng && distance) {
+    searchObj.location = {
+      $geoWithin: { $centerSphere: [[lat, lng], distance / 6371.1] }
     };
   }
   if (keyword) {
     searchObj.$or = [
-      {description: { $regex: '.*' + keyword + '.*' }}, 
-      {title: { $regex: '.*' + keyword + '.*' }}
+      { description: { $regex: '.*' + keyword + '.*' } },
+      { title: { $regex: '.*' + keyword + '.*' } }
     ];
   }
 
@@ -248,15 +247,15 @@ const filterAdvertisements = async (req, res) => {
 
   const advertisementsF = await Advertisement.paginate(
     searchObj
-    ,{
+    , {
       ...pagOptions,
       page: page2,
       skip: 4,
       limit,
-      sort: {'_id': -1}
+      sort: { '_id': -1 }
     });
-  
-  res.send({...advertisementsF, total: Math.ceil(advertisementsF.totalDocs / limit)});
+
+  res.send({ ...advertisementsF, total: Math.ceil(advertisementsF.totalDocs / limit) });
 };
 
 module.exports = {
