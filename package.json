@@ -62,7 +62,7 @@
     "jest-cli": "24.8.0",
     "jest-express": "^1.10.1",
     "localtunnel": "^1.9.2",
-    "mocha": "^6.2.0",
+    "mocha": "^10.2.0",
     "mockingoose": "^2.13.2"
   }
 }
